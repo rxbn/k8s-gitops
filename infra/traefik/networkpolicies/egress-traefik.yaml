@@ -19,7 +19,9 @@ spec:
       protocol: TCP
       destination:
         namespaceSelector: projectcalico.org/name == 'keycloak'
-        selector: app == 'keycloak'
+        selector: >-
+          app.kubernetes.io/name == 'keycloak' &&
+          app.kubernetes.io/instance == 'keycloak'
         ports:
           - 8080
     - action: Allow
@@ -118,15 +120,6 @@ spec:
     - action: Allow
       protocol: TCP
       destination:
-        namespaceSelector: projectcalico.org/name == 'argocd'
-        selector: >-
-          app.kubernetes.io/instance == 'argocd' &&
-          app.kubernetes.io/component == 'server'
-        ports:
-          - 8080
-    - action: Allow
-      protocol: TCP
-      destination:
         namespaceSelector: projectcalico.org/name == 'monitoring'
         selector: app == 'prometheus-pushgateway'
         ports:
@@ -152,13 +145,6 @@ spec:
         selector: app == 'alertmanager'
         ports:
           - 9093
-    - action: Allow
-      protocol: TCP
-      destination:
-        namespaceSelector: projectcalico.org/name == 'code-server'
-        selector: app == 'code-server'
-        ports:
-          - 8443
     - action: Allow
       protocol: TCP
       destination:
