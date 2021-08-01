@@ -27,3 +27,7 @@ This repository contains my entire Kubernetes cluster setup built on K3s and man
 
 - test renovate
 - improve documentation
+
+## :hugs:&nbsp; Thanks
+
+Thanks to the community at [k8s@home](https://github.com/k8s-at-home) for the awesome templates and the Kubernetes at home logo!
