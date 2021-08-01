@@ -2,7 +2,7 @@
 apiVersion: crd.projectcalico.org/v1
 kind: NetworkPolicy
 metadata:
-  name: ingress-pushgateway
+  name: ingress-prometheus-pushgateway
   namespace: monitoring
 spec:
   selector: app == 'prometheus-pushgateway'

@@ -1,11 +1,11 @@
 ---
 apiVersion: crd.projectcalico.org/v1
-kind: GlobalNetworkPolicy
+kind: NetworkPolicy
 metadata:
-  name: egress-to-pushgateway
+  name: prometheus-pushgateway-egress-traefik
+  namespace: traefik
 spec:
-  namespaceSelector: k8up == 'backup-enabled'
-  selector: has(job-name)
+  selector: app.kubernetes.io/instance == 'traefik'
   types:
     - Egress
   egress:

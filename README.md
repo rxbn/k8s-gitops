@@ -26,5 +26,4 @@ This repository contains my entire Kubernetes cluster setup built on K3s and man
 ## :ballot_box_with_check:&nbsp; ToDo
 
 - test renovate
-- split egress traefik networkpolicies
 - improve documentation
