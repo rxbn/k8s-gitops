@@ -2,6 +2,8 @@
 
 set -o errexit
 
+[[ ! "${PWD}" =~ "k8s-gitops/hack" ]] && echo "please cd to the 'hack' folder and run the script from there!" && exit 1
+
 secrets=$(grep --files-with-matches --recursive --regexp "^kind: Secret$" --exclude="*.template" ..)
 SECRET_WARN_MESSAGE="##################################################
 # make sure to delete all secrets before saving! #
