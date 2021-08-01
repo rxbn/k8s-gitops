@@ -1,0 +1,92 @@
+{
+    "semanticCommits": "enabled",
+    "dependencyDashboard": true,
+    "separateMajorMinor": false,
+    "assignees": [
+        "rxbn"
+    ],
+    "regexManagers": [
+        {
+            "fileMatch": [
+                "(infra|apps|base)\\/(.+\\/)*helmrelease\\.yaml$"
+            ],
+            "matchStrings": [
+                "registryUrl=(?<registryUrl>.*?)\\s +chart: (?<depName>.*?)\\n +version: (?<currentValue>.*)"
+            ],
+            "datasourceTemplate": [
+                "helm"
+            ]
+        },
+        {
+            "fileMatch": [
+                "crds\\/k8up\\/kustomization\\.yaml$"
+            ],
+            "matchStrings": [
+                "datasource=(?<datasource>.*) depName=(?<depName>.*)\\s.*\\/(?<currentValue>.*?)\\/"
+            ]
+        },
+        {
+            "fileMatch": [
+                "crds\\/kyverno\\/kustomization\\.yaml$"
+            ],
+            "matchStrings": [
+                "datasource=(?<datasource>.*) registryUrl=(?<registryUrl>.*) chart=(?<depName>.*)\\s.*(?<currentValue>v[0-9]\\.[0-9]\\.[0-9])"
+            ]
+        },
+        {
+            "fileMatch": [
+                "crds\\/(traefik|kube-prometheus-stack)\\/crds\\.yaml$"
+            ],
+            "matchStrings": [
+                "registryUrl=(?<registryUrl>.*) chart=(?<depName>.*)\\s.*tag: (?<currentValue>.*)"
+            ],
+            "datasourceTemplate": [
+                "helm"
+            ]
+        }
+    ],
+    "kubernetes": {
+        "fileMatch": [
+            "(infra\/traefik|apps)\/(.*\/)*.+\\.yaml"
+        ]
+    },
+    "packageRules": [
+        {
+            "matchDatasources": [
+                "docker",
+                "helm",
+                "github-releases",
+                "github-tags"
+            ],
+            "matchUpdateTypes": [
+                "patch",
+                "minor",
+                "major"
+            ],
+            "labels": [
+                "renovate/{{datasource}}",
+                "dep/{{updateType}}"
+            ],
+            "enabled": true
+        },
+        {
+            "matchDatasources": [
+                "docker"
+            ],
+            "matchPackagePatterns": [
+                "^ghcr.io/linuxserver/(ombi|plex|sabnzbd)"
+            ],
+            "versioning": "loose"
+        },
+        {
+            "matchDatasources": [
+                "docker"
+            ],
+            "matchPackagePatterns": [
+                "^ghcr.io/linuxserver/(son|rad)arr"
+            ],
+            "versioning": "loose",
+            "allowedVersions": "!/5\\.14/"
+        }
+    ]
+}

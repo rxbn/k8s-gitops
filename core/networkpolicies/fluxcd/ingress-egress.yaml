@@ -1,0 +1,25 @@
+---
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: ingress-egress
+  namespace: flux-system
+spec:
+  selector: >-
+    app == 'source-controller' ||
+    app == 'notification-controller' ||
+    app == 'helm-controller' ||
+    app == 'kustomize-controller'
+  types:
+    - Ingress
+    - Egress
+  ingress:
+    - action: Allow
+      protocol: TCP
+    - action: Allow
+      protocol: UDP
+  egress:
+    - action: Allow
+      protocol: TCP
+    - action: Allow
+      protocol: UDP

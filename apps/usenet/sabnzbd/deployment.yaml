@@ -1,0 +1,70 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sabnzbd
+  namespace: usenet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sabnzbd
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: sabnzbd
+    spec:
+      containers:
+        - name: sabnzbd
+          image: ghcr.io/linuxserver/sabnzbd:3.3.1-ls34
+          env:
+            - name: PGID
+              value: "2000"
+            - name: PUID
+              value: "2000"
+            - name: TZ
+              value: Europe/Zurich
+            - name: DOCKER_MODS
+              value: containeroo/docker-mods:sabnzbd-mkvtoolnix|containeroo/docker-mods:sabnzbd-nzbnotify
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - mountPath: /config
+              name: data
+            - mountPath: /incomplete-downloads
+              name: incomplete-downloads
+            - mountPath: /downloads
+              name: downloads
+            - mountPath: /app/sabnzbd/scripts/merge_subtitles.sh
+              name: merge-subtitles
+              subPath: merge_subtitles.sh
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 30
+            failureThreshold: 5
+            timeoutSeconds: 10
+            periodSeconds: 10
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: sabnzbd-data
+        - name: merge-subtitles
+          configMap:
+            name: merge-subtitles
+            items:
+              - key: merge_subtitles.sh
+                path: merge_subtitles.sh
+            defaultMode: 0777
+        - name: incomplete-downloads
+          hostPath:
+            path: /mnt/disk06/downloads/incomplete
+            type: Directory
+        - name: downloads
+          hostPath:
+            path: /mnt/disk06/downloads/complete
+            type: Directory

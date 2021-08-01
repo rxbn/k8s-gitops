@@ -1,0 +1,26 @@
+---
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: egress-keycloak
+  namespace: keycloak
+spec:
+  selector: >-
+    app.kubernetes.io/name == 'keycloak' &&
+    app.kubernetes.io/instance == 'keycloak'
+  types:
+    - Egress
+  egress:
+    - action: Allow
+      protocol: TCP
+      destination:
+        selector: >-
+          app.kubernetes.io/name == 'postgres' &&
+          app.kubernetes.io/instance == 'keycloak'
+        ports:
+          - 5432
+    - action: Allow
+      protocol: TCP
+      destination:
+        ports:
+          - 587

@@ -1,0 +1,18 @@
+---
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: ingress-nextcloud-redis
+  namespace: nextcloud
+spec:
+  selector: app == 'nextcloud-redis'
+  types:
+    - Ingress
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: app == 'nextcloud'
+      destination:
+        ports:
+          - 6379

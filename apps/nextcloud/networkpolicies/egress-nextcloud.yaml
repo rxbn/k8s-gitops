@@ -1,0 +1,38 @@
+---
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: egress-nextcloud
+  namespace: nextcloud
+spec:
+  selector: app == 'nextcloud'
+  types:
+    - Egress
+  egress:
+    - action: Allow
+      protocol: TCP
+      destination:
+        selector: app == 'nextcloud-mariadb'
+        ports:
+          - 3306
+    - action: Allow
+      protocol: TCP
+      destination:
+        selector: app == 'nextcloud-redis'
+        ports:
+          - 6379
+    - action: Allow
+      protocol: TCP
+      destination:
+        ports:
+          - 80
+          - 443
+          - 587
+          - 993
+    - action: Allow
+      protocol: TCP
+      destination:
+        namespaceSelector: projectcalico.org/name == 'traefik'
+        selector: app.kubernetes.io/instance == 'traefik'
+        ports:
+          - 8443

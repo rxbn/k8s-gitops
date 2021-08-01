@@ -1,0 +1,150 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud
+  namespace: nextcloud
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextcloud
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nextcloud
+    spec:
+      initContainers:
+        - name: wait-for-redis
+          image: busybox:1.33.1
+          command:
+            - sh
+            - -c
+            - |
+              echo 'Waiting for Redis to become ready...'
+              until printf "." && nc -z -w 2 nextcloud-redis.nextcloud.svc.cluster.local 6379; do
+                  sleep 2;
+              done;
+              echo 'Redis OK ✓'
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 10m
+              memory: 16Mi
+        - name: wait-for-database
+          image: busybox:1.33.1
+          command:
+            - sh
+            - -c
+            - |
+              echo 'Waiting for MariaDB to become ready...'
+              until printf "." && nc -z -w 2 nextcloud-mariadb.nextcloud.svc.cluster.local 3306; do
+                  sleep 2;
+              done;
+              echo 'MariaDB OK ✓'
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 10m
+              memory: 16Mi
+      containers:
+        - name: nginx
+          image: nginx:1.21.1-alpine
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /etc/nginx/nginx.conf
+              name: nginx-config
+              subPath: nginx.conf
+            - mountPath: /var/www/html
+              name: app-data
+              readOnly: true
+            - mountPath: /var/www/html/data
+              name: user-data
+              readOnly: true
+          livenessProbe:
+            httpGet:
+              path: /status.php
+              port: 80
+              httpHeaders:
+                - name: Host
+                  value: cloud.${BASE_DOMAIN}
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+        - name: nextcloud
+          image: nextcloud:22.0.0-fpm-alpine
+          env:
+            - name: MYSQL_DATABASE
+              value: nextcloud
+            - name: MYSQL_HOST
+              value: nextcloud-mariadb.nextcloud.svc.cluster.local
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nextcloud-mariadb
+                  key: MYSQL_ROOT_PASSWORD
+            - name: MYSQL_USER
+              value: root
+            - name: NEXTCLOUD_TRUSTED_DOMAINS
+              value: cloud.${BASE_DOMAIN}
+            - name: TRUSTED_PROXIES
+              value: http://traefik.traefik.svc.cluster.local
+            - name: OVERWRITEPROTOCOL
+              value: https
+            - name: REDIS_HOST
+              value: nextcloud-redis.nextcloud.svc.cluster.local
+            - name: TZ
+              value: Europe/Zurich
+            - name: MAIL_DOMAIN
+              value: ${BASE_DOMAIN}
+            - name: MAIL_FROM_ADDRESS
+              value: cloud
+            - name: SMTP_AUTHTYPE
+              value: LOGIN
+            - name: SMTP_NAME
+              value: cloud@${BASE_DOMAIN}
+            - name: SMTP_PORT
+              value: "587"
+            - name: SMTP_SECURE
+              value: tls
+          envFrom:
+            - secretRef:
+                name: nextcloud-mail-settings
+          volumeMounts:
+            - mountPath: /var/www/html
+              name: app-data
+            - mountPath: /var/www/html/data
+              name: user-data
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      volumes:
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: nextcloud-app-data
+        - name: user-data
+          persistentVolumeClaim:
+            claimName: nextcloud-user-data
+        - name: nginx-config
+          configMap:
+            name: nextcloud-nginx-config

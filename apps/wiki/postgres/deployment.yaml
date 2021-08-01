@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wiki-postgres
+  namespace: wiki
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wiki-postgres
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        k8up.syn.tools/backupcommand: pg_dumpall -U postgres -h 127.0.0.1
+      labels:
+        app: wiki-postgres
+    spec:
+      containers:
+        - name: wiki-postgres
+          image: postgres:13.3-alpine
+          envFrom:
+            - secretRef:
+                name: wiki-postgres
+          env:
+            - name: TZ
+              value: Europe/Zurich
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: data
+          livenessProbe:
+            exec:
+              command:
+                - "psql"
+                - "-w"
+                - "-U"
+                - "postgres"
+                - "-d"
+                - "postgres"
+                - "-c"
+                - "SELECT 1"
+            initialDelaySeconds: 45
+            timeoutSeconds: 2
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: wiki-postgres-data

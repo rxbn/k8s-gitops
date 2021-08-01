@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radarr
+  namespace: usenet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radarr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      containers:
+        - name: radarr
+          image: ghcr.io/linuxserver/radarr:3.2.2.5080-ls110
+          env:
+            - name: PGID
+              value: "2000"
+            - name: PUID
+              value: "2000"
+            - name: TZ
+              value: Europe/Zurich
+          ports:
+            - containerPort: 7878
+          volumeMounts:
+            - mountPath: /config
+              name: data
+            - mountPath: /config/Backups
+              name: backup
+            - mountPath: /movies
+              name: movies
+            - mountPath: /downloads
+              name: downloads
+          livenessProbe:
+            tcpSocket:
+              port: 7878
+            initialDelaySeconds: 30
+            failureThreshold: 5
+            timeoutSeconds: 10
+            periodSeconds: 10
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: radarr-data
+        - name: backup
+          persistentVolumeClaim:
+            claimName: radarr-backup
+        - name: movies
+          hostPath:
+            path: /mnt/tank/media/movies
+            type: Directory
+        - name: downloads
+          hostPath:
+            path: /mnt/disk06/downloads/complete
+            type: Directory

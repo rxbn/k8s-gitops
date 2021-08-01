@@ -1,0 +1,81 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plex
+  namespace: usenet
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plex
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: plex
+    spec:
+      containers:
+        - name: plex
+          image: ghcr.io/linuxserver/plex:1.23.6.4881-e2e58f321-ls65
+          env:
+            - name: PGID
+              value: "2000"
+            - name: PUID
+              value: "2000"
+            - name: TZ
+              value: Europe/Zurich
+          envFrom:
+            - secretRef:
+                name: plex
+          ports:
+            - containerPort: 32400
+          volumeMounts:
+            - mountPath: /config
+              name: data
+            - mountPath: /backup
+              name: backup
+            - mountPath: /data/tvshows
+              name: tvshows
+            - mountPath: /data/movies
+              name: movies
+            - mountPath: /data/movies2
+              name: movies2
+            - mountPath: /transcode
+              name: tmpfs
+          resources:
+            limits:
+              gpu.intel.com/i915: 1
+          livenessProbe:
+            httpGet:
+              path: /identity
+              port: 32400
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: plex-data
+        - name: backup
+          persistentVolumeClaim:
+            claimName: plex-backup
+        - name: tvshows
+          hostPath:
+            path: /mnt/tank/media/tv
+            type: Directory
+        - name: movies
+          hostPath:
+            path: /mnt/tank/media/movies
+            type: Directory
+        - name: movies2
+          hostPath:
+            path: /mnt/tank/media/movies2
+            type: Directory
+        - name: tmpfs
+          emptyDir:
+            medium: Memory

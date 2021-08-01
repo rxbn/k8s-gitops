@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ombi
+  namespace: usenet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ombi
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ombi
+    spec:
+      containers:
+        - name: ombi
+          image: ghcr.io/linuxserver/ombi:v4.0.1430-ls99
+          env:
+            - name: PGID
+              value: "2000"
+            - name: PUID
+              value: "2000"
+            - name: TZ
+              value: Europe/Zurich
+          ports:
+            - containerPort: 3579
+          volumeMounts:
+            - mountPath: /config
+              name: data
+          livenessProbe:
+            tcpSocket:
+              port: 3579
+            initialDelaySeconds: 30
+            failureThreshold: 5
+            timeoutSeconds: 10
+            periodSeconds: 10
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: ombi-data
