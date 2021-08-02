@@ -19,15 +19,15 @@ spec:
   values:
     configInline:
       address-pools:
-      - addresses:
-        - ${METALLB_TRAEFIK_ADDRESS_POOL}
-        auto-assign: false
-        name: traefik
-        protocol: layer2
-      - addresses:
-        - ${METALLB_DEFAULT_ADDRESS_POOL}
-        auto-assign: true
-        name: default
-        protocol: layer2
+        - name: traefik
+          addresses:
+            - ${METALLB_TRAEFIK_ADDRESS_POOL}
+          auto-assign: false
+          protocol: layer2
+        - name: default
+          addresses:
+            - ${METALLB_DEFAULT_ADDRESS_POOL}
+          auto-assign: true
+          protocol: layer2
     psp:
       create: false

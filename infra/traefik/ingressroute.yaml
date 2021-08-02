@@ -6,14 +6,14 @@ metadata:
   namespace: traefik
 spec:
   entryPoints:
-  - websecure
+    - websecure
   routes:
-  - kind: Rule
-    match: Host(`traefik.local.${BASE_DOMAIN}`)
-    middlewares:
-    - name: allow-lan-only@file
-    - name: forward-auth
-      namespace: traefik
-    services:
-    - kind: TraefikService
-      name: api@internal
+    - kind: Rule
+      match: Host(`traefik.local.${BASE_DOMAIN}`)
+      middlewares:
+        - name: allow-lan-only@file
+        - name: forward-auth
+          namespace: traefik
+      services:
+        - kind: TraefikService
+          name: api@internal

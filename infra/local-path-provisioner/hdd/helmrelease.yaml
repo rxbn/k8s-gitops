@@ -39,9 +39,9 @@ spec:
         archived_path="$(dirname ${absolutePath})/archived-$(basename ${absolutePath})"
         mv ${absolutePath} ${archived_path}
     nodePathMap:
-    - node: DEFAULT_PATH_FOR_NON_LISTED_NODES
-      paths:
-      - /mnt/disk01/data
+      - node: DEFAULT_PATH_FOR_NON_LISTED_NODES
+        paths:
+          - /mnt/disk01/data
     storageClass:
       defaultClass: false
       name: hdd

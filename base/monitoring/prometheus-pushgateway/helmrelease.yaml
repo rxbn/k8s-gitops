@@ -18,8 +18,8 @@ spec:
       interval: 5m
   values:
     extraVars:
-    - name: TZ
-      value: Europe/Zurich
+      - name: TZ
+        value: Europe/Zurich
     ingress:
       annotations:
         kubernetes.io/ingress.class: traefik
@@ -27,7 +27,7 @@ spec:
         traefik.ingress.kubernetes.io/router.middlewares: allow-lan-only@file
       enabled: true
       hosts:
-      - pushgateway.local.${BASE_DOMAIN}
+        - pushgateway.local.${BASE_DOMAIN}
     serviceMonitor:
       enabled: true
       namespace: monitoring

@@ -47,7 +47,7 @@ There are also a couple GitHub workflows included in this repository that will h
 
 - [Flux upgrade schedule](./.github/workflows/flux.yml) - workflow to upgrade Flux
 - [Renovate HelmReleases](./.github/workflows/renovate-helmreleases.yml) - workflow to annotate `HelmReleases` which allows [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate) to track Helm chart versions
-- [Sync Cloudflare Network Ranges](./.github/workflows/sync-cloudflare-nets.yml) - workflow to update Cloudflare network ranges
+- [Sync Cloudflare network ranges](./.github/workflows/sync-cloudflare-nets.yml) - workflow to update Cloudflare network ranges
 
 ## :hugs:&nbsp; Thanks
 

@@ -6,9 +6,9 @@ metadata:
   namespace: gitlab
 spec:
   entryPoints:
-  - gitlab-ssh
+    - gitlab-ssh
   routes:
-  - match: HostSNI(`*`)
-    services:
-    - name: gitlab-gitlab-shell
-      port: 22
+    - match: HostSNI(`*`)
+      services:
+        - name: gitlab-gitlab-shell
+          port: 22

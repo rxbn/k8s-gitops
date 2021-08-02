@@ -18,8 +18,8 @@ spec:
       interval: 5m
   values:
     extraEnv:
-    - name: TZ
-      value: Europe/Zurich
+      - name: TZ
+        value: Europe/Zurich
     ingress:
       annotations:
         kubernetes.io/ingress.class: traefik
@@ -27,6 +27,6 @@ spec:
         traefik.ingress.kubernetes.io/router.middlewares: allow-lan-only@file,traefik-forward-auth@kubernetescrd,kubernetes-dashboard-kubernetes-dashboard-auth@kubernetescrd
       enabled: true
       hosts:
-      - dash.local.${BASE_DOMAIN}
+        - dash.local.${BASE_DOMAIN}
     metricsScraper:
       enabled: true
