@@ -5,11 +5,7 @@ metadata:
   name: ingress-egress
   namespace: flux-system
 spec:
-  selector: >-
-    app == 'source-controller' ||
-    app == 'notification-controller' ||
-    app == 'helm-controller' ||
-    app == 'kustomize-controller'
+  selector: all()
   types:
     - Ingress
     - Egress
