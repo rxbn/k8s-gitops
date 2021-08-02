@@ -49,7 +49,7 @@
                 "crds\\/traefik\\/crds\\.yaml$"
             ],
             "matchStrings": [
-                "registryUrl=(?<registryUrl>.*) chart=(?<depName>.*)\\s.*tag: (?<currentValue>.*)"
+                "registryUrl=(?<registryUrl>.*) chart=(?<depName>.*)\\s.*tag: v(?<currentValue>.*)"
             ],
             "datasourceTemplate": [
                 "helm"
