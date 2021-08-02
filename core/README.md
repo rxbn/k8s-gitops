@@ -6,6 +6,7 @@ This directory contains Flux deployments and other manifests.
 
 - **flux-system** contains Flux manifests
 - **helmrepositories** contains all `HelmRepository` manifests
+- **kustomizations** contains all `Kustomizations` for Flux
 - **monitoring** contains monitoring related manifests for Flux
 - **namespaces** contains all `Namespace` manifests
 - **networkpolicies** contains the networkpolicies for Flux
