@@ -27,6 +27,7 @@ This repository contains my entire Kubernetes cluster setup built on K3s and man
 
 - test renovate
 - improve documentation
+- test and improve `sync cloudflare network ranges` Github Action
 
 ## :hugs:&nbsp; Thanks
 
