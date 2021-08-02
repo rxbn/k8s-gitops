@@ -47,13 +47,3 @@ spec:
     storageClass:
       defaultClass: true
       name: nvme
-  postRenderers:
-    - kustomize:
-        patchesStrategicMerge:
-          - apiVersion: apps/v1
-            kind: Deployment
-            metadata:
-              name: nvme-local-path-provisioner
-              namespace: local-path-provisioner
-              annotations:
-                reloader.stakater.com/auto: "true"
