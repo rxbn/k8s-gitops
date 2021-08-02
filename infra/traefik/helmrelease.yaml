@@ -17,6 +17,9 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    deployment:
+      annotations:
+        reloader.stakater.com/auto: "true"
     globalArguments: []
     ingressClass:
       enabled: true
