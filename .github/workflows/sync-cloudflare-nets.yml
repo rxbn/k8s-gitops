@@ -1,5 +1,5 @@
 ---
-name: sync cloudflare network ranges
+name: Sync Cloudflare network ranges
 
 on:
   workflow_dispatch:
