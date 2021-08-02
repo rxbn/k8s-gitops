@@ -35,7 +35,18 @@
         },
         {
             "fileMatch": [
-                "crds\\/(traefik|kube-prometheus-stack)\\/crds\\.yaml$"
+                "crds\\/kube-prometheus-stack\\/crds\\.yaml"
+            ],
+            "matchStrings": [
+                "registryUrl=(?<registryUrl>.*)\\s.*tag: (?<depName>.*)-(?<currentValue>.*)"
+            ],
+            "datasourceTemplate": [
+                "helm"
+            ]
+        },
+        {
+            "fileMatch": [
+                "crds\\/traefik\\/crds\\.yaml$"
             ],
             "matchStrings": [
                 "registryUrl=(?<registryUrl>.*) chart=(?<depName>.*)\\s.*tag: (?<currentValue>.*)"
