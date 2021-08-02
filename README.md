@@ -39,14 +39,14 @@ Install all pre-commit hooks so they are executed every time before a commit occ
 5. Bootstrap cluster  
    `kubectl apply --kustomize=./core/flux-system`
 
-### :robot:&nbsp; Automation
+## :robot:&nbsp; Automation
 
 - [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate) is a very useful tool that when configured will start to create PRs in your GitHub repository when Docker images, Helm charts or anything else that can be tracked has a newer version. The configuration for Renovate is located [here](./.github/renovate.json)
 
 There are also a couple GitHub workflows included in this repository that will help automate some processes.
 
-- [Flux upgrade schedule](./.github/workflows/flux.yaml) - workflow to upgrade Flux
-- [Renovate HelmReleases](./.github/workflows/renovate-helm-releases.yaml) - workflow to annotate `HelmReleases` which allows [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate) to track Helm chart versions
+- [Flux upgrade schedule](./.github/workflows/flux.yml) - workflow to upgrade Flux
+- [Renovate HelmReleases](./.github/workflows/renovate-helmreleases.yml) - workflow to annotate `HelmReleases` which allows [Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate) to track Helm chart versions
 - [Sync Cloudflare Network Ranges](./.github/workflows/sync-cloudflare-nets.yml) - workflow to update Cloudflare network ranges
 
 ## :hugs:&nbsp; Thanks
