@@ -21,10 +21,6 @@ This repository contains my entire Kubernetes cluster setup built on K3s and man
 5. Bootstrap cluster  
    `kubectl apply --kustomize=./core/flux-system`
 
-## :ballot_box_with_check:&nbsp; ToDo
-
-- improve documentation
-
 ## :hugs:&nbsp; Thanks
 
 Thanks to the community at [k8s@home](https://github.com/k8s-at-home) for the awesome templates and the Kubernetes at home logo!
