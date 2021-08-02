@@ -5,18 +5,14 @@ metadata:
   name: ingress-keycloak-postgres
   namespace: keycloak
 spec:
-  selector: >-
-    app.kubernetes.io/name == 'postgres' &&
-    app.kubernetes.io/instance == 'keycloak'
+  selector: app == 'keycloak-postgres'
   types:
     - Ingress
   ingress:
     - action: Allow
       protocol: TCP
       source:
-        selector: >-
-          app.kubernetes.io/name == 'keycloak' &&
-          app.kubernetes.io/instance == 'keycloak'
+        selector: app == 'keycloak'
       destination:
         ports:
           - 5432

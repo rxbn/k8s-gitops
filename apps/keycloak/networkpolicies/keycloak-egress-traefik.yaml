@@ -13,8 +13,6 @@ spec:
       protocol: TCP
       destination:
         namespaceSelector: projectcalico.org/name == 'keycloak'
-        selector: >-
-          app.kubernetes.io/name == 'keycloak' &&
-          app.kubernetes.io/instance == 'keycloak'
+        selector: app == 'keycloak'
         ports:
           - 8080
