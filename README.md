@@ -7,7 +7,7 @@
 This repository contains my entire Kubernetes cluster setup built on K3s and managed by Flux v2.  
 Secrets are encrypted and managed with [SOPS](https://github.com/mozilla/sops).
 
-## :open_file_folder:&nbsp; Repository structure
+## :open_file_folder:&nbsp; Repository Structure
 
 This Git Repository contains the following directories and are ordered below by how Flux will apply them:
 
