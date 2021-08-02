@@ -35,7 +35,7 @@
         },
         {
             "fileMatch": [
-                "crds\\/kube-prometheus-stack\\/crds\\.yaml"
+                "crds\\/kube-prometheus-stack\\/crds\\.yaml$"
             ],
             "matchStrings": [
                 "registryUrl=(?<registryUrl>.*)\\s.*tag: (?<depName>.*)-(?<currentValue>.*)"
