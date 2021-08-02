@@ -5,6 +5,7 @@ metadata:
   name: nextcloud-mariadb
   namespace: nextcloud
   annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
     reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
@@ -16,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        k8up.syn.tools/backupcommand: /bin/bash -c 'mysqldump -uroot -p"$\{MYSQL_ROOT_PASSWORD\}" --all-databases'
+        k8up.syn.tools/backupcommand: /bin/bash -c 'mysqldump -uroot -p"${MYSQL_ROOT_PASSWORD}" --all-databases'
       labels:
         app: nextcloud-mariadb
     spec:
@@ -44,7 +45,7 @@ spec:
               command:
                 - /bin/bash
                 - -ec
-                - mysqladmin status -uroot -p"$\{MYSQL_ROOT_PASSWORD\}"
+                - mysqladmin status -uroot -p"${MYSQL_ROOT_PASSWORD}"
       restartPolicy: Always
       automountServiceAccountToken: false
       volumes:
