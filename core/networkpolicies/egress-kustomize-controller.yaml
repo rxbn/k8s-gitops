@@ -12,6 +12,8 @@ spec:
     - action: Allow
       protocol: TCP
       destination:
-        selector: app == 'notification-controller'
+        selector: >-
+          app == 'notification-controller' ||
+          app == 'source-controller'
         ports:
           - 9090
