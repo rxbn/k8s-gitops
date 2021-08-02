@@ -54,6 +54,7 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: allow-lan-only@file,traefik-forward-auth@kubernetescrd
         enabled: true
+        ingressClassName: traefik
         hosts:
           - alertmanager.local.${BASE_DOMAIN}
         pathType: Prefix
@@ -86,6 +87,7 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: allow-lan-only@file
         enabled: true
+        ingressClassName: traefik
         hosts:
           - grafana.local.${BASE_DOMAIN}
         pathType: Prefix
@@ -105,6 +107,7 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: allow-lan-only@file,traefik-forward-auth@kubernetescrd
         enabled: true
+        ingressClassName: traefik
         hosts:
           - prometheus.local.${BASE_DOMAIN}
         pathType: Prefix

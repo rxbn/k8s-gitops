@@ -20,6 +20,7 @@ spec:
     ingress:
       enabled: true
       annotations:
+        kubernetes.io/ingress.class: traefik
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       rules:
         - host: sso.${BASE_DOMAIN}
