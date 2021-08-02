@@ -4,6 +4,8 @@ kind: ConfigMap
 metadata:
   name: merge-subtitles
   namespace: usenet
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
 data:
   merge_subtitles.sh: |
     #!/usr/bin/env bash

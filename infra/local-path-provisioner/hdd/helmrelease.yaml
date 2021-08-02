@@ -4,6 +4,8 @@ kind: HelmRelease
 metadata:
   name: hdd
   namespace: local-path-provisioner
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
 spec:
   interval: 5m
   chart:
