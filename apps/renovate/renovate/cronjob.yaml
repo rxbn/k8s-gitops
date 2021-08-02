@@ -55,7 +55,7 @@ spec:
                 - name: RENOVATE_PLATFORM
                   value: gitlab
                 - name: RENOVATE_REDIS_URL
-                  value: redis://renovate-redis
+                  value: redis://renovate-redis.renovate.svc.cluster.local
               envFrom:
                 - secretRef:
                     name: renovate
