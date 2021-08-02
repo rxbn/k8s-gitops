@@ -8,9 +8,7 @@ spec:
   interval: 1m0s
   ref:
     branch: master
-  secretRef:
-    name: flux-system
-  url: ssh://git@github.com/rxbn/k8s-gitops
+  url: https://github.com/rxbn/k8s-gitops
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
