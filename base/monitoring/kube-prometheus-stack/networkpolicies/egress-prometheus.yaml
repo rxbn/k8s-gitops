@@ -56,6 +56,12 @@ spec:
     - action: Allow
       protocol: TCP
       destination:
+        namespaceSelector: projectcalico.org/name == 'flux-system'
+        ports:
+          - 8080
+    - action: Allow
+      protocol: TCP
+      destination:
         nets:
           - ${HOST_IP}/32
         ports:
