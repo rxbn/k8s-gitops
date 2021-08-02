@@ -1,5 +1,5 @@
 ---
-name: Update FluxCD
+name: Update Flux
 
 on:
   workflow_dispatch:
