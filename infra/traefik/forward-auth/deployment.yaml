@@ -66,6 +66,13 @@ spec:
           volumeMounts:
             - name: forward-auth-rules
               mountPath: /rules
+          resources:
+            requests:
+              cpu: 25m
+              memory: 16Mi
+            limits:
+              cpu: 500m
+              memory: 128Mi
           startupProbe:
             tcpSocket:
               port: 4181

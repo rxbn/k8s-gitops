@@ -49,8 +49,14 @@ spec:
             - mountPath: /transcode
               name: tmpfs
           resources:
+            requests:
+              cpu: 1000m
+              memory: 1024Mi
+              gpu.intel.com/i915: "1"
             limits:
-              gpu.intel.com/i915: 1
+              cpu: 4000m
+              memory: 16384Mi
+              gpu.intel.com/i915: "1"
           startupProbe:
             httpGet:
               path: /identity
