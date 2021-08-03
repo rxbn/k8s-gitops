@@ -34,7 +34,7 @@ Install all pre-commit hooks so they are executed every time before a commit occ
 2. Install Calico
 3. Create `flux-system` namespace  
    `kubectl create namespace flux-system`
-4. Apply sops secret  
+4. Apply sops private key secret  
    `kubectl apply -f sops-secret.yaml`
 5. Bootstrap cluster (may needs to be executed twice)  
    `kubectl apply --kustomize=./core/flux-system`
