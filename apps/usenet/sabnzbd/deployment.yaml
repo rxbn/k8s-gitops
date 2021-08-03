@@ -78,8 +78,8 @@ spec:
           configMap:
             name: sabnzbd-startup
             items:
-              - key: merge_subtitles.sh
-                path: merge_subtitles.sh
+              - key: startup_probe.sh
+                path: startup_probe.sh
             defaultMode: 0777
         - name: incomplete-downloads
           hostPath:
