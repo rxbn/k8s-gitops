@@ -31,13 +31,6 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: data
-          resources:
-            requests:
-              cpu: 100m
-              memory: 128Mi
-            limits:
-              cpu: 1000m
-              memory: 1024Mi
           startupProbe:
             tcpSocket:
               port: 3579
