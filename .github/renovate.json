@@ -27,14 +27,6 @@
         },
         {
             "fileMatch": [
-                "crds\\/kyverno\\/kustomization\\.yaml$"
-            ],
-            "matchStrings": [
-                "datasource=(?<datasource>.*) registryUrl=(?<registryUrl>.*) chart=(?<depName>.*)\\s.*(?<currentValue>v[0-9]\\.[0-9]\\.[0-9])"
-            ]
-        },
-        {
-            "fileMatch": [
                 "crds\\/kube-prometheus-stack\\/crds\\.yaml$"
             ],
             "matchStrings": [

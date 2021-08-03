@@ -4,7 +4,6 @@ This directory contains infrastructure applications.
 
 ## Contents
 
-- **kyverno-policies** contains all Kubernetes cluster policies
 - **local-path-provisioner** dynamically provisions persistent local storage with Kubernetes
 - **metallb** MetalLB is a load-balancer implementation for bare metal Kubernetes clusters, using standard routing protocols
 - **networkpolicies** contains all cluster-wide network policies
