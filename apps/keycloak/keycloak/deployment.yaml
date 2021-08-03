@@ -75,11 +75,20 @@ spec:
                 name: keycloak
           ports:
             - containerPort: 8080
-          livenessProbe:
+          startupProbe:
             httpGet:
               path: /auth/
               port: 8080
             initialDelaySeconds: 30
+            failureThreshold: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /auth/
+              port: 8080
+            failureThreshold: 2
+            priodSeconds: 30
             timeoutSeconds: 5
       restartPolicy: Always
       automountServiceAccountToken: false

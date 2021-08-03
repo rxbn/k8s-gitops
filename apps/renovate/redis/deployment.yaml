@@ -24,12 +24,17 @@ spec:
               value: Europe/Zurich
           ports:
             - containerPort: 6379
+          startupProbe:
+            tcpSocket:
+              port: 6379
+            failureThreshold: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
           livenessProbe:
             tcpSocket:
               port: 6379
-            initialDelaySeconds: 30
-            failureThreshold: 5
-            timeoutSeconds: 10
-            periodSeconds: 10
+            failureThreshold: 2
+            priodSeconds: 30
+            timeoutSeconds: 5
       restartPolicy: Always
       automountServiceAccountToken: false

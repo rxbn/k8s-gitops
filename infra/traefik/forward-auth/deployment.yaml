@@ -66,13 +66,18 @@ spec:
           volumeMounts:
             - name: forward-auth-rules
               mountPath: /rules
+          startupProbe:
+            tcpSocket:
+              port: 4181
+            failureThreshold: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
           livenessProbe:
             tcpSocket:
               port: 4181
-            initialDelaySeconds: 30
-            failureThreshold: 5
-            timeoutSeconds: 10
-            periodSeconds: 10
+            failureThreshold: 2
+            priodSeconds: 30
+            timeoutSeconds: 50
       volumes:
         - name: forward-auth-rules
           secret:

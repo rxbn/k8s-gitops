@@ -45,8 +45,9 @@ spec:
                 - "postgres"
                 - "-c"
                 - "SELECT 1"
-            initialDelaySeconds: 45
-            timeoutSeconds: 2
+            failureThreshold: 2
+            priodSeconds: 30
+            timeoutSeconds: 5
       restartPolicy: Always
       automountServiceAccountToken: false
       volumes:

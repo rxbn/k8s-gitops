@@ -36,16 +36,14 @@ spec:
             - mountPath: /var/lib/mysql
               name: data
           livenessProbe:
-            failureThreshold: 3
-            initialDelaySeconds: 120
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 1
             exec:
               command:
                 - /bin/bash
                 - -ec
                 - mysqladmin status -uroot -p"${MYSQL_ROOT_PASSWORD}"
+            failureThreshold: 2
+            periodSeconds: 30
+            timeoutSeconds: 5
       restartPolicy: Always
       automountServiceAccountToken: false
       volumes:

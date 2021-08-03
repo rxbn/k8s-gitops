@@ -42,13 +42,25 @@ spec:
             - mountPath: /app/sabnzbd/scripts/merge_subtitles.sh
               name: merge-subtitles
               subPath: merge_subtitles.sh
+            - mountPath: /tmp/startup_probe.sh
+              name: sabnzbd-startup
+              subPath: startup_probe.sh
+          startupProbe:
+            exec:
+              command:
+                - bash
+                - -c
+                - /app/sabnzbd/startup
+            initialDelaySeconds: 30
+            failureThreshold: 30
+            timeoutSeconds: 10
+            periodSeconds: 5
           livenessProbe:
             tcpSocket:
               port: 8080
-            initialDelaySeconds: 30
-            failureThreshold: 5
-            timeoutSeconds: 10
-            periodSeconds: 10
+            failureThreshold: 2
+            timeoutSeconds: 5
+            periodSeconds: 30
       restartPolicy: Always
       automountServiceAccountToken: false
       volumes:
@@ -58,6 +70,13 @@ spec:
         - name: merge-subtitles
           configMap:
             name: merge-subtitles
+            items:
+              - key: merge_subtitles.sh
+                path: merge_subtitles.sh
+            defaultMode: 0777
+        - name: sabnzbd-startup
+          configMap:
+            name: sabnzbd-startup
             items:
               - key: merge_subtitles.sh
                 path: merge_subtitles.sh
