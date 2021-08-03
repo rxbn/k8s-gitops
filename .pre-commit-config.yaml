@@ -5,7 +5,6 @@ repos:
     rev: v1.26.1
     hooks:
       - id: yamllint
-        exclude: ^core/cluster-secrets\.yaml$
         args:
           - -c
           - .github/yamllint.config.yaml
