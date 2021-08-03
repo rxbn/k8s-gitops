@@ -64,6 +64,13 @@ spec:
                   key: POSTGRES_USER
           ports:
             - containerPort: 3000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 100m
+              memory: 1024Mi
           startupProbe:
             httpGet:
               path: /

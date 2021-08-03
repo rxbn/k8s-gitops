@@ -80,6 +80,13 @@ spec:
             - mountPath: /var/www/html/data
               name: user-data
               readOnly: true
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 2000m
+              memory: 2048Mi
           startupProbe:
             httpGet:
               path: /status.php
@@ -145,6 +152,13 @@ spec:
               name: app-data
             - mountPath: /var/www/html/data
               name: user-data
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 4000m
+              memory: 4096Mi
       restartPolicy: Always
       automountServiceAccountToken: false
       volumes:

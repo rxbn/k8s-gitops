@@ -34,6 +34,13 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: data
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
           livenessProbe:
             exec:
               command:

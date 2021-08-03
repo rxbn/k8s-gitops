@@ -75,6 +75,13 @@ spec:
                 name: keycloak
           ports:
             - containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 1024Mi
+            limits:
+              cpu: 2000m
+              memory: 2048Mi
           startupProbe:
             httpGet:
               path: /auth/
