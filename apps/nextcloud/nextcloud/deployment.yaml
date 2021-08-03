@@ -99,7 +99,7 @@ spec:
                 - name: Host
                   value: cloud.${BASE_DOMAIN}
             failureThreshold: 2
-            priodSeconds: 30
+            periodSeconds: 30
             timeoutSeconds: 5
         - name: nextcloud
           image: nextcloud:22.0.0-fpm-alpine

@@ -76,7 +76,7 @@ spec:
             tcpSocket:
               port: 4181
             failureThreshold: 2
-            priodSeconds: 30
+            periodSeconds: 30
             timeoutSeconds: 50
       volumes:
         - name: forward-auth-rules

@@ -77,7 +77,7 @@ spec:
               path: /
               port: 3000
             failureThreshold: 2
-            priodSeconds: 30
+            periodSeconds: 30
             timeoutSeconds: 5
       restartPolicy: Always
       automountServiceAccountToken: false

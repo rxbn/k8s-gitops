@@ -41,7 +41,7 @@ spec:
             tcpSocket:
               port: 3579
             failureThreshold: 2
-            priodSeconds: 30
+            periodSeconds: 30
             timeoutSeconds: 5
       restartPolicy: Always
       automountServiceAccountToken: false
