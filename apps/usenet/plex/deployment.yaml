@@ -51,12 +51,20 @@ spec:
           resources:
             limits:
               gpu.intel.com/i915: 1
+          startupProbe:
+            httpGet:
+              path: /identity
+              port: 32400
+            failureThreshold: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
           livenessProbe:
             httpGet:
               path: /identity
               port: 32400
-            initialDelaySeconds: 10
-            timeoutSeconds: 10
+            failureThreshold: 2
+            priodSeconds: 30
+            timeoutSeconds: 5
       restartPolicy: Always
       automountServiceAccountToken: false
       volumes:

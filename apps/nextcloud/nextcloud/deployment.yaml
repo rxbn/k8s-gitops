@@ -80,6 +80,17 @@ spec:
             - mountPath: /var/www/html/data
               name: user-data
               readOnly: true
+          startupProbe:
+            httpGet:
+              path: /status.php
+              port: 80
+              httpHeaders:
+                - name: Host
+                  value: cloud.${BASE_DOMAIN}
+            initialDelaySeconds: 15
+            failureThreshold: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
           livenessProbe:
             httpGet:
               path: /status.php
@@ -87,11 +98,9 @@ spec:
               httpHeaders:
                 - name: Host
                   value: cloud.${BASE_DOMAIN}
-            initialDelaySeconds: 30
-            periodSeconds: 15
+            failureThreshold: 2
+            priodSeconds: 30
             timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 3
         - name: nextcloud
           image: nextcloud:22.0.0-fpm-alpine
           env:
