@@ -34,6 +34,9 @@ spec:
                 runAsGroup: 1000
                 runAsNonRoot: true
               resources:
+                requests:
+                  cpu: 10m
+                  memory: 16Mi
                 limits:
                   cpu: 10m
                   memory: 16Mi

@@ -49,6 +49,10 @@ spec:
             - mountPath: /transcode
               name: tmpfs
           resources:
+            requests:
+              cpu: 1000m
+              memory: 1024Mi
+              gpu.intel.com/i915: "1"
             limits:
               cpu: 4000m
               memory: 16384Mi
