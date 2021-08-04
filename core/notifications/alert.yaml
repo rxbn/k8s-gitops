@@ -13,8 +13,6 @@ spec:
       name: "*"
     - kind: Kustomization
       name: "*"
-    - kind: HelmRepository
-      name: "*"
     - kind: HelmRelease
       namespace: local-path-provisioner
       name: "*"
