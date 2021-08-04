@@ -1,0 +1,23 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: gitlab-backup-mirror
+  namespace: gitlab
+spec:
+  schedule: '0 2 * * *'
+  failedJobsHistoryLimit: 1
+  sucessfulJobsHistoryLimit: 1
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            job: gitlab-backup-mirror
+        spec:
+          containers:
+            - name: gitlab-backup-mirror
+              image: ghcr.io/containeroo/mirrio:2.1.1
+          restartPolicy: Never
+          automountServiceAccountToken: false
