@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://kubernetes.github.io/dashboard
       chart: kubernetes-dashboard
-      version: 4.3.2
+      version: 4.5.0
       sourceRef:
         kind: HelmRepository
         name: kubernetes-dashboard
@@ -22,11 +22,11 @@ spec:
         value: Europe/Zurich
     ingress:
       annotations:
-        kubernetes.io/ingress.class: traefik
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.middlewares: allow-lan-only@file,traefik-forward-auth@kubernetescrd,kubernetes-dashboard-kubernetes-dashboard-auth@kubernetescrd
       enabled: true
       hosts:
         - dash.local.${BASE_DOMAIN}
+      className: traefik
     metricsScraper:
       enabled: true
