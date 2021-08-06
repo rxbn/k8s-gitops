@@ -102,7 +102,7 @@ spec:
             periodSeconds: 30
             timeoutSeconds: 5
         - name: nextcloud
-          image: nextcloud:22.0.0-fpm-alpine
+          image: nextcloud:22.1.0-fpm-alpine
           env:
             - name: MYSQL_DATABASE
               value: nextcloud
