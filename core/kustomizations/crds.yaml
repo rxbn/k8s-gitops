@@ -9,7 +9,7 @@ spec:
     - name: flux-system
   interval: 10m0s
   path: ./crds
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: flux-system
