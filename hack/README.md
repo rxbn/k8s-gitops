@@ -1,7 +1,8 @@
 # hack Directory
 
-This directory contains useful scripts.
+This directory contains useful scripts that are mostly bodgy at best.
 
 ## Contents
 
-- **generate_secret_template.sh** let's you generate `secret.template` files for your SOPS-encrypted Kubernetes secrets
+- **generate_kustomization.sh** generates `kustomization.yaml` files
+- **generate_secret_template.sh** generates `secret.template` files for SOPS-encrypted Kubernetes secrets
