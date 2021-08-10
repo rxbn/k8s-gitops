@@ -6,7 +6,9 @@ on:
     branches:
       - master
     paths:
-      - "**.yaml"
+      - "apps/**.yaml"
+      - "base/**.yaml"
+      - "infra/**.yaml"
 
 env:
   conf_live_branch: master
