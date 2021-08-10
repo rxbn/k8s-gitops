@@ -6,9 +6,7 @@ on:
     branches:
       - master
     paths:
-      - "apps/**.yaml"
-      - "base/**.yaml"
-      - "infra/**.yaml"
+      - "helmrelease.yaml"
 
 env:
   conf_live_branch: master
@@ -17,7 +15,7 @@ env:
 jobs:
   changes:
     name: Detect changes
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     outputs:
       files: "${{ steps.extract.outputs.files }}"
     steps:
@@ -40,7 +38,7 @@ jobs:
 
   helm:
     name: Template Helm Releases
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     if: ${{ needs.changes.outputs.files != '' }}
     needs:
       - changes
