@@ -6,7 +6,7 @@ on:
     branches:
       - master
     paths:
-      - "helmrelease.yaml"
+      - "**/helmrelease.yaml"
 
 env:
   conf_live_branch: master
