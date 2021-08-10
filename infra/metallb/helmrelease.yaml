@@ -24,7 +24,7 @@ spec:
             - ${METALLB_TRAEFIK_ADDRESS_POOL}
           auto-assign: false
           protocol: layer2
-        - name: default
+        - name: default-test
           addresses:
             - ${METALLB_DEFAULT_ADDRESS_POOL}
           auto-assign: true
