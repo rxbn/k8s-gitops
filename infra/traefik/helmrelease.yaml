@@ -24,6 +24,7 @@ spec:
     ingressClass:
       enabled: true
       isDefaultClass: true
+      fallbackApiVersion: v1
     ingressRoute:
       dashboard:
         enabled: false
