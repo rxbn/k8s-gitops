@@ -49,3 +49,5 @@ function process_folder {
 for base_folder in "${BASE_FOLDERS[@]}"; do
   process_folder "${base_folder}"
 done
+
+git checkout -- core/flux-system/kustomization.yaml
