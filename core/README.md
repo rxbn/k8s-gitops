@@ -9,5 +9,5 @@ This directory contains Flux deployments and other manifests.
 - **kustomizations** contains all `Kustomizations` for Flux
 - **monitoring** contains monitoring related manifests for Flux
 - **namespaces** contains all `Namespace` manifests
-- **networkpolicies** contains the networkpolicies for Flux
+- **networkpolicies** contains Flux and cluster-wide networkpolicies
 - **notifications** contains all manifests to configure Slack notifications for Flux
