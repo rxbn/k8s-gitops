@@ -5,6 +5,10 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-settings
   decryption:
     provider: sops
     secretRef:
