@@ -36,7 +36,9 @@ Install all pre-commit hooks so they are executed every time before a commit occ
    `kubectl create namespace flux-system`
 4. Apply sops private key secret  
    `kubectl apply -f sops-secret.yaml`
-5. Bootstrap cluster (may needs to be executed twice)  
+5. Apply cluster-settings configmap  
+   `kubectl apply -f core/cluster-settings.yaml`
+6. Bootstrap cluster (may needs to be executed twice)  
    `kubectl apply --kustomize=./core/flux-system`
 
 ## :robot:&nbsp; Automation
