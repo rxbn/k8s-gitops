@@ -12,20 +12,20 @@ spec:
     - host: git.${BASE_DOMAIN}
       http:
         paths:
-          - backend:
+          - path: /
+            pathType: Prefix
+            backend:
               service:
                 name: gitlab-webservice-default
                 port:
                   number: 8181
-            path: /
+          - path: /admin/sidekiq/
             pathType: Prefix
-          - backend:
+            backend:
               service:
                 name: gitlab-webservice-default
                 port:
                   number: 8080
-            path: /admin/sidekiq/
-            pathType: Prefix
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -40,13 +40,13 @@ spec:
     - host: registry.${BASE_DOMAIN}
       http:
         paths:
-          - backend:
+          - path: /
+            pathType: Prefix
+            backend:
               service:
                 name: gitlab-registry
                 port:
                   number: 5000
-            path: /
-            pathType: Prefix
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -62,10 +62,10 @@ spec:
     - host: gitlab-minio.local.${BASE_DOMAIN}
       http:
         paths:
-          - backend:
+          - path: /
+            pathType: Prefix
+            backend:
               service:
                 name: gitlab-minio-svc
                 port:
                   number: 9000
-            path: /
-            pathType: Prefix
