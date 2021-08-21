@@ -39,12 +39,13 @@ spec:
     pilot:
       dashboard: false
     ports:
-      metrics: null
       gitlab-ssh:
         expose: true
         exposedPort: 22
         port: 2222
         protocol: TCP
+      traefik:
+        expose: true
       web:
         redirectTo: websecure
       websecure:
@@ -57,6 +58,7 @@ spec:
                 - '*.local.${BASE_DOMAIN}'
                 - '*.dev.${BASE_DOMAIN}'
           enabled: true
+      metrics: null
     service:
       annotations:
         metallb.universe.tf/address-pool: traefik
