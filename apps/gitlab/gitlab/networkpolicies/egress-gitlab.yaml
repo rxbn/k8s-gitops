@@ -37,3 +37,10 @@ spec:
           - 80
           - 443
           - 587
+    - action: Allow
+      protocol: TCP
+      destination:
+        nets:
+          - ${HOST_IP}/32
+        ports:
+          - 6443
