@@ -1,10 +1,13 @@
 ---
 apiVersion: crd.projectcalico.org/v1
-kind: GlobalNetworkPolicy
+kind: NetworkPolicy
 metadata:
-  name: egress-to-kubeapi
+  name: egress-backup-nfs-subdir-external-provisioner
+  namespace: nfs-subdir-external-provisioner
 spec:
-  selector: all()
+  selector: >-
+    app == 'nfs-subdir-external-provisioner' &&
+    release == 'backup'
   types:
     - Egress
   egress:
