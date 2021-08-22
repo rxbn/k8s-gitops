@@ -7,7 +7,6 @@ resources:
   - networkpolicies
   - kustomizations
   - helmrepositories
-  - monitoring
   - notifications
   - cluster-settings.yaml
   - cluster-secrets.yaml
