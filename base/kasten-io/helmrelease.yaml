@@ -32,6 +32,9 @@ spec:
         scopes: openid profile email
         logoutURL: https://sso.${BASE_DOMAIN}/auth/realms/master/protocol/openid-connect/logout?redirect_uri=https://k10.local.${BASE_DOMAIN}
         usernameClaim: email
+    prometheus:
+      server:
+        enabled: false
   valuesFrom:
     - kind: Secret
       name: k10-helm-values
