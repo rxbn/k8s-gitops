@@ -8,7 +8,6 @@ resources:
   - metallb.yaml
   - bitnami.yaml
   - stakater.yaml
-  - kasten.yaml
   - traefik.yaml
   - kubernetes-dashboard.yaml
   - containeroo.yaml
