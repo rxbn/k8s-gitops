@@ -20,6 +20,8 @@ spec:
       accept: true
       company: ${BASE_DOMAIN/./-}
       email: ${EMAIL}
+    networkPolicy:
+      create: false
     global:
       persistence:
         storageClass: nvme
