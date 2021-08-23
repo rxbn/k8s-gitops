@@ -22,6 +22,7 @@ spec:
       email: ${EMAIL}
     networkPolicy:
       create: false
+    executorReplicas: 1
     global:
       persistence:
         storageClass: nvme
