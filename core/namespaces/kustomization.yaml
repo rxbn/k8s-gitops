@@ -17,4 +17,5 @@ resources:
   - kubernetes-dashboard.yaml
   - wiki.yaml
   - minio.yaml
+  - kasten-io.yaml
   - monitoring.yaml
