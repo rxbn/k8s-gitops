@@ -6,6 +6,7 @@ resources:
   - egress-kube-state-metrics.yaml
   - ingress-kube-state-metrics.yaml
   - ingress-kube-prometheus-stack-operator.yaml
+  - egress-kube-prometheus-stack-admission-create-job.yaml
   - ingress-prometheus.yaml
   - egress-kube-prometheus-stack-operator.yaml
   - egress-grafana.yaml
