@@ -14,5 +14,6 @@ resources:
   - ingress-alertmanager.yaml
   - grafana-egress-traefik.yaml
   - egress-alertmanager.yaml
+  - egress-kube-prometheus-stack-admission-patch-job.yaml
   - egress-prometheus.yaml
   - alertmanager-egress-traefik.yaml
