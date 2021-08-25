@@ -25,7 +25,7 @@ spec:
           - name: blackhole
           - name: slack
             slack_configs:
-              - channel: '#kubernetes'
+              - channel: '#alertmanager'
                 send_resolved: true
                 text: |2-
                   {{ range .Alerts }}
