@@ -44,7 +44,7 @@ spec:
               memory: 16Mi
       containers:
         - name: forward-auth
-          image: thomseddon/traefik-forward-auth:2.2.0
+          image: mesosphere/traefik-forward-auth:3.0.1
           env:
             - name: CONFIG
               value: /rules/config.ini
