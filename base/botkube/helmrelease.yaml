@@ -23,7 +23,7 @@ spec:
     config:
       recommendations: false
       settings:
-        clustername: ${BASE_DOMAIN/./-}
+        clustername: ${BASE_DOMAIN}
       resources:
         - name: v1/services
           namespaces:
