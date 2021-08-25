@@ -50,11 +50,9 @@ spec:
               value: /rules/config.ini
             - name: COOKIE_DOMAIN
               value: ${BASE_DOMAIN}
-            - name: DEFAULT_PROVIDER
-              value: oidc
             - name: AUTH_HOST
               value: fw-auth.${BASE_DOMAIN}
-            - name: PROVIDERS_OIDC_ISSUER_URL
+            - name: PROVIDER_URI
               value: https://sso.${BASE_DOMAIN}/auth/realms/master
             - name: TZ
               value: Europe/Zurich
