@@ -54,6 +54,8 @@ spec:
               value: fw-auth.${BASE_DOMAIN}
             - name: PROVIDER_URI
               value: https://sso.${BASE_DOMAIN}/auth/realms/master
+            - name: SCOPE
+              value: openid profile email
             - name: TZ
               value: Europe/Zurich
           envFrom:
