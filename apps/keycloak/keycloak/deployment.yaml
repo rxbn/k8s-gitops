@@ -90,5 +90,6 @@ spec:
             failureThreshold: 2
             periodSeconds: 30
             timeoutSeconds: 5
+          resources: {}
       restartPolicy: Always
       automountServiceAccountToken: false

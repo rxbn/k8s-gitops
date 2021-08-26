@@ -101,6 +101,7 @@ spec:
             failureThreshold: 2
             periodSeconds: 30
             timeoutSeconds: 5
+          resources: {}
         - name: nextcloud
           image: nextcloud:22.1.0-fpm-alpine
           env:
@@ -145,6 +146,7 @@ spec:
               name: app-data
             - mountPath: /var/www/html/data
               name: user-data
+          resources: {}
       restartPolicy: Always
       automountServiceAccountToken: false
       volumes:
