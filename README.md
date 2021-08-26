@@ -20,6 +20,7 @@ This Git Repository contains the following directories and are ordered below by 
 These directories are not tracked by Flux but are useful nonetheless:
 
 - **.github** directory contains GitHub related files
+- **.taskfiles** directory contains go-tasks
 - **hack** directory contains useful scrips
 
 ## :leftwards_arrow_with_hook:&nbsp; Install pre-commit Hooks
