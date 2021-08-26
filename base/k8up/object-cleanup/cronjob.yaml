@@ -1,0 +1,31 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: object-cleanup
+  namespace: k8up
+spec:
+  suspend: false
+  schedule: '0 20 * * *'
+  failedJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 1
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            job: object-cleanup
+        spec:
+          containers:
+            - name: object-cleanup
+              image: bitnami/kubectl:1.22.0
+              command:
+                - sh
+                - -c
+                - |
+                  kubectl delete backups.backup.appuio.ch --all-namespaces --all
+                  kubectl delete checks.backup.appuio.ch --all-namespaces --all
+                  kubectl delete prunes.backup.appuio.ch --all-namespaces --all
+          restartPolicy: Never
+          serviceAccountName: object-cleanup
