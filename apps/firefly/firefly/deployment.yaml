@@ -61,6 +61,8 @@ spec:
                   key: MYSQL_ROOT_PASSWORD
             - name: DB_USERNAME
               value: root
+            - name: TRUSTED_PROXIES
+              value: "**"
           envFrom:
             - secretRef:
                 name: firefly
@@ -68,11 +70,16 @@ spec:
             - containerPort: 8080
           volumeMounts:
             - mountPath: /var/www/html/storage/upload
-              name: data
+              name: upload
+            - mountPath: /var/www/html/storage/export
+              name: export
           resources: {}
       restartPolicy: Always
       automountServiceAccountToken: false
       volumes:
-        - name: data
+        - name: upload
           persistentVolumeClaim:
-            claimName: firefly-data
+            claimName: firefly-upload
+        - name: export
+          persistentVolumeClaim:
+            claimName: firefly-export
