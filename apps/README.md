@@ -4,6 +4,7 @@ This directory contains all other common applications.
 
 ## Contents
 
+- **firefly** is a free and open source personal finance manager
 - **gitlab** contains gitlab-backup-mirror (MirrIO) and gitlab-runner
 - **keycloak** single-sign-on
 - **kubernetes-dashboard** gives an overview on what's running in the cluster
