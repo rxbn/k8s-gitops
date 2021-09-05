@@ -24,12 +24,11 @@ spec:
   values:
     additionalArguments:
       - --api.insecure=true
-      - --providers.file.filename=/data/traefik-config.yaml
       - --certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare
       - --certificatesresolvers.cloudflare.acme.email=${EMAIL}
       - --certificatesresolvers.cloudflare.acme.dnschallenge.resolvers=1.1.1.1:53,1.0.0.1:53
       - --certificatesresolvers.cloudflare.acme.storage=/certs/acme.json
-      - --entrypoints.websecure.http.middlewares=headers-default@file
+      - --entrypoints.websecure.http.middlewares=traefik-headers@kubernetescrd
       - --serverstransport.insecureskipverify
       - --providers.kubernetesingress.ingressendpoint.ip=${METALLB_TRAEFIK_ADDRESS_POOL%/32}
     deployment:
@@ -79,10 +78,6 @@ spec:
         metallb.universe.tf/address-pool: traefik
       spec:
         externalTrafficPolicy: Local
-    volumes:
-      - mountPath: /data
-        name: traefik-config
-        type: configMap
     metrics:
       prometheus: null
   valuesFrom:
