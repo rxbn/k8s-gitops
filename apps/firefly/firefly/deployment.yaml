@@ -44,7 +44,7 @@ spec:
               memory: 16Mi
       containers:
         - name: firefly
-          image: fireflyiii/core:version-5.5.12
+          image: fireflyiii/core:version-5.5.13
           env:
             - name: DB_DATABASE
               value: firefly
