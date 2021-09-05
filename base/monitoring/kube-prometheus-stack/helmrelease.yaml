@@ -52,7 +52,7 @@ spec:
       ingress:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: allow-lan-only@file,traefik-forward-auth@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan-only@kubernetescrd,traefik-forward-auth@kubernetescrd
         enabled: true
         ingressClassName: traefik
         hosts:
@@ -85,7 +85,7 @@ spec:
       ingress:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: allow-lan-only@file
+          traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan-only@kubernetescrd
         enabled: true
         ingressClassName: traefik
         hosts:
@@ -105,7 +105,7 @@ spec:
       ingress:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: allow-lan-only@file,traefik-forward-auth@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan-only@kubernetescrd,traefik-forward-auth@kubernetescrd
         enabled: true
         ingressClassName: traefik
         hosts:
