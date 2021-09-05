@@ -81,7 +81,8 @@
                 "docker"
             ],
             "matchPackagePatterns": [
-                "^ghcr.io\\/linuxserver\\/(ombi|plex|sabnzbd)"
+                "^ghcr.io\\/linuxserver\\/(ombi|plex|sabnzbd)",
+                "^fireflyiii\\/core"
             ],
             "versioning": "loose"
         },
