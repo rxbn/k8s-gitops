@@ -24,4 +24,4 @@ spec:
   ipWhiteList:
     sourceRange:
       - ${LAN_NETWORK_RANGE}
-      - ${POD_NETWORK_RANGE
+      - ${POD_NETWORK_RANGE}
