@@ -17,3 +17,10 @@ spec:
       destination:
         ports:
           - 8080
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: job == 'firefly-cron'
+      destination:
+        ports:
+          - 8080

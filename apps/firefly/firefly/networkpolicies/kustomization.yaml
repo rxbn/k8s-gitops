@@ -5,3 +5,4 @@ resources:
   - egress-firefly.yaml
   - firefly-egress-traefik.yaml
   - ingress-firefly.yaml
+  - egress-firefly-cron.yaml

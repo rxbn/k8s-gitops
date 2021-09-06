@@ -1,0 +1,33 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: firefly-cron
+  namespace: firefly
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
+spec:
+  suspend: false
+  schedule: 0 3 * * *
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            job: firefly-cron
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: firefly-cron
+              image: curlimages/curl:7.78.0
+              args:
+                - "--fail"
+                - "-L"
+                - "http://firefly.firefly.svc.cluster.local:8080/api/v1/cron/${FIREFLY_TOKEN}"
+              envFrom:
+                - secretRef:
+                    name: firefly-cron
+          automountServiceAccountToken: false
