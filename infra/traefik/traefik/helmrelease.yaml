@@ -9,6 +9,8 @@ spec:
   dependsOn:
     - name: metallb
       namespace: metallb
+    - name: nvme
+      namespace: local-path-provisioner
   chart:
     spec:
       # renovate: registryUrl=https://helm.traefik.io/traefik
