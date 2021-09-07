@@ -9,8 +9,6 @@ spec:
   dependsOn:
     - name: metallb
       namespace: metallb
-    - name: nvme
-      namespace: local-path-provisioner
   chart:
     spec:
       # renovate: registryUrl=https://helm.traefik.io/traefik
@@ -31,9 +29,6 @@ spec:
       - --entrypoints.websecure.http.middlewares=traefik-headers@kubernetescrd
       - --serverstransport.insecureskipverify
       - --providers.kubernetesingress.ingressendpoint.ip=${METALLB_TRAEFIK_ADDRESS_POOL%/32}
-    deployment:
-      annotations:
-        reloader.stakater.com/auto: "true"
     globalArguments: null
     ingressClass:
       enabled: true
