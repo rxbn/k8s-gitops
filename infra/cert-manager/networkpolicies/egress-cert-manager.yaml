@@ -16,3 +16,24 @@ spec:
           - ${HOST_IP}/32
         ports:
           - 6443
+    - action: Allow
+      protocol: TCP
+      destination:
+        ports:
+          - 443
+    - action: Allow
+      protocol: TCP
+      destination:
+        nets:
+          - 1.1.1.1
+          - 1.0.0.1
+        ports:
+          - 53
+    - action: Allow
+      protocol: UDP
+      destination:
+        nets:
+          - 1.1.1.1
+          - 1.0.0.1
+        ports:
+          - 53
