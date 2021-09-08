@@ -35,3 +35,5 @@ repos:
         args:
           - --ignore-kind
           - GlobalNetworkPolicy
+          - --ignore-kind
+          - ClusterIssuer

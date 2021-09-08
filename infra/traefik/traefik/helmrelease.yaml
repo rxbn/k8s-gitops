@@ -9,8 +9,8 @@ spec:
   dependsOn:
     - name: metallb
       namespace: metallb
-    - name: nvme
-      namespace: local-path-provisioner
+    - name: cert-manager
+      namespace: cert-manager
   chart:
     spec:
       # renovate: registryUrl=https://helm.traefik.io/traefik
@@ -24,14 +24,13 @@ spec:
   values:
     additionalArguments:
       - --api.insecure=true
-      - --certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare
-      - --certificatesresolvers.cloudflare.acme.email=${EMAIL}
-      - --certificatesresolvers.cloudflare.acme.dnschallenge.resolvers=1.1.1.1:53,1.0.0.1:53
-      - --certificatesresolvers.cloudflare.acme.storage=/certs/acme.json
       - --entrypoints.websecure.http.middlewares=traefik-headers@kubernetescrd
       - --serverstransport.insecureskipverify
       - --providers.kubernetesingress.ingressendpoint.ip=${METALLB_TRAEFIK_ADDRESS_POOL%/32}
     globalArguments: null
+    env:
+      - name: TZ
+        value: Europe/Zurich
     ingressClass:
       enabled: true
       fallbackApiVersion: v1
@@ -42,11 +41,6 @@ spec:
     logs:
       general:
         level: INFO
-    persistence:
-      enabled: true
-      path: /certs
-      size: 128Mi
-      storageClass: nvme
     pilot:
       dashboard: false
     ports:
@@ -61,13 +55,6 @@ spec:
         redirectTo: websecure
       websecure:
         tls:
-          certResolver: cloudflare
-          domains:
-            - main: ${BASE_DOMAIN}
-              sans:
-                - '*.${BASE_DOMAIN}'
-                - '*.local.${BASE_DOMAIN}'
-                - '*.dev.${BASE_DOMAIN}'
           enabled: true
       metrics: null
     service:
@@ -77,10 +64,6 @@ spec:
         externalTrafficPolicy: Local
     metrics:
       prometheus: null
-  valuesFrom:
-    - kind: Secret
-      name: traefik-helm-values
-      optional: false
   install:
     crds: Skip
   upgrade:
