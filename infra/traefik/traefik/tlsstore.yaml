@@ -6,4 +6,4 @@ metadata:
   namespace: traefik
 spec:
   defaultCertificate:
-    secretName: ${SECRET_DOMAIN/./-}
+    secretName: ${BASE_DOMAIN/./-}
