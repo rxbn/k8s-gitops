@@ -104,5 +104,8 @@
             "versioning": "loose",
             "allowedVersions": "!/5\\.14/"
         }
-    ]
+    ],
+    "pre-commit": {
+        "enabled": true
+    }
 }
