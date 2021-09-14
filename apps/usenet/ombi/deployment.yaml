@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: ombi
-          image: ghcr.io/linuxserver/ombi:v4.0.1468-ls103
+          image: ghcr.io/linuxserver/ombi:v4.0.1468-ls104
           env:
             - name: PGID
               value: "2000"
