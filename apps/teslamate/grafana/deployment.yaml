@@ -60,7 +60,9 @@ spec:
             - name: GF_AUTH_GENERIC_OAUTH_NAME
               value: ${BASE_DOMAIN} SSO
             - name: GF_AUTH_GENERIC_OAUTH_SCOPES
-              value: openid profile email
+              value: openid profile email roles
+            - name: GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH
+              value: contains(realm_access.roles[*], 'admin') && 'Admin' || contains(realm_access.roles[*], 'editor') && 'Editor' || 'Viewer'
             - name: GF_AUTH_GENERIC_OAUTH_AUTH_URL
               value: https://sso.${BASE_DOMAIN}/auth/realms/master/protocol/openid-connect/auth
             - name: GF_AUTH_GENERIC_OAUTH_TOKEN_URL
