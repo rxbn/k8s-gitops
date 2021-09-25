@@ -4,8 +4,6 @@ kind: Deployment
 metadata:
   name: teslamate-mosquitto
   namespace: teslamate
-  annotations:
-    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
