@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: teslamate-mosquitto
+  namespace: teslamate
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: teslamate-mosquitto
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: teslamate-mosquitto
+    spec:
+      containers:
+        - name: teslamate-mosquitto
+          image: eclipse-mosquitto:2.0.11
+          command:
+            - mosquitto
+          args:
+            - -c
+            - /mosquitto-no-auth.conf
+          env:
+            - name: TZ
+              value: Europe/Zurich
+          ports:
+            - containerPort: 1883
+          volumeMounts:
+            - mountPath: /mosquitto/data
+              name: data
+            - mountPath: /mosquitto/config
+              name: config
+          resources: {}
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: teslamate-mosquitto-data
+        - name: config
+          persistentVolumeClaim:
+            claimName: teslamate-mosquitto-config

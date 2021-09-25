@@ -1,0 +1,61 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: teslamate
+  namespace: teslamate
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: teslamate
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: teslamate
+    spec:
+      containers:
+        - name: teslamate
+          image: teslamate/teslamate:1.24.0
+          envFrom:
+            - secretRef:
+                name: teslamate
+          env:
+            - name: DATABASE_HOST
+              value: teslamate-postgres.teslamate.svc.cluster.local
+            - name: DATABASE_NAME
+              value: teslamate
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: teslamate-postgres
+                  key: POSTGRES_USER
+            - name: DATABASE_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: teslamate-postgres
+                  key: POSTGRES_PASSWORD
+            - name: MQTT_HOST
+              value: teslamate-mosquitto.teslamate.svc.cluster.local
+            - name: VIRTUAL_HOST
+              value: app.teslamate.local.${BASE_DOMAIN}
+            - name: CHECK_ORIGIN
+              value: "true"
+            - name: TZ
+              value: Europe/Zurich
+          ports:
+            - containerPort: 4000
+          volumeMounts:
+            - mountPath: /opt/app/import
+              name: import
+          resources: {}
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: teslamate-import
