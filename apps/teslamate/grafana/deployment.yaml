@@ -44,7 +44,9 @@ spec:
             - name: GF_SERVER_DOMAIN
               value: dash.teslamate.local.${BASE_DOMAIN}
             - name: GF_SERVER_ROOT_URL
-              value: dash.teslamate.local.${BASE_DOMAIN}
+              value: https://dash.teslamate.local.${BASE_DOMAIN}
+            - name: GF_SERVER_SERVE_FROM_SUB_PATH
+              value: "false"
             - name: GF_AUTH_DISABLE_LOGIN_FORM
               value: "true"
             - name: GF_AUTH_OAUTH_AUTO_LOGIN
