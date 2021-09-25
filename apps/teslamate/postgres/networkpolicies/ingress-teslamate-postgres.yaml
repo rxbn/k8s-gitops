@@ -16,3 +16,10 @@ spec:
       destination:
         ports:
           - 5432
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: app == 'teslamate-grafana'
+      destination:
+        ports:
+          - 5432
