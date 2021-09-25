@@ -28,7 +28,7 @@ spec:
             - name: DATABASE_HOST
               value: teslamate-postgres.teslamate.svc.cluster.local
             - name: DATABASE_NAME
-              value: teslamate
+              value: postgres
             - name: DATABASE_USER
               valueFrom:
                 secretKeyRef:
