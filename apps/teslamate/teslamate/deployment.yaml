@@ -56,6 +56,6 @@ spec:
       restartPolicy: Always
       automountServiceAccountToken: false
       volumes:
-        - name: data
+        - name: import
           persistentVolumeClaim:
             claimName: teslamate-import
