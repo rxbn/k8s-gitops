@@ -21,9 +21,6 @@ spec:
       containers:
         - name: teslamate
           image: teslamate/teslamate:1.24.1
-          envFrom:
-            - secretRef:
-                name: teslamate
           env:
             - name: DATABASE_HOST
               value: teslamate-postgres.teslamate.svc.cluster.local
