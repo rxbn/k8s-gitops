@@ -19,4 +19,4 @@ spec:
               service:
                 name: teslamate-grafana
                 port:
-                  number: 4000
+                  number: 3000
