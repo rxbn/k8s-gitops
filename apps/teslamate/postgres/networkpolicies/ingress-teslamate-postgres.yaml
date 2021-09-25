@@ -12,14 +12,9 @@ spec:
     - action: Allow
       protocol: TCP
       source:
-        selector: app == 'teslamate'
-      destination:
-        ports:
-          - 5432
-    - action: Allow
-      protocol: TCP
-      source:
-        selector: app == 'teslamate-grafana'
+        selector: >-
+          app == 'teslamate' ||
+          app == 'teslamate-grafana'
       destination:
         ports:
           - 5432
