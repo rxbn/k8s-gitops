@@ -29,18 +29,6 @@ spec:
               value: Europe/Zurich
           ports:
             - containerPort: 1883
-          volumeMounts:
-            - mountPath: /mosquitto/data
-              name: data
-            - mountPath: /mosquitto/config
-              name: config
           resources: {}
       restartPolicy: Always
       automountServiceAccountToken: false
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: teslamate-mosquitto-data
-        - name: config
-          persistentVolumeClaim:
-            claimName: teslamate-mosquitto-config

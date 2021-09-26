@@ -46,13 +46,6 @@ spec:
               value: Europe/Zurich
           ports:
             - containerPort: 4000
-          volumeMounts:
-            - mountPath: /opt/app/import
-              name: import
           resources: {}
       restartPolicy: Always
       automountServiceAccountToken: false
-      volumes:
-        - name: import
-          persistentVolumeClaim:
-            claimName: teslamate-import

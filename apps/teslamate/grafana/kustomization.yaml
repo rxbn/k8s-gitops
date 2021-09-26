@@ -7,4 +7,3 @@ resources:
   - ingress.yaml
   - service.yaml
   - secret.yaml
-  - persistentvolumeclaim.yaml

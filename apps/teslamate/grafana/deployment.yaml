@@ -73,13 +73,6 @@ spec:
               value: Europe/Zurich
           ports:
             - containerPort: 3000
-          volumeMounts:
-            - mountPath: /var/lib/grafana
-              name: data
           resources: {}
       restartPolicy: Always
       automountServiceAccountToken: false
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: teslamate-grafana-data
