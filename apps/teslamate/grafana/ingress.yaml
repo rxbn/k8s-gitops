@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: teslamate-dashboards.${BASE_DOMAIN}
+    - host: teslamate-grafana.${BASE_DOMAIN}
       http:
         paths:
           - path: /
