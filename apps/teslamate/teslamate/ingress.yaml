@@ -6,11 +6,11 @@ metadata:
   namespace: teslamate
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan-only@kubernetescrd,traefik-forward-auth@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-forward-auth@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
-    - host: app.teslamate.local.${BASE_DOMAIN}
+    - host: teslamate.${BASE_DOMAIN}
       http:
         paths:
           - path: /

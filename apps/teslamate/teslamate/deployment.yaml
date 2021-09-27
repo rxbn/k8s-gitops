@@ -39,7 +39,7 @@ spec:
             - name: MQTT_HOST
               value: teslamate-mosquitto.teslamate.svc.cluster.local
             - name: VIRTUAL_HOST
-              value: app.teslamate.local.${BASE_DOMAIN}
+              value: teslamate.${BASE_DOMAIN}
             - name: CHECK_ORIGIN
               value: "true"
             - name: TZ

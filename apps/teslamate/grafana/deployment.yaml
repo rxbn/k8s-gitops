@@ -42,9 +42,9 @@ spec:
             - name: GF_AUTH_ANONYMOUS_ENABLED
               value: "false"
             - name: GF_SERVER_DOMAIN
-              value: dash.teslamate.local.${BASE_DOMAIN}
+              value: teslamate-dashboards.${BASE_DOMAIN}
             - name: GF_SERVER_ROOT_URL
-              value: https://dash.teslamate.local.${BASE_DOMAIN}
+              value: https://teslamate-dashboards.${BASE_DOMAIN}
             - name: GF_SERVER_SERVE_FROM_SUB_PATH
               value: "false"
             - name: GF_AUTH_DISABLE_LOGIN_FORM

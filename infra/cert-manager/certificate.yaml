@@ -15,4 +15,3 @@ spec:
     - "*.${BASE_DOMAIN}"
     - "*.local.${BASE_DOMAIN}"
     - "*.dev.${BASE_DOMAIN}"
-    - "*.teslamate.local.${BASE_DOMAIN}"
