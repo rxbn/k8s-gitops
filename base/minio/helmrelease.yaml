@@ -32,7 +32,8 @@ spec:
       storageClass: backup
     secretKey:
       password: ${MINIO_SECRETKEY}
-    debug: true
+    image:
+      debug: true
   postRenderers:
     - kustomize:
         patchesJson6902:
