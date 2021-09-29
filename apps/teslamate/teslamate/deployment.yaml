@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: teslamate
-          image: teslamate/teslamate:1.24.1
+          image: teslamate/teslamate:1.24.2
           env:
             - name: DATABASE_HOST
               value: teslamate-postgres.teslamate.svc.cluster.local
