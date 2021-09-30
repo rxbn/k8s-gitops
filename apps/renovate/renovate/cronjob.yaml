@@ -67,6 +67,13 @@ spec:
                   mountPath: /renovate/
           restartPolicy: Never
           automountServiceAccountToken: false
+          hostAliases:
+            - ip: 172.67.210.217
+              hostnames:
+                - git.${BASE_DOMAIN}
+            - ip: 104.21.93.136
+              hostnames:
+                - git.${BASE_DOMAIN}
           volumes:
             - name: renovate-config
               configMap:
