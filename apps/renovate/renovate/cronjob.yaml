@@ -42,7 +42,7 @@ spec:
                   memory: 16Mi
           containers:
             - name: renovate
-              image: renovate/renovate:27.21.0
+              image: renovate/renovate:27.25.0
               env:
                 - name: LOG_LEVEL
                   value: debug
@@ -56,8 +56,6 @@ spec:
                   value: gitlab
                 - name: RENOVATE_REDIS_URL
                   value: redis://renovate-redis.renovate.svc.cluster.local
-                - name: GIT_SSL_NO_VERIFY
-                  value: "1"
               envFrom:
                 - secretRef:
                     name: renovate
