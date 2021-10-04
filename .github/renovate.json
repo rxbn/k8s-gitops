@@ -90,7 +90,7 @@
                 "docker"
             ],
             "matchPackagePatterns": [
-                "^ghcr.io\\/linuxserver\\/(ombi|plex|sabnzbd)"
+                "^lscr.io\\/linuxserver\\/(ombi|plex|sabnzbd)"
             ],
             "versioning": "loose"
         },
@@ -99,7 +99,7 @@
                 "docker"
             ],
             "matchPackagePatterns": [
-                "^ghcr.io\\/linuxserver\\/(son|rad)arr"
+                "^lscr.io\\/linuxserver\\/(son|rad)arr"
             ],
             "versioning": "loose",
             "allowedVersions": "!/5\\.14/"
