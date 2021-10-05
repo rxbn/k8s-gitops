@@ -1,0 +1,20 @@
+---
+apiVersion: crd.projectcalico.org/v1
+kind: GlobalNetworkPolicy
+metadata:
+  name: egress-k8up-jobs
+spec:
+  selector: >-
+    job-name contains 'backup' ||
+    job-name contains 'prune' ||
+    job-name contains 'check'
+  types:
+    - Egress
+  egress:
+    - action: Allow
+      protocol: TCP
+      destination:
+        nets:
+          - ${HOST_IP}/32
+        ports:
+          - 6443
