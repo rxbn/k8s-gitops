@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.bitnami.com/bitnami
       chart: minio
-      version: 8.1.8
+      version: 7.3.0
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -19,10 +19,8 @@ spec:
   values:
     accessKey:
       password: ${MINIO_ACCESSKEY}
-      forcePassword: true
     secretKey:
       password: ${MINIO_SECRETKEY}
-      forcePassword: true
     extraEnv:
       - name: TZ
         value: Europe/Zurich
@@ -48,9 +46,6 @@ spec:
               kind: Deployment
               name: minio
             patch:
-              - op: replace
-                path: /spec/template/spec/containers/0/livenessProbe/httpGet/port
-                value: minio-api
-              - op: replace
-                path: /spec/template/spec/containers/0/readinessProbe/tcpSocket/port
-                value: minio-api
+              - op: add
+                path: /spec/template/spec/shareProcessNamespace
+                value: true
