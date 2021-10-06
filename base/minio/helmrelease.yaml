@@ -19,6 +19,10 @@ spec:
   values:
     accessKey:
       password: ${MINIO_ACCESSKEY}
+      forcePassword: true
+    secretKey:
+      password: ${MINIO_SECRETKEY}
+      forcePassword: true
     extraEnv:
       - name: TZ
         value: Europe/Zurich
@@ -30,8 +34,6 @@ spec:
       hostname: backups.local.${BASE_DOMAIN}
     persistence:
       storageClass: backup
-    secretKey:
-      password: ${MINIO_SECRETKEY}
   postRenderers:
     - kustomize:
         patchesJson6902:
