@@ -17,12 +17,7 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    accessKey:
-      password: ${MINIO_ACCESSKEY}
-      forcePassword: true
-    secretKey:
-      password: ${MINIO_SECRETKEY}
-      forcePassword: true
+    existingSecret: minio-credentials
     extraEnv:
       - name: TZ
         value: Europe/Zurich
