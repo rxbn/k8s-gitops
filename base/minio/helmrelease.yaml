@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.bitnami.com/bitnami
       chart: minio
-      version: 7.3.0
+      version: 8.1.8
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -46,6 +46,9 @@ spec:
               kind: Deployment
               name: minio
             patch:
-              - op: add
-                path: /spec/template/spec/shareProcessNamespace
-                value: true
+              - op: replace
+                path: /spec/template/spec/containers/0/livenessProbe/httpGet/port
+                value: minio-api
+              - op: replace
+                path: /spec/template/spec/containers/0/readinessProbe/tcpSocket/port
+                value: minio-api
