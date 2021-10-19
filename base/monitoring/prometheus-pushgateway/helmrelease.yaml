@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: prometheus-pushgateway
-      version: 1.11.0
+      version: 1.12.0
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -24,9 +24,19 @@ spec:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan-only@kubernetescrd
-      enabled: false
+      enabled: true
       hosts:
         - pushgateway.local.${BASE_DOMAIN}
     serviceMonitor:
       enabled: true
       namespace: monitoring
+  postRenderers:
+    - kustomize:
+        patchesJson6902:
+          - target:
+              kind: Ingress
+              name: prometheus-pushgateway
+            patch:
+              - op: add
+                path: /spec/ingressClassName
+                value: traefik

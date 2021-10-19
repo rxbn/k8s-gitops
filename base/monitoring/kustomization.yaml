@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - flux-system
   - kube-prometheus-stack
-  - prometheus-pushgateway
+  # - prometheus-pushgateway
