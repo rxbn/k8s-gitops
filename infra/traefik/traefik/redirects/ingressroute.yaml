@@ -19,6 +19,8 @@ spec:
           namespace: traefik
         - name: prometheus-redirect
           namespace: traefik
+        - name: kubernetes-dashboard-redirect
+          namespace: traefik
       services:
         - kind: TraefikService
           name: noop@internal

@@ -1,0 +1,10 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: kubernetes-dashboard-redirect
+  namespace: traefik
+spec:
+  redirectRegex:
+    regex: ^https://${BASE_DOMAIN}/kd$
+    replacement: https://dash.local.${BASE_DOMAIN}
