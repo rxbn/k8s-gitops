@@ -1,0 +1,20 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: redirects
+  namespace: traefik
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`${BASE_DOMAIN}`)
+      middlewares:
+        - name: teslamate-redirect
+          namespace: traefik
+        - name: teslamate-grafana-redirect
+          namespace: traefik
+      services:
+        - kind: TraefikService
+          name: noop@internal

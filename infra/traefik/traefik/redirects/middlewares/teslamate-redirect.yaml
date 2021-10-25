@@ -1,0 +1,10 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: teslamate-redirect
+  namespace: traefik
+spec:
+  redirectRegex:
+    regex: ^https://${BASE_DOMAIN}/tm$
+    replacement: https://teslamate.${BASE_DOMAIN}
