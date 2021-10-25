@@ -17,6 +17,8 @@ spec:
           namespace: traefik
         - name: github-redirect
           namespace: traefik
+        - name: prometheus-redirect
+          namespace: traefik
       services:
         - kind: TraefikService
           name: noop@internal
