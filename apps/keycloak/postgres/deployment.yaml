@@ -7,7 +7,7 @@ metadata:
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: keycloak-postgres
@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: keycloak-postgres
-          image: postgres:13.4-alpine
+          image: postgres:14.0-alpine
           envFrom:
             - secretRef:
                 name: keycloak-postgres
