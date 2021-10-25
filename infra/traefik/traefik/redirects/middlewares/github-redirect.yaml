@@ -1,0 +1,10 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: github-redirect
+  namespace: traefik
+spec:
+  redirectRegex:
+    regex: ^https://${BASE_DOMAIN}/gh$
+    replacement: https://github.com/rxbn

@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - teslamate-grafana-redirect.yaml
   - teslamate-redirect.yaml
+  - github-redirect.yaml

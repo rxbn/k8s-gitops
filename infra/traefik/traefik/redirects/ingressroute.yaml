@@ -15,6 +15,8 @@ spec:
           namespace: traefik
         - name: teslamate-grafana-redirect
           namespace: traefik
+        - name: github-redirect
+          namespace: traefik
       services:
         - kind: TraefikService
           name: noop@internal
