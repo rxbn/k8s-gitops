@@ -18,6 +18,30 @@ spec:
       labels:
         app: teslamate
     spec:
+      initContainers:
+        - name: wait-for-database
+          image: busybox:1.34.0
+          command:
+            - sh
+            - -c
+            - |
+              echo 'Waiting for PostgreSQL to become ready...'
+              until printf "." && nc -z -w 2 teslamate-postgres.teslamate.svc.cluster.local 5432; do
+                  sleep 2;
+              done;
+              echo 'PostgreSQL OK ✓'
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 10m
+              memory: 16Mi
       containers:
         - name: teslamate
           image: teslamate/teslamate:1.24.2
