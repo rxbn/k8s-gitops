@@ -6,7 +6,7 @@ metadata:
   namespace: k8up
 spec:
   suspend: false
-  schedule: '0 20 * * *'
+  schedule: CRON_TZ=Europe/Zurich 0 20 * * *
   failedJobsHistoryLimit: 3
   successfulJobsHistoryLimit: 1
   concurrencyPolicy: Forbid

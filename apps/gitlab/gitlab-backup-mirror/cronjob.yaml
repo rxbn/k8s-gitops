@@ -5,7 +5,8 @@ metadata:
   name: gitlab-backup-mirror
   namespace: gitlab
 spec:
-  schedule: '0 2 * * *'
+  suspend: false
+  schedule: CRON_TZ=Europe/Zurich 0 2 * * *
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 1
   concurrencyPolicy: Forbid

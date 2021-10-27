@@ -5,7 +5,8 @@ metadata:
   name: renovate
   namespace: renovate
 spec:
-  schedule: '*/15 * * * *'
+  suspend: false
+  schedule: CRON_TZ=Europe/Zurich */15 * * * *
   failedJobsHistoryLimit: 3
   successfulJobsHistoryLimit: 1
   concurrencyPolicy: Forbid
