@@ -12,9 +12,15 @@ spec:
     - action: Allow
       protocol: TCP
       source:
+        selector: app == 'teslamate'
+      destination:
+        ports:
+          - 1883
+    - action: Allow
+      protocol: TCP
+      source:
         nets:
           - 192.168.1.114/32
-        selector: app == 'teslamate'
       destination:
         ports:
           - 1883
