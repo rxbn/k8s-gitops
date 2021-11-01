@@ -5,7 +5,7 @@ metadata:
   name: object-cleanup
 rules:
   - apiGroups:
-      - backup.appuio.ch
+      - k8up.io
     resources:
       - backups
       - checks

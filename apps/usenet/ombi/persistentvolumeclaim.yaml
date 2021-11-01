@@ -5,7 +5,7 @@ metadata:
   name: ombi-data
   namespace: usenet
   annotations:
-    k8up.syn.tools/backup: "true"
+    k8up.io/backup: "true"
 spec:
   accessModes:
     - ReadWriteOnce

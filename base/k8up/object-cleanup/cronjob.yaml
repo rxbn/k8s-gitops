@@ -24,8 +24,8 @@ spec:
                 - sh
                 - -c
                 - |
-                  kubectl delete backups.backup.appuio.ch --all-namespaces --all
-                  kubectl delete checks.backup.appuio.ch --all-namespaces --all
-                  kubectl delete prunes.backup.appuio.ch --all-namespaces --all
+                  kubectl delete backups.k8up.io --all-namespaces --all
+                  kubectl delete checks.k8up.io --all-namespaces --all
+                  kubectl delete prunes.k8up.io --all-namespaces --all
           restartPolicy: Never
           serviceAccountName: object-cleanup
