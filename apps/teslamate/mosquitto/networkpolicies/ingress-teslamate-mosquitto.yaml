@@ -16,11 +16,3 @@ spec:
       destination:
         ports:
           - 1883
-    - action: Allow
-      protocol: TCP
-      source:
-        nets:
-          - 192.168.1.114/32
-      destination:
-        ports:
-          - 1883
