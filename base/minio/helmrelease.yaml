@@ -29,7 +29,7 @@ spec:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan-only@kubernetescrd
-      hostname: backups.local.${BASE_DOMAIN}
+      hostname: minio.local.${BASE_DOMAIN}
     persistence:
       storageClass: backup
   postRenderers:
