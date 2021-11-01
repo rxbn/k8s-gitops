@@ -15,6 +15,9 @@ spec:
       containers:
         - name: cluster-resources-backup
           image: projectsyn/k8s-object-dumper:v0.2.3
+          env:
+            - name: HOME
+              value: /home/dumper
           volumeMounts:
             - mountPath: /data
               name: data
