@@ -10,4 +10,4 @@ spec:
       targetPort: 1883
   selector:
     app: teslamate-mosquitto
-  type: ClusterIP
+  type: LoadBalancer
