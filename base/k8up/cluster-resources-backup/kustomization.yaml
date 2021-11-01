@@ -6,6 +6,5 @@ resources:
   - clusterrole.yaml
   - schedule.yaml
   - serviceaccount.yaml
-  - configmap.yaml
   - prebackuppod.yaml
   - clusterrolebinding.yaml
