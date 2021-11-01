@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        k8up.syn.tools/backupcommand: /bin/bash -c 'mysqldump -uroot -p"${MYSQL_ROOT_PASSWORD}" --all-databases'
+        k8up.io/backupcommand: /bin/bash -c 'mysqldump -uroot -p"${MYSQL_ROOT_PASSWORD}" --all-databases'
       labels:
         app: nextcloud-mariadb
     spec:
