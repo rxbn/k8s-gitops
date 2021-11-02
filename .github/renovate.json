@@ -6,6 +6,7 @@
     "assignees": [
         "rxbn"
     ],
+    "timezone": "Europe/Zurich",
     "regexManagers": [
         {
             "fileMatch": [
