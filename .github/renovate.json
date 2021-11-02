@@ -101,7 +101,7 @@
             "matchPackageNames": [
                 "renovate/renovate"
             ],
-            "schedule": "after 10pm and before 6am"
+            "schedule": "after 4am and before 6am"
         }
     ],
     "pre-commit": {
