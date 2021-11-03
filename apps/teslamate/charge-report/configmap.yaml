@@ -16,7 +16,9 @@ data:
     set -o pipefail
     set -o nounset
 
-    apk add curl
+    apk add curl python3
+    python3 -m ensurepip
+    pip3 install qrbill
 
     PGPASSWORD=${POSTGRES_PASSWORD} psql \
       --host=${POSTGRES_HOST} \
@@ -59,12 +61,35 @@ data:
                   --no-psqlrc \
                   --command="SELECT NOW();" | awk '{print $1}')
 
+    qrbill \
+      --account "${BILL_ACCOUNT}" \
+      --creditor-name "${BILL_CREDITOR_NAME}" \
+      --creditor-street "${BILL_CREDITOR_STREET}" \
+      --creditor-housenumber ${BILL_CREDITOR_HOUSENUMBER} \
+      --creditor-postalcode ${BILL_CREDITOR_POSTALCODE} \
+      --creditor-city "${BILL_CREDITOR_CITY}" \
+      --amount ${TOTAL_COST} \
+      --currency "CHF" \
+      --language "de" \
+      --extra-infos "Tesla charging ${START_DATE} - ${END_DATE}" \
+      --output "/tmp/charging-report-${END_DATE}.svg"
+
     response=$(curl \
                     --silent \
                     --show-error \
                     --no-progress-meter \
                     --form file=@"/tmp/report.csv" \
                     --form "initial_comment=Total charge cost for ${START_DATE} - ${END_DATE}: CHF ${TOTAL_COST}" \
+                    --form "channels=#${SLACK_CHANNEL}" \
+                    --header "Authorization: Bearer ${SLACK_TOKEN}" \
+                    https://slack.com/api/files.upload)
+
+    response=$(curl \
+                    --silent \
+                    --show-error \
+                    --no-progress-meter \
+                    --form file=@"/tmp/charging-report-${END_DATE}.svg" \
+                    --form "initial_comment=Bill for charge cost for ${START_DATE} - ${END_DATE}: CHF ${TOTAL_COST}" \
                     --form "channels=#${SLACK_CHANNEL}" \
                     --header "Authorization: Bearer ${SLACK_TOKEN}" \
                     https://slack.com/api/files.upload)
