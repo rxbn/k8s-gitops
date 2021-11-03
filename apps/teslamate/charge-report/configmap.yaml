@@ -16,7 +16,7 @@ data:
     set -o pipefail
     set -o nounset
 
-    apk add curl python3
+    apk add curl python3 libqrencode
     python3 -m ensurepip
     pip3 install qrbill
 
@@ -72,7 +72,7 @@ data:
       --currency "CHF" \
       --language "de" \
       --extra-infos "Tesla charging ${START_DATE} - ${END_DATE}" \
-      --output "/tmp/charging-report-${END_DATE}.svg"
+      --text | qrencode -o /tmp/qr_bill.png
 
     response=$(curl \
                     --silent \
@@ -88,7 +88,7 @@ data:
                     --silent \
                     --show-error \
                     --no-progress-meter \
-                    --form file=@"/tmp/charging-report-${END_DATE}.svg" \
+                    --form file=@"/tmp/qr_bill.png" \
                     --form "initial_comment=Bill for charge cost for ${START_DATE} - ${END_DATE}: CHF ${TOTAL_COST}" \
                     --form "channels=#${SLACK_CHANNEL}" \
                     --header "Authorization: Bearer ${SLACK_TOKEN}" \
