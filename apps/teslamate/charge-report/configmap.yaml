@@ -89,7 +89,7 @@ data:
                     --show-error \
                     --no-progress-meter \
                     --form file=@"/tmp/qr_bill.png" \
-                    --form "initial_comment=Bill for charge cost for ${START_DATE} - ${END_DATE}: CHF ${TOTAL_COST}" \
+                    --form "initial_comment=Bill ${START_DATE} - ${END_DATE}: CHF ${TOTAL_COST}" \
                     --form "channels=#${SLACK_CHANNEL}" \
                     --header "Authorization: Bearer ${SLACK_TOKEN}" \
                     https://slack.com/api/files.upload)
