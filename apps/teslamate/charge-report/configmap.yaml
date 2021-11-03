@@ -1,0 +1,72 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: charge-report
+  namespace: teslamate
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
+data:
+  report.sh: |
+    #!/usr/bin/env bash
+
+    # I know... this script is very hacky but it works so idc
+
+    set -o errexit
+    set -o pipefail
+    set -o nounset
+
+    apk add curl
+
+    PGPASSWORD=${POSTGRES_PASSWORD} psql \
+      --host=${POSTGRES_HOST} \
+      --port=${POSTGRES_PORT} \
+      --username=${POSTGRES_USER} \
+      --dbname=${POSTGRES_DB} \
+      --csv \
+      --command="SELECT start_date, end_date, charge_energy_added, cost FROM charging_processes WHERE geofence_id = 1 AND start_date >= NOW() - INTERVAL '3 month' AND start_date <= NOW() AND charge_energy_added IS NOT NULL ORDER BY start_date ASC;" > /tmp/report.csv
+
+    TOTAL_COST=$(PGPASSWORD=${POSTGRES_PASSWORD} psql \
+                  --host=${POSTGRES_HOST} \
+                  --port=${POSTGRES_PORT} \
+                  --username=${POSTGRES_USER} \
+                  --dbname=${POSTGRES_DB} \
+                  --quiet \
+                  --tuples-only \
+                  --no-align \
+                  --no-psqlrc \
+                  --command="SELECT sum(cost) FROM charging_processes WHERE geofence_id = 1 AND start_date >= NOW() - INTERVAL '3 month' AND start_date <= NOW();")
+
+    START_DATE=$(PGPASSWORD=${POSTGRES_PASSWORD} psql \
+                  --host=${POSTGRES_HOST} \
+                  --port=${POSTGRES_PORT} \
+                  --username=${POSTGRES_USER} \
+                  --dbname=${POSTGRES_DB} \
+                  --quiet \
+                  --tuples-only \
+                  --no-align \
+                  --no-psqlrc \
+                  --command="SELECT NOW() - INTERVAL '3 month';" | awk '{print $1}')
+
+    END_DATE=$(PGPASSWORD=${POSTGRES_PASSWORD} psql \
+                  --host=${POSTGRES_HOST} \
+                  --port=${POSTGRES_PORT} \
+                  --username=${POSTGRES_USER} \
+                  --dbname=${POSTGRES_DB} \
+                  --quiet \
+                  --tuples-only \
+                  --no-align \
+                  --no-psqlrc \
+                  --command="SELECT NOW();" | awk '{print $1}')
+
+    response=$(curl \
+                    --silent \
+                    --show-error \
+                    --no-progress-meter \
+                    --form file=@"/tmp/report.csv" \
+                    --form "initial_comment=Total charge cost for ${START_DATE} - ${END_DATE}: CHF ${TOTAL_COST}" \
+                    --form "channels=#${SLACK_CHANNEL}" \
+                    --header "Authorization: Bearer ${SLACK_TOKEN}" \
+                    https://slack.com/api/files.upload)
+
+    exit 0

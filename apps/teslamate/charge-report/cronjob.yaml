@@ -1,0 +1,49 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: charge-report
+  namespace: teslamate
+spec:
+  suspend: false
+  schedule: CRON_TZ=Europe/Zurich 0 0 1 */3 *
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            job: charge-report
+        spec:
+          containers:
+            - name: charge-report
+              image: postgres:14.0-alpine
+              command:
+                - /bin/bash
+              args:
+                - -c
+                - /data/report.sh
+              env:
+                - name: POSTGRES_HOST
+                  value: teslamate-postgres.teslamate.svc.cluster.local
+                - name: POSTGRES_PORT
+                  value: "5432"
+                - name: POSTGRES_DB
+                  value: postgres
+              envFrom:
+                - secretRef:
+                    name: teslamate-postgres
+                - secretRef:
+                    name: charge-report
+              volumeMounts:
+                - mountPath: /data
+                  name: charge-report
+          volumes:
+            - name: charge-report
+              configMap:
+                name: charge-report
+                defaultMode: 0777
+          restartPolicy: Never
+          automountServiceAccountToken: false

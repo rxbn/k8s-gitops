@@ -1,0 +1,22 @@
+---
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: egress-charge-report
+  namespace: teslamate
+spec:
+  selector: job == 'charge-report'
+  types:
+    - Egress
+  egress:
+    - action: Allow
+      protocol: TCP
+      destination:
+        selector: app == 'teslamate-postgres'
+        ports:
+          - 5432
+    - action: Allow
+      protocol: TCP
+      destination:
+        ports:
+          - 443
