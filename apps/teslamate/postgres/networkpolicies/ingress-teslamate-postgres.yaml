@@ -14,7 +14,8 @@ spec:
       source:
         selector: >-
           app == 'teslamate' ||
-          app == 'teslamate-grafana'
+          app == 'teslamate-grafana' ||
+          job == 'charge-report'
       destination:
         ports:
           - 5432
