@@ -10,16 +10,21 @@ data:
   report.sh: |
     #!/usr/bin/env bash
 
-    # I know... this script is very hacky but it works so idc
-
     set -o errexit
     set -o pipefail
     set -o nounset
 
-    apk add curl python3 libqrencode
+    # only run script on first day of month
+    if [ "$(date +%d)" != "01" ]; then
+        echo "Script should only run on first day of month"
+        exit 1
+    fi
+
+    apk add curl python3 libqrencode coreutils jq
     python3 -m ensurepip
     pip3 install qrbill
 
+    # get all charge reports
     PGPASSWORD=${POSTGRES_PASSWORD} psql \
       --host=${POSTGRES_HOST} \
       --port=${POSTGRES_PORT} \
@@ -28,6 +33,7 @@ data:
       --csv \
       --command="SELECT start_date, end_date, charge_energy_added, cost FROM charging_processes WHERE geofence_id = 1 AND start_date >= NOW() - INTERVAL '3 month' AND start_date <= NOW() AND charge_energy_added IS NOT NULL ORDER BY start_date ASC;" > /tmp/report.csv
 
+    # calculate total charge cost
     TOTAL_COST=$(PGPASSWORD=${POSTGRES_PASSWORD} psql \
                   --host=${POSTGRES_HOST} \
                   --port=${POSTGRES_PORT} \
@@ -39,28 +45,13 @@ data:
                   --no-psqlrc \
                   --command="SELECT sum(cost) FROM charging_processes WHERE geofence_id = 1 AND start_date >= NOW() - INTERVAL '3 month' AND start_date <= NOW();")
 
-    START_DATE=$(PGPASSWORD=${POSTGRES_PASSWORD} psql \
-                  --host=${POSTGRES_HOST} \
-                  --port=${POSTGRES_PORT} \
-                  --username=${POSTGRES_USER} \
-                  --dbname=${POSTGRES_DB} \
-                  --quiet \
-                  --tuples-only \
-                  --no-align \
-                  --no-psqlrc \
-                  --command="SELECT NOW() - INTERVAL '3 month';" | awk '{print $1}')
+    # get current date minus three months
+    START_DATE=$(date -d "3 months ago" +%Y-%m-%d)
 
-    END_DATE=$(PGPASSWORD=${POSTGRES_PASSWORD} psql \
-                  --host=${POSTGRES_HOST} \
-                  --port=${POSTGRES_PORT} \
-                  --username=${POSTGRES_USER} \
-                  --dbname=${POSTGRES_DB} \
-                  --quiet \
-                  --tuples-only \
-                  --no-align \
-                  --no-psqlrc \
-                  --command="SELECT NOW();" | awk '{print $1}')
+    # get current date
+    END_DATE=$(date +%Y-%m-%d)
 
+    # generate qr code
     qrbill \
       --account "${BILL_ACCOUNT}" \
       --creditor-name "${BILL_CREDITOR_NAME}" \
@@ -74,6 +65,7 @@ data:
       --extra-infos "Tesla charging ${START_DATE} - ${END_DATE}" \
       --text | qrencode -o /tmp/qr_bill.png
 
+    # send csv with charge report to slack
     response=$(curl \
                     --silent \
                     --show-error \
@@ -84,6 +76,11 @@ data:
                     --header "Authorization: Bearer ${SLACK_TOKEN}" \
                     https://slack.com/api/files.upload)
 
+    # check if upload was successful
+    [ $(jq .ok? <<< "$response" ) == true ] || \
+      echo "Error sending Slack notification. $(jq -r <<< "$response")"
+
+    # send qr code to slack
     response=$(curl \
                     --silent \
                     --show-error \
@@ -93,5 +90,9 @@ data:
                     --form "channels=#${SLACK_CHANNEL}" \
                     --header "Authorization: Bearer ${SLACK_TOKEN}" \
                     https://slack.com/api/files.upload)
+
+    # check if upload was successful
+    [ $(jq .ok? <<< "$response" ) == true ] || \
+      echo "Error sending Slack notification. $(jq -r <<< "$response")"
 
     exit 0
