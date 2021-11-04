@@ -42,29 +42,6 @@ spec:
             limits:
               cpu: 10m
               memory: 16Mi
-        - name: wait-for-mosquitto
-          image: busybox:1.34.1
-          command:
-            - sh
-            - -c
-            - |
-              echo 'Waiting for Mosquitto to become ready...'
-              until printf "." && nc -z -w 2 teslamate-mosquitto.teslamate.svc.cluster.local 1883; do
-                  sleep 2;
-              done;
-              echo 'Mosquitto OK ✓'
-          securityContext:
-            allowPrivilegeEscalation: false
-            runAsUser: 1000
-            runAsGroup: 1000
-            runAsNonRoot: true
-          resources:
-            requests:
-              cpu: 10m
-              memory: 16Mi
-            limits:
-              cpu: 10m
-              memory: 16Mi
       containers:
         - name: teslamate
           image: teslamate/teslamate:1.24.2
@@ -83,8 +60,8 @@ spec:
                 secretKeyRef:
                   name: teslamate-postgres
                   key: POSTGRES_PASSWORD
-            - name: MQTT_HOST
-              value: teslamate-mosquitto.teslamate.svc.cluster.local
+            - name: DISABLE_MQTT
+              value: "true"
             - name: VIRTUAL_HOST
               value: teslamate.${BASE_DOMAIN}
             - name: CHECK_ORIGIN

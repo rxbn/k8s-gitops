@@ -18,11 +18,5 @@ spec:
     - action: Allow
       protocol: TCP
       destination:
-        selector: app == 'teslamate-mosquitto'
-        ports:
-          - 1883
-    - action: Allow
-      protocol: TCP
-      destination:
         ports:
           - 443
