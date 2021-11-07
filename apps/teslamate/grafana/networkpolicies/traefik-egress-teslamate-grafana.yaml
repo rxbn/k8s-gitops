@@ -2,7 +2,7 @@
 apiVersion: crd.projectcalico.org/v1
 kind: NetworkPolicy
 metadata:
-  name: teslamate-egress-traefik
+  name: traefik-egress-teslamate-grafana
   namespace: traefik
 spec:
   selector: app.kubernetes.io/instance == 'traefik'
@@ -13,6 +13,6 @@ spec:
       protocol: TCP
       destination:
         namespaceSelector: projectcalico.org/name == 'teslamate'
-        selector: app == 'teslamate'
+        selector: app == 'teslamate-grafana'
         ports:
-          - 4000
+          - 3000

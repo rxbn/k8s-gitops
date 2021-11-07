@@ -2,7 +2,7 @@
 apiVersion: crd.projectcalico.org/v1
 kind: NetworkPolicy
 metadata:
-  name: radarr-egress-traefik
+  name: traefik-egress-ombi
   namespace: traefik
 spec:
   selector: app.kubernetes.io/instance == 'traefik'
@@ -13,6 +13,6 @@ spec:
       protocol: TCP
       destination:
         namespaceSelector: projectcalico.org/name == 'usenet'
-        selector: app == 'radarr'
+        selector: app == 'ombi'
         ports:
-          - 7878
+          - 3579
