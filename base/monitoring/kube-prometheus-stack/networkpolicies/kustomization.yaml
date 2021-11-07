@@ -5,15 +5,15 @@ resources:
   - ingress-grafana.yaml
   - egress-kube-state-metrics.yaml
   - ingress-kube-state-metrics.yaml
+  - traefik-egress-grafana.yaml
   - ingress-kube-prometheus-stack-operator.yaml
   - egress-kube-prometheus-stack-admission-create-job.yaml
   - ingress-prometheus.yaml
   - egress-kube-prometheus-stack-operator.yaml
   - egress-grafana.yaml
-  - prometheus-egress-traefik.yaml
+  - traefik-egress-alertmanager.yaml
   - ingress-alertmanager.yaml
-  - grafana-egress-traefik.yaml
+  - traefik-egress-prometheus.yaml
   - egress-alertmanager.yaml
   - egress-kube-prometheus-stack-admission-patch-job.yaml
   - egress-prometheus.yaml
-  - alertmanager-egress-traefik.yaml

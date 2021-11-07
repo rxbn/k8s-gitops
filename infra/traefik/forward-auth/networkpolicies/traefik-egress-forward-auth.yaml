@@ -2,7 +2,7 @@
 apiVersion: crd.projectcalico.org/v1
 kind: NetworkPolicy
 metadata:
-  name: ombi-egress-traefik
+  name: traefik-egress-forward-auth
   namespace: traefik
 spec:
   selector: app.kubernetes.io/instance == 'traefik'
@@ -12,7 +12,6 @@ spec:
     - action: Allow
       protocol: TCP
       destination:
-        namespaceSelector: projectcalico.org/name == 'usenet'
-        selector: app == 'ombi'
+        selector: app == 'forward-auth'
         ports:
-          - 3579
+          - 4181
