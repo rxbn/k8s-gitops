@@ -20,7 +20,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: nextcloud-cron
-              image: curlimages/curl:7.79.1
+              image: curlimages/curl:7.80.0
               args:
                 - "--fail"
                 - "-L"
