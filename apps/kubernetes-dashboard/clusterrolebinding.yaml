@@ -6,8 +6,8 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: cluster-admin
+  name: kubernetes-dashboard-cluster-reader
 subjects:
   - kind: ServiceAccount
-    name: admin-user
+    name: cluster-reader
     namespace: kubernetes-dashboard
