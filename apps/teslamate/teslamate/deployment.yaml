@@ -44,7 +44,7 @@ spec:
               memory: 16Mi
       containers:
         - name: teslamate
-          image: teslamate/teslamate:1.24.2
+          image: teslamate/teslamate:1.25.0
           env:
             - name: DATABASE_HOST
               value: teslamate-postgres.teslamate.svc.cluster.local
