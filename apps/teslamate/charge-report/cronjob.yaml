@@ -19,7 +19,7 @@ spec:
         spec:
           containers:
             - name: charge-report
-              image: postgres:14.0-alpine
+              image: postgres:14.1-alpine
               command:
                 - /bin/bash
               args:
