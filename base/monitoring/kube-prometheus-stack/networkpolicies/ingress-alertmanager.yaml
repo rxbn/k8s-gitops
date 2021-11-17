@@ -12,7 +12,9 @@ spec:
     - action: Allow
       protocol: TCP
       source:
-        selector: app.kubernetes.io/instance == 'kube-prometheus-stack-prometheus'
+        selector: >-
+          app.kubernetes.io/instance == 'kube-prometheus-stack-prometheus' ||
+          app == 'loki'
       destination:
         ports:
           - 9093

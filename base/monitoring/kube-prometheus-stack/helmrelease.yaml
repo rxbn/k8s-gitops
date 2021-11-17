@@ -67,6 +67,12 @@ spec:
         kubernetesResources: false
     grafana:
       defaultDashboardsTimezone: browser
+      datasources:
+        datasource.yaml:
+          - name: Loki
+            type: loki
+            access: proxy
+            url: http://loki.monitoring.svc.cluster.local:3100
       grafana.ini:
         auth:
           disable_login_form: true

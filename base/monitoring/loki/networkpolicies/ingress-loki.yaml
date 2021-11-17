@@ -1,0 +1,20 @@
+---
+apiVersion: crd.projectcalico.org/v1
+kind: NetworkPolicy
+metadata:
+  name: ingress-loki
+  namespace: monitoring
+spec:
+  selector: app == 'loki'
+  types:
+    - Ingress
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: >-
+          app.kubernetes.io/name == 'grafana' ||
+          app == 'promtail'
+      destination:
+        ports:
+          - 3100
