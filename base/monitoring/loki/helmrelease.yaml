@@ -31,16 +31,19 @@ spec:
         enable_api: true
       serviceMonitor:
         enabled: false
-      config:
-        alerting_groups:
-          - name: teslamate-errors
-            rules:
-              - alert: TeslamateErrors
-                expr: |
-                  (count_over_time({app="teslamate"} |~ "(?i)error"[2m])) > 0
-                for: 5m
-                labels:
-                  severity: critical
-                  category: logs
-                annotations:
-                  summary: "Teslamate reports errors!"
+      alerting_groups:
+        - name: teslamate-errors
+          rules:
+            - alert: TeslamateErrors
+              expr: |
+                (count_over_time({app="teslamate"} |~ "(?i)error"[2m])) > 0
+              for: 5m
+              labels:
+                severity: critical
+                category: logs
+              annotations:
+                summary: "Teslamate reports errors!"
+    promtail:
+      initContainer:
+        enabled: true
+        fsInotifyMaxUserInstances: 512
