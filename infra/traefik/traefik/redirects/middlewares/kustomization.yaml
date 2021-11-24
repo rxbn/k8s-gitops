@@ -1,9 +1,0 @@
----
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-  - teslamate-grafana-redirect.yaml
-  - kubernetes-dashboard-redirect.yaml
-  - prometheus-redirect.yaml
-  - teslamate-redirect.yaml
-  - github-redirect.yaml

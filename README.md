@@ -32,7 +32,7 @@ Install all pre-commit hooks so they are executed every time before a commit occ
 ## :wrench:&nbsp; Initial Deployment
 
 1. Install K3s
-2. Install Calico
+2. Install Cilium
 3. Create `flux-system` namespace  
    `kubectl create namespace flux-system`
 4. Apply sops private key secret  
