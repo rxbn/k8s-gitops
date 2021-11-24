@@ -11,7 +11,7 @@ spec:
       app.kubernetes.io/name: traefik
   ingress:
     - fromCIDRSet:
-        - cidr: 192.168.1.0/24
+        - cidr: ${LAN_NETWORK_RANGE}
       toPorts:
         - ports:
             - port: "2222"
