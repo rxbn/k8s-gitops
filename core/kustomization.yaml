@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - flux-system
   - namespaces
-  - networkpolicies
   - kustomizations
   - helmrepositories
   - notifications
