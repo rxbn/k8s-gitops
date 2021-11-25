@@ -30,10 +30,3 @@ spec:
       className: traefik
     metricsScraper:
       enabled: true
-    settings:
-      clusterName: ${BASE_DOMAIN/./-}
-      defaultNamespace: default
-      itemsPerPage: 20
-      logsAutoRefreshTimeInterval: 1
-      resourcesAutoRefreshTimeInterval: 5
-      labelLimit: 5
