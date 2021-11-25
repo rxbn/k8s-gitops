@@ -36,8 +36,8 @@ spec:
           rules:
             - alert: TeslamateErrors
               expr: |
-                (count_over_time({app="teslamate"} |~ "(?i)error"[2m])) > 0
-              for: 5m
+                sum(count_over_time({app="teslamate"} |~ "(?i)error"[2m])) > 0
+              for: 10s
               labels:
                 severity: critical
                 category: logs
