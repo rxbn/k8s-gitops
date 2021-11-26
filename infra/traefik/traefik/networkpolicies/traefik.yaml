@@ -39,5 +39,6 @@ spec:
       toPorts:
         - ports:
             - port: "8443"
+              protocol: ANY
     - fromEntities:
         - cluster
