@@ -19,21 +19,6 @@ data:
           - dev.${BASE_DOMAIN}
 
     additionalRecords:
-      - name: teslamate-gcp.${BASE_DOMAIN}
-        type: A
-        ttl: 1
-        content: ${GCP_TESLAMATE_INSTANCE_IP}
-        proxied: true
-      - name: teslamate-grafana-gcp.${BASE_DOMAIN}
-        type: A
-        ttl: 1
-        content: ${GCP_TESLAMATE_INSTANCE_IP}
-        proxied: true
-      - name: teslamate.srv.${BASE_DOMAIN}
-        type: A
-        ttl: 1
-        content: ${GCP_TESLAMATE_INSTANCE_IP}
-        proxied: false
       - name: vpn.${BASE_DOMAIN}
         ttl: 120
         proxied: false
