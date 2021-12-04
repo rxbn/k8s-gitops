@@ -146,6 +146,9 @@ spec:
               name: app-data
             - mountPath: /var/www/html/data
               name: user-data
+            - mountPath: /usr/local/etc/php-fpm.d/www.conf
+              name: fpm-config
+              subPath: www.conf
           resources: {}
       restartPolicy: Always
       automountServiceAccountToken: false
@@ -159,3 +162,6 @@ spec:
         - name: nginx-config
           configMap:
             name: nextcloud-nginx-config
+        - name: fpm-config
+          configMap:
+            name: nextcloud-fpm-config
