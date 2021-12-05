@@ -10,4 +10,3 @@ resources:
   - notifications
   - cluster-settings.yaml
   - cluster-secrets.yaml
-  - github-token-secret.yaml
