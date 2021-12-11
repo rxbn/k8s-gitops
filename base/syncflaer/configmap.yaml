@@ -22,6 +22,11 @@ data:
       - name: vpn.${BASE_DOMAIN}
         ttl: 120
         proxied: false
+      - name: teslamate.srv.${BASE_DOMAIN}
+        type: A
+        ttl: 1
+        content: ${TESLAMATE_SERVER_IP}
+        proxied: false
 
     cloudflare:
       apiToken: env:CF_API_TOKEN
