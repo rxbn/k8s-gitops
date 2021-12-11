@@ -24,9 +24,16 @@ data:
         proxied: false
       - name: teslamate.srv.${BASE_DOMAIN}
         type: A
-        ttl: 1
         content: ${TESLAMATE_SERVER_IP}
         proxied: false
+      - name: teslamate-hc.${BASE_DOMAIN}
+        type: A
+        content: ${TESLAMATE_SERVER_IP}
+        proxied: true
+      - name: teslamate-grafana-hc.${BASE_DOMAIN}
+        type: CNAME
+        content: teslamate-hc.${BASE_DOMAIN}
+        proxied: true
 
     cloudflare:
       apiToken: env:CF_API_TOKEN
