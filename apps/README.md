@@ -9,6 +9,5 @@ This directory contains all other common applications.
 - **kubernetes-dashboard** gives an overview on what's running in the cluster
 - **nextcloud** self-hosted cloud similar to iCloud
 - **renovate** dependency updater
-- **teslamate** a self-hosted data logger for my Tesla Model 3
 - **usenet** usenet-stack containing sonarr, radarr, plex, ombi, ...
 - **wiki** self-hosted wiki for internal documentation

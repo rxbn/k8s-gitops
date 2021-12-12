@@ -26,13 +26,13 @@ data:
         type: A
         content: ${TESLAMATE_SERVER_IP}
         proxied: false
-      - name: teslamate-hc.${BASE_DOMAIN}
+      - name: teslamate.${BASE_DOMAIN}
         type: A
         content: ${TESLAMATE_SERVER_IP}
         proxied: true
-      - name: teslamate-grafana-hc.${BASE_DOMAIN}
+      - name: teslamate-grafana.${BASE_DOMAIN}
         type: CNAME
-        content: teslamate-hc.${BASE_DOMAIN}
+        content: teslamate.${BASE_DOMAIN}
         proxied: true
 
     cloudflare:
