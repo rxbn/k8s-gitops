@@ -29,15 +29,15 @@ spec:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan-only@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan@kubernetescrd
       hostname: minio.local.${BASE_DOMAIN}
     apiIngress:
       enabled: true
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan-only@kubernetescrd
-      hostname: minio-api.local.${BASE_DOMAIN}
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan@kubernetescrd,traefik-allow-public-cloud-servers@kubernetescrd
+      hostname: minio-api.${BASE_DOMAIN}
     persistence:
       storageClass: backup
   postRenderers:

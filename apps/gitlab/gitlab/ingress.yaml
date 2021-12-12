@@ -48,7 +48,7 @@ metadata:
   namespace: gitlab
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan-only@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
