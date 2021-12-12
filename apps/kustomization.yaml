@@ -7,6 +7,5 @@ resources:
   - kubernetes-dashboard
   - usenet
   - wiki
-  - teslamate
   - keycloak
   - renovate
