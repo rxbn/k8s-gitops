@@ -92,7 +92,7 @@ spec:
             - name: GF_AUTH_GENERIC_OAUTH_TOKEN_URL
               value: https://sso.${BASE_DOMAIN}/auth/realms/master/protocol/openid-connect/token
             - name: GF_AUTH_GENERIC_OAUTH_SIGNOUT_REDIRECT_URL
-              value: https://sso.${BASE_DOMAIN}/auth/realms/master/protocol/openid-connect/logout?redirect_uri=https://dash.teslamate.${BASE_DOMAIN}/login
+              value: https://sso.${BASE_DOMAIN}/auth/realms/master/protocol/openid-connect/logout?redirect_uri=https://teslamate-grafana.${BASE_DOMAIN}/login
             - name: TZ
               value: Europe/Zurich
           ports:
