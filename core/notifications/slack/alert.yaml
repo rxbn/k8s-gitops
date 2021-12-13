@@ -62,4 +62,7 @@ spec:
     - kind: HelmRelease
       namespace: cert-manager
       name: "*"
+    - kind: HelmRelease
+      namespace: authentik
+      name: "*"
   suspend: false
