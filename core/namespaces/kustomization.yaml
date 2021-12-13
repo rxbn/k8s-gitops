@@ -15,6 +15,7 @@ resources:
   - usenet.yaml
   - cert-manager.yaml
   - traefik.yaml
+  - authentik.yaml
   - kubernetes-dashboard.yaml
   - wiki.yaml
   - minio.yaml
