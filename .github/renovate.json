@@ -64,7 +64,7 @@
     ],
     "kubernetes": {
         "fileMatch": [
-            "(infra\\/traefik\\/forward-auth|apps|base)\\/(.*\\/)*.+\\.yaml"
+            "(apps|base)\\/(.*\\/)*.+\\.yaml"
         ]
     },
     "packageRules": [
