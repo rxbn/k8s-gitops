@@ -8,5 +8,4 @@ resources:
   - authentik
   - usenet
   - wiki
-  - keycloak
   - renovate
