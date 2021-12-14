@@ -27,8 +27,8 @@ data:
         content: ${TESLAMATE_SERVER_IP}
         proxied: false
       - name: teslamate.${BASE_DOMAIN}
-        type: A
-        content: ${TESLAMATE_SERVER_IP}
+        type: CNAME
+        content: teslamate.srv.${BASE_DOMAIN}
         proxied: true
       - name: teslamate-grafana.${BASE_DOMAIN}
         type: CNAME
