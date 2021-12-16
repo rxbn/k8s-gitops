@@ -42,3 +42,13 @@ spec:
               protocol: ANY
     - fromEntities:
         - cluster
+    - fromCIDR:
+        - 192.168.1.33/32
+      toPorts:
+        - ports:
+            - port: "9000"
+              protocol: ANY
+          rules:
+            http:
+              - method: GET
+                path: /ping
