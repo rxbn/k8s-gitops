@@ -18,6 +18,7 @@ spec:
       interval: 5m
   values:
     authentik:
+      log_level: trace
       email:
         port: 587
         username: auth@${BASE_DOMAIN}
