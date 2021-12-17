@@ -54,6 +54,11 @@ spec:
           storageClass: nvme
           accessModes:
             - ReadWriteOnce
+    prometheus:
+      serviceMonitor:
+        create: true
+      rules:
+        create: true
   valuesFrom:
     - kind: Secret
       name: authentik-helm-values
