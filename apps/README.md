@@ -6,6 +6,7 @@ This directory contains all other common applications.
 
 - **authentik**: single-sign-on
 - **gitlab** contains gitlab-backup-mirror (MirrIO) and gitlab-runner
+- **keycloak** single-sign-on
 - **kubernetes-dashboard** gives an overview on what's running in the cluster
 - **nextcloud** self-hosted cloud similar to iCloud
 - **renovate** dependency updater
