@@ -24,7 +24,7 @@ spec:
     authentik:
       outposts:
         container_image_base: ghcr.io/goauthentik/dev-%(type)s:gh-%(build_hash)s
-      log_level: debug
+      log_level: trace
       email:
         port: 587
         username: auth@${BASE_DOMAIN}
