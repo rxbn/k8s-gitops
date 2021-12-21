@@ -63,6 +63,7 @@ spec:
     defaultRules:
       rules:
         etcd: false
+        kubernetesResources: false
     grafana:
       defaultDashboardsTimezone: browser
       grafana.ini:
@@ -95,9 +96,7 @@ spec:
         paths:
           - /
     kubeControllerManager:
-      enabled: true
-      endpoints:
-        - ${HOST_IP}
+      enabled: false
     kubeEtcd:
       enabled: false
     kubeProxy:
