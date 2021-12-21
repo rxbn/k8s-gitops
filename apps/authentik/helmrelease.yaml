@@ -18,8 +18,12 @@ spec:
       interval: 5m
   values:
     image:
-      tag: 2021.12.2
+      repository: goauthentik.io/dev-server
+      tag: gh-next
+      pullPolicy: Always
     authentik:
+      outposts:
+        container_image_base: goauthentik.io/dev-%(type)s:gh-%(build_hash)s
       log_level: debug
       email:
         port: 587
