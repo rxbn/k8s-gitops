@@ -27,18 +27,12 @@ data:
         content: ${TESLAMATE_SERVER_IP}
         proxied: false
       - name: teslamate.${BASE_DOMAIN}
-        type: CNAME
         content: teslamate.srv.${BASE_DOMAIN}
-        proxied: true
       - name: teslamate-grafana.${BASE_DOMAIN}
-        type: CNAME
-        content: teslamate.${BASE_DOMAIN}
-        proxied: true
+        content: teslamate.srv.${BASE_DOMAIN}
 
     cloudflare:
       apiToken: env:CF_API_TOKEN
       zoneNames:
         - ${BASE_DOMAIN}
       deleteGrace: 5
-      defaults:
-        proxied: true
