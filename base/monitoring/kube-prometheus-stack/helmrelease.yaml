@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      version: 28.0.2
+      version: 29.0.0
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -98,16 +98,6 @@ spec:
       enabled: true
       endpoints:
         - ${HOST_IP}
-      service:
-        enabled: true
-        port: 10257
-        targetPort: 10257
-      serviceMonitor:
-        enabled: true
-        https: true
-        insecureSkipVerify: true
-    kubeEtcd:
-      enabled: false
     kubeProxy:
       enabled: true
       endpoints:
@@ -116,14 +106,8 @@ spec:
       enabled: true
       endpoints:
         - ${HOST_IP}
-      service:
-        enabled: true
-        port: 10259
-        targetPort: 10259
-      serviceMonitor:
-        enabled: true
-        https: true
-        insecureSkipVerify: true
+    kubeEtcd:
+      enabled: false
     prometheus:
       ingress:
         annotations:
