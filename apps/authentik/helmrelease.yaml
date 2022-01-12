@@ -18,7 +18,7 @@ spec:
       interval: 5m
   values:
     image:
-      # renovate: datasource=github-releases depName=goauthentik/authentik
+      # renovate: datasource=docker depName=ghcr.io/goauthentik/server
       tag: 2021.12.4
     authentik:
       log_level: info
