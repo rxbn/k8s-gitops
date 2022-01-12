@@ -44,6 +44,12 @@
         "registryUrl=(?<registryUrl>.*) chart=(?<depName>.*)\\s.*tag: v(?<currentValue>.*)"
       ],
       "datasourceTemplate": "helm"
+    },
+    {
+      "fileMatch": ["apps\\/authentik\\/helmrelease\\.yaml$"],
+      "matchStrings": [
+        "datasource=(?<datasource>.*) depName=(?<depName>.*)\\s.*tag: (?<currentValue>.*)"
+      ]
     }
   ],
   "kubernetes": {
