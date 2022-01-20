@@ -12,13 +12,6 @@
       "datasourceTemplate": "github-releases"
     },
     {
-      "fileMatch": ["(apps|base|infra)\\/(.+\\/)*helmrelease\\.yaml$"],
-      "matchStrings": [
-        "registryUrl=(?<registryUrl>.*?)\\s +chart: (?<depName>.*?)\\n +version: (?<currentValue>.*)"
-      ],
-      "datasourceTemplate": "helm"
-    },
-    {
       "fileMatch": ["crds\\/k8up\\/kustomization\\.yaml$"],
       "matchStrings": [
         "datasource=(?<datasource>.*) depName=(?<depName>.*)\\s.*\\/(?<currentValue>.*?)\\/"
@@ -53,7 +46,10 @@
     }
   ],
   "kubernetes": {
-    "fileMatch": ["(apps|base)\\/(.*\\/)*.+\\.yaml"]
+    "fileMatch": ["(apps|base)\\/(.+\\/)*(deployment|daemonset|statefulset|cronjob)\\.yaml$"]
+  },
+  "flux": {
+    "fileMatch": ["(apps|base|infra)\\/(.+\\/)*helmrelease\\.yaml$"]
   },
   "packageRules": [
     {
