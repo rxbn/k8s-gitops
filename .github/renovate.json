@@ -37,12 +37,6 @@
         "registryUrl=(?<registryUrl>.*) chart=(?<depName>.*)\\s.*tag: v(?<currentValue>.*)"
       ],
       "datasourceTemplate": "helm"
-    },
-    {
-      "fileMatch": ["apps\\/authentik\\/helmrelease\\.yaml$"],
-      "matchStrings": [
-        "datasource=(?<datasource>.*) depName=(?<depName>.*)\\s.*tag: (?<currentValue>.*)"
-      ]
     }
   ],
   "kubernetes": {
@@ -52,8 +46,11 @@
   },
   "flux": {
     "fileMatch": [
-      "((apps|base|infra)\\/(.+\\/)*helmrelease\\.yaml|core\\/helmrepositories\\/.*\\.yaml)$"
+      "((apps|base|infra)\\/(.+\\/)*helmrelease|core\\/helmrepositories\\/.*)\\.yaml$"
     ]
+  },
+  "helm-values": {
+    "fileMatch": ["(apps|base|infra)\\/(.+\\/)*helmrelease\\.yaml$"]
   },
   "packageRules": [
     {
