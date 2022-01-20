@@ -41,10 +41,7 @@ spec:
       general:
         level: INFO
     pilot:
-      enabled: false
-    experimental:
-      plugins:
-        enabled: true
+      dashboard: false
     ports:
       gitlab-ssh:
         expose: true
