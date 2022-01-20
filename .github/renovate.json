@@ -46,10 +46,14 @@
     }
   ],
   "kubernetes": {
-    "fileMatch": ["(apps|base)\\/(.+\\/)*(deployment|daemonset|statefulset|cronjob)\\.yaml$"]
+    "fileMatch": [
+      "(apps|base)\\/(.+\\/)*(deployment|daemonset|statefulset|cronjob)\\.yaml$"
+    ]
   },
   "flux": {
-    "fileMatch": ["(apps|base|infra)\\/(.+\\/)*helmrelease\\.yaml$"]
+    "fileMatch": [
+      "((apps|base|infra)\\/(.+\\/)*helmrelease\\.yaml|core\\/helmrepositories\\/.*\\.yaml)$"
+    ]
   },
   "packageRules": [
     {
