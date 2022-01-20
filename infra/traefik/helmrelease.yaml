@@ -41,7 +41,10 @@ spec:
       general:
         level: INFO
     pilot:
-      dashboard: false
+      enabled: true
+    experimental:
+      plugins:
+        enabled: true
     ports:
       gitlab-ssh:
         expose: true
@@ -67,3 +70,7 @@ spec:
     crds: Skip
   upgrade:
     crds: Skip
+  valuesFrom:
+    - kind: Secret
+      name: traefik-helm-values
+      optional: false
