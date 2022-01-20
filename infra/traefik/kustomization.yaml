@@ -7,4 +7,3 @@ resources:
   - helmrelease.yaml
   - middleware.yaml
   - tlsstore.yaml
-  - secret.yaml

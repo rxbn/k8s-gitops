@@ -41,7 +41,7 @@ spec:
       general:
         level: INFO
     pilot:
-      enabled: true
+      enabled: false
     experimental:
       plugins:
         enabled: true
@@ -70,7 +70,3 @@ spec:
     crds: Skip
   upgrade:
     crds: Skip
-  valuesFrom:
-    - kind: Secret
-      name: traefik-helm-values
-      optional: false
