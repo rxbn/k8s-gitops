@@ -52,6 +52,7 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan@kubernetescrd,authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
+          syncflaer.containeroo.ch/ignore: "true"
         enabled: true
         ingressClassName: traefik
         hosts:
@@ -86,6 +87,7 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan@kubernetescrd
+          syncflaer.containeroo.ch/ignore: "true"
         enabled: true
         ingressClassName: traefik
         hosts:
@@ -128,6 +130,7 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan@kubernetescrd,authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
+          syncflaer.containeroo.ch/ignore: "true"
         enabled: true
         ingressClassName: traefik
         hosts:
