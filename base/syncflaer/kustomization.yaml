@@ -4,5 +4,8 @@ kind: Kustomization
 resources:
   - prometheusrule.yaml
   - cronjob.yaml
+  - clusterrole.yaml
+  - serviceaccount.yaml
   - configmap.yaml
+  - clusterrolebinding.yaml
   - secret.yaml

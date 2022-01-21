@@ -5,7 +5,7 @@ metadata:
   name: syncflaer
   namespace: syncflaer
 spec:
-  suspend: true
+  suspend: false
   schedule: CRON_TZ=Europe/Zurich */3 * * * *
   failedJobsHistoryLimit: 3
   successfulJobsHistoryLimit: 1
@@ -19,7 +19,7 @@ spec:
         spec:
           containers:
             - name: syncflaer
-              image: ghcr.io/containeroo/syncflaer:5.2.0
+              image: ghcr.io/containeroo/syncflaer:5.3.0-rc1
               args:
                 - --debug
               envFrom:
@@ -30,7 +30,7 @@ spec:
                   name: config
                   subPath: config.yml
           restartPolicy: Never
-          automountServiceAccountToken: false
+          serviceAccountName: syncflaer
           volumes:
             - name: config
               configMap:
