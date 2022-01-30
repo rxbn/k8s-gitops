@@ -47,3 +47,6 @@ spec:
     - kind: HelmRelease
       namespace: authentik
       name: "*"
+    - kind: HelmRelease
+      namespace: cloudflare-operator
+      name: "*"
