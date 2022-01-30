@@ -21,8 +21,7 @@ metadata:
 spec:
   name: vpn.${BASE_DOMAIN}
   type: CNAME
-  ipRef:
-    name: external-ip
+  content: ${BASE_DOMAIN}
   proxied: false
   ttl: 120
   interval: 5m
@@ -47,7 +46,7 @@ metadata:
   name: teslamate-${BASE_DOMAIN/./-}
   namespace: cloudflare-operator
 spec:
-  name: teslamate.srv.${BASE_DOMAIN}
+  name: teslamate.${BASE_DOMAIN}
   type: CNAME
   content: teslamate.srv.${BASE_DOMAIN}
   proxied: true
@@ -60,7 +59,7 @@ metadata:
   name: teslamate-grafana-${BASE_DOMAIN/./-}
   namespace: cloudflare-operator
 spec:
-  name: teslamate-grafana.srv.${BASE_DOMAIN}
+  name: teslamate-grafana.${BASE_DOMAIN}
   type: CNAME
   content: teslamate.srv.${BASE_DOMAIN}
   proxied: true
