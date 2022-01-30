@@ -35,7 +35,7 @@ spec:
   name: teslamate.srv.${BASE_DOMAIN}
   type: A
   ipRef:
-    name: teslamate-ip
+    name: teslamate
   proxied: false
   ttl: 120
   interval: 5m

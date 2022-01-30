@@ -9,7 +9,7 @@ spec:
 apiVersion: cf.containeroo.ch/v1alpha1
 kind: IP
 metadata:
-  name: teslamate-ip
+  name: teslamate
 spec:
   type: static
   address: ${TESLAMATE_SERVER_IP}
