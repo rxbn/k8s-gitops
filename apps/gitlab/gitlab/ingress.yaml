@@ -53,7 +53,7 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan@kubernetescrd
-    cf.containeroo.ch/skip: "true"
+    cf.containeroo.ch/ignore: "true"
 spec:
   ingressClassName: traefik
   rules:
