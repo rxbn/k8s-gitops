@@ -12,7 +12,16 @@
       "datasourceTemplate": "github-releases"
     },
     {
-      "fileMatch": ["crds\\/(k8up|cloudflare-operator)\\/kustomization\\.yaml$"],
+      "fileMatch": [".github\\/workflows\\/helm-release-differ\\.yaml$"],
+      "matchStrings": [
+        "depName=(?<depName>.*)\\s.*version: (?<currentValue>.*)"
+      ],
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "fileMatch": [
+        "crds\\/(k8up|cloudflare-operator)\\/kustomization\\.yaml$"
+      ],
       "matchStrings": [
         "datasource=(?<datasource>.*) depName=(?<depName>.*)\\s.*\\/(?<currentValue>.*?)\\/"
       ]

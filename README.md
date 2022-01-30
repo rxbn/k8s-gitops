@@ -50,7 +50,7 @@ There are also a couple GitHub workflows included in this repository that will h
 
 - [Update Flux](./.github/workflows/update-flux.yaml) - workflow to update Flux components
 - [Sync Cloudflare network ranges](./.github/workflows/sync-cloudflare-nets.yaml) - workflow to update Cloudflare network ranges
-- [Diff HelmReleases on Pull Requests](./.github/workflows/diff-helmreleases.yaml) - workflow to add diff to `HelmRelease` pull requests
+- [Diff HelmReleases on Pull Requests](./.github/workflows/helm-release-differ.yaml) - workflow to add diff to `HelmRelease` pull requests
 
 ## :hugs:&nbsp; Thanks
 
