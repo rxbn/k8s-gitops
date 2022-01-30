@@ -10,8 +10,8 @@ resources:
   - nextcloud.yaml
   - metallb.yaml
   - local-path-provisioner.yaml
-  - syncflaer.yaml
   - usenet.yaml
+  - cloudflare-operator.yaml
   - cert-manager.yaml
   - traefik.yaml
   - authentik.yaml

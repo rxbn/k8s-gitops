@@ -1,0 +1,15 @@
+---
+apiVersion: cf.containeroo.ch/v1alpha1
+kind: IP
+metadata:
+  name: external-ip
+spec:
+  type: dynamic
+---
+apiVersion: cf.containeroo.ch/v1alpha1
+kind: IP
+metadata:
+  name: teslamate-ip
+spec:
+  type: static
+  address: ${TESLAMATE_SERVER_IP}

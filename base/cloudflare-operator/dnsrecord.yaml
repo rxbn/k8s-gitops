@@ -1,0 +1,68 @@
+---
+apiVersion: cf.containeroo.ch/v1alpha1
+kind: DNSRecord
+metadata:
+  name: ${BASE_DOMAIN/./-}
+  namespace: cloudflare-operator
+spec:
+  name: ${BASE_DOMAIN}
+  type: A
+  ipRef:
+    name: external-ip
+  proxied: true
+  ttl: 1
+  interval: 5m
+---
+apiVersion: cf.containeroo.ch/v1alpha1
+kind: DNSRecord
+metadata:
+  name: vpn-${BASE_DOMAIN/./-}
+  namespace: cloudflare-operator
+spec:
+  name: vpn.${BASE_DOMAIN}
+  type: CNAME
+  ipRef:
+    name: external-ip
+  proxied: false
+  ttl: 120
+  interval: 5m
+---
+apiVersion: cf.containeroo.ch/v1alpha1
+kind: DNSRecord
+metadata:
+  name: teslamate-srv-${BASE_DOMAIN/./-}
+  namespace: cloudflare-operator
+spec:
+  name: teslamate.srv.${BASE_DOMAIN}
+  type: A
+  ipRef:
+    name: teslamate-ip
+  proxied: false
+  ttl: 120
+  interval: 5m
+---
+apiVersion: cf.containeroo.ch/v1alpha1
+kind: DNSRecord
+metadata:
+  name: teslamate-${BASE_DOMAIN/./-}
+  namespace: cloudflare-operator
+spec:
+  name: teslamate.srv.${BASE_DOMAIN}
+  type: CNAME
+  content: teslamate.srv.${BASE_DOMAIN}
+  proxied: true
+  ttl: 1
+  interval: 5m
+---
+apiVersion: cf.containeroo.ch/v1alpha1
+kind: DNSRecord
+metadata:
+  name: teslamate-grafana-${BASE_DOMAIN/./-}
+  namespace: cloudflare-operator
+spec:
+  name: teslamate-grafana.srv.${BASE_DOMAIN}
+  type: CNAME
+  content: teslamate.srv.${BASE_DOMAIN}
+  proxied: true
+  ttl: 1
+  interval: 5m

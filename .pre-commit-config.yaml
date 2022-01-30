@@ -35,3 +35,7 @@ repos:
         args:
           - --ignore-kind
           - ClusterIssuer
+          - --ignore-kind
+          - Account
+          - --ignore-kind
+          - IP

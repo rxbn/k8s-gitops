@@ -12,7 +12,7 @@
       "datasourceTemplate": "github-releases"
     },
     {
-      "fileMatch": ["crds\\/k8up\\/kustomization\\.yaml$"],
+      "fileMatch": ["crds\\/(k8up|cloudflare-operator)\\/kustomization\\.yaml$"],
       "matchStrings": [
         "datasource=(?<datasource>.*) depName=(?<depName>.*)\\s.*\\/(?<currentValue>.*?)\\/"
       ]
