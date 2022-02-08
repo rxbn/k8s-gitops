@@ -47,6 +47,8 @@ spec:
             - receiver: blackhole
               matchers:
                 - alertname = Watchdog
+            - receiver: blackhole
+              matchers:
                 - severity =~ none|info
             - receiver: slack
       ingress:
