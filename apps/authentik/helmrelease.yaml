@@ -20,7 +20,7 @@ spec:
       repository: ghcr.io/goauthentik/server
       tag: 2022.1.4
     authentik:
-      log_level: debug
+      log_level: info
       email:
         port: 587
         username: auth@${BASE_DOMAIN}
