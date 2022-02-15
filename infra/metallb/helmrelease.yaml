@@ -30,3 +30,14 @@ spec:
           protocol: layer2
     psp:
       create: false
+    speaker:
+      frr:
+        enabled: false
+    prometheus:
+      namespace: monitoring
+      podMonitor:
+        enabled: true
+      prometheusRule:
+        enabled: true
+        bgpSessionDown:
+          enabled: false
