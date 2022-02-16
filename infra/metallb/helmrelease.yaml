@@ -33,11 +33,3 @@ spec:
     speaker:
       frr:
         enabled: false
-    prometheus:
-      namespace: monitoring
-      podMonitor:
-        enabled: true
-      prometheusRule:
-        enabled: true
-        bgpSessionDown:
-          enabled: false
