@@ -8,4 +8,5 @@ resources:
   - authentik
   - usenet
   - wiki
+  - mealie
   - renovate
