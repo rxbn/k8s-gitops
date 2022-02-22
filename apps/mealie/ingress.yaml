@@ -6,12 +6,12 @@ metadata:
   namespace: mealie
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    cf.containeroo.ch/content: ${BASE_DOMAIN}
-    cf.containeroo.ch/type: CNAME
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan@kubernetescrd
+    cf.containeroo.ch/ignore: "true"
 spec:
   ingressClassName: traefik
   rules:
-    - host: mealie.${BASE_DOMAIN}
+    - host: mealie.local.${BASE_DOMAIN}
       http:
         paths:
           - path: /
