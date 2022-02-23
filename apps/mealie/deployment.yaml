@@ -24,18 +24,12 @@ spec:
               value: "1000"
             - name: PGID
               value: "1000"
+            - name: BASE_URL
+              value: https://mealie.local.${BASE_DOMAIN}
             - name: RECIPE_PUBLIC
               value: "false"
-            - name: RECIPE_SHOW_NUTRITION
-              value: "true"
-            - name: RECIPE_SHOW_ASSETS
-              value: "true"
-            - name: RECIPE_LANDSCAPE_VIEW
-              value: "true"
             - name: RECIPE_DISABLE_COMMENTS
               value: "true"
-            - name: RECIPE_DISABLE_AMOUNT
-              value: "false"
             - name: TZ
               value: Europe/Zurich
           volumeMounts:
