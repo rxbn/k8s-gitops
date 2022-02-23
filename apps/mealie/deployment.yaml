@@ -26,6 +26,14 @@ spec:
               value: "1000"
             - name: BASE_URL
               value: https://mealie.local.${BASE_DOMAIN}
+            - name: LDAP_AUTH_ENABLED
+              value: "true"
+            - name: LDAP_SERVER_URL
+              value: ldaps://ldap.srv.${BASE_DOMAIN}
+            - name: LDAP_BIND_TEMPLATE
+              value: cn={},DC=ldap,DC=goauthentik,DC=io
+            - name: LDAP_ADMIN_FILTER
+              value: (memberOf=cn=Mealie Admins,dc=ldap,dc=goauthentik,dc=io)
             - name: RECIPE_PUBLIC
               value: "false"
             - name: RECIPE_DISABLE_COMMENTS
