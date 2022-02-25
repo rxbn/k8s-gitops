@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: nextcloud-mariadb
-          image: mariadb:10.6.4
+          image: mariadb:10.8.2
           args:
             - --innodb-read-only-compressed=OFF
           envFrom:
