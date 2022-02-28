@@ -23,6 +23,7 @@ spec:
       PAPERLESS_OCR_LANGUAGE: deu
       PAPERLESS_OCR_LANGUAGES: deu eng
       PAPERLESS_TIME_ZONE: Europe/Zurich
+      REDIS_URL: redis://paperless-redis-master.paperless.svc.cluster.local:6379
     ingress:
       main:
         enabled: true
@@ -49,6 +50,9 @@ spec:
           k8up.io/backup: "true"
     redis:
       enabled: true
+      auth:
+        enabled: false
+      architecture: standalone
   valuesFrom:
     - kind: Secret
       name: paperless-helm-values
