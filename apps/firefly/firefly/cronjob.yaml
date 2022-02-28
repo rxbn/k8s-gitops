@@ -22,7 +22,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: firefly-cron
-              image: curlimages/curl:7.78.0
+              image: curlimages/curl:7.81.0
               args:
                 - "--fail"
                 - "-L"
