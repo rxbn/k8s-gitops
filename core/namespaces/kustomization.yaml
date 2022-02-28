@@ -8,6 +8,7 @@ resources:
   - gitlab.yaml
   - nfs-subdir-external-provisioner.yaml
   - nextcloud.yaml
+  - paperless.yaml
   - metallb.yaml
   - local-path-provisioner.yaml
   - mealie.yaml

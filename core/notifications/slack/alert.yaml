@@ -71,4 +71,7 @@ spec:
     - kind: HelmRelease
       namespace: mealie
       name: "*"
+    - kind: HelmRelease
+      namespace: paperless
+      name: "*"
   suspend: false
