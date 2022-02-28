@@ -5,6 +5,7 @@ This directory contains all other common applications.
 ## Contents
 
 - **authentik**: single-sign-on
+- **firefly** is a free and open source personal finance manager
 - **gitlab** contains gitlab-backup-mirror (MirrIO) and gitlab-runner
 - **kubernetes-dashboard** gives an overview on what's running in the cluster
 - **mealie** is a self hosted recipe book
