@@ -47,6 +47,8 @@ spec:
         size: 1Gi
         annotations:
           k8up.io/backup: "true"
+    redis:
+      enabled: true
   valuesFrom:
     - kind: Secret
       name: paperless-helm-values
