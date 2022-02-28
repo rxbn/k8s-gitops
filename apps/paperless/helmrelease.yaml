@@ -24,12 +24,14 @@ spec:
       PAPERLESS_OCR_LANGUAGES: deu eng
       PAPERLESS_TIME_ZONE: Europe/Zurich
       PAPERLESS_REDIS: redis://paperless-redis-master.paperless.svc.cluster.local:6379
+      PAPERLESS_ENABLE_HTTP_REMOTE_USER: "True"
+      PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME: HTTP_X_AUTHENTIK_EMAIL
     ingress:
       main:
         enabled: true
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan@kubernetescrd,authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
           cf.containeroo.ch/ignore: "true"
         hosts:
           - host: paperless.local.${BASE_DOMAIN}
