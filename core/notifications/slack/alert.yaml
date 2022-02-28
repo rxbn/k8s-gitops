@@ -68,4 +68,7 @@ spec:
     - kind: HelmRelease
       namespace: cloudflare-operator
       name: "*"
+    - kind: HelmRelease
+      namespace: mealie
+      name: "*"
   suspend: false
