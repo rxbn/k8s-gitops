@@ -38,11 +38,13 @@ spec:
       data:
         enabled: true
         storageClass: nvme
+        size: 1Gi
         annotations:
           k8up.io/backup: "true"
       media:
         enabled: true
         storageClass: nvme
+        size: 1Gi
         annotations:
           k8up.io/backup: "true"
   valuesFrom:
