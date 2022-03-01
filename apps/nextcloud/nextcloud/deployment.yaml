@@ -48,11 +48,11 @@ spec:
             - sh
             - -c
             - |
-              echo 'Waiting for MariaDB to become ready...'
-              until printf "." && nc -z -w 2 nextcloud-mariadb.nextcloud.svc.cluster.local 3306; do
+              echo 'Waiting for PostgreSQL to become ready...'
+              until printf "." && nc -z -w 2 nextcloud-postgres.nextcloud.svc.cluster.local 5432; do
                   sleep 2;
               done;
-              echo 'MariaDB OK ✓'
+              echo 'PostgreSQL OK ✓'
           securityContext:
             allowPrivilegeEscalation: false
             runAsUser: 1000
@@ -105,17 +105,10 @@ spec:
         - name: nextcloud
           image: nextcloud:23.0.2-fpm-alpine
           env:
-            - name: MYSQL_DATABASE
-              value: nextcloud
-            - name: MYSQL_HOST
-              value: nextcloud-mariadb.nextcloud.svc.cluster.local
-            - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: nextcloud-mariadb
-                  key: MYSQL_ROOT_PASSWORD
-            - name: MYSQL_USER
-              value: root
+            - name: POSTGRES_DB
+              value: postgres
+            - name: POSTGRES_HOST
+              value: nextcloud-postgres.nextcloud.svc.cluster.local
             - name: NEXTCLOUD_TRUSTED_DOMAINS
               value: cloud.${BASE_DOMAIN}
             - name: TRUSTED_PROXIES
@@ -141,6 +134,8 @@ spec:
           envFrom:
             - secretRef:
                 name: nextcloud-mail-settings
+            - secretRef:
+                name: nextcloud-postgres
           volumeMounts:
             - mountPath: /var/www/html
               name: app-data
