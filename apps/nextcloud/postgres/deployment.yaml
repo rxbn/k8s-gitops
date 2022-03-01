@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud-postgres
+  namespace: nextcloud
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextcloud-postgres
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        k8up.io/backupcommand: pg_dumpall -U postgres -h 127.0.0.1
+      labels:
+        app: nextcloud-postgres
+    spec:
+      containers:
+        - name: nextcloud-postgres
+          image: postgres:14.2-alpine
+          envFrom:
+            - secretRef:
+                name: nextcloud-postgres
+          env:
+            - name: TZ
+              value: Europe/Zurich
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: data
+          livenessProbe:
+            exec:
+              command:
+                - "psql"
+                - "-w"
+                - "-U"
+                - "postgres"
+                - "-d"
+                - "postgres"
+                - "-c"
+                - "SELECT 1"
+            failureThreshold: 2
+            periodSeconds: 30
+            timeoutSeconds: 5
+          resources: {}
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: nextcloud-postgres-data
