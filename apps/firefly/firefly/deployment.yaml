@@ -25,11 +25,11 @@ spec:
             - sh
             - -c
             - |
-              echo 'Waiting for MariaDB to become ready...'
-              until printf "." && nc -z -w 2 firefly-mariadb.firefly.svc.cluster.local 3306; do
+              echo 'Waiting for PostgreSQL to become ready...'
+              until printf "." && nc -z -w 2 firefly-postgres.firefly.svc.cluster.local 5432; do
                   sleep 2;
               done;
-              echo 'MariaDB OK ✓'
+              echo 'PostgreSQL OK ✓'
           securityContext:
             allowPrivilegeEscalation: false
             runAsUser: 1000
@@ -49,18 +49,21 @@ spec:
             - name: DB_DATABASE
               value: firefly
             - name: DB_HOST
-              value: firefly-mariadb.firefly.svc.cluster.local
+              value: firefly-postgres.firefly.svc.cluster.local
             - name: DB_PORT
               value: "3306"
             - name: DB_CONNECTION
-              value: mysql
+              value: pgsql
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: firefly-mariadb
-                  key: MYSQL_ROOT_PASSWORD
+                  name: firefly-postgres
+                  key: POSTGRES_PASSWORD
             - name: DB_USERNAME
-              value: root
+              valueFrom:
+                secretKeyRef:
+                  name: firefly-postgres
+                  key: POSTGRES_USER
             - name: TRUSTED_PROXIES
               value: "**"
             - name: APP_URL

@@ -2,47 +2,49 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: firefly-mariadb
+  name: firefly-postgres
   namespace: firefly
   annotations:
-    kustomize.toolkit.fluxcd.io/substitute: disabled
     reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: firefly-mariadb
+      app: firefly-postgres
   strategy:
     type: Recreate
   template:
     metadata:
       annotations:
-        k8up.syn.tools/backupcommand: /bin/bash -c 'mysqldump -uroot -p"${MYSQL_ROOT_PASSWORD}" --all-databases'
+        k8up.io/backupcommand: pg_dumpall -U postgres -h 127.0.0.1
       labels:
-        app: firefly-mariadb
+        app: firefly-postgres
     spec:
       containers:
-        - name: firefly-mariadb
-          image: mariadb:10.6.4
-          args:
-            - --innodb-read-only-compressed=OFF
+        - name: firefly-postgres
+          image: postgres:14.2-alpine
           envFrom:
             - secretRef:
-                name: firefly-mariadb
+                name: firefly-postgres
           env:
             - name: TZ
               value: Europe/Zurich
           ports:
-            - containerPort: 3306
+            - containerPort: 5432
           volumeMounts:
-            - mountPath: /var/lib/mysql
+            - mountPath: /var/lib/postgresql/data
               name: data
           livenessProbe:
             exec:
               command:
-                - /bin/bash
-                - -ec
-                - mysqladmin status -uroot -p"${MYSQL_ROOT_PASSWORD}"
+                - "psql"
+                - "-w"
+                - "-U"
+                - "postgres"
+                - "-d"
+                - "postgres"
+                - "-c"
+                - "SELECT 1"
             failureThreshold: 2
             periodSeconds: 30
             timeoutSeconds: 5
@@ -52,4 +54,4 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: firefly-mariadb-data
+            claimName: firefly-postgres-data
