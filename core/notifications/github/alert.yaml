@@ -56,3 +56,6 @@ spec:
     - kind: HelmRelease
       namespace: paperless
       name: "*"
+    - kind: HelmRelease
+      namespace: kube-system
+      name: "*"
