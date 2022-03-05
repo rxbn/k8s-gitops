@@ -13,5 +13,6 @@ resources:
   - jetstack.yaml
   - traefik.yaml
   - kubernetes-dashboard.yaml
+  - metrics-server.yaml
   - containeroo.yaml
   - appuio.yaml
