@@ -26,6 +26,7 @@ spec:
       - --entrypoints.websecure.http.middlewares=traefik-headers@kubernetescrd
       - --serverstransport.insecureskipverify
       - --providers.kubernetesingress.ingressendpoint.ip=${METALLB_TRAEFIK_ADDRESS_POOL%/32}
+      - --entryPoints.websecure.forwardedHeaders.trustedIPs=1.1.1.1/32
     globalArguments: null
     env:
       - name: TZ

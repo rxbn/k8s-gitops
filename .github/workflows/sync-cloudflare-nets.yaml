@@ -12,15 +12,18 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v3
-
       - name: Process YAML
         run: |
           # renovate depName=mikefarah/yq
           wget -O /tmp/yq https://github.com/mikefarah/yq/releases/download/v4.21.1/yq_linux_amd64
           chmod +x /tmp/yq
           readarray -d '' nets < <(curl -sS https://www.cloudflare.com/ips-v4/ | sort)
-          nets=$(printf '"%s", ' ${nets[@]})  # add quotes and commas for yq
-          /tmp/yq eval --inplace ".spec.ingress[1].fromCIDR = [ ${nets%,*} ]" infra/traefik/networkpolicies/traefik.yaml
+
+          cilium_nets=$(printf '"%s", ' ${nets[@]})
+          /tmp/yq eval --inplace ".spec.ingress[0].fromCIDR = [ ${cilium_nets%,*} ]" infra/traefik/networkpolicies/traefik.yaml
+
+          traefik_nets=$(printf '%s,' ${nets[@]})
+          /tmp/yq eval --inplace ".spec.values.additionalArguments[-1] = \"--entryPoints.web.forwardedHeaders.trustedIPs=${traefik_nets}\"" infra/traefik/helmrelease.yaml
       - name: Create pull request for cloudflare network range update
         uses: peter-evans/create-pull-request@v3
         with:
