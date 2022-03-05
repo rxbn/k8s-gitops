@@ -20,10 +20,10 @@ jobs:
           readarray -d '' nets < <(curl -sS https://www.cloudflare.com/ips-v4/ | sort)
 
           cilium_nets=$(printf '"%s", ' ${nets[@]})
-          /tmp/yq eval --inplace ".spec.ingress[0].fromCIDR = [ ${cilium_nets%,*} ]" infra/traefik/networkpolicies/traefik.yaml
+          /tmp/yq eval --inplace ".spec.ingress[1].fromCIDR = [ ${cilium_nets%,*} ]" infra/traefik/networkpolicies/traefik.yaml
 
           traefik_nets=$(printf '%s,' ${nets[@]})
-          /tmp/yq eval --inplace ".spec.values.additionalArguments[-1] = \"--entryPoints.web.forwardedHeaders.trustedIPs=${traefik_nets}\"" infra/traefik/helmrelease.yaml
+          /tmp/yq eval --inplace ".spec.values.additionalArguments[-1] = \"--entryPoints.websecure.forwardedHeaders.trustedIPs=${traefik_nets}\"" infra/traefik/helmrelease.yaml
       - name: Create pull request for cloudflare network range update
         uses: peter-evans/create-pull-request@v3
         with:
