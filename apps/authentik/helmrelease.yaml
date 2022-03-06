@@ -62,15 +62,3 @@ spec:
     - kind: Secret
       name: authentik-helm-values
       optional: false
-  postRenderers:
-    - kustomize:
-        patchesJson6902:
-          - target:
-              version: monitoring.coreos.com/v1
-              kind: ServiceMonitor
-              name: authentik
-              namespace: authentik
-            patch:
-              - op: add
-                path: /metadata/namespace
-                value: monitoring
