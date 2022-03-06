@@ -24,7 +24,7 @@ spec:
           - name: blackhole
           - name: slack
             slack_configs:
-              - channel: '#alertmanager'
+              - channel: "#alertmanager"
                 send_resolved: true
                 text: |2-
                   {{ range .Alerts }}
@@ -34,7 +34,8 @@ spec:
                     {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
                     {{ end }}
                   {{ end }}
-                title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing
+                title:
+                  '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing
                   | len }}{{ end }}] Monitoring Event Notification'
         route:
           group_by:
@@ -125,9 +126,7 @@ spec:
         https: true
         insecureSkipVerify: true
     kubeProxy:
-      enabled: true
-      endpoints:
-        - ${HOST_IP}
+      enabled: false
     kubeEtcd:
       enabled: false
     prometheus:
