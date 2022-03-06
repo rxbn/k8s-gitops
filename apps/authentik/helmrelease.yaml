@@ -64,9 +64,12 @@ spec:
       optional: false
   postRenderers:
     - kustomize:
-        patchesStrategicMerge:
-          - kind: ServiceMonitor
-            apiVersion: monitoring.coreos.com/v1
-            metadata:
+        patchesJson6902:
+          - target:
+              version: monitoring.coreos.com/v1
+              kind: ServiceMonitor
               name: authentik
-              namespace: monitoring
+            patch:
+              - op: add
+                path: /metadata/namespace
+                value: monitoring
