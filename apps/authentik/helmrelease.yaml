@@ -69,6 +69,7 @@ spec:
               version: monitoring.coreos.com/v1
               kind: ServiceMonitor
               name: authentik
+              namespace: authentik
             patch:
               - op: add
                 path: /metadata/namespace
