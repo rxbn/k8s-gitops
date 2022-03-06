@@ -47,6 +47,8 @@ spec:
               env:
                 - name: LOG_LEVEL
                   value: debug
+                - name: RENOVATE_ENDPOINT
+                  value: https://git.${BASE_DOMAIN}/api/v4/
                 - name: RENOVATE_AUTODISCOVER
                   value: "true"
                 - name: RENOVATE_CONFIG_FILE
@@ -62,7 +64,7 @@ spec:
                     name: renovate
               volumeMounts:
                 - name: renovate-ssh
-                  mountPath: '/home/ubuntu/.ssh'
+                  mountPath: /home/ubuntu/.ssh
                   readOnly: true
                 - name: renovate-config
                   mountPath: /renovate/
