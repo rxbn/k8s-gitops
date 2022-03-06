@@ -23,6 +23,7 @@ jobs:
           /tmp/yq eval --inplace ".spec.ingress[1].fromCIDR = [ ${cilium_nets%,*} ]" infra/traefik/networkpolicies/traefik.yaml
 
           traefik_nets=$(printf '%s,' ${nets[@]})
+          traefik_nets="${traefik_nets%,*}"
           /tmp/yq eval --inplace ".spec.values.additionalArguments[-1] = \"--entryPoints.websecure.forwardedHeaders.trustedIPs=${traefik_nets}\"" infra/traefik/helmrelease.yaml
       - name: Create pull request for cloudflare network range update
         uses: peter-evans/create-pull-request@v3
