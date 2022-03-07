@@ -16,8 +16,6 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    image:
-      tag: 0.0.18
     metrics:
       prometheusRule:
         enabled: true
