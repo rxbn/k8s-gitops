@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: cloudflare-operator
-      version: 0.0.22
+      version: 0.0.23
       sourceRef:
         kind: HelmRepository
         name: containeroo
@@ -20,7 +20,7 @@ spec:
       prometheusRule:
         enabled: true
         namespace: monitoring
-      serviceMonitor:
+      podMonitor:
         enabled: true
         namespace: monitoring
   install:
