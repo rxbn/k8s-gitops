@@ -1,12 +1,12 @@
 ---
-apiVersion: cf.containeroo.ch/v1alpha1
+apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
 metadata:
   name: external-ip
 spec:
   type: dynamic
 ---
-apiVersion: cf.containeroo.ch/v1alpha1
+apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
 metadata:
   name: teslamate
