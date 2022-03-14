@@ -20,5 +20,4 @@ resources:
   - kubernetes-dashboard.yaml
   - wiki.yaml
   - minio.yaml
-  - firefly.yaml
   - monitoring.yaml
