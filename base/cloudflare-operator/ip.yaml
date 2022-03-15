@@ -20,7 +20,9 @@ spec:
   type: dynamic
   ipSources:
     - url: https://api.hetzner.cloud/v1/servers
-      responseJSONPath: "{.servers[0].public_net.ipv4.ip}"
+      requestHeaders:
+        Accept: application/json
       requestHeadersSecretRef:
         name: hetzner-cloud-api-key
         namespace: cloudflare-operator
+      responseJSONPath: "{.servers[0].public_net.ipv4.ip}"

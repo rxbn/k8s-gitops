@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: cloudflare-operator
-      version: 0.2.0
+      version: 0.2.1
       sourceRef:
         kind: HelmRepository
         name: containeroo
@@ -23,7 +23,3 @@ spec:
       podMonitor:
         enabled: true
         namespace: monitoring
-  install:
-    crds: Skip
-  upgrade:
-    crds: Skip
