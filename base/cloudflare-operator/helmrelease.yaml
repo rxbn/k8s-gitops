@@ -23,7 +23,3 @@ spec:
       podMonitor:
         enabled: true
         namespace: monitoring
-  install:
-    crds: Skip
-  upgrade:
-    crds: Skip
