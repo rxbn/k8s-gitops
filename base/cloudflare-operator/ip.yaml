@@ -5,11 +5,22 @@ metadata:
   name: external-ip
 spec:
   type: dynamic
+  ipSources:
+    - url: https://ifconfig.me/ip
+    - url: https://ipecho.net/plain
+    - url: https://myip.is/ip/
+    - url: https://checkip.amazonaws.com
+    - url: https://api.ipify.org
 ---
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
 metadata:
   name: teslamate
 spec:
-  type: static
-  address: ${TESLAMATE_SERVER_IP}
+  type: dynamic
+  ipSources:
+    - url: https://api.hetzner.cloud/v1/servers
+      responseJSONPath: "{.servers[0].public_net.ipv4.ip}"
+      requestHeadersSecretRef:
+        name: hetzner-cloud-api-key
+        namespace: cloudflare-operator
