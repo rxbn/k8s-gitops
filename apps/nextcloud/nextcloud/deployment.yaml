@@ -103,7 +103,7 @@ spec:
             timeoutSeconds: 5
           resources: {}
         - name: nextcloud
-          image: nextcloud:23.0.2-fpm-alpine
+          image: nextcloud:23.0.3-fpm-alpine
           env:
             - name: POSTGRES_DB
               value: postgres
