@@ -11,7 +11,7 @@ spec:
   chart:
     spec:
       chart: local-path-provisioner
-      version: 0.0.21
+      version: 0.0.22
       sourceRef:
         kind: HelmRepository
         name: containeroo
@@ -22,23 +22,9 @@ spec:
       name: hdd-local-path-provisioner
       teardown: |-
         #!/bin/sh
-        while getopts "m:s:p:" opt
-        do
-          case $opt in
-            p)
-            absolutePath=$OPTARG
-            ;;
-            s)
-            sizeInBytes=$OPTARG
-            ;;
-            m)
-            volMode=$OPTARG
-            ;;
-            esac
-        done
 
-        archived_path="$(dirname ${absolutePath})/archived-$(basename ${absolutePath})"
-        mv ${absolutePath} ${archived_path}
+        archived_path="$(dirname ${VOL_DIR})/archived-$(basename ${VOL_DIR})"
+        mv ${VOL_DIR} ${archived_path}
     nodePathMap:
       - node: DEFAULT_PATH_FOR_NON_LISTED_NODES
         paths:
