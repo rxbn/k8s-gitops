@@ -32,5 +32,9 @@ spec:
       enabled: true
     settings:
       clusterName: ${BASE_DOMAIN/./-}
+      defaultNamespace: default
       itemsPerPage: 20
+      labelsLimit: 3
       logsAutoRefreshTimeInterval: 1
+      resourceAutoRefreshTimeInterval: 5
+      disableAccessDeniedNotifications: false
