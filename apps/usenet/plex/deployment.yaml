@@ -88,7 +88,7 @@ spec:
             type: Directory
         - name: other
           hostPath:
-            path: /mnt/disk01/media/other
+            path: /mnt/tank/media/other
             type: Directory
         - name: tmpfs
           emptyDir:
