@@ -1,0 +1,16 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: object-cleanup
+rules:
+  - apiGroups:
+      - k8up.io
+    resources:
+      - backups
+      - checks
+      - prunes
+    verbs:
+      - get
+      - list
+      - delete
