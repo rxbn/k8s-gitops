@@ -19,7 +19,7 @@ spec:
         spec:
           containers:
             - name: object-cleanup
-              image: bitnami/kubectl:1.22.3
+              image: bitnami/kubectl:1.23.6
               command:
                 - sh
                 - -c
