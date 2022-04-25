@@ -12,13 +12,10 @@ spec:
     - kind: Kustomization
       name: "*"
     - kind: HelmRelease
-      namespace: local-path-provisioner
+      namespace: storage-system
       name: "*"
     - kind: HelmRelease
-      namespace: metallb
-      name: "*"
-    - kind: HelmRelease
-      namespace: nfs-subdir-external-provisioner
+      namespace: metallb-system
       name: "*"
     - kind: HelmRelease
       namespace: traefik
