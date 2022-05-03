@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: plex
-          image: lscr.io/linuxserver/plex:1.26.0.5715-8cf78dab3-ls111
+          image: lscr.io/linuxserver/plex:1.26.0.5715-8cf78dab3-ls112
           env:
             - name: PGID
               value: "2000"
