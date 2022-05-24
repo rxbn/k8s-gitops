@@ -65,3 +65,17 @@ spec:
   proxied: true
   ttl: 1
   interval: 5m
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: DNSRecord
+metadata:
+  name: checkmk-srv-${BASE_DOMAIN/./-}
+  namespace: cloudflare-operator
+spec:
+  name: checkmk.srv.${BASE_DOMAIN}
+  type: A
+  ipRef:
+    name: checkmk
+  proxied: false
+  ttl: 120
+  interval: 5m
