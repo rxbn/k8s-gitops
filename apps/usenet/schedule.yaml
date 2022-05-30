@@ -11,17 +11,17 @@ spec:
     s3:
       bucket: usenet
   backup:
-    schedule: "0 1,13 * * *"
+    schedule: 0 1,13 * * *
     successfulJobsHistoryLimit: 1
     failedJobsHistoryLimit: 1
   check:
-    schedule: "0 3 * * *"
+    schedule: 0 3 * * *
     successfulJobsHistoryLimit: 1
     failedJobsHistoryLimit: 1
   prune:
     retention:
       keepDaily: 2
       keepLast: 14
-    schedule: "0 2 * * *"
+    schedule: 0 2 * * *
     successfulJobsHistoryLimit: 1
     failedJobsHistoryLimit: 1
