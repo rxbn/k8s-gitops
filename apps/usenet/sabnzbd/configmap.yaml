@@ -15,14 +15,14 @@ data:
 
     cd "${SAB_COMPLETE_DIR}"
 
-    FILENAME=$(find -type f -name "*.mkv" -and -not -iname "*sample*" | head -n 1)
+    FILENAME=$(find . -type f -name "*.mkv" -and -not -iname "*sample*" | head -n 1)
 
     if [[ -z ${FILENAME} ]]; then
         echo "no mkv file found - skipping"
         exit 0
     fi
 
-    SUBS=$(find -type f -name "*.idx" -or -name "*.srt")
+    SUBS=$(find . -type f -name "*.idx" -or -name "*.srt")
 
     if [[ -z ${SUBS} ]]; then
         echo "no subtitles found - skipping"
@@ -30,10 +30,12 @@ data:
     fi
 
     while IFS= read -r SUB; do
-        mkvmerge -o ${FILENAME}.merged ${FILENAME} ${SUB}
-        rm -f ${FILENAME}
-        mv ${FILENAME}.merged ${FILENAME}
+        mkvmerge -o "${FILENAME}.merged" "${FILENAME}" "${SUB}"
+        rm -f "${SUB}"
+        rm -f "${FILENAME}"
+        mv "${FILENAME}.merged" "${FILENAME}"
     done <<< "${SUBS}"
+
     echo "finished merging subtitles"
 
     exit 0
@@ -46,15 +48,18 @@ metadata:
 data:
   startup_probe.sh: |
     #!/usr/bin/env bash
+
     if ! command -v mkvmerge >/dev/null; then
       echo "mkvmerge not found"
       exit 1
     fi
+
     if [ ! -f /app/sabnzbd/scripts/merge_subtitles.sh ]; then
       echo "merge_subtitles.sh not found"
       exit 1
     fi
-    if [ $(curl --write-out '%{http_code}' --silent --output /dev/null http://localhost:8080) != "200" ]; then
+
+    if [ "$(curl --write-out '%{http_code}' --silent --output /dev/null http://localhost:8080)" != "200" ]; then
       echo "sabnzbd not ready"
       exit 1
     fi
