@@ -35,9 +35,9 @@ spec:
       ingressClassName: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        cf.containeroo.ch/content: ${BASE_DOMAIN}
-        cf.containeroo.ch/type: CNAME
-      hostname: minio-api.${BASE_DOMAIN}
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan@kubernetescrd
+        cf.containeroo.ch/ignore: "true"
+      hostname: minio-api.local.${BASE_DOMAIN}
     persistence:
       storageClass: backup
   postRenderers:
