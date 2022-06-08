@@ -25,7 +25,7 @@ spec:
       requestHeadersSecretRef:
         name: hetzner-cloud-api-key
         namespace: cloudflare-operator
-      responseJSONPath: "{.servers[0].public_net.ipv4.ip}"
+      responseJSONPath: '{.servers[?(@.name=="teslamate.srv.${BASE_DOMAIN}")].public_net.ipv4.ip}'
 ---
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
@@ -40,4 +40,4 @@ spec:
       requestHeadersSecretRef:
         name: hetzner-cloud-api-key
         namespace: cloudflare-operator
-      responseJSONPath: "{.servers[1].public_net.ipv4.ip}"
+      responseJSONPath: '{.servers[?(@.name=="checkmk.srv.${BASE_DOMAIN}")].public_net.ipv4.ip}'
