@@ -106,3 +106,16 @@ spec:
   proxied: true
   ttl: 1
   interval: 5m
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: DNSRecord
+metadata:
+  name: fw-auth-${BASE_DOMAIN/./-}
+  namespace: cloudflare-operator
+spec:
+  name: fw-auth.${BASE_DOMAIN}
+  type: CNAME
+  content: keycloak.srv.${BASE_DOMAIN}
+  proxied: true
+  ttl: 1
+  interval: 5m
