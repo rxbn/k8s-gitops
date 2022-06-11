@@ -60,9 +60,6 @@ spec:
       namespace: cert-manager
       name: "*"
     - kind: HelmRelease
-      namespace: authentik
-      name: "*"
-    - kind: HelmRelease
       namespace: cloudflare-operator
       name: "*"
     - kind: HelmRelease

@@ -9,7 +9,6 @@ resources:
   - metallb.yaml
   - bitnami.yaml
   - stakater.yaml
-  - goauthentik.yaml
   - jetstack.yaml
   - traefik.yaml
   - kubernetes-dashboard.yaml

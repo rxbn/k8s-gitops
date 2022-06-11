@@ -5,7 +5,6 @@ resources:
   - nextcloud
   - gitlab
   - kubernetes-dashboard
-  - authentik
   - usenet
   - paperless
   - wiki
