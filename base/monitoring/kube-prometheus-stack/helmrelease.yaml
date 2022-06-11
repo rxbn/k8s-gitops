@@ -80,13 +80,13 @@ spec:
         auth.generic_oauth:
           allow_sign_up: true
           enabled: true
-          name: authentik
-          auth_url: https://auth.${BASE_DOMAIN}/application/o/authorize/
-          token_url: https://auth.${BASE_DOMAIN}/application/o/token/
-          api_url: https://auth.${BASE_DOMAIN}/application/o/userinfo/
+          name: ${BASE_DOMAIN} SSO
+          auth_url: https://sso.{{ base_domain }}/realms/master/protocol/openid-connect/auth
+          token_url: https://sso.{{ base_domain }}/realms/master/protocol/openid-connect/token
+          api_url: https://sso.{{ base_domain }}/realms/master/protocol/openid-connect/userinfo
           scopes: openid profile email
-          signout_redirect_url: https://auth.${BASE_DOMAIN}/application/o/kubernetes-grafana/end-session/
-          role_attribute_path: contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'
+          signout_redirect_url: https://sso.{{ base_domain }}/realms/master/protocol/openid-connect/logout
+          role_attribute_path: contains(roles[*], 'admins') && 'Admin' || 'Viewer'
         server:
           root_url: https://grafana.local.${BASE_DOMAIN}
       ingress:
