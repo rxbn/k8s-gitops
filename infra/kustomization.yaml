@@ -6,5 +6,6 @@ resources:
   - nfs-subdir-external-provisioner
   - metrics-server
   - cert-manager
+  - traefik-forward-auth
   - metallb
   - traefik
