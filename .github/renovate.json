@@ -50,7 +50,7 @@
   ],
   "kubernetes": {
     "fileMatch": [
-      "(apps|base)\\/(.+\\/)*(deployment|daemonset|statefulset|cronjob)\\.yaml$"
+      "(apps|base|infra)\\/(.+\\/)*(deployment|daemonset|statefulset|cronjob)\\.yaml$"
     ]
   },
   "flux": {
