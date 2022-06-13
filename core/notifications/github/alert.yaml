@@ -45,9 +45,6 @@ spec:
       namespace: cloudflare-operator
       name: "*"
     - kind: HelmRelease
-      namespace: mealie
-      name: "*"
-    - kind: HelmRelease
       namespace: paperless
       name: "*"
     - kind: HelmRelease

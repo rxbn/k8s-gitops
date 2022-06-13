@@ -10,7 +10,6 @@ resources:
   - paperless.yaml
   - storage-system.yaml
   - metallb-system.yaml
-  - mealie.yaml
   - usenet.yaml
   - cloudflare-operator.yaml
   - cert-manager.yaml
