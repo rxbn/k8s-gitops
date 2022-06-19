@@ -59,6 +59,8 @@ spec:
                   value: gitlab
                 - name: RENOVATE_REDIS_URL
                   value: redis://renovate-redis.renovate.svc.cluster.local
+                - name: RENOVATE_CONFIG_MIGRATION
+                  value: "true"
               envFrom:
                 - secretRef:
                     name: renovate
