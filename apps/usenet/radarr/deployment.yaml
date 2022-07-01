@@ -31,8 +31,8 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: data
-            - mountPath: /config/Backups
-              name: backup
+            # - mountPath: /config/Backups
+            #   name: backup
             - mountPath: /movies
               name: movies
             - mountPath: /downloads
@@ -56,9 +56,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: radarr-data
-        - name: backup
-          persistentVolumeClaim:
-            claimName: radarr-backup
+        # - name: backup
+        #   persistentVolumeClaim:
+        #     claimName: radarr-backup
         - name: movies
           hostPath:
             path: /mnt/tank/media/movies

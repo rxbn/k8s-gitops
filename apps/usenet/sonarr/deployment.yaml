@@ -31,8 +31,8 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: data
-            - mountPath: /config/Backups
-              name: backup
+            # - mountPath: /config/Backups
+            #   name: backup
             - mountPath: /tv
               name: tv-shows
             - mountPath: /downloads
@@ -56,9 +56,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: sonarr-data
-        - name: backup
-          persistentVolumeClaim:
-            claimName: sonarr-backup
+        # - name: backup
+        #   persistentVolumeClaim:
+        #     claimName: sonarr-backup
         - name: tv-shows
           hostPath:
             path: /mnt/tank/media/tv
