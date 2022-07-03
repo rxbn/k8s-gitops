@@ -16,5 +16,4 @@ resources:
   - traefik.yaml
   - kubernetes-dashboard.yaml
   - wiki.yaml
-  - minio.yaml
   - monitoring.yaml
