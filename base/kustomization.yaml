@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - cloudflare-operator
   - reloader
-  - minio
+  # - minio
   - intel-gpu-plugin
   - k8up
   - monitoring
