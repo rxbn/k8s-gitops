@@ -8,3 +8,4 @@ resources:
   - configmap.yaml
   - prebackuppod.yaml
   - clusterrolebinding.yaml
+  - secret.yaml

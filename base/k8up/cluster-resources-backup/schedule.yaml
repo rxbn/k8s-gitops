@@ -8,8 +8,15 @@ spec:
   podSecurityContext:
     runAsUser: 0
   backend:
-    s3:
-      bucket: cluster-resources
+    b2:
+      accountIDSecretRef:
+        key: b2-account-id
+        name: backup-credentials
+      accountKeySecretRef:
+        key: b2-account-key
+        name: backup-credentials
+      bucket: ${BASE_DOMAIN/./-}
+      path: k8up/cluster-resources
   backup:
     schedule: 0 */12 * * *
     successfulJobsHistoryLimit: 1
