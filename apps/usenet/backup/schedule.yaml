@@ -2,14 +2,21 @@
 apiVersion: k8up.io/v1
 kind: Schedule
 metadata:
-  name: paperless
-  namespace: paperless
+  name: usenet
+  namespace: usenet
 spec:
   podSecurityContext:
     runAsUser: 0
   backend:
-    s3:
-      bucket: paperless
+    b2:
+      accountIDSecretRef:
+        key: b2-account-id
+        name: backup-credentials
+      accountKeySecretRef:
+        key: b2-account-key
+        name: backup-credentials
+      bucket: ${BASE_DOMAIN/./-}
+      path: k8up/usenet
   backup:
     schedule: 0 1,13 * * *
     successfulJobsHistoryLimit: 1
