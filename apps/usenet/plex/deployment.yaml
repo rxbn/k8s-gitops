@@ -36,8 +36,8 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: data
-            # - mountPath: /backup
-            #   name: backup
+            - mountPath: /backup
+              name: backup
             - mountPath: /data/tvshows
               name: tvshows
             - mountPath: /data/movies
@@ -71,9 +71,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: plex-data
-        # - name: backup
-        #   persistentVolumeClaim:
-        #     claimName: plex-backup
+        - name: backup
+          persistentVolumeClaim:
+            claimName: plex-backup
         - name: tvshows
           hostPath:
             path: /mnt/tank/media/tv

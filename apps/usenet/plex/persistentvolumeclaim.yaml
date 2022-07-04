@@ -19,10 +19,12 @@ kind: PersistentVolumeClaim
 metadata:
   name: plex-backup
   namespace: usenet
+  annotations:
+    k8up.io/backup: "true"
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: backup
+  storageClassName: nvme
   resources:
     requests:
       storage: 200Mi
