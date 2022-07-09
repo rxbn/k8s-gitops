@@ -19,4 +19,4 @@ spec:
     psp:
       create: false
     crds:
-      enabled: true
+      enabled: false
