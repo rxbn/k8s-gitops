@@ -1,0 +1,22 @@
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: traefik
+  namespace: metallb-system
+spec:
+  addresses:
+    - ${METALLB_TRAEFIK_ADDRESS_POOL}
+  auto-assign: false
+  protocol: layer2
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: default
+  namespace: metallb-system
+spec:
+  addresses:
+    - ${METALLB_DEFAULT_ADDRESS_POOL}
+  auto-assign: true
+  protocol: layer2
