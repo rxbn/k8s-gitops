@@ -7,4 +7,5 @@ This directory contains all CustomResourceDefinitions required.
 - **cert-manager** provisions let's encrypt certificates
 - **k8up** backup operator
 - **kube-prometheus-stack** monitoring stack
+- **metallb** load balancer
 - **traefik** reverse proxy

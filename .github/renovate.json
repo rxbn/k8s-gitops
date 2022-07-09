@@ -46,6 +46,13 @@
         "registryUrl=(?<registryUrl>.*) chart=(?<depName>.*)\\s.*tag: v(?<currentValue>.*)"
       ],
       "datasourceTemplate": "helm"
+    },
+    {
+      "fileMatch": ["crds\\/metallb\\/crds\\.yaml$"],
+      "matchStrings": [
+        "datasource=(?<datasource>.*) depName=(?<depName>.*)\\s.*tag: (?<currentValue>.*)"
+      ],
+      "datasourceTemplate": "helm"
     }
   ],
   "kubernetes": {
