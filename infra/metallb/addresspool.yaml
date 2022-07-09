@@ -7,8 +7,7 @@ metadata:
 spec:
   addresses:
     - ${METALLB_TRAEFIK_ADDRESS_POOL}
-  auto-assign: false
-  protocol: layer2
+  autoAssign: false
 ---
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
@@ -18,5 +17,4 @@ metadata:
 spec:
   addresses:
     - ${METALLB_DEFAULT_ADDRESS_POOL}
-  auto-assign: true
-  protocol: layer2
+  autoAssign: true
