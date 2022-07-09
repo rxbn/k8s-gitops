@@ -9,27 +9,14 @@ spec:
   chart:
     spec:
       chart: metallb
-      version: 0.12.1
+      version: 0.13.3
       sourceRef:
         kind: HelmRepository
         name: metallb
         namespace: flux-system
       interval: 5m
   values:
-    configInline:
-      address-pools:
-        - name: traefik
-          addresses:
-            - ${METALLB_TRAEFIK_ADDRESS_POOL}
-          auto-assign: false
-          protocol: layer2
-        - name: default
-          addresses:
-            - ${METALLB_DEFAULT_ADDRESS_POOL}
-          auto-assign: true
-          protocol: layer2
     psp:
       create: false
-    speaker:
-      frr:
-        enabled: false
+    crds:
+      enabled: true
