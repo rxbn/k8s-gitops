@@ -18,5 +18,15 @@ spec:
   values:
     psp:
       create: false
-    crds:
-      enabled: false
+    configInline:
+      address-pools:
+        - name: traefik
+          addresses:
+            - ${METALLB_TRAEFIK_ADDRESS_POOL}
+          auto-assign: false
+          protocol: layer2
+        - name: default
+          addresses:
+            - ${METALLB_DEFAULT_ADDRESS_POOL}
+          auto-assign: true
+          protocol: layer2
