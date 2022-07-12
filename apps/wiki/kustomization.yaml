@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - wiki
   - postgres
-  - backup
+  - schedule.yaml

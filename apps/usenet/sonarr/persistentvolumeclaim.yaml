@@ -19,12 +19,10 @@ kind: PersistentVolumeClaim
 metadata:
   name: sonarr-backup
   namespace: usenet
-  annotations:
-    k8up.io/backup: "true"
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: nvme
+  storageClassName: backup
   resources:
     requests:
       storage: 200Mi
