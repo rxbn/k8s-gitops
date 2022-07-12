@@ -5,4 +5,4 @@ resources:
   - nextcloud
   - redis
   - postgres
-  - backup
+  - schedule.yaml
