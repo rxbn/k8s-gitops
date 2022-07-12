@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: sonarr
-          image: lscr.io/linuxserver/sonarr:3.0.8.1507-ls149
+          image: lscr.io/linuxserver/sonarr:3.0.8.1507-ls150
           env:
             - name: PGID
               value: "2000"
