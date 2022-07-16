@@ -84,9 +84,9 @@ spec:
             defaultMode: 0777
         - name: incomplete-downloads
           hostPath:
-            path: /data/downloads/incomplete
+            path: /mnt/disk06/downloads/incomplete
             type: Directory
         - name: downloads
           hostPath:
-            path: /data/downloads/complete
+            path: /mnt/disk06/downloads/complete
             type: Directory
