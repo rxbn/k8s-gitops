@@ -19,11 +19,15 @@
       "datasourceTemplate": "github-releases"
     },
     {
-      "fileMatch": [
-        "crds\\/(k8up|cloudflare-operator)\\/kustomization\\.yaml$"
-      ],
+      "fileMatch": ["crds\\/cloudflare-operator\\/kustomization\\.yaml$"],
       "matchStrings": [
         "datasource=(?<datasource>.*) depName=(?<depName>.*)\\s.*\\/(?<currentValue>.*?)\\/"
+      ]
+    },
+    {
+      "fileMatch": ["crds\\/k8up\\/kustomization\\.yaml$"],
+      "matchStrings": [
+        "datasource=(?<datasource>.*) registryUrl=(?<registryUrl>.*?) depName=(?<depName>.*)\\s.*\\/k8up-(?<currentValue>.*?)\\/"
       ]
     },
     {

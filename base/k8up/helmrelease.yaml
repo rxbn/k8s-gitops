@@ -9,13 +9,17 @@ spec:
   chart:
     spec:
       chart: k8up
-      version: 2.0.5
+      version: 3.0.0
       sourceRef:
         kind: HelmRepository
-        name: appuio
+        name: k8up-io
         namespace: flux-system
       interval: 5m
   values:
+    image:
+      registry: ghcr.io
+      repository: k8up-io/k8up
+      tag: v2.3.3
     k8up:
       timezone: Europe/Zurich
     metrics:
