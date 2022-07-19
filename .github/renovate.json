@@ -27,8 +27,9 @@
     {
       "fileMatch": ["crds\\/k8up\\/kustomization\\.yaml$"],
       "matchStrings": [
-        "datasource=(?<datasource>.*) registryUrl=(?<registryUrl>.*?) depName=(?<depName>.*)\\s.*\\/k8up-(?<currentValue>.*?)\\/"
-      ]
+        "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*)\\s.*\\/k8up-(?<currentValue>.*?)\\/"
+      ],
+      "datasourceTemplate": "helm"
     },
     {
       "fileMatch": ["crds\\/cert-manager\\/kustomization\\.yaml$"],
