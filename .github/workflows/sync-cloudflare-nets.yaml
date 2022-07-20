@@ -18,6 +18,8 @@ jobs:
           wget -O /tmp/yq https://github.com/mikefarah/yq/releases/download/v4.26.1/yq_linux_amd64
           chmod +x /tmp/yq
           readarray -d '' nets < <(curl -sS https://www.cloudflare.com/ips-v4/ | sort)
+          readarray -d '' netsv6 < <(curl -sS https://www.cloudflare.com/ips-v6/ | sort)
+          nets+=$(printf '\n%s' "${netsv6[@]}")
 
           cilium_nets=$(printf '"%s", ' ${nets[@]})
           /tmp/yq eval --inplace ".spec.ingress[1].fromCIDR = [ ${cilium_nets%,*} ]" infra/traefik/networkpolicies/traefik.yaml
