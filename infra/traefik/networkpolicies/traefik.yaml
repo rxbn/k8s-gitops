@@ -12,6 +12,7 @@ spec:
   ingress:
     - fromCIDR:
         - ${LAN_NETWORK_RANGE}
+        - ${LAN_NETWORK_RANGE_V6}
       toPorts:
         - ports:
             - port: "2222"
