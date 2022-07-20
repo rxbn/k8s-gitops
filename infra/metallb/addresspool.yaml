@@ -7,6 +7,7 @@ metadata:
 spec:
   addresses:
     - ${METALLB_TRAEFIK_ADDRESS_POOL}
+    - ${METALLB_TRAEFIK_ADDRESS_POOL_V6}
   autoAssign: false
 ---
 apiVersion: metallb.io/v1beta1

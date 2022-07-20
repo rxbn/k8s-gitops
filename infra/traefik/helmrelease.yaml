@@ -62,6 +62,10 @@ spec:
         metallb.universe.tf/address-pool: traefik
       spec:
         externalTrafficPolicy: Local
+      ipFamilyPolicy: PreferDualStack
+      ipFamilies:
+        - IPv4
+        - IPv6
     metrics:
       prometheus: null
   install:
