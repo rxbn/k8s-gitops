@@ -2,7 +2,7 @@
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
 metadata:
-  name: external-ip
+  name: ${BASE_DOMAIN/./-}-v4
 spec:
   type: dynamic
   ipSources:
@@ -15,7 +15,7 @@ spec:
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
 metadata:
-  name: external-ipv6
+  name: ${BASE_DOMAIN/./-}-v6
 spec:
   type: static
   address: ${METALLB_TRAEFIK_ADDRESS_POOL_V6%/128}
