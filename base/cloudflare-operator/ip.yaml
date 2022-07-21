@@ -15,6 +15,14 @@ spec:
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
 metadata:
+  name: external-ipv6
+spec:
+  type: static
+  address: ${METALLB_TRAEFIK_ADDRESS_POOL_V6%/128}
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: IP
+metadata:
   name: teslamate
 spec:
   type: dynamic

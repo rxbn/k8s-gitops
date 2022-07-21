@@ -16,6 +16,20 @@ spec:
 apiVersion: cf.containeroo.ch/v1beta1
 kind: DNSRecord
 metadata:
+  name: ${BASE_DOMAIN/./-}-v6
+  namespace: cloudflare-operator
+spec:
+  name: ${BASE_DOMAIN}
+  type: AAAA
+  ipRef:
+    name: external-ipv6
+  proxied: true
+  ttl: 1
+  interval: 5m
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: DNSRecord
+metadata:
   name: vpn-${BASE_DOMAIN/./-}
   namespace: cloudflare-operator
 spec:
