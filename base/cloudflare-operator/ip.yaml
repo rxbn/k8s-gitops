@@ -23,7 +23,7 @@ spec:
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
 metadata:
-  name: teslamate
+  name: teslamate-v4
 spec:
   type: dynamic
   ipSources:
@@ -38,7 +38,22 @@ spec:
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
 metadata:
-  name: checkmk
+  name: teslamate-v6
+spec:
+  type: dynamic
+  ipSources:
+    - url: https://api.hetzner.cloud/v1/servers
+      requestHeaders:
+        Accept: application/json
+      requestHeadersSecretRef:
+        name: hetzner-cloud-api-key
+        namespace: cloudflare-operator
+      responseJSONPath: '{.servers[?(@.name=="teslamate.srv.${BASE_DOMAIN}")].public_net.ipv6.ip}'
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: IP
+metadata:
+  name: checkmk-v4
 spec:
   type: dynamic
   ipSources:
@@ -53,7 +68,22 @@ spec:
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
 metadata:
-  name: keycloak
+  name: checkmk-v6
+spec:
+  type: dynamic
+  ipSources:
+    - url: https://api.hetzner.cloud/v1/servers
+      requestHeaders:
+        Accept: application/json
+      requestHeadersSecretRef:
+        name: hetzner-cloud-api-key
+        namespace: cloudflare-operator
+      responseJSONPath: '{.servers[?(@.name=="checkmk.srv.${BASE_DOMAIN}")].public_net.ipv6.ip}'
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: IP
+metadata:
+  name: keycloak-v4
 spec:
   type: dynamic
   ipSources:
@@ -64,3 +94,18 @@ spec:
         name: hetzner-cloud-api-key
         namespace: cloudflare-operator
       responseJSONPath: '{.servers[?(@.name=="keycloak.srv.${BASE_DOMAIN}")].public_net.ipv4.ip}'
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: IP
+metadata:
+  name: keycloak-v6
+spec:
+  type: dynamic
+  ipSources:
+    - url: https://api.hetzner.cloud/v1/servers
+      requestHeaders:
+        Accept: application/json
+      requestHeadersSecretRef:
+        name: hetzner-cloud-api-key
+        namespace: cloudflare-operator
+      responseJSONPath: '{.servers[?(@.name=="keycloak.srv.${BASE_DOMAIN}")].public_net.ipv6.ip}'

@@ -2,7 +2,7 @@
 apiVersion: cf.containeroo.ch/v1beta1
 kind: DNSRecord
 metadata:
-  name: ${BASE_DOMAIN/./-}
+  name: ${BASE_DOMAIN/./-}-v4
   namespace: cloudflare-operator
 spec:
   name: ${BASE_DOMAIN}
@@ -43,13 +43,27 @@ spec:
 apiVersion: cf.containeroo.ch/v1beta1
 kind: DNSRecord
 metadata:
-  name: teslamate-srv-${BASE_DOMAIN/./-}
+  name: teslamate-srv-${BASE_DOMAIN/./-}-v4
   namespace: cloudflare-operator
 spec:
   name: teslamate.srv.${BASE_DOMAIN}
   type: A
   ipRef:
-    name: teslamate
+    name: teslamate-v4
+  proxied: false
+  ttl: 120
+  interval: 5m
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: DNSRecord
+metadata:
+  name: teslamate-srv-${BASE_DOMAIN/./-}-v6
+  namespace: cloudflare-operator
+spec:
+  name: teslamate.srv.${BASE_DOMAIN}
+  type: A
+  ipRef:
+    name: teslamate-v6
   proxied: false
   ttl: 120
   interval: 5m
@@ -83,13 +97,13 @@ spec:
 apiVersion: cf.containeroo.ch/v1beta1
 kind: DNSRecord
 metadata:
-  name: checkmk-srv-${BASE_DOMAIN/./-}
+  name: checkmk-srv-${BASE_DOMAIN/./-}-v4
   namespace: cloudflare-operator
 spec:
   name: checkmk.srv.${BASE_DOMAIN}
   type: A
   ipRef:
-    name: checkmk
+    name: checkmk-v4
   proxied: false
   ttl: 120
   interval: 5m
@@ -97,13 +111,41 @@ spec:
 apiVersion: cf.containeroo.ch/v1beta1
 kind: DNSRecord
 metadata:
-  name: keycloak-srv-${BASE_DOMAIN/./-}
+  name: checkmk-srv-${BASE_DOMAIN/./-}-v6
+  namespace: cloudflare-operator
+spec:
+  name: checkmk.srv.${BASE_DOMAIN}
+  type: A
+  ipRef:
+    name: checkmk-v6
+  proxied: false
+  ttl: 120
+  interval: 5m
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: DNSRecord
+metadata:
+  name: keycloak-srv-${BASE_DOMAIN/./-}-v4
   namespace: cloudflare-operator
 spec:
   name: keycloak.srv.${BASE_DOMAIN}
   type: A
   ipRef:
-    name: keycloak
+    name: keycloak-v4
+  proxied: false
+  ttl: 120
+  interval: 5m
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: DNSRecord
+metadata:
+  name: keycloak-srv-${BASE_DOMAIN/./-}-v6
+  namespace: cloudflare-operator
+spec:
+  name: keycloak.srv.${BASE_DOMAIN}
+  type: A
+  ipRef:
+    name: keycloak-v6
   proxied: false
   ttl: 120
   interval: 5m
