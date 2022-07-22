@@ -41,7 +41,7 @@ metadata:
   name: teslamate-v6
 spec:
   type: static
-  address: ${HCLOUD_TESLAMATE_V6}
+  address: "${HCLOUD_TESLAMATE_V6}"
 ---
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
@@ -64,7 +64,7 @@ metadata:
   name: checkmk-v6
 spec:
   type: static
-  address: ${HCLOUD_CHECKMK_V6}
+  address: "${HCLOUD_CHECKMK_V6}"
 ---
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
@@ -87,4 +87,4 @@ metadata:
   name: keycloak-v6
 spec:
   type: static
-  address: ${HCLOUD_KEYCLOAK_V6}
+  address: "${HCLOUD_KEYCLOAK_V6}"
