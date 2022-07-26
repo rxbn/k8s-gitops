@@ -7,3 +7,4 @@ resources:
   - middleware.yaml
   - serviceaccount.yaml
   - clusterrolebinding.yaml
+  - secret.yaml
