@@ -22,7 +22,7 @@ metadata:
   name: kube-prometheus-stack-crds
   namespace: flux-system
 spec:
-  interval: 15m
+  interval: 5m
   prune: false
   sourceRef:
     kind: GitRepository
