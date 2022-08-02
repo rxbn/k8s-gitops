@@ -53,6 +53,11 @@ spec:
         size: 1Gi
         annotations:
           k8up.io/backup: "true"
+      consume:
+        enabled: true
+        size: 1Gi
+        emptyDir:
+          enabled: true
     redis:
       enabled: true
       auth:
