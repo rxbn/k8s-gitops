@@ -56,8 +56,7 @@
       "fileMatch": ["crds\\/metallb\\/crds\\.yaml$"],
       "matchStrings": [
         "datasource=(?<datasource>.*) depName=(?<depName>.*)\\s.*tag: (?<currentValue>.*)"
-      ],
-      "datasourceTemplate": "helm"
+      ]
     }
   ],
   "kubernetes": {
