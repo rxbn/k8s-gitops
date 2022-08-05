@@ -44,13 +44,13 @@ spec:
 apiVersion: cf.containeroo.ch/v1beta1
 kind: DNSRecord
 metadata:
-  name: teslamate-srv-${BASE_DOMAIN/./-}-v4
+  name: docker-srv-${BASE_DOMAIN/./-}-v4
   namespace: cloudflare-operator
 spec:
-  name: teslamate.srv.${BASE_DOMAIN}
+  name: docker.srv.${BASE_DOMAIN}
   type: A
   ipRef:
-    name: teslamate-v4
+    name: docker-v4
   proxied: false
   ttl: 120
   interval: 5m
@@ -58,13 +58,13 @@ spec:
 apiVersion: cf.containeroo.ch/v1beta1
 kind: DNSRecord
 metadata:
-  name: teslamate-srv-${BASE_DOMAIN/./-}-v6
+  name: docker-srv-${BASE_DOMAIN/./-}-v6
   namespace: cloudflare-operator
 spec:
-  name: teslamate.srv.${BASE_DOMAIN}
+  name: docker.srv.${BASE_DOMAIN}
   type: AAAA
   ipRef:
-    name: teslamate-v6
+    name: docker-v6
   proxied: false
   ttl: 120
   interval: 5m
@@ -77,7 +77,7 @@ metadata:
 spec:
   name: teslamate.${BASE_DOMAIN}
   type: CNAME
-  content: teslamate.srv.${BASE_DOMAIN}
+  content: docker.srv.${BASE_DOMAIN}
   proxied: true
   ttl: 1
   interval: 5m
@@ -90,7 +90,20 @@ metadata:
 spec:
   name: teslamate-grafana.${BASE_DOMAIN}
   type: CNAME
-  content: teslamate.srv.${BASE_DOMAIN}
+  content: docker.srv.${BASE_DOMAIN}
+  proxied: true
+  ttl: 1
+  interval: 5m
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: DNSRecord
+metadata:
+  name: sso-${BASE_DOMAIN/./-}
+  namespace: cloudflare-operator
+spec:
+  name: sso.${BASE_DOMAIN}
+  type: CNAME
+  content: docker.srv.${BASE_DOMAIN}
   proxied: true
   ttl: 1
   interval: 5m
@@ -121,45 +134,4 @@ spec:
     name: checkmk-v6
   proxied: false
   ttl: 120
-  interval: 5m
----
-apiVersion: cf.containeroo.ch/v1beta1
-kind: DNSRecord
-metadata:
-  name: keycloak-srv-${BASE_DOMAIN/./-}-v4
-  namespace: cloudflare-operator
-spec:
-  name: keycloak.srv.${BASE_DOMAIN}
-  type: A
-  ipRef:
-    name: keycloak-v4
-  proxied: false
-  ttl: 120
-  interval: 5m
----
-apiVersion: cf.containeroo.ch/v1beta1
-kind: DNSRecord
-metadata:
-  name: keycloak-srv-${BASE_DOMAIN/./-}-v6
-  namespace: cloudflare-operator
-spec:
-  name: keycloak.srv.${BASE_DOMAIN}
-  type: AAAA
-  ipRef:
-    name: keycloak-v6
-  proxied: false
-  ttl: 120
-  interval: 5m
----
-apiVersion: cf.containeroo.ch/v1beta1
-kind: DNSRecord
-metadata:
-  name: sso-${BASE_DOMAIN/./-}
-  namespace: cloudflare-operator
-spec:
-  name: sso.${BASE_DOMAIN}
-  type: CNAME
-  content: keycloak.srv.${BASE_DOMAIN}
-  proxied: true
-  ttl: 1
   interval: 5m
