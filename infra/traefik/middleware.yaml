@@ -6,7 +6,6 @@ metadata:
   namespace: traefik
 spec:
   headers:
-    sslRedirect: true
     browserXssFilter: true
     contentTypeNosniff: true
     forceSTSHeader: true
@@ -14,6 +13,8 @@ spec:
     stsPreload: true
     stsSeconds: 15552000
     customFrameOptionsValue: SAMEORIGIN
+    customRequestHeaders:
+      X-Forwarded-Proto: https
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
