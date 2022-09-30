@@ -50,6 +50,6 @@ spec:
     - kind: HelmRelease
       namespace: kube-system
       name: "*"
-  suspend: false
   exclusionList:
     - InternalError.*failed to call webhook.*EOF
+  suspend: false
