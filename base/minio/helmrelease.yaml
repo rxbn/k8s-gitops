@@ -45,3 +45,5 @@ spec:
     resources:
       requests:
         memory: null
+    securityContext:
+      enabled: true
