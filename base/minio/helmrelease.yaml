@@ -47,3 +47,4 @@ spec:
         memory: null
     securityContext:
       enabled: false
+    users: []
