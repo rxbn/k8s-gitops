@@ -20,3 +20,7 @@ spec:
       create: false
     crds:
       enabled: false
+  install:
+    crds: Skip
+  upgrade:
+    crds: Skip
