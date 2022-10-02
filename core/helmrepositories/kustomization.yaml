@@ -7,11 +7,11 @@ resources:
   - prometheus-community.yaml
   - k8s-at-home.yaml
   - metallb.yaml
-  - bitnami.yaml
   - stakater.yaml
   - k8up-io.yaml
   - jetstack.yaml
   - traefik.yaml
   - kubernetes-dashboard.yaml
+  - minio.yaml
   - metrics-server.yaml
   - containeroo.yaml
