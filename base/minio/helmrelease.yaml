@@ -46,4 +46,4 @@ spec:
       requests:
         memory: null
     securityContext:
-      enabled: true
+      enabled: false
