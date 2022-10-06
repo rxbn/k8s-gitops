@@ -33,7 +33,7 @@ spec:
         traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan@kubernetescrd
         cf.containeroo.ch/ignore: "true"
       hosts:
-        - minio-api.local.${BASE_DOMAIN}
+        - s3.local.${BASE_DOMAIN}
     consoleIngress:
       enabled: true
       ingressClassName: traefik
@@ -42,7 +42,7 @@ spec:
         traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan@kubernetescrd
         cf.containeroo.ch/ignore: "true"
       hosts:
-        - minio.local.${BASE_DOMAIN}
+        - minio-console.local.${BASE_DOMAIN}
     environment:
       TZ: Europe/Zurich
     resources:
