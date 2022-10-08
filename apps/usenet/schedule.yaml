@@ -9,7 +9,7 @@ spec:
     runAsUser: 0
   backend:
     s3:
-      bucket: usenet
+      bucket: k8up-usenet
   backup:
     schedule: 0 1,13 * * *
     successfulJobsHistoryLimit: 1

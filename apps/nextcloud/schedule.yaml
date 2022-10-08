@@ -9,7 +9,7 @@ spec:
     runAsUser: 0
   backend:
     s3:
-      bucket: nextcloud
+      bucket: k8up-nextcloud
   backup:
     schedule: 0 1,13 * * *
     successfulJobsHistoryLimit: 1
