@@ -50,4 +50,7 @@ spec:
         memory: null
     securityContext:
       enabled: false
-    users: []
+  valuesFrom:
+    - kind: Secret
+      name: minio-helm-values
+      optional: false
