@@ -21,8 +21,6 @@ spec:
       tag: RELEASE.2022-10-05T14-58-27Z
     mode: standalone
     ignoreChartChecksums: true
-    rootUser: ${MINIO_ACCESSKEY}
-    rootPassword: ${MINIO_SECRETKEY}
     persistence:
       storageClass: backup
     ingress:
