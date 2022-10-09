@@ -48,6 +48,12 @@ spec:
         memory: null
     securityContext:
       enabled: false
+    oidc:
+      enabled: true
+      configUrl: https://sso.${BASE_DOMAIN}/realms/master/.well-known/openid-configuration
+      claimName: policy
+      scopes: openid,profile,email
+      redirectUri: https://minio-console.local.${BASE_DOMAIN}/oauth_callback
   valuesFrom:
     - kind: Secret
       name: minio-helm-values
