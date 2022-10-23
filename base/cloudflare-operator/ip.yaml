@@ -23,10 +23,40 @@ spec:
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
 metadata:
+  name: docker-v4
+spec:
+  type: dynamic
+  ipSources:
+    - url: https://api.hetzner.cloud/v1/servers
+      requestHeaders:
+        Accept: application/json
+      requestHeadersSecretRef:
+        name: hetzner-cloud-api-key
+        namespace: cloudflare-operator
+      responseJSONPath: '{.servers[?(@.name=="docker.srv.${BASE_DOMAIN}")].public_net.ipv4.ip}'
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: IP
+metadata:
   name: docker-v6
 spec:
   type: static
   address: ${HCLOUD_DOCKER_V6}
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: IP
+metadata:
+  name: checkmk-v4
+spec:
+  type: dynamic
+  ipSources:
+    - url: https://api.hetzner.cloud/v1/servers
+      requestHeaders:
+        Accept: application/json
+      requestHeadersSecretRef:
+        name: hetzner-cloud-api-key
+        namespace: cloudflare-operator
+      responseJSONPath: '{.servers[?(@.name=="checkmk.srv.${BASE_DOMAIN}")].public_net.ipv4.ip}'
 ---
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
