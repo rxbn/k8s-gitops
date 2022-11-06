@@ -20,4 +20,4 @@ spec:
               service:
                 name: memos
                 port:
-                  number: 230
+                  number: 5230
