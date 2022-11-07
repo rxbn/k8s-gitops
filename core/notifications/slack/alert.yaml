@@ -72,4 +72,5 @@ spec:
       name: "*"
   exclusionList:
     - InternalError.*failed to call webhook.*EOF
+    - TLS handshake timeout
   suspend: false
