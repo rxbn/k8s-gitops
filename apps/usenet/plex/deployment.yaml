@@ -89,9 +89,8 @@ spec:
             path: /mnt/tank/media/movies2
             type: Directory
         - name: music
-          hostPath:
-            path: /mnt/tank/media/music
-            type: Directory
+          persistentVolumeClaim:
+            claimName: plex-music
         - name: other
           hostPath:
             path: /mnt/tank/media/other

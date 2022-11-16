@@ -17,6 +17,18 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: plex-music
+  namespace: usenet
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 200Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: plex-backup
   namespace: usenet
 spec:
