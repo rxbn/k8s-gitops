@@ -6,20 +6,20 @@ on: # yamllint disable-line rule:truthy
     branches:
       - master
     paths:
-      - "apps/**.yaml"
-      - "base/**.yaml"
-      - "infra/**.yaml"
-
-env:
-  DEFAULT_BRANCH: master
+      - apps/**.yaml
+      - base/**.yaml
+      - infra/**.yaml
 
 jobs:
   detect-file-changes:
     name: Detect File Changes
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: dorny/paths-filter@v2
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Filter Helm Releases
+        uses: dorny/paths-filter@v2
         id: filter
         with:
           list-files: json
@@ -28,6 +28,7 @@ jobs:
               - added|modified: "**/helmrelease.yaml"
     outputs:
       yaml_files: ${{ steps.filter.outputs.yaml_files }}
+
   helm-release-differ:
     name: Helm Release Differ
     runs-on: ubuntu-latest
@@ -38,16 +39,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Checkout default branch
         uses: actions/checkout@v3
         with:
-          ref: "${{ env.DEFAULT_BRANCH }}"
+          ref: master
           path: default
+
       - name: Install Helm
         uses: azure/setup-helm@v3
         with:
           # renovate depName=helm/helm
           version: v3.10.2
+
       - name: Helm Release Differ
         id: diff
         run: |
@@ -57,8 +61,18 @@ jobs:
           diff="${diff//$'\n'/'%0A'}"
           diff="${diff//$'\r'/'%0D'}"
           echo "::set-output name=diff::$(echo ${diff})"
-      - name: Add Pull Request comment
-        uses: peter-evans/create-or-update-comment@v2
+
+      - name: Find Comment
+        uses: peter-evans/find-comment@v2
+        id: find-comment
         with:
           issue-number: "${{ github.event.pull_request.number }}"
+          body-includes: "${{ matrix.file }}"
+
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          comment-id: "${{ steps.find-comment.outputs.comment-id }}"
+          issue-number: "${{ github.event.pull_request.number }}"
           body: "${{ steps.diff.outputs.diff }}"
+          edit-mode: replace
