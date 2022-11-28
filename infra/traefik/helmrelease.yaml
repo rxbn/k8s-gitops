@@ -31,18 +31,12 @@ spec:
     env:
       - name: TZ
         value: Europe/Zurich
-    ingressClass:
-      enabled: true
-      fallbackApiVersion: v1
-      isDefaultClass: true
     ingressRoute:
       dashboard:
         enabled: false
     logs:
       general:
         level: INFO
-    pilot:
-      dashboard: false
     ports:
       gitlab-ssh:
         expose: true
@@ -53,9 +47,6 @@ spec:
         expose: true
       web:
         redirectTo: websecure
-      websecure:
-        tls:
-          enabled: true
       metrics: null
     service:
       annotations:
