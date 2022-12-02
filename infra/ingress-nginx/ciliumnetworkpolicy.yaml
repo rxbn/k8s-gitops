@@ -7,6 +7,7 @@ metadata:
 spec:
   endpointSelector:
     matchLabels:
+      app.kubernetes.io/component: controller
       app.kubernetes.io/instance: ingress-nginx
       app.kubernetes.io/name: ingress-nginx
   ingress:
@@ -15,17 +16,17 @@ spec:
         - ${LAN_NETWORK_RANGE_V6}
       toPorts:
         - ports:
-            - port: "2222"
+            - port: "22"
               protocol: ANY
-            - port: "8000"
+            - port: "80"
               protocol: ANY
-            - port: "8443"
+            - port: "443"
               protocol: ANY
     - fromCIDR:
         - 1.1.1.1/32
       toPorts:
         - ports:
-            - port: "8443"
+            - port: "443"
               protocol: ANY
     - fromEntities:
         - cluster
