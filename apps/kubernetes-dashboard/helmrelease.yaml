@@ -23,7 +23,7 @@ spec:
       annotations:
         nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
         nginx.ingress.kubernetes.io/configuration-snippet: |
-          more_set_headers "Authorization: ${KUBE_DASHBOARD_BASIC_AUTH}";
+          proxy_set_header Authorization ${KUBE_DASHBOARD_BASIC_AUTH};
         cf.containeroo.ch/ignore: "true"
       enabled: true
       hosts:
