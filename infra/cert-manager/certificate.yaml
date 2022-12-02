@@ -5,7 +5,7 @@ metadata:
   name: ${BASE_DOMAIN/./-}
   namespace: ingress-nginx
 spec:
-  secretName: ${BASE_DOMAIN/./-}
+  secretName: ${BASE_DOMAIN/./-}-tls
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
