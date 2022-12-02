@@ -10,6 +10,7 @@ resources:
   - gitlab.yaml
   - nextcloud.yaml
   - paperless.yaml
+  - oauth2-proxy.yaml
   - storage-system.yaml
   - metallb-system.yaml
   - usenet.yaml

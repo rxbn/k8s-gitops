@@ -21,6 +21,9 @@ spec:
       namespace: ingress-nginx
       name: "*"
     - kind: HelmRelease
+      namespace: oauth2-proxy
+      name: "*"
+    - kind: HelmRelease
       namespace: gitlab
       name: "*"
     - kind: HelmRelease
