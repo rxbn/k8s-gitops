@@ -16,12 +16,29 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    extraArgs:
-      provider: keycloak-oidc
-      oidc-issuer-url: https://sso.${BASE_DOMAIN}/realms/master
+    config:
+      configFile: |-
+        skip_provider_button = true
+        provider = "oidc"
+        provider_display_name = "${BASE_DOMAIN} SSO"
+        oidc_issuer_url = "https://sso.${BASE_DOMAIN}/realms/master"
+        cookie_domains = ".${BASE_DOMAIN}"
+        email_domains = [ "*" ]
+        scope = "openid profile email"
+        whitelist_domains = ".${BASE_DOMAIN}"
+        pass_authorization_header = true
+        pass_access_token = true
+        pass_user_headers = true
+        set_authorization_header = true
+        set_xauthrequest = true
+        cookie_refresh = "1m"
+        cookie_expire = "30m"
     ingress:
       enabled: true
       className: nginx
+      annotations:
+        cf.containeroo.ch/content: ${BASE_DOMAIN}
+        cf.containeroo.ch/type: CNAME
       hosts:
         - oauth2-proxy.${BASE_DOMAIN}
     metrics:
