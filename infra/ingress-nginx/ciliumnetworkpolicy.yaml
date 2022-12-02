@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: ingress-nginx
   ingress:
     - fromCIDR:
-        - ${LAN_NETWORK_RANGE}
+        - ${LAN_NETWORK_RANGE_V4}
         - ${LAN_NETWORK_RANGE_V6}
       toPorts:
         - ports:

@@ -17,5 +17,5 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-    - ${METALLB_DEFAULT_ADDRESS_POOL}
+    - ${METALLB_DEFAULT_ADDRESS_POOL_V4}
   autoAssign: true
