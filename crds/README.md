@@ -8,4 +8,3 @@ This directory contains all CustomResourceDefinitions required.
 - **k8up** backup operator
 - **kube-prometheus-stack** monitoring stack
 - **metallb** load balancer
-- **traefik** reverse proxy

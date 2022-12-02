@@ -5,12 +5,10 @@ metadata:
   name: sonarr
   namespace: usenet
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-forward-auth@kubernetescrd
     cf.containeroo.ch/content: ${BASE_DOMAIN}
     cf.containeroo.ch/type: CNAME
 spec:
-  ingressClassName: traefik
+  ingressClassName: nginx
   rules:
     - host: sonarr.${BASE_DOMAIN}
       http:

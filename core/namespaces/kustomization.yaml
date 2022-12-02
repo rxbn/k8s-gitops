@@ -6,6 +6,7 @@ resources:
   - k8up.yaml
   - reloader.yaml
   - renovate.yaml
+  - ingress-nginx.yaml
   - gitlab.yaml
   - nextcloud.yaml
   - paperless.yaml
@@ -14,7 +15,6 @@ resources:
   - usenet.yaml
   - cloudflare-operator.yaml
   - cert-manager.yaml
-  - traefik.yaml
   - kubernetes-dashboard.yaml
   - wiki.yaml
   - minio.yaml

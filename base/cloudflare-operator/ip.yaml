@@ -18,7 +18,7 @@ metadata:
   name: ${BASE_DOMAIN/./-}-v6
 spec:
   type: static
-  address: ${METALLB_TRAEFIK_ADDRESS_POOL_V6%/128}
+  address: ${METALLB_INGRESS_NGINX_ADDRESS_POOL_V6%/128}
 ---
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP

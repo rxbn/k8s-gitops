@@ -1,0 +1,46 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ingress-nginx
+  namespace: ingress-nginx
+spec:
+  interval: 5m
+  dependsOn:
+    - name: metallb
+      namespace: metallb-system
+    - name: cert-manager
+      namespace: cert-manager
+  chart:
+    spec:
+      chart: ingress-nginx
+      version: 4.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: ingress-nginx
+        namespace: flux-system
+      interval: 5m
+  values:
+    controller:
+      config:
+        forwarded-for-header: CF-Connecting-IP
+        ssl-protocols: TLSv1.3 TLSv1.2
+        use-forwarded-headers: "true"
+        proxy-real-ip-cidr: 1.1.1.1/32
+      ingressClassResource:
+        default: true
+      extraArgs:
+        default-ssl-certificate: |-
+          ingress-nginx/${BASE_DOMAIN/./-}
+      service:
+        annotations:
+          metallb.universe.tf/address-pool: ingress-nginx
+        externalTrafficPolicy: Local
+        ipFamilyPolicy: PreferDualStack
+        ipFamilies:
+          - IPv4
+          - IPv6
+    defaultBackend:
+      enabled: true
+    tcp:
+      22: gitlab/gitlab-gitlab-shell:22
