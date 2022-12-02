@@ -54,11 +54,9 @@ spec:
             - receiver: slack
       ingress:
         annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan@kubernetescrd,traefik-forward-auth@kubernetescrd
           cf.containeroo.ch/ignore: "true"
         enabled: true
-        ingressClassName: traefik
+        ingressClassName: nginx
         hosts:
           - alertmanager.local.${BASE_DOMAIN}
         pathType: Prefix
@@ -91,11 +89,9 @@ spec:
           root_url: https://grafana.local.${BASE_DOMAIN}
       ingress:
         annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan@kubernetescrd
           cf.containeroo.ch/ignore: "true"
         enabled: true
-        ingressClassName: traefik
+        ingressClassName: nginx
         hosts:
           - grafana.local.${BASE_DOMAIN}
         pathType: Prefix
@@ -132,11 +128,9 @@ spec:
     prometheus:
       ingress:
         annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: traefik-allow-lan@kubernetescrd,traefik-forward-auth@kubernetescrd
           cf.containeroo.ch/ignore: "true"
         enabled: true
-        ingressClassName: traefik
+        ingressClassName: nginx
         hosts:
           - prometheus.local.${BASE_DOMAIN}
         pathType: Prefix

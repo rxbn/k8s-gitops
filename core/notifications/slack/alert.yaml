@@ -38,7 +38,7 @@ spec:
       namespace: metallb-system
       name: "*"
     - kind: HelmRelease
-      namespace: traefik
+      namespace: ingress-nginx
       name: "*"
     - kind: HelmRelease
       namespace: gitlab

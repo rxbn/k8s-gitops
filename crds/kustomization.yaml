@@ -7,4 +7,3 @@ resources:
   - cert-manager
   - metallb
   - k8up
-  - traefik

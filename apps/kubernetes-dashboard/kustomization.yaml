@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - clusterrole.yaml
   - helmrelease.yaml
-  - middleware.yaml
   - serviceaccount.yaml
   - clusterrolebinding.yaml
   - secret.yaml

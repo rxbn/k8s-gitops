@@ -9,5 +9,4 @@ This directory contains infrastructure applications.
 - **metallb** MetalLB is a load-balancer implementation for bare metal Kubernetes clusters, using standard routing protocols
 - **metrics-server** metrics server collects resource metrics
 - **nfs-subdir-external-provisioner** dynamically provisions sub-dirs on a remote NFS server
-- **traefik** is a cloud native application proxy
-- **traefik-forward-auth** is an OAUTH2 proxy for Traefik
+- **ingress-nginx** is an Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer

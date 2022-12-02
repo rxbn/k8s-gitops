@@ -1,0 +1,31 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: ingress-nginx
+  namespace: ingress-nginx
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/instance: ingress-nginx
+      app.kubernetes.io/name: ingress-nginx
+  ingress:
+    - fromCIDR:
+        - ${LAN_NETWORK_RANGE}
+        - ${LAN_NETWORK_RANGE_V6}
+      toPorts:
+        - ports:
+            - port: "2222"
+              protocol: ANY
+            - port: "8000"
+              protocol: ANY
+            - port: "8443"
+              protocol: ANY
+    - fromCIDR:
+        - 1.1.1.1/32
+      toPorts:
+        - ports:
+            - port: "8443"
+              protocol: ANY
+    - fromEntities:
+        - cluster
