@@ -29,9 +29,6 @@ spec:
         proxy-real-ip-cidr: 1.1.1.1/32
       ingressClassResource:
         default: true
-      extraArgs:
-        default-ssl-certificate: |-
-          ingress-nginx/${BASE_DOMAIN/./-}-tls
       service:
         annotations:
           metallb.universe.tf/address-pool: ingress-nginx
