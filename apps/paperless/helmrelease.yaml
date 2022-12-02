@@ -33,6 +33,7 @@ spec:
       main:
         enabled: true
         annotations:
+          nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
           cf.containeroo.ch/ignore: "true"
         hosts:
           - host: paperless.local.${BASE_DOMAIN}
