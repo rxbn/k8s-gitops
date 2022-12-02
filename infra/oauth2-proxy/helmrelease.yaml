@@ -17,8 +17,8 @@ spec:
       interval: 5m
   values:
     extraArgs:
-      - --provider=keycloak-oidc
-      - --oidc-issuer-url=https://sso.${BASE_DOMAIN}/realms/master
+      provider: keycloak-oidc
+      oidc-issuer-url: https://sso.${BASE_DOMAIN}/realms/master
     ingress:
       enabled: true
       className: nginx
