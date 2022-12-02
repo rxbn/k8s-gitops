@@ -31,7 +31,7 @@ spec:
         default: true
       extraArgs:
         default-ssl-certificate: |-
-          default/${BASE_DOMAIN/./-}
+          ingress-nginx/${BASE_DOMAIN/./-}
       service:
         annotations:
           metallb.universe.tf/address-pool: ingress-nginx
