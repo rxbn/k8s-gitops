@@ -33,6 +33,7 @@ spec:
         set_xauthrequest = true
         cookie_refresh = "1m"
         cookie_expire = "30m"
+        reverse_proxy = true
     ingress:
       enabled: true
       className: nginx
