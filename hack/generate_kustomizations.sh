@@ -2,7 +2,7 @@
 
 set -o errexit
 
-[[ "${PWD}" =~ "k8s-gitops/hack" ]] && echo "please cd to the root folder and run the script from there!" && exit 1
+[[ "${PWD}" =~ "k3s-gitops/hack" ]] && echo "please cd to the root folder and run the script from there!" && exit 1
 
 KUSTOMIZATION_TEMPLATE="---
 apiVersion: kustomize.config.k8s.io/v1beta1
