@@ -44,13 +44,13 @@ spec:
 apiVersion: cf.containeroo.ch/v1beta1
 kind: DNSRecord
 metadata:
-  name: docker-srv-${BASE_DOMAIN/./-}-v4
+  name: k3s-hetzner-srv-${BASE_DOMAIN/./-}-v4
   namespace: cloudflare-operator
 spec:
-  name: docker.srv.${BASE_DOMAIN}
+  name: k3s-hetzner.srv.${BASE_DOMAIN}
   type: A
   ipRef:
-    name: docker-v4
+    name: k3s-hetzner-v4
   proxied: false
   ttl: 120
   interval: 5m
@@ -58,13 +58,13 @@ spec:
 apiVersion: cf.containeroo.ch/v1beta1
 kind: DNSRecord
 metadata:
-  name: docker-srv-${BASE_DOMAIN/./-}-v6
+  name: k3s-hetzner-srv-${BASE_DOMAIN/./-}-v6
   namespace: cloudflare-operator
 spec:
-  name: docker.srv.${BASE_DOMAIN}
+  name: k3s-hetzner.srv.${BASE_DOMAIN}
   type: AAAA
   ipRef:
-    name: docker-v6
+    name: k3s-hetzner-v6
   proxied: false
   ttl: 120
   interval: 5m
@@ -77,7 +77,7 @@ metadata:
 spec:
   name: teslamate.${BASE_DOMAIN}
   type: CNAME
-  content: docker.srv.${BASE_DOMAIN}
+  content: k3s-hetzner.srv.${BASE_DOMAIN}
   proxied: true
   ttl: 1
   interval: 5m
@@ -90,7 +90,7 @@ metadata:
 spec:
   name: teslamate-grafana.${BASE_DOMAIN}
   type: CNAME
-  content: docker.srv.${BASE_DOMAIN}
+  content: k3s-hetzner.srv.${BASE_DOMAIN}
   proxied: true
   ttl: 1
   interval: 5m
@@ -103,7 +103,7 @@ metadata:
 spec:
   name: sso.${BASE_DOMAIN}
   type: CNAME
-  content: docker.srv.${BASE_DOMAIN}
+  content: k3s-hetzner.srv.${BASE_DOMAIN}
   proxied: true
   ttl: 1
   interval: 5m
