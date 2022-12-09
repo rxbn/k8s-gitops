@@ -27,10 +27,10 @@ spec:
       enabled: true
       ingressClassName: nginx
       annotations:
-        cf.containeroo.ch/content: ${BASE_DOMAIN}
-        cf.containeroo.ch/type: CNAME
+        nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
+        cf.containeroo.ch/ignore: "true"
       hosts:
-        - s3.${BASE_DOMAIN}
+        - s3.local.${BASE_DOMAIN}
     consoleIngress:
       enabled: true
       ingressClassName: nginx
