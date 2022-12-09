@@ -23,7 +23,7 @@ spec:
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
 metadata:
-  name: k3s-hetzner-v4
+  name: docker-v4
 spec:
   type: dynamic
   ipSources:
@@ -33,15 +33,15 @@ spec:
       requestHeadersSecretRef:
         name: hetzner-cloud-api-key
         namespace: cloudflare-operator
-      responseJSONPath: '{.servers[?(@.name=="k3s-hetzner.srv.${BASE_DOMAIN}")].public_net.ipv4.ip}'
+      responseJSONPath: '{.servers[?(@.name=="docker.srv.${BASE_DOMAIN}")].public_net.ipv4.ip}'
 ---
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
 metadata:
-  name: k3s-hetzner-v6
+  name: docker-v6
 spec:
   type: static
-  address: ${HCLOUD_K3S_HETZNER_V6}
+  address: ${HCLOUD_DOCKER_V6}
 ---
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
