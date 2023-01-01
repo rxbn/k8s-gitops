@@ -38,7 +38,7 @@ spec:
   ipRef:
     name: ${BASE_DOMAIN/./-}-v4
   proxied: false
-  ttl: 120
+  ttl: 60
   interval: 5m
 ---
 apiVersion: cf.containeroo.ch/v1beta1
@@ -52,7 +52,7 @@ spec:
   ipRef:
     name: docker-v4
   proxied: false
-  ttl: 120
+  ttl: 60
   interval: 5m
 ---
 apiVersion: cf.containeroo.ch/v1beta1
@@ -66,7 +66,7 @@ spec:
   ipRef:
     name: docker-v6
   proxied: false
-  ttl: 120
+  ttl: 60
   interval: 5m
 ---
 apiVersion: cf.containeroo.ch/v1beta1
@@ -119,7 +119,7 @@ spec:
   ipRef:
     name: checkmk-v4
   proxied: false
-  ttl: 120
+  ttl: 60
   interval: 5m
 ---
 apiVersion: cf.containeroo.ch/v1beta1
@@ -133,5 +133,5 @@ spec:
   ipRef:
     name: checkmk-v6
   proxied: false
-  ttl: 120
+  ttl: 60
   interval: 5m
