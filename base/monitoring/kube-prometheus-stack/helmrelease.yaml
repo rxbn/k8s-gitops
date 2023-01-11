@@ -150,6 +150,14 @@ spec:
         probeSelectorNilUsesHelmValues: false
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 10Gi
     prometheus-node-exporter:
       extraArgs:
         - --collector.filesystem.ignored-mount-points=^/(mnt|dev|proc|sys|var/lib/docker/.+)($|/)
