@@ -10,19 +10,19 @@ SECRET_WARN_MESSAGE="##################################################
 ##################################################"
 
 for secret in ${secrets}; do
-  filepath=$(dirname "${secret}")
-  filename=$(basename "${secret}")
-  secret_template_name="${filepath}/${filename%.*}.template"
+	filepath=$(dirname "${secret}")
+	filename=$(basename "${secret}")
+	secret_template_name="${filepath}/${filename%.*}.template"
 
-  [[ -f ${secret_template_name} ]] && echo "secret template '${secret_template_name}' already exists" && continue
+	[[ -f ${secret_template_name} ]] && echo "secret template '${secret_template_name}' already exists" && continue
 
-  echo "creating secret template '${secret_template_name}'"
+	echo "creating secret template '${secret_template_name}'"
 
-  grep --quiet --regexp "ENC.AES256" "${secret}" || sops --encrypt --in-place "${secret}" 2> /dev/null
+	grep --quiet --regexp "ENC.AES256" "${secret}" || sops --encrypt --in-place "${secret}" 2>/dev/null
 
-  printf '%s\n' "${SECRET_WARN_MESSAGE}" "$(sops --decrypt "${secret}")" > "${secret_template_name}"
+	printf '%s\n' "${SECRET_WARN_MESSAGE}" "$(sops --decrypt "${secret}")" >"${secret_template_name}"
 
-  vim "${secret_template_name}"
-  tail -n +4 "${secret_template_name}" > "${secret_template_name}2"
-  mv "${secret_template_name}2" "${secret_template_name}"
+	nvim "${secret_template_name}"
+	tail -n +4 "${secret_template_name}" >"${secret_template_name}2"
+	mv "${secret_template_name}2" "${secret_template_name}"
 done
