@@ -135,3 +135,59 @@ spec:
   proxied: false
   ttl: 60
   interval: 5m
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: DNSRecord
+metadata:
+  name: ${BASE_DOMAIN/./-}-mx
+  namespace: cloudflare-operator
+spec:
+  content: ${MX_SERVER}
+  name: ${BASE_DOMAIN}
+  priority: 10
+  proxied: false
+  ttl: 1
+  type: MX
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: DNSRecord
+metadata:
+  name: ${BASE_DOMAIN/./-}-spf
+  namespace: cloudflare-operator
+spec:
+  content: ${SPF_CONTENT}
+  name: ${BASE_DOMAIN}
+  proxied: false
+  ttl: 1
+  type: TXT
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: DNSRecord
+metadata:
+  name: ${BASE_DOMAIN/./-}-dkim
+  namespace: cloudflare-operator
+spec:
+  content: ${DKIM_CONTENT}
+  name: sel2011a._domainkey.${BASE_DOMAIN}
+  proxied: false
+  ttl: 1
+  type: TXT
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: DNSRecord
+metadata:
+  name: ${BASE_DOMAIN/./-}-srv
+  namespace: cloudflare-operator
+spec:
+  name: ${BASE_DOMAIN}
+  data:
+    service: _autodiscover
+    proto: _tcp
+    port: "443"
+    name: ${BASE_DOMAIN}
+    priority: "0"
+    weight: "100"
+    target: ${SRV_TARGET}
+  proxied: false
+  ttl: 1
+  type: SRV
