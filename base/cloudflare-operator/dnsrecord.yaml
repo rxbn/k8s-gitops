@@ -179,7 +179,7 @@ metadata:
   name: ${BASE_DOMAIN/./-}-srv
   namespace: cloudflare-operator
 spec:
-  name: ${BASE_DOMAIN}
+  name: _autodiscover._tcp.${BASE_DOMAIN}
   data:
     service: _autodiscover
     proto: _tcp
@@ -188,6 +188,7 @@ spec:
     priority: "0"
     weight: "100"
     target: ${SRV_TARGET}
+  priority: 0
   proxied: false
   ttl: 1
   type: SRV
