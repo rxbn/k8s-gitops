@@ -33,7 +33,7 @@ spec:
       requestHeadersSecretRef:
         name: hetzner-cloud-api-key
         namespace: cloudflare-operator
-      responseJSONPath: '{.servers[?(@.name=="docker.srv.${BASE_DOMAIN}")].public_net.ipv4.ip}'
+      responseJQFilter: '.servers[] | select(.name == "docker.srv.${BASE_DOMAIN}").public_net.ipv4.ip'
 ---
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
@@ -56,7 +56,7 @@ spec:
       requestHeadersSecretRef:
         name: hetzner-cloud-api-key
         namespace: cloudflare-operator
-      responseJSONPath: '{.servers[?(@.name=="checkmk.srv.${BASE_DOMAIN}")].public_net.ipv4.ip}'
+      responseJQFilter: '.servers[] | select(.name == "checkmk.srv.${BASE_DOMAIN}").public_net.ipv4.ip'
 ---
 apiVersion: cf.containeroo.ch/v1beta1
 kind: IP
