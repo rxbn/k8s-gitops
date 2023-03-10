@@ -10,4 +10,3 @@ This directory contains all other common applications.
 - **paperless** (paperless-ng) is an indexer and archiver for scanned paper documents
 - **renovate** dependency updater
 - **usenet** usenet-stack containing sonarr, radarr, plex, ...
-- **wiki** self-hosted wiki for internal documentation
