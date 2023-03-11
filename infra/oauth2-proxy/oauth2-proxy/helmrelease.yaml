@@ -34,6 +34,8 @@ spec:
         cookie_refresh = "1m"
         cookie_expire = "30m"
         reverse_proxy = true
+        session_store_type = "redis"
+        redis_connection_url = "redis://oauth2-proxy-redis.oauth2-proxy.svc.cluster.local:6379"
     ingress:
       enabled: true
       className: nginx
