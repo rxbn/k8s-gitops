@@ -7,6 +7,8 @@ metadata:
   annotations:
     cf.containeroo.ch/content: ${BASE_DOMAIN}
     cf.containeroo.ch/type: CNAME
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Robots-Tag: noindex, nofollow";
 spec:
   ingressClassName: nginx
   rules:
