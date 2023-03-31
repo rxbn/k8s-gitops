@@ -19,6 +19,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: plex-music
   namespace: usenet
+  annotations:
+    k8up.io/backup: "false"
 spec:
   accessModes:
     - ReadWriteOnce
@@ -32,6 +34,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: plex-backup
   namespace: usenet
+  annotations:
+    k8up.io/backup: "false"
 spec:
   accessModes:
     - ReadWriteOnce

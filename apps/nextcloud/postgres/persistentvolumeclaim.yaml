@@ -4,6 +4,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: nextcloud-postgres-data
   namespace: nextcloud
+  annotations:
+    k8up.io/backup: "false"
 spec:
   accessModes:
     - ReadWriteOnce
