@@ -70,8 +70,7 @@ spec:
       architecture: standalone
       master:
         persistence:
-          annotations:
-            k8up.io/backup: "false"
+          enabled: false
   valuesFrom:
     - kind: Secret
       name: paperless-helm-values
