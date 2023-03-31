@@ -61,14 +61,17 @@ spec:
         size: 1Gi
         emptyDir:
           enabled: true
+        annotations:
+          k8up.io/backup: "false"
     redis:
       enabled: true
       auth:
         enabled: false
       architecture: standalone
-      persistence:
-        annotations:
-          k8up.io/backup: "false"
+      master:
+        persistence:
+          annotations:
+            k8up.io/backup: "false"
   valuesFrom:
     - kind: Secret
       name: paperless-helm-values
