@@ -23,3 +23,25 @@ spec:
                 name: sonarr
                 port:
                   number: 8989
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sonarr-api
+  namespace: usenet
+  annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
+    cf.containeroo.ch/ignore: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: sonarr.${BASE_DOMAIN}
+      http:
+        paths:
+          - path: /api
+            pathType: Exact
+            backend:
+              service:
+                name: sonarr
+                port:
+                  number: 8989
