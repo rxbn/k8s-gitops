@@ -39,7 +39,7 @@ spec:
       http:
         paths:
           - path: /api
-            pathType: Exact
+            pathType: Prefix
             backend:
               service:
                 name: sonarr
