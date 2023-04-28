@@ -65,5 +65,5 @@ spec:
             type: Directory
         - name: downloads
           hostPath:
-            path: /mnt/disk06/downloads/complete
+            path: /mnt/disk04/downloads/complete
             type: Directory
