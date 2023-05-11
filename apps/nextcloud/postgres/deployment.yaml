@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: nextcloud-postgres
-          image: postgres:15.2-alpine
+          image: postgres:15.3-alpine
           envFrom:
             - secretRef:
                 name: nextcloud-postgres
