@@ -4,3 +4,24 @@ kind: Kustomization
 resources:
   - helmrelease.yaml
   - ciliumnetworkpolicy.yaml
+configMapGenerator:
+  - name: grafana-dashboards-ingress-nginx
+    namespace: monitoring
+    files:
+      - dashboards/nginx.json
+      - dashboards/nginx-handling-performance.json
+generatorOptions:
+  disableNameSuffixHash: true
+patches:
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboards-ingress-nginx
+    patch: |-
+      - op: add
+        path: "/metadata/labels"
+        value:
+          grafana_dashboard: "1"
+      - op: add
+        path: "/metadata/annotations"
+        value:
+          kustomize.toolkit.fluxcd.io/substitute: disabled

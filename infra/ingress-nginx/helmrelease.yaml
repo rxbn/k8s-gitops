@@ -22,6 +22,11 @@ spec:
       interval: 5m
   values:
     controller:
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+          namespace: monitoring
       config:
         disable-access-log: "true"
         force-ssl-redirect: "true"
