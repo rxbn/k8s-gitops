@@ -92,9 +92,8 @@ spec:
           persistentVolumeClaim:
             claimName: plex-music
         - name: other
-          hostPath:
-            path: /mnt/tank/media/other
-            type: Directory
+          persistentVolumeClaim:
+            claimName: plex-other
         - name: tmpfs
           emptyDir:
             medium: Memory
