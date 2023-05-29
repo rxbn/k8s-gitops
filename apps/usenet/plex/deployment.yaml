@@ -44,8 +44,6 @@ spec:
               name: movies
             - mountPath: /data/movies2
               name: movies2
-            - mountPath: /data/music
-              name: music
             - mountPath: /data/other
               name: other
             - mountPath: /transcode
@@ -88,9 +86,6 @@ spec:
           hostPath:
             path: /mnt/tank/media/movies2
             type: Directory
-        - name: music
-          persistentVolumeClaim:
-            claimName: plex-music
         - name: other
           persistentVolumeClaim:
             claimName: plex-other

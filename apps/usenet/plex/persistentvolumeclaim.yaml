@@ -17,7 +17,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: plex-music
+  name: plex-other
   namespace: usenet
   annotations:
     k8up.io/backup: "false"
@@ -40,21 +40,6 @@ spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: backup
-  resources:
-    requests:
-      storage: 200Mi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: plex-other
-  namespace: usenet
-  annotations:
-    k8up.io/backup: "false"
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: ""
   resources:
     requests:
       storage: 200Mi
