@@ -21,6 +21,10 @@ spec:
       enabled: false
     rbac:
       create: true
+      rules:
+        - apiGroups: [""]
+          resources: ["*"]
+          verbs: ["*"]
     runners:
       locked: false
       protected: false
