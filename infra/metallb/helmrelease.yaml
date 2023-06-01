@@ -16,6 +16,9 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    speaker:
+      frr:
+        enabled: false
     psp:
       create: false
     crds:
