@@ -47,9 +47,6 @@ spec:
       namespace: gitlab
       name: "*"
     - kind: HelmRelease
-      namespace: kubernetes-dashboard
-      name: "*"
-    - kind: HelmRelease
       namespace: k8up
       name: "*"
     - kind: HelmRelease

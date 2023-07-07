@@ -15,6 +15,5 @@ resources:
   - usenet.yaml
   - cloudflare-operator.yaml
   - cert-manager.yaml
-  - kubernetes-dashboard.yaml
   - minio.yaml
   - monitoring.yaml

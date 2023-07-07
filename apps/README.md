@@ -5,7 +5,6 @@ This directory contains all other common applications.
 ## Contents
 
 - **gitlab** contains gitlab-backup-mirror (MirrIO) and gitlab-runner
-- **kubernetes-dashboard** gives an overview on what's running in the cluster
 - **nextcloud** self-hosted cloud similar to iCloud
 - **paperless** (paperless-ng) is an indexer and archiver for scanned paper documents
 - **renovate** dependency updater

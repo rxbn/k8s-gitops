@@ -12,7 +12,6 @@ resources:
   - stakater.yaml
   - k8up-io.yaml
   - jetstack.yaml
-  - kubernetes-dashboard.yaml
   - minio.yaml
   - metrics-server.yaml
   - containeroo.yaml

@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - nextcloud
   - gitlab
-  - kubernetes-dashboard
   - usenet
   - paperless
   - renovate
