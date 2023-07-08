@@ -6,7 +6,6 @@ resources:
   - gitlab.yaml
   - nfs-subdir-external-provisioner.yaml
   - prometheus-community.yaml
-  - k8s-at-home.yaml
   - oauth2-proxy.yaml
   - metallb.yaml
   - stakater.yaml
