@@ -16,3 +16,4 @@ resources:
   - cert-manager.yaml
   - minio.yaml
   - monitoring.yaml
+  - cilium.yaml

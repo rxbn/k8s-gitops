@@ -14,3 +14,4 @@ resources:
   - minio.yaml
   - metrics-server.yaml
   - containeroo.yaml
+  - cilium.yaml
