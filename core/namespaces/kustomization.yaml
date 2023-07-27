@@ -10,7 +10,6 @@ resources:
   - nextcloud.yaml
   - oauth2-proxy.yaml
   - storage-system.yaml
-  - metallb-system.yaml
   - usenet.yaml
   - cloudflare-operator.yaml
   - cert-manager.yaml

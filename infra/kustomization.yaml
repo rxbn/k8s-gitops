@@ -7,5 +7,4 @@ resources:
   - metrics-server
   - oauth2-proxy
   - cert-manager
-  - metallb
   - ingress-nginx

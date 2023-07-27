@@ -15,9 +15,6 @@ spec:
       namespace: storage-system
       name: "*"
     - kind: HelmRelease
-      namespace: metallb-system
-      name: "*"
-    - kind: HelmRelease
       namespace: ingress-nginx
       name: "*"
     - kind: HelmRelease
