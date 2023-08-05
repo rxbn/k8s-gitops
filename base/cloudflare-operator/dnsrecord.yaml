@@ -192,3 +192,45 @@ spec:
   proxied: false
   ttl: 1
   type: SRV
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: DNSRecord
+metadata:
+  name: rxbn-app
+  namespace: cloudflare-operator
+spec:
+  name: rxbn.app
+  type: A
+  content: 76.76.21.21
+  proxied: true
+  ttl: 1
+  interval: 5m
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: DNSRecord
+metadata:
+  name: rxbn-app-wildcard
+  namespace: cloudflare-operator
+spec:
+  name: "*.rxbn.app"
+  type: CNAME
+  content: cname.vercel-dns.com
+  proxied: true
+  ttl: 1
+  interval: 5m
+---
+apiVersion: cf.containeroo.ch/v1beta1
+kind: DNSRecord
+metadata:
+  name: rxbn-app-caa
+  namespace: cloudflare-operator
+spec:
+  name: rxbn.app
+  type: CAA
+  data:
+    flags: "0"
+    tag: issue
+    value: letsencrypt.org
+  proxied: false
+  ttl: 1
+  interval: 5m
