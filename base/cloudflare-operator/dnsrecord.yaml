@@ -183,10 +183,10 @@ spec:
   data:
     service: _autodiscover
     proto: _tcp
-    port: "443"
+    port: 443
     name: ${BASE_DOMAIN}
-    priority: "0"
-    weight: "100"
+    priority: 0
+    weight: 100
     target: ${SRV_TARGET}
   priority: 0
   proxied: false
@@ -228,7 +228,7 @@ spec:
   name: rxbn.app
   type: CAA
   data:
-    flags: "0"
+    flags: 0
     tag: issue
     value: letsencrypt.org
   proxied: false
