@@ -4,7 +4,7 @@
 
 ## :loudspeaker:&nbsp; About
 
-This repository contains my entire Kubernetes cluster setup built on K3s and managed by Flux v2.  
+This repository contains my entire Kubernetes cluster setup built on K3s and managed by Flux v2.\
 Secrets are encrypted and managed with [SOPS](https://github.com/mozilla/sops).
 
 ## :open_file_folder:&nbsp; Repository Structure
@@ -33,13 +33,13 @@ Install all pre-commit hooks so they are executed every time before a commit occ
 
 1. Install K3s
 2. Install Cilium
-3. Create `flux-system` namespace  
+3. Create `flux-system` namespace\
    `kubectl create namespace flux-system`
-4. Apply sops private key secret  
+4. Apply sops private key secret\
    `kubectl apply -f sops-secret.yaml`
-5. Apply cluster-settings configmap  
+5. Apply cluster-settings configmap\
    `kubectl apply -f core/cluster-settings.yaml`
-6. Bootstrap cluster (may needs to be executed twice)  
+6. Bootstrap cluster (may needs to be executed twice)\
    `kubectl apply --kustomize=./core/flux-system`
 
 ## :robot:&nbsp; Automation
