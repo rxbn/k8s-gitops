@@ -5,8 +5,8 @@ metadata:
   name: plex
   namespace: usenet
   annotations:
-    cf.containeroo.ch/content: ${BASE_DOMAIN}
-    cf.containeroo.ch/type: CNAME
+    cloudflare-operator.io/content: ${BASE_DOMAIN}
+    cloudflare-operator.io/type: CNAME
 spec:
   ingressClassName: nginx
   rules:

@@ -1,5 +1,5 @@
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: IP
 metadata:
   name: ${BASE_DOMAIN/./-}-v4
@@ -12,7 +12,7 @@ spec:
     - url: https://checkip.amazonaws.com
     - url: https://api.ipify.org
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: IP
 metadata:
   name: ${BASE_DOMAIN/./-}-v6
@@ -20,7 +20,7 @@ spec:
   type: static
   address: ${METALLB_INGRESS_NGINX_ADDRESS_POOL_V6%/128}
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: IP
 metadata:
   name: docker-v4
@@ -35,7 +35,7 @@ spec:
         namespace: cloudflare-operator
       responseJQFilter: '.servers[] | select(.name == "docker.srv.${BASE_DOMAIN}").public_net.ipv4.ip'
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: IP
 metadata:
   name: docker-v6
@@ -50,7 +50,7 @@ spec:
         namespace: cloudflare-operator
       responseJQFilter: '.servers[] | select(.name == "docker.srv.${BASE_DOMAIN}").public_net.ipv6 | "\(.ip)"[0:-3]+"1"'
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: IP
 metadata:
   name: checkmk-v4
@@ -65,7 +65,7 @@ spec:
         namespace: cloudflare-operator
       responseJQFilter: '.servers[] | select(.name == "checkmk.srv.${BASE_DOMAIN}").public_net.ipv4.ip'
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: IP
 metadata:
   name: checkmk-v6

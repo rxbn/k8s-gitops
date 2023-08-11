@@ -8,8 +8,8 @@ metadata:
     nginx.ingress.kubernetes.io/auth-url: "https://oauth2-proxy.${BASE_DOMAIN}/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://oauth2-proxy.${BASE_DOMAIN}/oauth2/start?rd=$scheme://$best_http_host$request_uri"
     nginx.ingress.kubernetes.io/auth-response-headers: "x-auth-request-user, x-auth-request-email, x-auth-request-access-token"
-    cf.containeroo.ch/content: ${BASE_DOMAIN}
-    cf.containeroo.ch/type: CNAME
+    cloudflare-operator.io/content: ${BASE_DOMAIN}
+    cloudflare-operator.io/type: CNAME
 spec:
   ingressClassName: nginx
   rules:
@@ -31,7 +31,7 @@ metadata:
   namespace: usenet
   annotations:
     nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
-    cf.containeroo.ch/ignore: "true"
+    cloudflare-operator.io/ignore: "true"
 spec:
   ingressClassName: nginx
   rules:

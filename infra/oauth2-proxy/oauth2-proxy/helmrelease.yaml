@@ -40,8 +40,8 @@ spec:
       enabled: true
       className: nginx
       annotations:
-        cf.containeroo.ch/content: ${BASE_DOMAIN}
-        cf.containeroo.ch/type: CNAME
+        cloudflare-operator.io/content: ${BASE_DOMAIN}
+        cloudflare-operator.io/type: CNAME
       hosts:
         - oauth2-proxy.${BASE_DOMAIN}
     metrics:
