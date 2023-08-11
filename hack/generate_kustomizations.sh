@@ -18,34 +18,34 @@ BASE_FOLDERS+=("crds")
 BASE_FOLDERS+=("infra")
 
 function process_folder {
-  pushd "${1}"
+	pushd "${1}"
 
-  folders=$(find . -type d -maxdepth 1 -mindepth 1)
-  files=$(find . -type f -maxdepth 1 -mindepth 1 -name "*.yaml" -not -name "kustomization.yaml")
+	folders=$(find . -type d -maxdepth 1 -mindepth 1)
+	files=$(find . -type f -maxdepth 1 -mindepth 1 -name "*.yaml" -not -name "kustomization.yaml")
 
-  [[ -z "${files}" && -z "${folders}" ]] && popd && return
+	[[ -z "${files}" && -z "${folders}" ]] && popd && return
 
-  [[ -f "kustomization.yaml" ]] && rm -f kustomization.yaml
+	[[ -f "kustomization.yaml" ]] && rm -f kustomization.yaml
 
-  echo "${KUSTOMIZATION_TEMPLATE}" > kustomization.yaml
+	echo "${KUSTOMIZATION_TEMPLATE}" >kustomization.yaml
 
-  resources="${folders} ${files}"
+	resources="${folders} ${files}"
 
-  for resource in $resources; do
-    echo "  - ${resource#./}" >> kustomization.yaml
-  done
+	for resource in $resources; do
+		echo "  - ${resource#./}" >>kustomization.yaml
+	done
 
-  [[ -z "${folders}" ]] && popd && return
+	[[ -z "${folders}" ]] && popd && return
 
-  for folder in ${folders}; do
-    process_folder "${folder}"
-  done
+	for folder in ${folders}; do
+		process_folder "${folder}"
+	done
 
-  popd
+	popd
 }
 
 for base_folder in "${BASE_FOLDERS[@]}"; do
-  process_folder "${base_folder}"
+	process_folder "${base_folder}"
 done
 
 git checkout -- core/flux-system/kustomization.yaml

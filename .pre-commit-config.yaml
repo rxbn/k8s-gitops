@@ -12,14 +12,12 @@ repos:
     rev: v4.4.0
     hooks:
       - id: trailing-whitespace
-        exclude: ^README\.md$
       - id: end-of-file-fixer
       - id: mixed-line-ending
   - repo: https://github.com/Lucas-C/pre-commit-hooks
     rev: v1.5.3
     hooks:
       - id: remove-crlf
-      - id: remove-tabs
   - repo: https://github.com/sirosen/fix-smartquotes
     rev: 0.2.0
     hooks:
