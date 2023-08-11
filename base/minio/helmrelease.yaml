@@ -28,7 +28,7 @@ spec:
       ingressClassName: nginx
       annotations:
         nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
-        cf.containeroo.ch/ignore: "true"
+        cloudflare-operator.io/ignore: "true"
       hosts:
         - s3.local.${BASE_DOMAIN}
     consoleIngress:
@@ -36,7 +36,7 @@ spec:
       ingressClassName: nginx
       annotations:
         nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
-        cf.containeroo.ch/ignore: "true"
+        cloudflare-operator.io/ignore: "true"
       hosts:
         - minio-console.local.${BASE_DOMAIN}
     environment:

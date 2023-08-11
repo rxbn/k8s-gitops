@@ -58,7 +58,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-signin: "https://oauth2-proxy.${BASE_DOMAIN}/oauth2/start?rd=$scheme://$best_http_host$request_uri"
           nginx.ingress.kubernetes.io/auth-response-headers: "x-auth-request-user, x-auth-request-email, x-auth-request-access-token"
           nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
-          cf.containeroo.ch/ignore: "true"
+          cloudflare-operator.io/ignore: "true"
         enabled: true
         ingressClassName: nginx
         hosts:
@@ -94,7 +94,7 @@ spec:
       ingress:
         annotations:
           nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
-          cf.containeroo.ch/ignore: "true"
+          cloudflare-operator.io/ignore: "true"
         enabled: true
         ingressClassName: nginx
         hosts:
@@ -137,7 +137,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-signin: "https://oauth2-proxy.${BASE_DOMAIN}/oauth2/start?rd=$scheme://$best_http_host$request_uri"
           nginx.ingress.kubernetes.io/auth-response-headers: "x-auth-request-user, x-auth-request-email, x-auth-request-access-token"
           nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
-          cf.containeroo.ch/ignore: "true"
+          cloudflare-operator.io/ignore: "true"
         enabled: true
         ingressClassName: nginx
         hosts:

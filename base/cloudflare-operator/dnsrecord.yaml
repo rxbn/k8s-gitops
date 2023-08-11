@@ -1,5 +1,5 @@
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: ${BASE_DOMAIN/./-}-v4
@@ -13,7 +13,7 @@ spec:
   ttl: 1
   interval: 5m
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: ${BASE_DOMAIN/./-}-v6
@@ -27,7 +27,7 @@ spec:
   ttl: 1
   interval: 5m
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: vpn-${BASE_DOMAIN/./-}
@@ -41,7 +41,7 @@ spec:
   ttl: 60
   interval: 5m
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: docker-srv-${BASE_DOMAIN/./-}-v4
@@ -55,7 +55,7 @@ spec:
   ttl: 60
   interval: 5m
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: docker-srv-${BASE_DOMAIN/./-}-v6
@@ -69,7 +69,7 @@ spec:
   ttl: 60
   interval: 5m
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: teslamate-${BASE_DOMAIN/./-}
@@ -82,7 +82,7 @@ spec:
   ttl: 1
   interval: 5m
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: teslamate-grafana-${BASE_DOMAIN/./-}
@@ -95,7 +95,7 @@ spec:
   ttl: 1
   interval: 5m
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: sso-${BASE_DOMAIN/./-}
@@ -108,7 +108,7 @@ spec:
   ttl: 1
   interval: 5m
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: checkmk-srv-${BASE_DOMAIN/./-}-v4
@@ -122,7 +122,7 @@ spec:
   ttl: 60
   interval: 5m
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: checkmk-srv-${BASE_DOMAIN/./-}-v6
@@ -136,7 +136,7 @@ spec:
   ttl: 60
   interval: 5m
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: ${BASE_DOMAIN/./-}-mx
@@ -149,7 +149,7 @@ spec:
   ttl: 1
   type: MX
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: ${BASE_DOMAIN/./-}-spf
@@ -161,7 +161,7 @@ spec:
   ttl: 1
   type: TXT
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: ${BASE_DOMAIN/./-}-dkim
@@ -173,7 +173,7 @@ spec:
   ttl: 1
   type: TXT
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: ${BASE_DOMAIN/./-}-srv
@@ -193,7 +193,7 @@ spec:
   ttl: 1
   type: SRV
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: rxbn-app
@@ -206,7 +206,7 @@ spec:
   ttl: 1
   interval: 5m
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: rxbn-app-wildcard
@@ -219,7 +219,7 @@ spec:
   ttl: 1
   interval: 5m
 ---
-apiVersion: cf.containeroo.ch/v1beta1
+apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
   name: rxbn-app-caa
