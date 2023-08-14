@@ -11,7 +11,6 @@ spec:
     name: ${BASE_DOMAIN/./-}-v4
   proxied: true
   ttl: 1
-  interval: 5m
 ---
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
@@ -25,7 +24,6 @@ spec:
     name: ${BASE_DOMAIN/./-}-v6
   proxied: true
   ttl: 1
-  interval: 5m
 ---
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
@@ -39,7 +37,6 @@ spec:
     name: ${BASE_DOMAIN/./-}-v4
   proxied: false
   ttl: 60
-  interval: 5m
 ---
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
@@ -53,7 +50,6 @@ spec:
     name: docker-v4
   proxied: false
   ttl: 60
-  interval: 5m
 ---
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
@@ -67,7 +63,6 @@ spec:
     name: docker-v6
   proxied: false
   ttl: 60
-  interval: 5m
 ---
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
@@ -80,7 +75,6 @@ spec:
   content: docker.srv.${BASE_DOMAIN}
   proxied: true
   ttl: 1
-  interval: 5m
 ---
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
@@ -93,7 +87,6 @@ spec:
   content: docker.srv.${BASE_DOMAIN}
   proxied: true
   ttl: 1
-  interval: 5m
 ---
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
@@ -106,7 +99,6 @@ spec:
   content: docker.srv.${BASE_DOMAIN}
   proxied: true
   ttl: 1
-  interval: 5m
 ---
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
@@ -120,7 +112,6 @@ spec:
     name: checkmk-v4
   proxied: false
   ttl: 60
-  interval: 5m
 ---
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
@@ -134,7 +125,6 @@ spec:
     name: checkmk-v6
   proxied: false
   ttl: 60
-  interval: 5m
 ---
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
@@ -204,7 +194,6 @@ spec:
   content: 76.76.21.21
   proxied: true
   ttl: 1
-  interval: 5m
 ---
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
@@ -217,7 +206,6 @@ spec:
   content: cname.vercel-dns.com
   proxied: true
   ttl: 1
-  interval: 5m
 ---
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
@@ -233,4 +221,3 @@ spec:
     value: letsencrypt.org
   proxied: false
   ttl: 1
-  interval: 5m
