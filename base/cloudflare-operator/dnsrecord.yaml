@@ -4,8 +4,6 @@ kind: DNSRecord
 metadata:
   name: ${BASE_DOMAIN/./-}-v4
   namespace: cloudflare-operator
-  annotations:
-    kustomize.toolkit.fluxcd.io/ssa: merge
 spec:
   name: ${BASE_DOMAIN}
   type: A
@@ -20,8 +18,6 @@ kind: DNSRecord
 metadata:
   name: ${BASE_DOMAIN/./-}-v6
   namespace: cloudflare-operator
-  annotations:
-    kustomize.toolkit.fluxcd.io/ssa: merge
 spec:
   name: ${BASE_DOMAIN}
   type: AAAA
@@ -36,8 +32,6 @@ kind: DNSRecord
 metadata:
   name: vpn-${BASE_DOMAIN/./-}
   namespace: cloudflare-operator
-  annotations:
-    kustomize.toolkit.fluxcd.io/ssa: merge
 spec:
   name: vpn.${BASE_DOMAIN}
   type: A
@@ -52,8 +46,6 @@ kind: DNSRecord
 metadata:
   name: docker-srv-${BASE_DOMAIN/./-}-v4
   namespace: cloudflare-operator
-  annotations:
-    kustomize.toolkit.fluxcd.io/ssa: merge
 spec:
   name: docker.srv.${BASE_DOMAIN}
   type: A
@@ -68,8 +60,6 @@ kind: DNSRecord
 metadata:
   name: docker-srv-${BASE_DOMAIN/./-}-v6
   namespace: cloudflare-operator
-  annotations:
-    kustomize.toolkit.fluxcd.io/ssa: merge
 spec:
   name: docker.srv.${BASE_DOMAIN}
   type: AAAA
@@ -123,8 +113,6 @@ kind: DNSRecord
 metadata:
   name: checkmk-srv-${BASE_DOMAIN/./-}-v4
   namespace: cloudflare-operator
-  annotations:
-    kustomize.toolkit.fluxcd.io/ssa: merge
 spec:
   name: checkmk.srv.${BASE_DOMAIN}
   type: A
@@ -139,8 +127,6 @@ kind: DNSRecord
 metadata:
   name: checkmk-srv-${BASE_DOMAIN/./-}-v6
   namespace: cloudflare-operator
-  annotations:
-    kustomize.toolkit.fluxcd.io/ssa: merge
 spec:
   name: checkmk.srv.${BASE_DOMAIN}
   type: AAAA
