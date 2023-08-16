@@ -6,11 +6,9 @@ metadata:
 spec:
   type: dynamic
   ipSources:
-    - url: https://ifconfig.me/ip
-    - url: https://ipecho.net/plain
-    - url: https://myip.is/ip/
     - url: https://checkip.amazonaws.com
     - url: https://api.ipify.org
+    - url: https://ipv4.hostpoint.ch
 ---
 apiVersion: cloudflare-operator.io/v1
 kind: IP
