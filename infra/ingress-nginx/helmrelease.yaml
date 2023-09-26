@@ -27,6 +27,7 @@ spec:
         serviceMonitor:
           enabled: true
           namespace: monitoring
+      allowSnippetAnnotations: true
       config:
         disable-access-log: "true"
         force-ssl-redirect: "true"
