@@ -70,8 +70,6 @@ spec:
       rules:
         etcd: false
     grafana:
-      plugins:
-        - grafana-oncall-app
       defaultDashboardsTimezone: browser
       grafana.ini:
         security:
