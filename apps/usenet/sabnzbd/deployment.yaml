@@ -29,7 +29,11 @@ spec:
             - name: TZ
               value: Europe/Zurich
             - name: DOCKER_MODS
-              value: containeroo/docker-mods:sabnzbd-mkvtoolnix|containeroo/docker-mods:sabnzbd-nzbnotify
+              value: containeroo/docker-mods:sabnzbd-mkvtoolnix|containeroo/docker-mods:sabnzbd-nzbnotify|ghcr.io/themepark-dev/theme.park:sabnzbd
+            - name: TP_THEME
+              value: catppuccin-frappe
+            - name: TP_COMMUNITY_THEME
+              value: "true"
           ports:
             - containerPort: 8080
           volumeMounts:
