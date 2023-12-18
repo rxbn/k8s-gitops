@@ -1,4 +1,4 @@
-# k3s-gitops
+# k8s-gitops
 
 ![Kubernetes](https://i.imgur.com/p1RzXjQ.png)
 
