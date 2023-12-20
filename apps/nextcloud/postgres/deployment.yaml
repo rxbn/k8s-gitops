@@ -4,8 +4,6 @@ kind: Deployment
 metadata:
   name: nextcloud-postgres
   namespace: nextcloud
-  annotations:
-    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:
