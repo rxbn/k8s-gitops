@@ -38,6 +38,7 @@ spec:
         reverse_proxy = true
         session_store_type = "redis"
         redis_connection_url = "redis://oauth2-proxy-redis.oauth2-proxy.svc.cluster.local:6379"
+        skip_auth_routes = [ "^/favicon\.(ico|png)$", "^/apple-touch-icon.*\.png$" ]
     ingress:
       enabled: true
       className: nginx
