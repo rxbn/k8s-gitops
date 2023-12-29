@@ -6,6 +6,8 @@ metadata:
   namespace: oauth2-proxy
 spec:
   interval: 5m
+  driftDetection:
+    mode: enabled
   chart:
     spec:
       chart: oauth2-proxy
