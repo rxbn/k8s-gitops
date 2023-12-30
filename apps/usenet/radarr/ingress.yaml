@@ -23,3 +23,24 @@ spec:
                 name: radarr
                 port:
                   number: 7878
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: radarr-api
+  namespace: usenet
+  annotations:
+    cloudflare-operator.io/ignore: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: radarr.${BASE_DOMAIN}
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: radarr
+                port:
+                  number: 7878
