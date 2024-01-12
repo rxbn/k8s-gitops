@@ -11,7 +11,7 @@ spec:
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: 55.7.1
+      version: 55.8.1
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -82,6 +82,8 @@ spec:
         auth.basic:
           enabled: false
         auth.generic_oauth:
+          client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
+          client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
           allow_sign_up: true
           enabled: true
           name: ${BASE_DOMAIN} SSO
@@ -104,6 +106,12 @@ spec:
         pathType: Prefix
         paths:
           - /
+      extraSecretMounts:
+        - name: grafana-auth-generic-oauth
+          secretName: grafana-auth-generic-oauth
+          defaultMode: 0440
+          mountPath: /etc/secrets/auth_generic_oauth
+          readOnly: true
     kubeControllerManager:
       enabled: true
       endpoints:
