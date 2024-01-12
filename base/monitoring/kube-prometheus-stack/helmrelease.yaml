@@ -72,6 +72,7 @@ spec:
       rules:
         etcd: false
     grafana:
+      assertNoLeakedSecrets: false
       defaultDashboardsTimezone: browser
       grafana.ini:
         security:
