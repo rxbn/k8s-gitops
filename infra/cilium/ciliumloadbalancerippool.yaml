@@ -12,12 +12,3 @@ spec:
     matchLabels:
       io.kubernetes.service.namespace: ingress-nginx
       io.kubernetes.service.name: ingress-nginx-controller
----
-apiVersion: cilium.io/v2alpha1
-kind: CiliumLoadBalancerIPPool
-metadata:
-  name: default
-spec:
-  allowFirstLastIPs: "Yes"
-  cidrs:
-    - cidr: ${DEFAULT_LB_IP_POOL_V4}
