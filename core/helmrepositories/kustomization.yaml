@@ -7,7 +7,6 @@ resources:
   - nfs-subdir-external-provisioner.yaml
   - prometheus-community.yaml
   - oauth2-proxy.yaml
-  - metallb.yaml
   - k8up-io.yaml
   - jetstack.yaml
   - minio.yaml

@@ -16,7 +16,7 @@ metadata:
   name: ${BASE_DOMAIN/./-}-v6
 spec:
   type: static
-  address: ${METALLB_INGRESS_NGINX_ADDRESS_POOL_V6%/128}
+  address: ${INGRESS_NGINX_LB_IP_POOL_V6%/128}
 ---
 apiVersion: cloudflare-operator.io/v1
 kind: IP

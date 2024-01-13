@@ -1,0 +1,23 @@
+---
+apiVersion: cilium.io/v2alpha1
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: ingress-nginx
+spec:
+  allowFirstLastIPs: "Yes"
+  cidrs:
+    - cidr: ${INGRESS_NGINX_LB_IP_POOL_V4}
+    - cidr: ${INGRESS_NGINX_LB_IP_POOL_V6}
+  serviceSelector:
+    matchLabels:
+      io.kubernetes.service.namespace: ingress-nginx
+      io.kubernetes.service.name: ingress-nginx-controller
+---
+apiVersion: cilium.io/v2alpha1
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: default
+spec:
+  allowFirstLastIPs: "Yes"
+  cidrs:
+    - cidr: ${DEFAULT_LB_IP_POOL_V4}
