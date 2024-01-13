@@ -39,3 +39,5 @@ repos:
           - IP
           - --ignore-kind
           - CiliumLoadBalancerIPPool
+          - --ignore-kind
+          - CiliumL2AnnouncementPolicy
