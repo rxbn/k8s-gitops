@@ -5,4 +5,5 @@ resources:
   - cloudflare-operator
   - kube-prometheus-stack
   - cert-manager
+  - metallb
   - k8up

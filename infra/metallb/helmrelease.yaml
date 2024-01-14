@@ -1,0 +1,31 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: metallb
+  namespace: metallb-system
+spec:
+  interval: 5m
+  driftDetection:
+    mode: enabled
+  chart:
+    spec:
+      chart: metallb
+      version: 0.13.12
+      sourceRef:
+        kind: HelmRepository
+        name: metallb
+        namespace: flux-system
+      interval: 5m
+  values:
+    speaker:
+      frr:
+        enabled: false
+    psp:
+      create: false
+    crds:
+      enabled: false
+  install:
+    crds: Skip
+  upgrade:
+    crds: Skip

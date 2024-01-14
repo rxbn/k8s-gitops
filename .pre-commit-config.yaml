@@ -37,5 +37,3 @@ repos:
           - Account
           - --ignore-kind
           - IP
-          - --ignore-kind
-          - CiliumLoadBalancerIPPool

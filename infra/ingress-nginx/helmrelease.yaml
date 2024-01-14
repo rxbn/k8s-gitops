@@ -9,6 +9,8 @@ spec:
   driftDetection:
     mode: enabled
   dependsOn:
+    - name: metallb
+      namespace: metallb-system
     - name: cert-manager
       namespace: cert-manager
   chart:
@@ -48,6 +50,8 @@ spec:
         default-ssl-certificate: |-
           ingress-nginx/${BASE_DOMAIN/./-}
       service:
+        annotations:
+          metallb.universe.tf/address-pool: ingress-nginx
         externalTrafficPolicy: Local
         ipFamilyPolicy: PreferDualStack
         ipFamilies:
