@@ -140,10 +140,11 @@ spec:
   postRenderers:
     - kustomize:
         patches:
-          - target:
+          - patch: |-
+              apiVersion: batch/v1
               kind: CronJob
-              name: gitlab-toolbox-backup
-            patch: |
-              - op: add
-                path: /spec/timeZone
-                value: Europe/Zurich
+              metadata:
+                name: gitlab-toolbox-backup
+                namespace: gitlab
+              spec:
+                timeZone: Europe/Zurich
