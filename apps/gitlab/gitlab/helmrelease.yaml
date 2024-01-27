@@ -137,3 +137,14 @@ spec:
     - kind: Secret
       name: gitlab-helm-values
       optional: false
+  postRenderes:
+    patchesJson6902:
+      - patch: |-
+          - op: add
+            path: /spec/timeZone
+            value: Europe/Zurich
+        target:
+          group: batch
+          version: v1
+          kind: CronJob
+          name: gitlab-toolbox-backup
