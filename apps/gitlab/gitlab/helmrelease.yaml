@@ -137,7 +137,7 @@ spec:
     - kind: Secret
       name: gitlab-helm-values
       optional: false
-  postRenderes:
+  postRenderers:
     patchesJson6902:
       - patch: |-
           - op: add
