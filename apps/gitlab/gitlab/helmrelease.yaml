@@ -1,0 +1,150 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: gitlab
+  namespace: gitlab
+spec:
+  interval: 5m
+  driftDetection:
+    mode: enabled
+  chart:
+    spec:
+      chart: gitlab
+      version: 7.8.1
+      sourceRef:
+        kind: HelmRepository
+        name: gitlab
+        namespace: flux-system
+      interval: 5m
+  values:
+    certmanager:
+      install: false
+    gitlab:
+      gitlab-exporter:
+        enabled: false
+      gitlab-shell:
+        maxReplicas: 1
+        minReplicas: 1
+      migrations:
+        enabled: true
+      sidekiq:
+        deployment:
+          strategy:
+            type: Recreate
+        maxReplicas: 1
+        minReplicas: 1
+      toolbox:
+        backups:
+          cron:
+            enabled: true
+            schedule: 0 1 * * *
+            successfulJobsHistoryLimit: 1
+      webservice:
+        deployment:
+          strategy:
+            type: Recreate
+        maxReplicas: 1
+        minReplicas: 1
+        deployments:
+          default:
+            ingress:
+              annotations:
+                cloudflare-operator.io/content: ${BASE_DOMAIN}
+                cloudflare-operator.io/type: CNAME
+              path: /
+    gitlab-runner:
+      install: false
+    global:
+      kas:
+        enabled: false
+      appConfig:
+        omniauth:
+          enabled: true
+          allowSingleSignOn:
+            - openid_connect
+          syncProfileFromProvider:
+            - openid_connect
+          syncProfileAttributes:
+            - email
+          autoSignInWithProvider: openid_connect
+          autoLinkUser: true
+          blockAutoCreatedUsers: false
+          providers:
+            - secret: gitlab-oidc-sso
+      edition: ce
+      email:
+        display_name: GitLab@${BASE_DOMAIN}
+        from: git@${BASE_DOMAIN}
+        reply_to: git@${BASE_DOMAIN}
+        subject_suffix: null
+      grafana:
+        enabled: false
+      hosts:
+        domain: ${BASE_DOMAIN}
+        gitlab:
+          name: git.${BASE_DOMAIN}
+        minio:
+          name: gitlab-minio.local.${BASE_DOMAIN}
+        registry:
+          name: registry.${BASE_DOMAIN}
+      ingress:
+        configureCertmanager: false
+        enabled: true
+        class: nginx
+        tls:
+          enabled: false
+      smtp:
+        authentication: login
+        enabled: true
+        openssl_verify_mode: peer
+        password:
+          key: password
+          secret: gitlab-mail-password
+        port: 587
+        starttls_auto: true
+        user_name: git@${BASE_DOMAIN}
+      time_zone: Europe/Zurich
+    nginx-ingress:
+      enabled: false
+    postgresql:
+      image:
+        tag: 13.6.0
+      metrics:
+        enabled: false
+    prometheus:
+      install: false
+    redis:
+      metrics:
+        enabled: false
+    registry:
+      ingress:
+        annotations:
+          cloudflare-operator.io/content: ${BASE_DOMAIN}
+          cloudflare-operator.io/type: CNAME
+      hpa:
+        maxReplicas: 1
+        minReplicas: 1
+      maintenance:
+        readonly:
+          enabled: false
+    minio:
+      ingress:
+        annotations:
+          nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
+          cloudflare-operator.io/ignore: "true"
+  valuesFrom:
+    - kind: Secret
+      name: gitlab-helm-values
+      optional: false
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              version: batch/v1
+              kind: CronJob
+              name: gitlab-toolbox-backup
+            patch: |
+              - op: add
+                path: /spec/timeZone
+                value: Europe/Zurich
