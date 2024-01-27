@@ -140,7 +140,7 @@ spec:
   postRenderers:
     - kustomize:
         patchesJson6902:
-          - patch: |-
+          - patch:
               - op: add
                 path: /spec/timeZone
                 value: Europe/Zurich
