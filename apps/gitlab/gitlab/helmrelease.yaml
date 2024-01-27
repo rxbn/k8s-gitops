@@ -144,7 +144,7 @@ spec:
               group: batch
               version: v1
               kind: CronJob
-          - patch: |-
+            patch: |-
               apiVersion: batch/v1
               kind: CronJob
               metadata:
