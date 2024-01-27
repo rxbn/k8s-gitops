@@ -141,13 +141,12 @@ spec:
     - kustomize:
         patches:
           - target:
+              kind: CronJob
               group: batch
               version: v1
-              kind: CronJob
-            patch: |-
-              apiVersion: batch/v1
-              kind: CronJob
-              metadata:
-                name: gitlab-toolbox-backup
-              spec:
-                timeZone: Europe/Zurich
+              name: gitlab-toolbox-backup
+              namespace: gitlab
+            patch: |
+              - op: add
+                path: /spec/timeZone
+                value: Europe/Zurich
