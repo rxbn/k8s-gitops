@@ -139,13 +139,10 @@ spec:
       optional: false
   postRenderers:
     - kustomize:
-        patchesJson6902:
-          - patch:
-              - op: add
-                path: /spec/timeZone
-                value: Europe/Zurich
-            target:
-              group: batch
-              version: v1
-              kind: CronJob
-              name: gitlab-toolbox-backup
+        patches:
+          - patch: |-
+              apiVersion: autoscaling/v2
+              kind: HorizontalPodAutoscaler
+              metadata:
+                name: gitlab-registry
+              $patch: delete
