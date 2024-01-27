@@ -140,9 +140,11 @@ spec:
   postRenderers:
     - kustomize:
         patches:
-          - patch: |-
-              apiVersion: autoscaling/v2
+          - target:
+              group: autoscaling
+              version: v2
               kind: HorizontalPodAutoscaler
-              metadata:
-                name: gitlab-registry
-              $patch: delete
+              name: gitlab-registry
+            patch: |-
+              - op: remove
+                path: /
