@@ -141,7 +141,8 @@ spec:
     - kustomize:
         patches:
           - target:
-              version: batch/v1
+              group: batch
+              version: v1
               kind: CronJob
               name: gitlab-toolbox-backup
             patch: |
