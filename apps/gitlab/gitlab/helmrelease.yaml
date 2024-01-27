@@ -137,3 +137,84 @@ spec:
     - kind: Secret
       name: gitlab-helm-values
       optional: false
+  postRenderers:
+    - kustomize:
+        patches:
+          - patch: |
+              apiVersion: batch/v1
+              kind: CronJob
+              metadata:
+                name: gitlab-toolbox-backup
+                namespace: gitlab
+              spec:
+                timeZone: Europe/Zurich
+          - patch: |-
+              apiVersion: autoscaling/v2
+              kind: HorizontalPodAutoscaler
+              metadata:
+                name: gitlab-registry
+                namespace: gitlab
+              $patch: delete
+          - patch: |-
+              apiVersion: autoscaling/v2
+              kind: HorizontalPodAutoscaler
+              metadata:
+                name: gitlab-webservice-default
+                namespace: gitlab
+              $patch: delete
+          - patch: |-
+              apiVersion: autoscaling/v2
+              kind: HorizontalPodAutoscaler
+              metadata:
+                name: gitlab-gitlab-shell
+                namespace: gitlab
+              $patch: delete
+          - patch: |-
+              apiVersion: autoscaling/v2
+              kind: HorizontalPodAutoscaler
+              metadata:
+                name: gitlab-sidekiq-all-in-1-v2
+                namespace: gitlab
+              $patch: delete
+          - patch: |-
+              apiVersion: policy/v1
+              kind: PodDisruptionBudget
+              metadata:
+                name: gitlab-gitaly
+                namespace: gitlab
+              $patch: delete
+          - patch: |-
+              apiVersion: policy/v1
+              kind: PodDisruptionBudget
+              metadata:
+                name: gitlab-gitlab-shell
+                namespace: gitlab
+              $patch: delete
+          - patch: |-
+              apiVersion: policy/v1
+              kind: PodDisruptionBudget
+              metadata:
+                name: gitlab-sidekiq-all-in-1-v1
+                namespace: gitlab
+              $patch: delete
+          - patch: |-
+              apiVersion: policy/v1
+              kind: PodDisruptionBudget
+              metadata:
+                name: gitlab-webservice-default
+                namespace: gitlab
+              $patch: delete
+          - patch: |-
+              apiVersion: policy/v1
+              kind: PodDisruptionBudget
+              metadata:
+                name: gitlab-minio-v1
+                namespace: gitlab
+              $patch: delete
+          - patch: |-
+              apiVersion: policy/v1
+              kind: PodDisruptionBudget
+              metadata:
+                name: gitlab-registry-v1
+                namespace: gitlab
+              $patch: delete
