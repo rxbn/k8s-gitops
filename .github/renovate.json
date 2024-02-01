@@ -89,7 +89,8 @@
       "matchUpdateTypes": ["minor", "patch"],
       "matchPackageNames": ["renovate/renovate"],
       "automerge": true,
-      "platformAutomerge": true
+      "platformAutomerge": true,
+      "autoMergeType": "branch"
     }
   ],
   "pre-commit": {
