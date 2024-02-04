@@ -132,7 +132,6 @@ spec:
       ingress:
         annotations:
           nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
-          cloudflare-operator.io/ignore: "true"
   install:
     crds: Skip
   upgrade:

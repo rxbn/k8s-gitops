@@ -29,8 +29,6 @@ kind: Ingress
 metadata:
   name: sabnzbd-api
   namespace: usenet
-  annotations:
-    cloudflare-operator.io/ignore: "true"
 spec:
   ingressClassName: nginx
   rules:

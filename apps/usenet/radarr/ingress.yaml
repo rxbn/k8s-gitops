@@ -29,8 +29,6 @@ kind: Ingress
 metadata:
   name: radarr-api
   namespace: usenet
-  annotations:
-    cloudflare-operator.io/ignore: "true"
 spec:
   ingressClassName: nginx
   rules:
