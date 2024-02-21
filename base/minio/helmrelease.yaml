@@ -30,7 +30,7 @@ spec:
       ingressClassName: nginx
       annotations:
         nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
-        nginx.ingress.kubernetes.io/proxy-body-size: 5m
+        nginx.ingress.kubernetes.io/proxy-body-size: 200m
       hosts:
         - s3.local.${BASE_DOMAIN}
     consoleIngress:
