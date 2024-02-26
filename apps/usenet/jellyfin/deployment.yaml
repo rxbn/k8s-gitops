@@ -1,0 +1,76 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+  namespace: usenet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jellyfin
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+    spec:
+      containers:
+        - name: jellyfin
+          image: lscr.io/linuxserver/jellyfin:latest # TODO: use tag
+          env:
+            - name: PGID
+              value: "2000"
+            - name: PUID
+              value: "2000"
+            - name: TZ
+              value: Europe/Zurich
+          ports:
+            - containerPort: 8096
+          volumeMounts:
+            - mountPath: /config
+              name: data
+            - mountPath: /data/tvshows
+              name: tvshows
+            - mountPath: /data/movies
+              name: movies
+            - mountPath: /data/movies2
+              name: movies2
+          resources:
+            requests:
+              gpu.intel.com/i915: 1
+            limits:
+              gpu.intel.com/i915: 1
+          # startupProbe:
+          #   httpGet:
+          #     path: /identity
+          #     port: 32400
+          #   failureThreshold: 30
+          #   periodSeconds: 5
+          #   timeoutSeconds: 5
+          # livenessProbe:
+          #   httpGet:
+          #     path: /identity
+          #     port: 32400
+          #   failureThreshold: 2
+          #   periodSeconds: 30
+          #   timeoutSeconds: 5
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: jellyfin-data
+        - name: tvshows
+          hostPath:
+            path: /mnt/tank/media/tv
+            type: Directory
+        - name: movies
+          hostPath:
+            path: /mnt/tank/media/movies
+            type: Directory
+        - name: movies2
+          hostPath:
+            path: /mnt/tank/media/movies2
+            type: Directory
