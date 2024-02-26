@@ -37,11 +37,11 @@ spec:
               name: movies
             - mountPath: /data/movies2
               name: movies2
-          resources:
-            requests:
-              gpu.intel.com/i915: 1
-            limits:
-              gpu.intel.com/i915: 1
+          # resources:
+          #   requests:
+          #     gpu.intel.com/i915: 1
+          #   limits:
+          #     gpu.intel.com/i915: 1
           # startupProbe:
           #   httpGet:
           #     path: /identity
