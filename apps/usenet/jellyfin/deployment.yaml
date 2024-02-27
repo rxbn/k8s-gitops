@@ -39,12 +39,11 @@ spec:
               name: movies2
             - mountPath: /transcode
               name: transcode
-          # TODO: add hardware acceleration
-          # resources:
-          #   requests:
-          #     gpu.intel.com/i915: 1
-          #   limits:
-          #     gpu.intel.com/i915: 1
+          resources:
+            requests:
+              gpu.intel.com/i915: 1
+            limits:
+              gpu.intel.com/i915: 1
           startupProbe:
             httpGet:
               path: /health
