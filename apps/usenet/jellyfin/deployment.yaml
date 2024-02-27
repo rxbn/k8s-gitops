@@ -26,6 +26,8 @@ spec:
               value: "2000"
             - name: TZ
               value: Europe/Zurich
+            - name: DOCKER_MODS
+              value: linuxserver/mods:jellyfin-opencl-intel
           ports:
             - containerPort: 8096
           volumeMounts:
