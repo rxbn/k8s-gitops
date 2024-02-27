@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: jellyfin
-          image: lscr.io/linuxserver/jellyfin:10.8.12-1-ls235
+          image: lscr.io/linuxserver/jellyfin:10.8.13-1-ls247
           env:
             - name: PGID
               value: "2000"
