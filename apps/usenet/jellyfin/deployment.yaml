@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: jellyfin
-          image: lscr.io/linuxserver/jellyfin:latest # TODO: use tag
+          image: lscr.io/linuxserver/jellyfin:10.8.12-1-ls235
           env:
             - name: PGID
               value: "2000"
