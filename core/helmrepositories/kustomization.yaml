@@ -8,6 +8,7 @@ resources:
   - prometheus-community.yaml
   - oauth2-proxy.yaml
   - metallb.yaml
+  - grafana.yaml
   - k8up-io.yaml
   - jetstack.yaml
   - minio.yaml
