@@ -55,12 +55,12 @@ spec:
             - name: KC_DB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: postgres
+                  name: keycloak-postgres
                   key: POSTGRES_USER
             - name: KC_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: postgres
+                  name: keycloak-postgres
                   key: POSTGRES_PASSWORD
             - name: KC_DB_URL
               value: jdbc:postgresql://postgres.keycloak.svc.cluster.local/postgres
