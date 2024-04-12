@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - postgres
   - keycloak
+  - schedule.yaml
