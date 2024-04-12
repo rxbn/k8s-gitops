@@ -94,6 +94,9 @@ spec:
               port: 8080
             initialDelaySeconds: 10
             timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 1Gi
       restartPolicy: Always
       automountServiceAccountToken: false
       volumes:
