@@ -5,7 +5,7 @@ metadata:
   name: keycloak-providers
   namespace: keycloak
   annotations:
-    k8up.io/backup: "true"
+    k8up.io/backup: "false"
 spec:
   accessModes:
     - ReadWriteOnce
