@@ -1,0 +1,101 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: teslamate-grafana
+  namespace: teslamate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: teslamate-grafana
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: teslamate-grafana
+    spec:
+      initContainers:
+        - name: wait-for-database
+          image: busybox:1.36.1
+          command:
+            - sh
+            - -c
+            - |
+              echo 'Waiting for PostgreSQL to become ready...'
+              until printf "." && nc -z -w 2 teslamate-postgres.teslamate.svc.cluster.local 5432; do
+                  sleep 2;
+              done;
+              echo 'PostgreSQL OK ✓'
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 10m
+              memory: 16Mi
+      containers:
+        - name: teslamate-grafana
+          image: teslamate/grafana:1.28.5
+          env:
+            - name: GF_SERVER_DOMAIN
+              value: teslamate-grafana.${BASE_DOMAIN}
+            - name: GF_SERVER_ROOT_URL
+              value: https://teslamate-grafana.${BASE_DOMAIN}
+            - name: GF_SERVER_SERVE_FROM_SUB_PATH
+              value: "false"
+            - name: GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION
+              value: "true"
+            - name: GF_AUTH_ANONYMOUS_ENABLED
+              value: "false"
+            - name: GF_AUTH_DISABLE_LOGIN_FORM
+              value: "true"
+            - name: GF_AUTH_OAUTH_AUTO_LOGIN
+              value: "true"
+            - name: GF_AUTH_BASIC_ENABLED
+              value: "false"
+            - name: GF_AUTH_GENERIC_OAUTH_ENABLED
+              value: "true"
+            - name: GF_AUTH_GENERIC_OAUTH_ALLOW_SIGNUP
+              value: "true"
+            - name: GF_AUTH_GENERIC_OAUTH_NAME
+              value: "${BASE_DOMAIN} SSO"
+            - name: GF_AUTH_GENERIC_OAUTH_SCOPES
+              value: openid profile email
+            - name: GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH
+              value: contains(roles[*], 'admins') && 'Admin' || 'Viewer'
+            - name: GF_AUTH_GENERIC_OAUTH_AUTH_URL
+              value: https://sso.${BASE_DOMAIN}/realms/master/protocol/openid-connect/auth
+            - name: GF_AUTH_GENERIC_OAUTH_TOKEN_URL
+              value: https://sso.${BASE_DOMAIN}/realms/master/protocol/openid-connect/token
+            - name: GF_AUTH_GENERIC_OAUTH_API_URL
+              value: https://sso.${BASE_DOMAIN}/realms/master/protocol/openid-connect/userinfo
+            - name: GF_AUTH_SIGNOUT_REDIRECT_URL
+              value: https://sso.${BASE_DOMAIN}/realms/master/protocol/openid-connect/logout
+            - name: DATABASE_HOST
+              value: teslamate-postgres.teslamate.svc.cluster.local
+            - name: DATABASE_NAME
+              value: postgres
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: teslamate-postgres
+                  key: POSTGRES_USER
+            - name: DATABASE_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: teslamate-postgres
+                  key: POSTGRES_PASSWORD
+          envFrom:
+            - secretRef:
+                name: teslamate-grafana
+          ports:
+            - containerPort: 3000
+      restartPolicy: Always
+      automountServiceAccountToken: false

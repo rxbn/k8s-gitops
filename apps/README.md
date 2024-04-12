@@ -8,4 +8,5 @@ This directory contains all other common applications.
 - **keycloak** identity and access management
 - **nextcloud** self-hosted cloud similar to iCloud
 - **renovate** dependency updater
+- **teslamate** data logger for my Tesla Model 3
 - **usenet** usenet-stack containing sonarr, radarr, plex, ...
