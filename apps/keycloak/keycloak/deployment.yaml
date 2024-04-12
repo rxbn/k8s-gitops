@@ -63,7 +63,7 @@ spec:
                   name: keycloak-postgres
                   key: POSTGRES_PASSWORD
             - name: KC_DB_URL
-              value: jdbc:postgresql://postgres.keycloak.svc.cluster.local/postgres
+              value: jdbc:postgresql://keycloak-postgres.keycloak.svc.cluster.local/postgres
             - name: KC_HEALTH_ENABLED
               value: "true"
           envFrom:
