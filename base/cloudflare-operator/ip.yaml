@@ -21,36 +21,6 @@ spec:
 apiVersion: cloudflare-operator.io/v1
 kind: IP
 metadata:
-  name: docker-v4
-spec:
-  type: dynamic
-  ipSources:
-    - url: https://api.hetzner.cloud/v1/servers
-      requestHeaders:
-        Accept: application/json
-      requestHeadersSecretRef:
-        name: hetzner-cloud-api-key
-        namespace: cloudflare-operator
-      responseJQFilter: '.servers[] | select(.name == "docker.srv.${BASE_DOMAIN}").public_net.ipv4.ip'
----
-apiVersion: cloudflare-operator.io/v1
-kind: IP
-metadata:
-  name: docker-v6
-spec:
-  type: dynamic
-  ipSources:
-    - url: https://api.hetzner.cloud/v1/servers
-      requestHeaders:
-        Accept: application/json
-      requestHeadersSecretRef:
-        name: hetzner-cloud-api-key
-        namespace: cloudflare-operator
-      responseJQFilter: '.servers[] | select(.name == "docker.srv.${BASE_DOMAIN}").public_net.ipv6 | "\(.ip)"[0:-3]+"1"'
----
-apiVersion: cloudflare-operator.io/v1
-kind: IP
-metadata:
   name: checkmk-v4
 spec:
   type: dynamic
