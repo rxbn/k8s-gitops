@@ -14,6 +14,7 @@ resources:
   - usenet.yaml
   - cloudflare-operator.yaml
   - cert-manager.yaml
+  - teslamate.yaml
   - minio.yaml
   - monitoring.yaml
   - cilium.yaml
