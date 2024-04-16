@@ -19,14 +19,14 @@ spec:
             job: renovate
         spec:
           initContainers:
-            - name: wait-for-redis
+            - name: wait-for-valkey
               image: busybox:1.36.1
               command:
                 - sh
                 - -c
                 - |
                   echo 'Waiting for Redis to become ready...'
-                  until printf "." && nc -z -w 2 renovate-redis.renovate.svc.cluster.local 6379; do
+                  until printf "." && nc -z -w 2 renovate-valkey.renovate.svc.cluster.local 6379; do
                       sleep 2;
                   done;
                   echo 'Redis OK ✓'
@@ -59,7 +59,7 @@ spec:
                 - name: RENOVATE_PLATFORM
                   value: gitlab
                 - name: RENOVATE_REDIS_URL
-                  value: redis://renovate-redis.renovate.svc.cluster.local
+                  value: redis://renovate-valkey.renovate.svc.cluster.local
                 - name: RENOVATE_CONFIG_MIGRATION
                   value: "true"
               envFrom:

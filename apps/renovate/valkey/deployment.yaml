@@ -2,23 +2,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: oauth2-proxy-redis
-  namespace: oauth2-proxy
+  name: renovate-valkey
+  namespace: renovate
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: oauth2-proxy-redis
+      app: renovate-valkey
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: oauth2-proxy-redis
+        app: renovate-valkey
     spec:
       containers:
-        - name: oauth2-proxy-redis
-          image: redis:7.2.4-alpine
+        - name: renovate-valkey
+          image: valkey/valkey:7.2.5-alpine
           env:
             - name: TZ
               value: Europe/Zurich

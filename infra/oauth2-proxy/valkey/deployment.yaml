@@ -2,23 +2,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nextcloud-redis
-  namespace: nextcloud
+  name: oauth2-proxy-valkey
+  namespace: oauth2-proxy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nextcloud-redis
+      app: oauth2-proxy-valkey
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: nextcloud-redis
+        app: oauth2-proxy-valkey
     spec:
       containers:
-        - name: nextcloud-redis
-          image: redis:7.2.4-alpine
+        - name: oauth2-proxy-valkey
+          image: valkey/valkey:7.2.5-alpine
           env:
             - name: TZ
               value: Europe/Zurich
