@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: nextcloud-valkey
-          image: valkey:7.2.5-alpine
+          image: valkey/valkey:7.2.5-alpine
           env:
             - name: TZ
               value: Europe/Zurich
