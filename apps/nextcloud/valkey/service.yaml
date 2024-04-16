@@ -2,12 +2,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nextcloud-redis
+  name: nextcloud-valkey
   namespace: nextcloud
 spec:
   ports:
     - port: 6379
       targetPort: 6379
   selector:
-    app: nextcloud-redis
+    app: nextcloud-valkey
   type: ClusterIP

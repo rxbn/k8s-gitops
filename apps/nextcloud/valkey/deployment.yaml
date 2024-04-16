@@ -2,23 +2,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nextcloud-redis
+  name: nextcloud-valkey
   namespace: nextcloud
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nextcloud-redis
+      app: nextcloud-valkey
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: nextcloud-redis
+        app: nextcloud-valkey
     spec:
       containers:
-        - name: nextcloud-redis
-          image: redis:7.2.4-alpine
+        - name: nextcloud-valkey
+          image: valkey:7.2.5-alpine
           env:
             - name: TZ
               value: Europe/Zurich
