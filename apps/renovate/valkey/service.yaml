@@ -2,12 +2,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: renovate-redis
+  name: renovate-valkey
   namespace: renovate
 spec:
   ports:
     - port: 6379
       targetPort: 6379
   selector:
-    app: renovate-redis
+    app: renovate-valkey
   type: ClusterIP
