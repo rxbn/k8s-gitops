@@ -1,16 +1,15 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: teslamate-postgres
   namespace: teslamate
 spec:
+  serviceName: teslamate-postgres
   replicas: 1
   selector:
     matchLabels:
       app: teslamate-postgres
-  strategy:
-    type: Recreate
   template:
     metadata:
       annotations:
@@ -49,7 +48,14 @@ spec:
           resources: {}
       restartPolicy: Always
       automountServiceAccountToken: false
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: teslamate-postgres-data
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
