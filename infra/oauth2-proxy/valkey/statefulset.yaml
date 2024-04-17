@@ -1,23 +1,22 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: nextcloud-valkey
-  namespace: nextcloud
+  name: oauth2-proxy-valkey
+  namespace: oauth2-proxy
 spec:
+  serviceName: oauth2-proxy-valkey
   replicas: 1
   selector:
     matchLabels:
-      app: nextcloud-valkey
-  strategy:
-    type: RollingUpdate
+      app: oauth2-proxy-valkey
   template:
     metadata:
       labels:
-        app: nextcloud-valkey
+        app: oauth2-proxy-valkey
     spec:
       containers:
-        - name: nextcloud-valkey
+        - name: oauth2-proxy-valkey
           image: valkey/valkey:7.2.5-alpine
           env:
             - name: TZ

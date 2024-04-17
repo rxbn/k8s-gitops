@@ -1,23 +1,22 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: renovate-valkey
-  namespace: renovate
+  name: nextcloud-valkey
+  namespace: nextcloud
 spec:
+  serviceName: nextcloud-valkey
   replicas: 1
   selector:
     matchLabels:
-      app: renovate-valkey
-  strategy:
-    type: RollingUpdate
+      app: nextcloud-valkey
   template:
     metadata:
       labels:
-        app: renovate-valkey
+        app: nextcloud-valkey
     spec:
       containers:
-        - name: renovate-valkey
+        - name: nextcloud-valkey
           image: valkey/valkey:7.2.5-alpine
           env:
             - name: TZ

@@ -1,23 +1,22 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: oauth2-proxy-valkey
-  namespace: oauth2-proxy
+  name: renovate-valkey
+  namespace: renovate
 spec:
+  serviceName: renovate-valkey
   replicas: 1
   selector:
     matchLabels:
-      app: oauth2-proxy-valkey
-  strategy:
-    type: RollingUpdate
+      app: renovate-valkey
   template:
     metadata:
       labels:
-        app: oauth2-proxy-valkey
+        app: renovate-valkey
     spec:
       containers:
-        - name: oauth2-proxy-valkey
+        - name: renovate-valkey
           image: valkey/valkey:7.2.5-alpine
           env:
             - name: TZ
