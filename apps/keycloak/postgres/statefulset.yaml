@@ -1,29 +1,28 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: teslamate-postgres
-  namespace: teslamate
+  name: keycloak-postgres
+  namespace: keycloak
 spec:
+  serviceName: keycloak-postgres
   replicas: 1
   selector:
     matchLabels:
-      app: teslamate-postgres
-  strategy:
-    type: Recreate
+      app: keycloak-postgres
   template:
     metadata:
       annotations:
         k8up.io/backupcommand: pg_dumpall -U postgres -h 127.0.0.1
       labels:
-        app: teslamate-postgres
+        app: keycloak-postgres
     spec:
       containers:
-        - name: teslamate-postgres
+        - name: keycloak-postgres
           image: postgres:16.2-alpine
           envFrom:
             - secretRef:
-                name: teslamate-postgres
+                name: keycloak-postgres
           env:
             - name: TZ
               value: Europe/Zurich
@@ -49,7 +48,14 @@ spec:
           resources: {}
       restartPolicy: Always
       automountServiceAccountToken: false
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: teslamate-postgres-data
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Mi

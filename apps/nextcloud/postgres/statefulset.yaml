@@ -1,16 +1,15 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: nextcloud-postgres
   namespace: nextcloud
 spec:
+  serviceName: nextcloud-postgres
   replicas: 1
   selector:
     matchLabels:
       app: nextcloud-postgres
-  strategy:
-    type: Recreate
   template:
     metadata:
       annotations:
@@ -49,7 +48,14 @@ spec:
           resources: {}
       restartPolicy: Always
       automountServiceAccountToken: false
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: nextcloud-postgres-data
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 500Mi
