@@ -69,5 +69,17 @@ spec:
                 name: teslamate
           ports:
             - containerPort: 4000
+          startupProbe:
+            tcpSocket:
+              port: 4000
+            failureThreshold: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          livenessProbe:
+            tcpSocket:
+              port: 4000
+            failureThreshold: 2
+            periodSeconds: 30
+            timeoutSeconds: 5
       restartPolicy: Always
       automountServiceAccountToken: false
