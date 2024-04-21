@@ -64,6 +64,8 @@ spec:
                 secretKeyRef:
                   name: teslamate-postgres
                   key: POSTGRES_PASSWORD
+            - name: TZ
+              value: Europe/Zurich
           envFrom:
             - secretRef:
                 name: teslamate
