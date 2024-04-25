@@ -65,7 +65,7 @@ spec:
             - name: AUTHENTICATION_GUARD
               value: remote_user_guard
             - name: AUTHENTICATION_GUARD_HEADER
-              value: X-Auth-Request-Email
+              value: HTTP_X_AUTH_REQUEST_EMAIL
             - name: TZ
               value: Europe/Zurich
           envFrom:
