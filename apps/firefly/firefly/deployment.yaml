@@ -64,6 +64,8 @@ spec:
                   key: POSTGRES_PASSWORD
             - name: AUTHENTICATION_GUARD
               value: remote_user_guard
+            - name: AUTHENTICATION_GUARD_HEADER
+              value: X-Auth-Request-Email
             - name: TZ
               value: Europe/Zurich
           envFrom:
