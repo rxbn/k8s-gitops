@@ -42,7 +42,7 @@ spec:
               memory: 16Mi
       containers:
         - name: firefly
-          image: fireflyiii/core:version-6.1.14
+          image: fireflyiii/core:version-6.1.15
           env:
             - name: DB_CONNECTION
               value: pgsql
