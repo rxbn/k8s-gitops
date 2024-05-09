@@ -40,32 +40,6 @@ spec:
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
-  name: checkmk-srv-${BASE_DOMAIN/./-}-v4
-  namespace: cloudflare-operator
-spec:
-  name: checkmk.srv.${BASE_DOMAIN}
-  type: A
-  ipRef:
-    name: checkmk-v4
-  proxied: false
-  ttl: 60
----
-apiVersion: cloudflare-operator.io/v1
-kind: DNSRecord
-metadata:
-  name: checkmk-srv-${BASE_DOMAIN/./-}-v6
-  namespace: cloudflare-operator
-spec:
-  name: checkmk.srv.${BASE_DOMAIN}
-  type: AAAA
-  ipRef:
-    name: checkmk-v6
-  proxied: false
-  ttl: 60
----
-apiVersion: cloudflare-operator.io/v1
-kind: DNSRecord
-metadata:
   name: ${BASE_DOMAIN/./-}-mx
   namespace: cloudflare-operator
 spec:

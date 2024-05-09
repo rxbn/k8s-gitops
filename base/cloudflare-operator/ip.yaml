@@ -17,33 +17,3 @@ metadata:
 spec:
   type: static
   address: ${METALLB_INGRESS_NGINX_ADDRESS_POOL_V6%/128}
----
-apiVersion: cloudflare-operator.io/v1
-kind: IP
-metadata:
-  name: checkmk-v4
-spec:
-  type: dynamic
-  ipSources:
-    - url: https://api.hetzner.cloud/v1/servers
-      requestHeaders:
-        Accept: application/json
-      requestHeadersSecretRef:
-        name: hetzner-cloud-api-key
-        namespace: cloudflare-operator
-      responseJQFilter: '.servers[] | select(.name == "checkmk.srv.${BASE_DOMAIN}").public_net.ipv4.ip'
----
-apiVersion: cloudflare-operator.io/v1
-kind: IP
-metadata:
-  name: checkmk-v6
-spec:
-  type: dynamic
-  ipSources:
-    - url: https://api.hetzner.cloud/v1/servers
-      requestHeaders:
-        Accept: application/json
-      requestHeadersSecretRef:
-        name: hetzner-cloud-api-key
-        namespace: cloudflare-operator
-      responseJQFilter: '.servers[] | select(.name == "checkmk.srv.${BASE_DOMAIN}").public_net.ipv6 | "\(.ip)"[0:-3]+"1"'
