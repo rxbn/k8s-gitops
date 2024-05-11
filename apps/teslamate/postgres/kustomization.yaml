@@ -5,3 +5,4 @@ resources:
   - service.yaml
   - statefulset.yaml
   - secret.yaml
+  - ciliumnetworkpolicy.yaml
