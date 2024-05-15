@@ -37,6 +37,8 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: data
+            - mountPath: /backup
+              name: backup
             - mountPath: /incomplete-downloads
               name: incomplete-downloads
             - mountPath: /downloads
@@ -69,6 +71,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: sabnzbd-data
+        - name: backup
+          persistentVolumeClaim:
+            claimName: sabnzbd-backup
         - name: merge-subtitles
           configMap:
             name: merge-subtitles
