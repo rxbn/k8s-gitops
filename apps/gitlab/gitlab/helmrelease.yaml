@@ -59,6 +59,8 @@ spec:
       kas:
         enabled: false
       appConfig:
+        terraformState:
+          enabled: true
         omniauth:
           enabled: true
           allowSingleSignOn:
