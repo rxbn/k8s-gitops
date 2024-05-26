@@ -8,6 +8,9 @@ spec:
   interval: 5m
   driftDetection:
     mode: enabled
+  dependsOn:
+    - name: ingress-nginx
+      namespace: ingress-nginx
   chart:
     spec:
       chart: kube-prometheus-stack
