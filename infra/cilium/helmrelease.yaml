@@ -29,9 +29,13 @@ spec:
       enabled: true
     ipam:
       operator:
+        clusterPoolIPv4MaskSize: 24
         clusterPoolIPv4PodCIDRList:
           - ${POD_NETWORK_RANGE_V4}
+        clusterPoolIPv6MaskSize: 64
         clusterPoolIPv6PodCIDRList:
           - ${POD_NETWORK_RANGE_V6}
     ipv6:
       enabled: true
+    bpf:
+      masquerade: true
