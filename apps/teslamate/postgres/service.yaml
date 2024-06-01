@@ -12,4 +12,8 @@ spec:
       targetPort: 5432
   selector:
     app: teslamate-postgres
+  ipFamilyPolicy: PreferDualStack
+  ipFamilies:
+    - IPv4
+    - IPv6
   type: LoadBalancer

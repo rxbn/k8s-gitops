@@ -10,4 +10,8 @@ spec:
       targetPort: 8989
   selector:
     app: sonarr
+  ipFamilyPolicy: PreferDualStack
+  ipFamilies:
+    - IPv4
+    - IPv6
   type: ClusterIP

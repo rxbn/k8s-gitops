@@ -10,4 +10,8 @@ spec:
       targetPort: 5432
   selector:
     app: keycloak-postgres
+  ipFamilyPolicy: PreferDualStack
+  ipFamilies:
+    - IPv4
+    - IPv6
   type: ClusterIP

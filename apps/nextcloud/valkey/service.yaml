@@ -10,4 +10,8 @@ spec:
       targetPort: 6379
   selector:
     app: nextcloud-valkey
+  ipFamilyPolicy: PreferDualStack
+  ipFamilies:
+    - IPv4
+    - IPv6
   type: ClusterIP

@@ -10,4 +10,8 @@ spec:
       targetPort: 4000
   selector:
     app: teslamate
+  ipFamilyPolicy: PreferDualStack
+  ipFamilies:
+    - IPv4
+    - IPv6
   type: ClusterIP

@@ -10,4 +10,8 @@ spec:
       targetPort: 3000
   selector:
     app: teslamate-grafana
+  ipFamilyPolicy: PreferDualStack
+  ipFamilies:
+    - IPv4
+    - IPv6
   type: ClusterIP

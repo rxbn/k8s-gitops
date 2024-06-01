@@ -10,4 +10,8 @@ spec:
       targetPort: 7878
   selector:
     app: radarr
+  ipFamilyPolicy: PreferDualStack
+  ipFamilies:
+    - IPv4
+    - IPv6
   type: ClusterIP

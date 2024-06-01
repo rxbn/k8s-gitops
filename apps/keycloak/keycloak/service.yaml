@@ -10,4 +10,8 @@ spec:
       targetPort: 8080
   selector:
     app: keycloak
+  ipFamilyPolicy: PreferDualStack
+  ipFamilies:
+    - IPv4
+    - IPv6
   type: ClusterIP

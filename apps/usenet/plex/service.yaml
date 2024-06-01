@@ -10,4 +10,8 @@ spec:
       targetPort: 32400
   selector:
     app: plex
+  ipFamilyPolicy: PreferDualStack
+  ipFamilies:
+    - IPv4
+    - IPv6
   type: ClusterIP
