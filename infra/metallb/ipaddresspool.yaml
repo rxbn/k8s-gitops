@@ -18,4 +18,5 @@ metadata:
 spec:
   addresses:
     - ${METALLB_DEFAULT_ADDRESS_POOL_V4}
+    - ${METALLB_DEFAULT_ADDRESS_POOL_V6}
   autoAssign: true
