@@ -44,6 +44,9 @@ spec:
         keep-alive-requests: 10000
         keep-alive: 120
         proxy-body-size: "100M"
+        proxy-buffering: "on"
+        proxy-buffers: 4 "512k"
+        proxy-buffer-size: "256k"
       ingressClassResource:
         default: true
       extraArgs:
