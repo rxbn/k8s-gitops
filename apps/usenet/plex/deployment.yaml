@@ -48,8 +48,8 @@ spec:
               name: movies
             - mountPath: /data/movies2
               name: movies2
-            - mountPath: /data/other
-              name: other
+            - mountPath: /data/movies3
+              name: movies3
             - mountPath: /transcode
               name: tmpfs
           resources:
@@ -94,9 +94,10 @@ spec:
           hostPath:
             path: /mnt/tank/media/movies2
             type: Directory
-        - name: other
-          persistentVolumeClaim:
-            claimName: plex-other
+        - name: movies3
+          hostPath:
+            path: /mnt/tank/media/movies3
+            type: Directory
         - name: tmpfs
           emptyDir:
             medium: Memory
