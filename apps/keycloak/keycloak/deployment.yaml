@@ -42,9 +42,10 @@ spec:
               memory: 16Mi
       containers:
         - name: keycloak
-          image: quay.io/keycloak/keycloak:24.0.5
+          image: quay.io/keycloak/keycloak:25.0.0
           args:
             - start
+            - --features=persistent-user-session
           env:
             - name: KC_HOSTNAME
               value: sso.${BASE_DOMAIN}
