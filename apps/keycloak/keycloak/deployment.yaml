@@ -81,7 +81,7 @@ spec:
           startupProbe:
             httpGet:
               path: /health
-              port: 8080
+              port: 9000
             initialDelaySeconds: 30
             timeoutSeconds: 1
             failureThreshold: 60
@@ -89,13 +89,13 @@ spec:
           livenessProbe:
             httpGet:
               path: /health/live
-              port: 8080
+              port: 9000
             initialDelaySeconds: 0
             timeoutSeconds: 5
           readinessProbe:
             httpGet:
               path: /health/ready
-              port: 8080
+              port: 9000
             initialDelaySeconds: 10
             timeoutSeconds: 1
           resources:
