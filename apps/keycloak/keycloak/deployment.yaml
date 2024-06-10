@@ -45,12 +45,13 @@ spec:
           image: quay.io/keycloak/keycloak:25.0.0
           args:
             - start
-            - --features=persistent-user-sessions
           env:
             - name: KC_HOSTNAME
-              value: sso.${BASE_DOMAIN}
-            - name: KC_PROXY
-              value: edge
+              value: https://sso.${BASE_DOMAIN}
+            - name: KC_PROXY_HEADERS
+              value: xforwarded
+            - name: KC_HTTP_ENABLED
+              value: "true"
             - name: KC_DB
               value: postgres
             - name: KC_DB_USERNAME
@@ -67,6 +68,8 @@ spec:
               value: jdbc:postgresql://keycloak-postgres.keycloak.svc.cluster.local/postgres
             - name: KC_HEALTH_ENABLED
               value: "true"
+            - name: KC_FEATURES
+              value: persistent-user-sessions,hostname:v2
           envFrom:
             - secretRef:
                 name: keycloak
