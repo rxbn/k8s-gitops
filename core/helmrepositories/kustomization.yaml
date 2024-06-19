@@ -15,3 +15,4 @@ resources:
   - metrics-server.yaml
   - containeroo.yaml
   - cilium.yaml
+  - falcosecurity.yaml

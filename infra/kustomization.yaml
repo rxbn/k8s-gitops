@@ -8,5 +8,6 @@ resources:
   - oauth2-proxy
   - cert-manager
   - metallb
+  - falco
   - cilium
   - ingress-nginx

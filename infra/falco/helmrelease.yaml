@@ -1,0 +1,53 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: falco
+  namespace: falco
+spec:
+  interval: 5m
+  driftDetection:
+    mode: enabled
+  chart:
+    spec:
+      chart: falco
+      version: 4.5.0
+      sourceRef:
+        kind: HelmRepository
+        name: falcosecurity
+        namespace: flux-system
+      interval: 5m
+  values:
+    driver:
+      kind: ebpf
+    collectors:
+      containerd:
+        enabled: true
+        socket: /run/k3s/containerd/containerd.sock
+      crio:
+        enabled: false
+      docker:
+        enabled: false
+    falcosidekick:
+      enabled: true
+      replicaCount: 1
+      config:
+        slack:
+          minimumpriority: notice
+    tty: true
+    customRules:
+      falco_rules.local.yaml: |-
+        - macro: user_known_stand_streams_redirect_activities
+          condition: >
+            container.name="gitlab-shell"
+            or container.name="gitlab-workhorse"
+        - list: user_known_packet_socket_binaries
+          items: [speaker]
+        - macro: user_known_contact_k8s_api_server_activities
+          condition: >
+            container.name="grafana-sc-datasources"
+            or container.name="grafana-sc-dashboard"
+  valuesFrom:
+    - kind: Secret
+      name: falco-helm-values
+      optional: false
