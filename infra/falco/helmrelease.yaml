@@ -47,6 +47,7 @@ spec:
           condition: >
             container.name="grafana-sc-datasources"
             or container.name="grafana-sc-dashboard"
+            or container.name="local-path-provisioner"
   valuesFrom:
     - kind: Secret
       name: falco-helm-values
