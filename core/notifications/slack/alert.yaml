@@ -68,6 +68,9 @@ spec:
     - kind: HelmRelease
       namespace: cilium
       name: "*"
+    - kind: HelmRelease
+      namespace: falco
+      name: "*"
   exclusionList:
     - InternalError.*failed to call webhook.*EOF
     - "dial tcp: lookup.*server misbehaving"
