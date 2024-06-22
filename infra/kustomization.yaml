@@ -9,5 +9,6 @@ resources:
   - cert-manager
   - metallb
   - falco
+  - coredns
   - cilium
   - ingress-nginx

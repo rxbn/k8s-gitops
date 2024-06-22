@@ -1,0 +1,66 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: coredns
+  namespace: kube-system
+spec:
+  interval: 5m
+  driftDetection:
+    mode: enabled
+  chart:
+    spec:
+      chart: coredns
+      version: 1.30.0
+      sourceRef:
+        kind: HelmRepository
+        name: coredns
+        namespace: flux-system
+      interval: 5m
+  values:
+    fullnameOverride: coredns
+    k8sAppLabelOverride: kube-dns
+    service:
+      name: kube-dns
+      clusterIP: 10.2.0.10
+    serviceAccount:
+      create: true
+    servers:
+      - zones:
+          - zone: .
+            use_tcp: true
+        port: 53
+        plugins:
+          - name: errors
+          - name: health
+          - name: ready
+          - name: kubernetes
+            parameters: cluster.local in-addr.arpa ip6.arpa
+            configBlock: |-
+              pods insecure
+              fallthrough in-addr.arpa ip6.arpa
+          - name: prometheus
+            parameters: :9153
+          - name: forward
+            parameters: . /etc/resolv.conf
+          - name: cache
+            parameters: 30
+          - name: loop
+          - name: reload
+          - name: loadbalance
+    tolerations:
+      - key: CriticalAddonsOnly
+        operator: Exists
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/instance: coredns
