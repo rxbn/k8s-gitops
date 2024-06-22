@@ -59,6 +59,10 @@ spec:
         - macro: known_drop_and_execute_activities
           condition: >
             (k8s.ns.name="gitlab" and container.name in ("gitaly", "build"))
+
+        - macro: user_known_read_sensitive_files_activities
+          condition: >
+            (proc.name startswith "python3")
   valuesFrom:
     - kind: Secret
       name: falco-helm-values
