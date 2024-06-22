@@ -20,7 +20,9 @@ spec:
   values:
     fullnameOverride: coredns
     k8sAppLabelOverride: kube-dns
-    replicaCount: 2
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
     service:
       name: kube-dns
       clusterIP: 10.2.0.10
