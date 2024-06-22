@@ -18,6 +18,5 @@ resources:
   - cert-manager.yaml
   - teslamate.yaml
   - minio.yaml
-  - flux-system.yaml
   - monitoring.yaml
   - cilium.yaml
