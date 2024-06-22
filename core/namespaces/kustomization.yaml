@@ -12,10 +12,12 @@ resources:
   - oauth2-proxy.yaml
   - storage-system.yaml
   - metallb-system.yaml
+  - kube-system.yaml
   - usenet.yaml
   - cloudflare-operator.yaml
   - cert-manager.yaml
   - teslamate.yaml
   - minio.yaml
+  - flux-system.yaml
   - monitoring.yaml
   - cilium.yaml
