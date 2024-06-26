@@ -64,7 +64,7 @@ spec:
           items: [docker.io/synology/synology-csi]
 
         - macro: allowed_clear_log_files
-          condition: (fd.name startswith "/var/lib/rancher/k3s/*")
+          condition: (fd.name startswith "/var/lib/rancher/k3s")
   valuesFrom:
     - kind: Secret
       name: falco-helm-values
