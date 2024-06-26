@@ -58,6 +58,9 @@ spec:
           condition: >
             (proc.name startswith "python3")
             or (k8s.ns.name="gitlab" and proc.exepath="/kaniko/executor")
+
+        - list: allowed_container_images_loading_kernel_module
+          items: [docker.io/synology/synology-csi]
   valuesFrom:
     - kind: Secret
       name: falco-helm-values

@@ -9,6 +9,7 @@ resources:
   - oauth2-proxy.yaml
   - metallb.yaml
   - grafana.yaml
+  - synology-csi.yaml
   - coredns.yaml
   - k8up-io.yaml
   - jetstack.yaml
