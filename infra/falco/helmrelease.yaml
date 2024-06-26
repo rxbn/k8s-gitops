@@ -53,6 +53,7 @@ spec:
         - macro: known_drop_and_execute_activities
           condition: >
             (k8s.ns.name="gitlab" and container.name in ("gitaly", "build"))
+            or (k8s.ns.name="usenet" and container.name="sabnzbd")
 
         - macro: user_known_read_sensitive_files_activities
           condition: >
@@ -61,6 +62,9 @@ spec:
 
         - list: allowed_container_images_loading_kernel_module
           items: [docker.io/synology/synology-csi]
+
+        - macro: allowed_clear_log_files
+          condition: (fd.name startswith "/var/lib/rancher/k3s/*")
   valuesFrom:
     - kind: Secret
       name: falco-helm-values
