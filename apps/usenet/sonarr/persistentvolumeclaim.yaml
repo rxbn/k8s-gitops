@@ -27,4 +27,4 @@ spec:
   storageClassName: synology-csi-delete
   resources:
     requests:
-      storage: 200Mi
+      storage: 1Gi
