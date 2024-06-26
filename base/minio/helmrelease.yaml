@@ -27,7 +27,8 @@ spec:
     mode: standalone
     ignoreChartChecksums: true
     persistence:
-      storageClass: backup
+      storageClass: synology-csi-delete
+      size: 200Gi
     ingress:
       enabled: true
       ingressClassName: nginx
