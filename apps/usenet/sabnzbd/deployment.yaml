@@ -37,7 +37,7 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: data
-            - mountPath: /backup
+            - mountPath: /config/backup
               name: backup
             - mountPath: /incomplete-downloads
               name: incomplete-downloads
@@ -66,8 +66,6 @@ spec:
             timeoutSeconds: 5
             periodSeconds: 30
       restartPolicy: Always
-      securityContext:
-        fsGroup: 2000
       automountServiceAccountToken: false
       volumes:
         - name: data

@@ -40,7 +40,7 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: data
-            - mountPath: /backup
+            - mountPath: /config/backup
               name: backup
             - mountPath: /data/tvshows
               name: tvshows
