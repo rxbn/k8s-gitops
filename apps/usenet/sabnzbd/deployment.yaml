@@ -66,6 +66,8 @@ spec:
             timeoutSeconds: 5
             periodSeconds: 30
       restartPolicy: Always
+      securityContext:
+        fsGroup: 2000
       automountServiceAccountToken: false
       volumes:
         - name: data
