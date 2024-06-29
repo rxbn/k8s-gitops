@@ -60,9 +60,6 @@ spec:
             (proc.name startswith "python3")
             or (k8s.ns.name="gitlab" and proc.exepath="/kaniko/executor")
 
-        - list: allowed_container_images_loading_kernel_module
-          items: [docker.io/synology/synology-csi]
-
         - macro: allowed_clear_log_files
           condition: (fd.name startswith "/var/lib/rancher/k3s")
   valuesFrom:
