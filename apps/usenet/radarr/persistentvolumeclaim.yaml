@@ -24,7 +24,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: synology-csi-delete
+  storageClassName: backup
   resources:
     requests:
       storage: 1Gi

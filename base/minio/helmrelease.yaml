@@ -27,7 +27,7 @@ spec:
     mode: standalone
     ignoreChartChecksums: true
     persistence:
-      storageClass: synology-csi-delete
+      storageClass: backup
       size: 200Gi
     ingress:
       enabled: true
