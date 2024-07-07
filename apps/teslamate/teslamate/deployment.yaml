@@ -42,7 +42,7 @@ spec:
               memory: 16Mi
       containers:
         - name: teslamate
-          image: teslamate/teslamate:1.29.2
+          image: teslamate/teslamate:1.30.0
           env:
             - name: DISABLE_MQTT
               value: "true"
