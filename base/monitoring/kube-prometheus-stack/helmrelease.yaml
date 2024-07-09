@@ -118,6 +118,7 @@ spec:
       enabled: true
       endpoints:
         - ${HOST_IP_V4}
+        - ${HOST_IP_V6}
       service:
         enabled: true
         port: 10257
@@ -130,6 +131,7 @@ spec:
       enabled: true
       endpoints:
         - ${HOST_IP_V4}
+        - ${HOST_IP_V6}
       service:
         enabled: true
         port: 10259
