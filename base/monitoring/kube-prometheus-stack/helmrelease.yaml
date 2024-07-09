@@ -117,7 +117,7 @@ spec:
     kubeControllerManager:
       enabled: true
       endpoints:
-        - ${HOST_IP}
+        - ${HOST_IP_V4}
       service:
         enabled: true
         port: 10257
@@ -129,7 +129,7 @@ spec:
     kubeScheduler:
       enabled: true
       endpoints:
-        - ${HOST_IP}
+        - ${HOST_IP_V4}
       service:
         enabled: true
         port: 10259
