@@ -5,7 +5,7 @@ metadata:
   name: teslamate-postgres
   namespace: teslamate
   annotations:
-    metallb.universe.tf/address-pool: default
+    metallb.universe.tf/loadBalancerIPs: 10.0.1.201,${IPV6_PREFIX}::201
 spec:
   ports:
     - port: 5432
