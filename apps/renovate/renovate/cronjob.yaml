@@ -25,11 +25,11 @@ spec:
                 - sh
                 - -c
                 - |
-                  echo 'Waiting for Redis to become ready...'
+                  echo 'Waiting for Valkey to become ready...'
                   until printf "." && nc -z -w 2 renovate-valkey.renovate.svc.cluster.local 6379; do
                       sleep 2;
                   done;
-                  echo 'Redis OK ✓'
+                  echo 'Valkey OK ✓'
               securityContext:
                 allowPrivilegeEscalation: false
                 runAsUser: 1000

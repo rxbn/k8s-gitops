@@ -27,7 +27,7 @@ spec:
               until printf "." && nc -z -w 2 nextcloud-valkey.nextcloud.svc.cluster.local 6379; do
                   sleep 2;
               done;
-              echo 'Redis OK ✓'
+              echo 'Valkey OK ✓'
           securityContext:
             allowPrivilegeEscalation: false
             runAsUser: 1000
