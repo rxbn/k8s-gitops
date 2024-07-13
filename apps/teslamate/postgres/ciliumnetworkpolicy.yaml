@@ -11,7 +11,7 @@ spec:
   ingress:
     - fromCIDR:
         - 10.0.1.103/32
-        - ${IPV6_PREFIX}:0:11:32ff:fe2b:732d/128
+        - ${IPV6_PREFIX}::103/128
       toPorts:
         - ports:
             - port: "5432"
