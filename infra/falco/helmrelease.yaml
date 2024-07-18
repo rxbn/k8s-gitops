@@ -39,7 +39,7 @@ spec:
       falco_rules.local.yaml: |-
         - macro: user_known_stand_streams_redirect_activities
           condition: >
-            (k8s.ns.name="gitlab" and container.name in ("gitlab-shell", "gitlab-workhorse"))
+            (k8s.ns.name="gitlab" and container.name in ("gitaly", "gitlab-shell", "gitlab-workhorse"))
 
         - list: user_known_packet_socket_binaries
           items: [speaker]
