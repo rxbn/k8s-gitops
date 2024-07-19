@@ -15,6 +15,7 @@ resources:
   - kube-system.yaml
   - usenet.yaml
   - cloudflare-operator.yaml
+  - cnpg-system.yaml
   - cert-manager.yaml
   - teslamate.yaml
   - minio.yaml

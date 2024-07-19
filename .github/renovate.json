@@ -46,7 +46,10 @@
       "datasourceTemplate": "helm"
     },
     {
-      "fileMatch": ["crds\\/metallb\\/crds\\.yaml$"],
+      "fileMatch": [
+        "crds\\/metallb\\/crds\\.yaml$",
+        "crds\\/cloudnative-pg\\/crds\\.yaml$"
+      ],
       "matchStrings": [
         "datasource=(?<datasource>.*) depName=(?<depName>.*)\\s.*tag: (?<currentValue>.*)"
       ]
