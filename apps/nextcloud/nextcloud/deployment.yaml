@@ -47,7 +47,7 @@ spec:
             - -c
             - |
               echo 'Waiting for PostgreSQL to become ready...'
-              until printf "." && nc -z -w 2 nextcloud-postgres.nextcloud.svc.cluster.local 5432; do
+              until printf "." && nc -z -w 2 nextcloud-psql-rw.nextcloud.svc.cluster.local 5432; do
                   sleep 2;
               done;
               echo 'PostgreSQL OK ✓'
@@ -102,10 +102,23 @@ spec:
         - name: nextcloud
           image: nextcloud:29.0.3-fpm-alpine
           env:
-            - name: POSTGRES_DB
-              value: postgres
             - name: POSTGRES_HOST
-              value: nextcloud-postgres.nextcloud.svc.cluster.local
+              value: nextcloud-psql-rw.nextcloud.svc.cluster.local
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: nextcloud-psql-app
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nextcloud-psql-app
+                  key: password
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: nextcloud-psql-app
+                  key: dbname
             - name: NEXTCLOUD_TRUSTED_DOMAINS
               value: cloud.${BASE_DOMAIN}
             - name: TRUSTED_PROXIES
@@ -131,8 +144,6 @@ spec:
           envFrom:
             - secretRef:
                 name: nextcloud-mail-settings
-            - secretRef:
-                name: nextcloud-postgres
           volumeMounts:
             - mountPath: /var/www/html
               name: app-data
