@@ -12,12 +12,6 @@ spec:
   bootstrap:
     initdb:
       database: nextcloud
-      import:
-        type: microservice
-        databases:
-          - postgres
-        source:
-          externalCluster: nextcloud-postgres
   backup:
     barmanObjectStore:
       destinationPath: s3://db-backups
@@ -34,12 +28,3 @@ spec:
       data:
         compression: gzip
     retentionPolicy: 3d
-  externalClusters:
-    - name: nextcloud-postgres
-      connectionParameters:
-        host: nextcloud-postgres.nextcloud.svc.cluster.local
-        user: postgres
-        dbname: postgres
-      password:
-        name: nextcloud-postgres
-        key: POSTGRES_PASSWORD
