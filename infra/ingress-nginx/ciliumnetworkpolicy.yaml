@@ -49,5 +49,12 @@ spec:
         - ports:
             - port: "443"
               protocol: ANY
+    - fromCIDR:
+        - 10.0.1.103/32
+        - ${IPV6_PREFIX}::103/128
+      toPorts:
+        - ports:
+            - port: "5432"
+              protocol: TCP
     - fromEntities:
         - cluster
