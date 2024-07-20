@@ -46,6 +46,11 @@
       "datasourceTemplate": "helm"
     },
     {
+      "fileMatch": ["apps\\/(.+\\/)*postgres\\.yaml$"],
+      "matchStrings": ["imageName:\\s(?<depName>.*):(?<currentValue>.*)"],
+      "datasourceTemplate": "docker"
+    },
+    {
       "fileMatch": [
         "crds\\/metallb\\/crds\\.yaml$",
         "crds\\/cloudnative-pg\\/crds\\.yaml$"
@@ -57,7 +62,7 @@
   ],
   "kubernetes": {
     "fileMatch": [
-      "(apps|base|infra)\\/(.+\\/)*(deployment|daemonset|statefulset|cronjob|postgres)\\.yaml$"
+      "(apps|base|infra)\\/(.+\\/)*(deployment|daemonset|statefulset|cronjob)\\.yaml$"
     ]
   },
   "flux": {
