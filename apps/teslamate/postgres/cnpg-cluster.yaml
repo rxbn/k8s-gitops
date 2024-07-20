@@ -12,12 +12,6 @@ spec:
   bootstrap:
     initdb:
       database: teslamate
-      import:
-        type: microservice
-        databases:
-          - postgres
-        source:
-          externalCluster: teslamate-postgres
   backup:
     barmanObjectStore:
       destinationPath: s3://db-backups
@@ -34,12 +28,3 @@ spec:
       data:
         compression: gzip
     retentionPolicy: 3d
-  externalClusters:
-    - name: teslamate-postgres
-      connectionParameters:
-        host: teslamate-postgres.teslamate.svc.cluster.local
-        user: postgres
-        dbname: postgres
-      password:
-        name: teslamate-postgres
-        key: POSTGRES_PASSWORD
