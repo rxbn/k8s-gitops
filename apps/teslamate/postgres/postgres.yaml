@@ -2,7 +2,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: teslamate-psql
+  name: teslamate-postgres
   namespace: teslamate
 spec:
   instances: 1

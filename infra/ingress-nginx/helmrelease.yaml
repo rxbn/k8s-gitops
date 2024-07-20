@@ -61,4 +61,4 @@ spec:
       enabled: true
     tcp:
       "22": "gitlab/gitlab-gitlab-shell:22"
-      "5432": "teslamate/teslamate-psql-r:5432"
+      "5432": "teslamate/teslamate-postgres-r:5432"
