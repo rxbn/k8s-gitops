@@ -24,7 +24,7 @@ spec:
             - -c
             - |
               echo 'Waiting for PostgreSQL to become ready...'
-              until printf "." && nc -z -w 2 teslamate-postgres-rw.teslamate.svc.cluster.local 5432; do
+              until printf "." && nc -z -w 2 teslamate-psql-r.teslamate.svc.cluster.local 5432; do
                   sleep 2;
               done;
               echo 'PostgreSQL OK ✓'
@@ -79,7 +79,7 @@ spec:
             - name: GF_AUTH_SIGNOUT_REDIRECT_URL
               value: https://sso.${BASE_DOMAIN}/realms/master/protocol/openid-connect/logout
             - name: DATABASE_HOST
-              value: teslamate-postgres-rw.teslamate.svc.cluster.local
+              value: teslamate-psql-r.teslamate.svc.cluster.local
             - name: DATABASE_USER
               valueFrom:
                 secretKeyRef:
