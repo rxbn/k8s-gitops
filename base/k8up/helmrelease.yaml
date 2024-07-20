@@ -24,6 +24,7 @@ spec:
       tag: v2.10.0
     k8up:
       timezone: Europe/Zurich
+      skipWithoutAnnotation: true
     metrics:
       prometheusRule:
         enabled: true
