@@ -12,12 +12,6 @@ spec:
   bootstrap:
     initdb:
       database: keycloak
-      import:
-        type: microservice
-        databases:
-          - postgres
-        source:
-          externalCluster: keycloak-postgres
   backup:
     barmanObjectStore:
       destinationPath: s3://db-backups
@@ -34,12 +28,3 @@ spec:
       data:
         compression: gzip
     retentionPolicy: 3d
-  externalClusters:
-    - name: keycloak-postgres
-      connectionParameters:
-        host: keycloak-postgres.keycloak.svc.cluster.local
-        user: postgres
-        dbname: postgres
-      password:
-        name: keycloak-postgres
-        key: POSTGRES_PASSWORD
