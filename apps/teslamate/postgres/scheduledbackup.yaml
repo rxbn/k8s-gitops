@@ -1,0 +1,10 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: teslamate-psql
+  namespace: teslamate
+spec:
+  schedule: "0 10 2 * * *"
+  cluster:
+    name: teslamate-psql

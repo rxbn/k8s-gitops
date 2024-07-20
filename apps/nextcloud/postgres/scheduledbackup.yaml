@@ -1,0 +1,10 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: nextcloud-psql
+  namespace: nextcloud
+spec:
+  schedule: "0 5 2 * * *"
+  cluster:
+    name: nextcloud-psql
