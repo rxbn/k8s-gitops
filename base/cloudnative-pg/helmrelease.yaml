@@ -20,8 +20,6 @@ spec:
   values:
     crds:
       create: false
-    monitoring:
-      podMonitorEnabled: true
   install:
     crds: Skip
   upgrade:
