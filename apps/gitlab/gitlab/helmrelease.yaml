@@ -56,6 +56,11 @@ spec:
     gitlab-runner:
       install: false
     global:
+      psql:
+        host: gitlab-postgres-rw.gitlab.svc.cluster.local
+        password:
+          key: password
+          secret: gitlab-postgres-app
       kas:
         enabled: false
       appConfig:
@@ -110,10 +115,7 @@ spec:
     nginx-ingress:
       enabled: false
     postgresql:
-      image:
-        tag: 14.8.0
-      metrics:
-        enabled: false
+      install: false
     prometheus:
       install: false
     redis:
