@@ -1,0 +1,26 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: teslamate-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: teslamate.rules
+      rules:
+        - alert: TeslaMateOpenDrives
+          annotations:
+            description: Unclosed drives found in TeslaMate
+            runbook_url: https://docs.teslamate.org/docs/maintenance/manually_fixing_data#terminate-a-drive-or-charge
+          expr: cnpg_open_drives_open_drives > 0
+          for: 8h
+          labels:
+            severity: critical
+        - alert: TeslaMateIncompleteCharges
+          annotations:
+            description: Incomplete charges found in TeslaMate
+            runbook_url: https://docs.teslamate.org/docs/maintenance/manually_fixing_data#terminate-a-drive-or-charge
+          expr: cnpg_incomplete_charges_incomplete_charges > 0
+          for: 8h
+          labels:
+            severity: critical
