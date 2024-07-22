@@ -9,6 +9,9 @@ metadata:
 data:
   queries: |
     open_drives:
+      target_databases:
+        - teslamate
+
       query: "SELECT count(*) FROM drives WHERE end_date IS NULL;"
 
       metrics:
@@ -17,6 +20,9 @@ data:
             description: "Number of open drives"
 
     incomplete_charges:
+      target_databases:
+        - teslamate
+
       query: "SELECT count(*) FROM charging_processes WHERE end_date IS NULL;"
 
       metrics:
