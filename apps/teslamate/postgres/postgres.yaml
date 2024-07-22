@@ -32,4 +32,4 @@ spec:
     enablePodMonitor: true
     customQueriesConfigMap:
       - name: teslamate-monitoring
-        key: queries
+        key: custom-queries

@@ -7,25 +7,37 @@ metadata:
   labels:
     cnpg.io/reload: ""
 data:
-  queries: |
+  custom-queries: |
     open_drives:
-      target_databases:
-        - teslamate
-
-      query: "SELECT count(*) FROM drives WHERE end_date IS NULL;"
+      query: |
+        SELECT
+          current_database() as dbname,
+          count(*) as open_drives
+        FROM drives
+        WHERE
+          end_date IS NULL;
 
       metrics:
-        - open-drives:
+        - dbname:
+            usage: "LABEL"
+            description: "Database name"
+        - open_drives:
             usage: "GAUGE"
             description: "Number of open drives"
 
     incomplete_charges:
-      target_databases:
-        - teslamate
-
-      query: "SELECT count(*) FROM charging_processes WHERE end_date IS NULL;"
+      query: |
+        SELECT
+          current_database() as dbname,
+          count(*) as incomplete_charges
+        FROM charging_processes
+        WHERE
+          end_date IS NULL;
 
       metrics:
-        - incomplete-charges:
+        - dbname:
+            usage: "LABEL"
+            description: "Database name"
+        - incomplete_charges:
             usage: "GAUGE"
             description: "Number of incomplete charges"
