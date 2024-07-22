@@ -30,3 +30,6 @@ spec:
     retentionPolicy: 3d
   monitoring:
     enablePodMonitor: true
+    customQueriesConfigMap:
+      - name: teslamate-monitoring
+        key: queries

@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: teslamate-monitoring
+  namespace: teslamate
+  labels:
+    cnpg.io/reload: ""
+data:
+  queries: |
+    open_drives:
+      query: "SELECT count(*) FROM drives WHERE end_date IS NULL;"
+
+      metrics:
+        - open-drives:
+            usage: "GAUGE"
+            description: "Number of open drives"
+
+    incomplete_charges:
+      query: "SELECT count(*) FROM charging_processes WHERE end_date IS NULL;"
+
+      metrics:
+        - incomplete-charges:
+            usage: "GAUGE"
+            description: "Number of incomplete charges"
