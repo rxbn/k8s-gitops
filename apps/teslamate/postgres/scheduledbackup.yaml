@@ -5,6 +5,6 @@ metadata:
   name: teslamate-postgres
   namespace: teslamate
 spec:
-  schedule: "0 10 2 * * *"
+  schedule: 0 10 2 * * SUN
   cluster:
     name: teslamate-postgres

@@ -5,6 +5,6 @@ metadata:
   name: gitlab-postgres
   namespace: gitlab
 spec:
-  schedule: "0 15 2 * * *"
+  schedule: 0 15 2 * * SUN
   cluster:
     name: gitlab-postgres

@@ -5,6 +5,6 @@ metadata:
   name: nextcloud-postgres
   namespace: nextcloud
 spec:
-  schedule: "0 5 2 * * *"
+  schedule: 0 5 2 * * SUN
   cluster:
     name: nextcloud-postgres
