@@ -18,6 +18,8 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    envoy:
+      enabled: false
     hubble:
       enabled: true
       relay:
