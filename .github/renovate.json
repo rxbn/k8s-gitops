@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "semanticCommits": "enabled",
   "dependencyDashboard": true,
-  "separateMajorMinor": false,
+  "separateMajorMinor": true,
   "assignees": ["rxbn"],
   "timezone": "Europe/Zurich",
   "regexManagers": [
