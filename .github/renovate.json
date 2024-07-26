@@ -99,6 +99,10 @@
       "automerge": true,
       "automergeType": "branch",
       "requiredStatusChecks": null
+    },
+    {
+      "matchPackageNames": ["ghcr.io/cloudnative-pg/postgresql"],
+      "additionalBranchPrefix": "{{baseDir}}-"
     }
   ],
   "pre-commit": {
