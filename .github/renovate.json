@@ -102,7 +102,8 @@
     },
     {
       "matchPackageNames": ["ghcr.io/cloudnative-pg/postgresql"],
-      "additionalBranchPrefix": "{{baseDir}}-"
+      "additionalBranchPrefix": "{{baseDir}}-",
+      "major": false
     }
   ],
   "pre-commit": {
