@@ -5,5 +5,6 @@ resources:
   - sabnzbd
   - radarr
   - plex
+  - overseerr
   - sonarr
   - schedule.yaml

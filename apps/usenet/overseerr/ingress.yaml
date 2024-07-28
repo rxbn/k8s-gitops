@@ -1,0 +1,22 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: overseerr
+  namespace: usenet
+  annotations:
+    cloudflare-operator.io/content: ${BASE_DOMAIN}
+    cloudflare-operator.io/type: CNAME
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: overseerr.${BASE_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: overseerr
+                port:
+                  number: 5055
