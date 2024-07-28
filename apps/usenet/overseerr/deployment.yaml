@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: overseerr
-          image: lscr.io/linuxserver/overseerr:v1.33.2-ls112
+          image: lscr.io/linuxserver/overseerr:v1.33.2-ls113
           env:
             - name: PGID
               value: "2000"
