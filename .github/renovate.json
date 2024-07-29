@@ -106,9 +106,6 @@
       "major": false
     }
   ],
-  "pre-commit": {
-    "enabled": true
-  },
   "ignoreDeps": [
     "ghcr.io/fluxcd/helm-controller",
     "ghcr.io/fluxcd/image-automation-controller",
