@@ -82,13 +82,10 @@ metadata:
 spec:
   name: _autodiscover._tcp.${BASE_DOMAIN}
   data:
-    service: _autodiscover
-    proto: _tcp
     port: 443
-    name: ${BASE_DOMAIN}
     priority: 0
-    weight: 100
     target: ${SRV_TARGET}
+    weight: 100
   priority: 0
   proxied: false
   ttl: 1
