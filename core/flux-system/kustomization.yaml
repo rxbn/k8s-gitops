@@ -6,25 +6,67 @@ resources:
   - gotk-sync.yaml
 patches:
   - path: patch-flux-system-kustomization.yaml
-  - path: patch-source-controller-deployment.yaml
   - patch: |
+      $patch: delete
       apiVersion: networking.k8s.io/v1
       kind: NetworkPolicy
       metadata:
-        name: allow-egress
-        namespace: flux-system
-      $patch: delete
-  - patch: |
-      apiVersion: networking.k8s.io/v1
+        name: not-used
+    target:
+      group: networking.k8s.io
       kind: NetworkPolicy
-      metadata:
-        name: allow-scraping
-        namespace: flux-system
-      $patch: delete
   - patch: |
-      apiVersion: networking.k8s.io/v1
-      kind: NetworkPolicy
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --concurrent=12
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --kube-api-qps=500
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --kube-api-burst=1000
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --requeue-dependency=5s
+    target:
+      kind: Deployment
+      name: (kustomize-controller|helm-controller|source-controller)
+  - patch: |
+      apiVersion: apps/v1
+      kind: Deployment
       metadata:
-        name: allow-webhooks
-        namespace: flux-system
-      $patch: delete
+        name: not-used
+      spec:
+        template:
+          spec:
+            containers:
+              - name: manager
+                resources:
+                  limits:
+                    memory: 2Gi
+    target:
+      kind: Deployment
+      name: (kustomize-controller|helm-controller|source-controller)
+  - patch: |
+      - op: replace
+        path: /spec/template/spec/volumes/0
+        value:
+          name: temp
+          emptyDir:
+            medium: Memory
+    target:
+      kind: Deployment
+      name: kustomize-controller
+  - patch: |
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --feature-gates=OOMWatch=true
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --oom-watch-memory-threshold=95
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --oom-watch-interval=500ms
+    target:
+      kind: Deployment
+      name: helm-controller
