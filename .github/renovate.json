@@ -83,7 +83,7 @@
     {
       "matchDatasources": ["docker"],
       "matchPackagePatterns": [
-        "^lscr\\.io\\/linuxserver\\/(sonarr|radarr|sabnzbd|plex|overseerr)$"
+        "^ghcr\\.io\\/linuxserver\\/(sonarr|radarr|sabnzbd|plex|overseerr)$"
       ],
       "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.?(?<build>\\d+)?.*?-ls(?<revision>\\d+)$"
     },
