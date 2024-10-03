@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: oauth2-proxy-valkey
-          image: valkey/valkey:8.0.0-alpine
+          image: valkey/valkey:8.0.1-alpine
           env:
             - name: TZ
               value: Europe/Zurich
