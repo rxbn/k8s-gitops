@@ -61,8 +61,6 @@ spec:
                   key: jdbc-uri
             - name: KC_HEALTH_ENABLED
               value: "true"
-            - name: KC_FEATURES
-              value: persistent-user-sessions,hostname:v2
           envFrom:
             - secretRef:
                 name: keycloak
