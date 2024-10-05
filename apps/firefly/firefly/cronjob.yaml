@@ -19,12 +19,12 @@ spec:
         spec:
           containers:
             - name: firefly-cron
-              image: busybox:1.37.0
+              image: ghcr.io/containeroo/toolbox:v2.4.7
               command:
-                - sh
+                - bash
                 - -c
                 - |
-                  wget http://firefly.firefly.svc.cluster.local:8080/api/v1/cron/${CRON_TOKEN}
+                  curl http://firefly.firefly.svc.cluster.local:8080/api/v1/cron/${CRON_TOKEN}
               env:
                 - name: CRON_TOKEN
                   valueFrom:
