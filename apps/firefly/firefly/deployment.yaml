@@ -1,0 +1,107 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: firefly
+  namespace: firefly
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: firefly
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: firefly
+    spec:
+      initContainers:
+        - name: wait-for-database
+          image: busybox:1.37.0
+          command:
+            - sh
+            - -c
+            - |
+              echo 'Waiting for PostgreSQL to become ready...'
+              until printf "." && nc -z -w 2 firefly-postgres-rw.firefly.svc.cluster.local 5432; do
+                  sleep 2;
+              done;
+              echo 'PostgreSQL OK ✓'
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 10m
+              memory: 16Mi
+      containers:
+        - name: firefly
+          image: fireflyiii/core:version-6.1.21
+          env:
+            - name: DB_CONNECTION
+              value: pgsql
+            - name: DB_HOST
+              value: firefly-postgres-rw.firefly.svc.cluster.local
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: firefly-postgres-app
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: firefly-postgres-app
+                  key: password
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: firefly-postgres-app
+                  key: dbname
+            - name: TRUSTED_PROXIES
+              value: "*"
+            - name: AUTHENTICATION_GUARD
+              value: remote_user_guard
+            - name: AUTHENTICATION_GUARD_HEADER
+              value: HTTP_REMOTE_USER
+          envFrom:
+            - secretRef:
+                name: firefly
+          volumeMounts:
+            - name: firefly-uploads
+              mountPath: /var/www/html/storage/upload
+          ports:
+            - containerPort: 8080
+          # startupProbe:
+          #   httpGet:
+          #     path: /health
+          #     port: 9000
+          #   initialDelaySeconds: 30
+          #   timeoutSeconds: 1
+          #   failureThreshold: 60
+          #   periodSeconds: 5
+          # livenessProbe:
+          #   httpGet:
+          #     path: /health/live
+          #     port: 9000
+          #   initialDelaySeconds: 0
+          #   timeoutSeconds: 5
+          # readinessProbe:
+          #   httpGet:
+          #     path: /health/ready
+          #     port: 9000
+          #   initialDelaySeconds: 10
+          #   timeoutSeconds: 1
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      volumes:
+        - name: firefly-uploads
+          persistentVolumeClaim:
+            claimName: firefly-uploads
