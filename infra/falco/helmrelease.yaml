@@ -43,6 +43,7 @@ spec:
             or (k8s.ns.name="flux-system" and proc.name="gpg-agent")
             or (k8s.ns.name="renovate" and container.name="renovate")
             or (k8s.ns.name="ingress-nginx" and container.name="controller")
+            or (k8s.ns.name="firefly" and container.name="firefly")
             or (container.name="postgres")
 
         - list: user_known_packet_socket_binaries
