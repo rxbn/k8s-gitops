@@ -30,6 +30,6 @@ spec:
                   valueFrom:
                     secretKeyRef:
                       name: firefly
-                      key: cron-token
+                      key: CRON_TOKEN
           restartPolicy: Never
           automountServiceAccountToken: false
