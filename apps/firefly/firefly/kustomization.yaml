@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - ingress.yaml
+  - cronjob.yaml
   - service.yaml
   - secret.yaml
   - persistentvolumeclaim.yaml
