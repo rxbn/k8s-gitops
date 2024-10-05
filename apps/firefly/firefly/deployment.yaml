@@ -79,26 +79,26 @@ spec:
               mountPath: /var/www/html/storage/upload
           ports:
             - containerPort: 8080
-          # startupProbe:
-          #   httpGet:
-          #     path: /health
-          #     port: 9000
-          #   initialDelaySeconds: 30
-          #   timeoutSeconds: 1
-          #   failureThreshold: 60
-          #   periodSeconds: 5
-          # livenessProbe:
-          #   httpGet:
-          #     path: /health/live
-          #     port: 9000
-          #   initialDelaySeconds: 0
-          #   timeoutSeconds: 5
-          # readinessProbe:
-          #   httpGet:
-          #     path: /health/ready
-          #     port: 9000
-          #   initialDelaySeconds: 10
-          #   timeoutSeconds: 1
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 60
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 0
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
       restartPolicy: Always
       automountServiceAccountToken: false
       volumes:
