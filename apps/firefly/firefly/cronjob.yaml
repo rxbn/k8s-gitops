@@ -19,7 +19,7 @@ spec:
         spec:
           containers:
             - name: firefly-cron
-              image: ghcr.io/containeroo/toolbox:v2.4.7
+              image: ghcr.io/containeroo/alpine-toolbox:2.4.7
               command:
                 - bash
                 - -c
