@@ -38,6 +38,7 @@ spec:
         backups:
           cron:
             enabled: true
+            timeZone: Europe/Zurich
             schedule: 0 1 * * *
             successfulJobsHistoryLimit: 1
       webservice:
@@ -147,14 +148,6 @@ spec:
   postRenderers:
     - kustomize:
         patches:
-          - patch: |
-              apiVersion: batch/v1
-              kind: CronJob
-              metadata:
-                name: gitlab-toolbox-backup
-                namespace: gitlab
-              spec:
-                timeZone: Europe/Zurich
           - patch: |-
               apiVersion: autoscaling/v2
               kind: HorizontalPodAutoscaler
