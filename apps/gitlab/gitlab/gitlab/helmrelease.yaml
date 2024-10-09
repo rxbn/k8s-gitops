@@ -24,6 +24,9 @@ spec:
       gitlab-exporter:
         enabled: false
       gitlab-shell:
+        service:
+          type: LoadBalancer
+          externalTrafficPolicy: Local
         maxReplicas: 1
         minReplicas: 1
       migrations:
@@ -96,6 +99,7 @@ spec:
           name: gitlab-minio.local.${BASE_DOMAIN}
         registry:
           name: registry.${BASE_DOMAIN}
+        ssh: ssh.git.${BASE_DOMAIN}
       ingress:
         configureCertmanager: false
         enabled: true
@@ -148,6 +152,19 @@ spec:
   postRenderers:
     - kustomize:
         patches:
+          - patch: |-
+              apiVersion: v1
+              kind: Service
+              metadata:
+                name: gitlab-gitlab-shell
+                namespace: gitlab
+                annotations:
+                  metallb.universe.tf/loadBalancerIPs: 10.0.1.201,${IPV6_PREFIX}::201
+              spec:
+                ipFamilyPolicy: PreferDualStack
+                ipFamilies:
+                  - IPv4
+                  - IPv6
           - patch: |-
               apiVersion: autoscaling/v2
               kind: HorizontalPodAutoscaler
