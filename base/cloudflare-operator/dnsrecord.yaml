@@ -47,7 +47,7 @@ spec:
   name: ssh.git.${BASE_DOMAIN}
   type: AAAA
   content: ${IPV6_PREFIX}::201
-  proxied: true
+  proxied: false
   ttl: 1
 ---
 apiVersion: cloudflare-operator.io/v1
