@@ -16,8 +16,6 @@ spec:
         - ${LAN_NETWORK_RANGE_V6}
       toPorts:
         - ports:
-            - port: "22"
-              protocol: ANY
             - port: "80"
               protocol: ANY
             - port: "443"
