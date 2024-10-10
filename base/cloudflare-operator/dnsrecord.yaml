@@ -28,6 +28,30 @@ spec:
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
+  name: ssh-git-${BASE_DOMAIN/./-}-v4
+  namespace: cloudflare-operator
+spec:
+  name: ssh.git.${BASE_DOMAIN}
+  type: CNAME
+  content: ${BASE_DOMAIN}
+  proxied: false
+  ttl: 1
+---
+apiVersion: cloudflare-operator.io/v1
+kind: DNSRecord
+metadata:
+  name: ssh-git-${BASE_DOMAIN/./-}-v6
+  namespace: cloudflare-operator
+spec:
+  name: ssh.git.${BASE_DOMAIN}
+  type: AAAA
+  content: ${IPV4_PREFIX}::201
+  proxied: true
+  ttl: 1
+---
+apiVersion: cloudflare-operator.io/v1
+kind: DNSRecord
+metadata:
   name: vpn-${BASE_DOMAIN/./-}
   namespace: cloudflare-operator
 spec:
