@@ -83,9 +83,16 @@
     {
       "matchDatasources": ["docker"],
       "matchPackagePatterns": [
-        "^ghcr\\.io\\/linuxserver\\/(sonarr|radarr|sabnzbd|plex|overseerr)$"
+        "^ghcr\\.io\\/linuxserver\\/(sonarr|radarr|plex)$"
       ],
       "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.?(?<build>\\d+)?.*?-ls(?<revision>\\d+)$"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackagePatterns": [
+        "^ghcr\\.io\\/linuxserver\\/(sabnzbd|overseerr)$"
+      ],
+      "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-ls(?<build>\\d+)$"
     },
     {
       "matchDatasources": ["docker"],
