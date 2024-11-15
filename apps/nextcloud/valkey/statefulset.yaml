@@ -6,7 +6,7 @@ metadata:
   namespace: nextcloud
 spec:
   serviceName: nextcloud-valkey
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: nextcloud-valkey
