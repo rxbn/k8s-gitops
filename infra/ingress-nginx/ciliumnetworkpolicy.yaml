@@ -17,9 +17,9 @@ spec:
       toPorts:
         - ports:
             - port: "80"
-              protocol: ANY
+              protocol: TCP
             - port: "443"
-              protocol: ANY
+              protocol: TCP
     - fromCIDR:
         - 103.21.244.0/22
         - 103.22.200.0/22
@@ -46,6 +46,6 @@ spec:
       toPorts:
         - ports:
             - port: "443"
-              protocol: ANY
+              protocol: TCP
     - fromEntities:
         - cluster
