@@ -31,7 +31,7 @@ spec:
           namespace: monitoring
       allowSnippetAnnotations: true
       config:
-        disable-access-log: "true"
+        disable-access-log: "false"
         force-ssl-redirect: "true"
         forwarded-for-header: CF-Connecting-IP
         ssl-protocols: TLSv1.3 TLSv1.2
