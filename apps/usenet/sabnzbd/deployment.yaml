@@ -29,7 +29,7 @@ spec:
             - name: DOCKER_MODS
               value: containeroo/docker-mods:universal-mkvtoolnix|ghcr.io/themepark-dev/theme.park:sabnzbd
             - name: TP_THEME
-              value: catppuccin-frappe
+              value: catppuccin-mocha
             - name: TP_COMMUNITY_THEME
               value: "true"
           ports:
