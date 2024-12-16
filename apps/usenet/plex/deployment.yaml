@@ -48,8 +48,6 @@ spec:
               name: movies
             - mountPath: /data/movies2
               name: movies2
-            - mountPath: /data/movies3
-              name: movies3
             - mountPath: /transcode
               name: tmpfs
           resources:
@@ -93,10 +91,6 @@ spec:
         - name: movies2
           hostPath:
             path: /mnt/tank/media/movies2
-            type: Directory
-        - name: movies3
-          hostPath:
-            path: /mnt/tank/media/movies3
             type: Directory
         - name: tmpfs
           emptyDir:
