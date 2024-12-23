@@ -28,7 +28,7 @@ spec:
         - ip: ${IPV6_PREFIX}::200
           hostnames:
             - oauth2-proxy.${BASE_DOMAIN}
-        - ip: ${METALLB_INGRESS_NGINX_ADDRESS_POOL_V4}
+        - ip: ${METALLB_INGRESS_NGINX_ADDRESS_POOL_V4%/32}
           hostnames:
             - oauth2-proxy.${BASE_DOMAIN}
       metrics:
