@@ -24,6 +24,13 @@ spec:
       interval: 5m
   values:
     controller:
+      hostAliases:
+        - ip: ${IPV6_PREFIX}::200
+          hostnames:
+            - oauth2-proxy.${BASE_DOMAIN}
+        - ip: ${METALLB_INGRESS_NGINX_ADDRESS_POOL_V4}
+          hostnames:
+            - oauth2-proxy.${BASE_DOMAIN}
       metrics:
         enabled: true
         serviceMonitor:
