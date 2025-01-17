@@ -34,6 +34,9 @@ spec:
       config:
         slack:
           minimumpriority: notice
+        loki:
+          grafanaDashboard:
+            enabled: false
     tty: true
     customRules:
       falco_rules.local.yaml: |-
