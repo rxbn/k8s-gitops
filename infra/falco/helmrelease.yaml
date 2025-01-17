@@ -11,7 +11,7 @@ spec:
   chart:
     spec:
       chart: falco
-      version: 4.17.0
+      version: 4.17.1
       sourceRef:
         kind: HelmRepository
         name: falcosecurity
@@ -34,6 +34,9 @@ spec:
       config:
         slack:
           minimumpriority: notice
+        loki:
+          grafanaDashboard:
+            enabled: false
     tty: true
     customRules:
       falco_rules.local.yaml: |-
