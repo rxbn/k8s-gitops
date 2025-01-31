@@ -21,6 +21,8 @@ spec:
     driver:
       kind: modern_ebpf
     collectors:
+      kubernetes:
+        enabled: true
       containerd:
         enabled: true
         socket: /run/k3s/containerd/containerd.sock
@@ -29,7 +31,7 @@ spec:
       docker:
         enabled: false
     falcosidekick:
-      enabled: true
+      enabled: false
       replicaCount: 1
       config:
         slack:
