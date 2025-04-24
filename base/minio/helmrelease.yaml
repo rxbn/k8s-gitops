@@ -40,11 +40,9 @@ spec:
       enabled: true
       ingressClassName: nginx
       annotations:
-        cloudflare-operator.io/content: ${BASE_DOMAIN}
-        cloudflare-operator.io/type: CNAME
-        # nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
+        nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
       hosts:
-        - minio-console.${BASE_DOMAIN}
+        - minio-console.local.${BASE_DOMAIN}
     environment:
       TZ: Europe/Zurich
     resources:
