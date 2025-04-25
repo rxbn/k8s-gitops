@@ -7,7 +7,7 @@ metadata:
 spec:
   interval: 5m
   driftDetection:
-    mode: disabled
+    mode: enabled
   chart:
     spec:
       chart: gitlab
@@ -61,10 +61,10 @@ spec:
       install: false
     global:
       psql:
-        host: gitlab-postgres-rw.gitlab.svc.cluster.local
+        host: gitlab-postgres-16-rw.gitlab.svc.cluster.local
         password:
           key: password
-          secret: gitlab-postgres-app
+          secret: gitlab-postgres-16-app
       kas:
         enabled: false
       appConfig:
