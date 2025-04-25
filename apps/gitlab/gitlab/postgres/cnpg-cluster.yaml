@@ -2,39 +2,6 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: gitlab-postgres
-  namespace: gitlab
-spec:
-  instances: 1
-  imageName: ghcr.io/cloudnative-pg/postgresql:15.12
-  storage:
-    size: 20Gi
-  bootstrap:
-    initdb:
-      database: gitlabhq_production
-      owner: gitlab
-  backup:
-    barmanObjectStore:
-      destinationPath: s3://db-backups
-      endpointURL: http://minio.minio.svc.cluster.local:9000
-      s3Credentials:
-        accessKeyId:
-          name: db-backup
-          key: accessKey
-        secretAccessKey:
-          name: db-backup
-          key: secretKey
-      wal:
-        compression: gzip
-      data:
-        compression: gzip
-    retentionPolicy: 30d
-  monitoring:
-    enablePodMonitor: true
----
-apiVersion: postgresql.cnpg.io/v1
-kind: Cluster
-metadata:
   name: gitlab-postgres-16
   namespace: gitlab
 spec:
@@ -46,12 +13,6 @@ spec:
     initdb:
       database: gitlabhq_production
       owner: gitlab
-      import:
-        type: microservice
-        databases:
-          - gitlabhq_production
-        source:
-          externalCluster: gitlab-postgres
   backup:
     barmanObjectStore:
       destinationPath: s3://db-backups
@@ -70,12 +31,3 @@ spec:
     retentionPolicy: 30d
   monitoring:
     enablePodMonitor: true
-  externalClusters:
-    - name: gitlab-postgres
-      connectionParameters:
-        host: gitlab-postgres-r.gitlab.svc.cluster.local
-        user: gitlab
-        dbname: gitlabhq_production
-      password:
-        name: gitlab-postgres-app
-        key: password
