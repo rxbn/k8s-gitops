@@ -3,18 +3,26 @@
   "semanticCommits": "enabled",
   "dependencyDashboard": true,
   "separateMajorMinor": true,
-  "assignees": ["rxbn"],
+  "assignees": [
+    "rxbn"
+  ],
   "timezone": "Europe/Zurich",
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [".github\\/workflows\\/sync-cloudflare-nets\\.yaml$"],
-      "matchStrings": ["depName=(?<depName>.*)\\s.*\\/(?<currentValue>.*?)\\/"],
+      "managerFilePatterns": [
+        "/.github\\/workflows\\/sync-cloudflare-nets\\.yaml$/"
+      ],
+      "matchStrings": [
+        "depName=(?<depName>.*)\\s.*\\/(?<currentValue>.*?)\\/"
+      ],
       "datasourceTemplate": "github-releases"
     },
     {
       "customType": "regex",
-      "fileMatch": [".github\\/workflows\\/helm-release-differ\\.yaml$"],
+      "managerFilePatterns": [
+        "/.github\\/workflows\\/helm-release-differ\\.yaml$/"
+      ],
       "matchStrings": [
         "depName=(?<depName>.*)\\s.*version: (?<currentValue>.*)"
       ],
@@ -22,14 +30,18 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["crds\\/cloudflare-operator\\/kustomization\\.yaml$"],
+      "managerFilePatterns": [
+        "/crds\\/cloudflare-operator\\/kustomization\\.yaml$/"
+      ],
       "matchStrings": [
         "datasource=(?<datasource>.*) depName=(?<depName>.*)\\s.*\\/(?<currentValue>.*?)\\/"
       ]
     },
     {
       "customType": "regex",
-      "fileMatch": ["crds\\/k8up\\/kustomization\\.yaml$"],
+      "managerFilePatterns": [
+        "/crds\\/k8up\\/kustomization\\.yaml$/"
+      ],
       "matchStrings": [
         "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*)\\s.*\\/k8up-(?<currentValue>.*?)\\/"
       ],
@@ -37,7 +49,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["crds\\/cert-manager\\/kustomization\\.yaml$"],
+      "managerFilePatterns": [
+        "/crds\\/cert-manager\\/kustomization\\.yaml$/"
+      ],
       "matchStrings": [
         "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*?)\\s.*\\/(?<currentValue>.*?)\\/"
       ],
@@ -45,7 +59,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["crds\\/kube-prometheus-stack\\/crds\\.yaml$"],
+      "managerFilePatterns": [
+        "/crds\\/kube-prometheus-stack\\/crds\\.yaml$/"
+      ],
       "matchStrings": [
         "registryUrl=(?<registryUrl>.*)\\s.*tag: (?<depName>.*)-(?<currentValue>.*)"
       ],
@@ -53,15 +69,19 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["apps\\/(.+\\/)*cnpg-cluster\\.yaml$"],
-      "matchStrings": ["imageName:\\s(?<depName>.*):(?<currentValue>.*)"],
+      "managerFilePatterns": [
+        "/apps\\/(.+\\/)*cnpg-cluster\\.yaml$/"
+      ],
+      "matchStrings": [
+        "imageName:\\s(?<depName>.*):(?<currentValue>.*)"
+      ],
       "datasourceTemplate": "docker"
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "crds\\/metallb\\/crds\\.yaml$",
-        "crds\\/cloudnative-pg\\/crds\\.yaml$"
+      "managerFilePatterns": [
+        "/crds\\/metallb\\/crds\\.yaml$/",
+        "/crds\\/cloudnative-pg\\/crds\\.yaml$/"
       ],
       "matchStrings": [
         "datasource=(?<datasource>.*) depName=(?<depName>.*)\\s.*tag: (?<currentValue>.*)"
@@ -69,52 +89,85 @@
     }
   ],
   "kubernetes": {
-    "fileMatch": [
-      "(apps|base|infra)\\/(.+\\/)*(deployment|daemonset|statefulset|cronjob)\\.yaml$"
+    "managerFilePatterns": [
+      "/(apps|base|infra)\\/(.+\\/)*(deployment|daemonset|statefulset|cronjob)\\.yaml$/"
     ]
   },
   "flux": {
-    "fileMatch": [
-      "((apps|base|infra)\\/(.+\\/)*helmrelease|core\\/helmrepositories\\/.*)\\.yaml$"
+    "managerFilePatterns": [
+      "/((apps|base|infra)\\/(.+\\/)*helmrelease|core\\/helmrepositories\\/.*)\\.yaml$/"
     ]
   },
   "helm-values": {
-    "fileMatch": ["(apps|base|infra)\\/(.+\\/)*helmrelease\\.yaml$"]
+    "managerFilePatterns": [
+      "/(apps|base|infra)\\/(.+\\/)*helmrelease\\.yaml$/"
+    ]
   },
   "packageRules": [
     {
-      "matchDatasources": ["docker", "helm", "github-releases", "github-tags"],
-      "matchUpdateTypes": ["patch", "minor", "major"],
-      "labels": ["renovate/{{datasource}}", "dep/{{updateType}}"],
+      "matchDatasources": [
+        "docker",
+        "helm",
+        "github-releases",
+        "github-tags"
+      ],
+      "matchUpdateTypes": [
+        "patch",
+        "minor",
+        "major"
+      ],
+      "labels": [
+        "renovate/{{datasource}}",
+        "dep/{{updateType}}"
+      ],
       "enabled": true
     },
     {
-      "matchDatasources": ["docker"],
+      "matchDatasources": [
+        "docker"
+      ],
       "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.?(?<build>\\d+)?.*?-ls(?<revision>\\d+)$",
       "matchPackageNames": [
         "/^ghcr\\.io\\/linuxserver\\/(sonarr|radarr|plex)$/"
       ]
     },
     {
-      "matchDatasources": ["docker"],
+      "matchDatasources": [
+        "docker"
+      ],
       "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-ls(?<build>\\d+)$",
-      "matchPackageNames": ["/^ghcr\\.io\\/linuxserver\\/(sabnzbd|overseerr)$/"]
+      "matchPackageNames": [
+        "/^ghcr\\.io\\/linuxserver\\/(sabnzbd|overseerr)$/"
+      ]
     },
     {
-      "matchDatasources": ["docker"],
+      "matchDatasources": [
+        "docker"
+      ],
       "versioning": "regex:^RELEASE\\.(?<major>\\d+)-(?<minor>\\d+)-(?<patch>\\d+)T.*Z$",
-      "matchPackageNames": ["quay.io/minio/minio"]
+      "matchPackageNames": [
+        "quay.io/minio/minio"
+      ]
     },
     {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "matchPackageNames": ["renovate/renovate"],
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "matchPackageNames": [
+        "renovate/renovate"
+      ],
       "automerge": true,
       "automergeType": "branch",
       "ignoreTests": true
     },
     {
-      "matchPackageNames": ["ghcr.io/cloudnative-pg/postgresql"],
+      "matchPackageNames": [
+        "ghcr.io/cloudnative-pg/postgresql"
+      ],
       "additionalBranchPrefix": "{{packageFileDir}}-",
       "major": {
         "enabled": false
