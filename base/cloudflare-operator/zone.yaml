@@ -5,4 +5,4 @@ metadata:
   name: ${BASE_DOMAIN/./-}
 spec:
   name: ${BASE_DOMAIN}
-  prune: false
+  prune: true
