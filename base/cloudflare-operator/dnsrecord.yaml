@@ -77,7 +77,7 @@ spec:
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
-  name: mail-{BASE_DOMAIN/./-}-v6
+  name: mail-${BASE_DOMAIN/./-}-v6
   namespace: cloudflare-operator
 spec:
   name: mail.${BASE_DOMAIN}
