@@ -114,7 +114,7 @@ spec:
           secret: gitlab-mail-password
         port: 587
         starttls_auto: true
-        user_name: git@${BASE_DOMAIN}
+        user_name: mail@${BASE_DOMAIN}
       time_zone: Europe/Zurich
     nginx-ingress:
       enabled: false
