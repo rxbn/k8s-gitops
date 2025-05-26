@@ -45,7 +45,7 @@ metadata:
   namespace: cloudflare-operator
 spec:
   name: mail.${BASE_DOMAIN}
-  proxied: true
+  proxied: false
   ttl: 1
   type: A
   content: ${MAIL_IP_V4}
@@ -57,7 +57,7 @@ metadata:
   namespace: cloudflare-operator
 spec:
   name: mail.${BASE_DOMAIN}
-  proxied: true
+  proxied: false
   ttl: 1
   type: AAAA
   content: ${MAIL_IP_V6}
@@ -99,7 +99,7 @@ metadata:
 spec:
   name: autodiscover.${BASE_DOMAIN}
   content: mail.${BASE_DOMAIN}
-  proxied: true
+  proxied: false
   ttl: 1
   type: CNAME
 ---
@@ -128,7 +128,7 @@ metadata:
 spec:
   name: autoconfig.${BASE_DOMAIN}
   content: mail.${BASE_DOMAIN}
-  proxied: true
+  proxied: false
   ttl: 1
   type: CNAME
 ---
