@@ -65,10 +65,50 @@ spec:
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
+  name: mail-${BASE_DOMAIN/./-}-v4
+  namespace: cloudflare-operator
+spec:
+  name: mail.${BASE_DOMAIN}
+  proxied: false
+  ttl: 1
+  type: A
+  content: ${MAIL_IP_V4}
+---
+apiVersion: cloudflare-operator.io/v1
+kind: DNSRecord
+metadata:
+  name: mail-{BASE_DOMAIN/./-}-v6
+  namespace: cloudflare-operator
+spec:
+  name: mail.${BASE_DOMAIN}
+  proxied: false
+  ttl: 1
+  type: AAAA
+  content: ${MAIL_IP_V6}
+---
+apiVersion: cloudflare-operator.io/v1
+kind: DNSRecord
+metadata:
+  name: mail-${BASE_DOMAIN/./-}-tlsa
+  namespace: cloudflare-operator
+spec:
+  name: _25._tcp.mail.${BASE_DOMAIN}
+  proxied: false
+  ttl: 1
+  type: TLSA
+  data:
+    certificate: faf63dddf7d2999df871e09094947c24f147b1f0582a1bdbb442690811067ee7
+    usage: 3
+    selector: 1
+    matching_type: 1
+---
+apiVersion: cloudflare-operator.io/v1
+kind: DNSRecord
+metadata:
   name: ${BASE_DOMAIN/./-}-mx
   namespace: cloudflare-operator
 spec:
-  content: ${MX_SERVER}
+  content: mail.${BASE_DOMAIN}
   name: ${BASE_DOMAIN}
   priority: 10
   proxied: false
@@ -78,26 +118,14 @@ spec:
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
-  name: ${BASE_DOMAIN/./-}-spf
+  name: ${BASE_DOMAIN/./-}-autodiscover
   namespace: cloudflare-operator
 spec:
-  content: ${SPF_CONTENT}
-  name: ${BASE_DOMAIN}
+  name: autodiscover.${BASE_DOMAIN}
+  content: mail.${BASE_DOMAIN}
   proxied: false
   ttl: 1
-  type: TXT
----
-apiVersion: cloudflare-operator.io/v1
-kind: DNSRecord
-metadata:
-  name: ${BASE_DOMAIN/./-}-dkim
-  namespace: cloudflare-operator
-spec:
-  content: ${DKIM_CONTENT}
-  name: sel2011a._domainkey.${BASE_DOMAIN}
-  proxied: false
-  ttl: 1
-  type: TXT
+  type: CNAME
 ---
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
@@ -109,9 +137,57 @@ spec:
   data:
     port: 443
     priority: 0
-    target: ${SRV_TARGET}
-    weight: 100
+    target: mail.${BASE_DOMAIN}
+    weight: 1
   priority: 0
   proxied: false
   ttl: 1
   type: SRV
+---
+apiVersion: cloudflare-operator.io/v1
+kind: DNSRecord
+metadata:
+  name: ${BASE_DOMAIN/./-}-autoconfig
+  namespace: cloudflare-operator
+spec:
+  name: autoconfig.${BASE_DOMAIN}
+  content: mail.${BASE_DOMAIN}
+  proxied: false
+  ttl: 1
+  type: CNAME
+---
+apiVersion: cloudflare-operator.io/v1
+kind: DNSRecord
+metadata:
+  name: ${BASE_DOMAIN/./-}-spf
+  namespace: cloudflare-operator
+spec:
+  name: ${BASE_DOMAIN}
+  content: v=spf1 mx a -all
+  proxied: false
+  ttl: 1
+  type: TXT
+---
+apiVersion: cloudflare-operator.io/v1
+kind: DNSRecord
+metadata:
+  name: ${BASE_DOMAIN/./-}-dmarc
+  namespace: cloudflare-operator
+spec:
+  name: _dmarc.${BASE_DOMAIN}
+  content: v=DMARC1; p=reject; rua=mailto:dmarc-reports@${BASE_DOMAIN}
+  proxied: false
+  ttl: 1
+  type: TXT
+---
+apiVersion: cloudflare-operator.io/v1
+kind: DNSRecord
+metadata:
+  name: ${BASE_DOMAIN/./-}-dkim
+  namespace: cloudflare-operator
+spec:
+  content: v=DKIM1;k=rsa;t=s;s=email;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA38tLz37hSo9nZ86I8lagiUSOqHSaNBAnwZu7PcvtMgceeTYfFKsYp4rxdxhFVPYe5iQsAmLb/1peJg+3Hx+UVuzSJPzBW9Z2sS76k6kvDJ0ONl1NGUUq9qpmdeY23TKAIN+j3XD4eMm2572bhBIb1ORFqhmgJzafaAr4zv4vHnZT/kdNHHI8ZMhJkHhSqVec1R2yPmEq0gomBE/X3YADkZsuKIks7+rYJbQ+aH3acBTZUSR9sXUbFI7o2xxUOd4v69zVmJoUvgQPSY8TOpK/Z/jw9ZX8qjzAMomFvo4k5exOAXNH17+IVJBPTyC9gLWA4q4U1BFKVVPQd5B289uk9wIDAQAB
+  name: dkim._domainkey.${BASE_DOMAIN}
+  proxied: false
+  ttl: 1
+  type: TXT
