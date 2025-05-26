@@ -28,31 +28,6 @@ spec:
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
-  name: ssh-git-${BASE_DOMAIN/./-}-v4
-  namespace: cloudflare-operator
-spec:
-  name: ssh.git.${BASE_DOMAIN}
-  type: A
-  ipRef:
-    name: ${BASE_DOMAIN/./-}-v4
-  proxied: false
-  ttl: 1
----
-apiVersion: cloudflare-operator.io/v1
-kind: DNSRecord
-metadata:
-  name: ssh-git-${BASE_DOMAIN/./-}-v6
-  namespace: cloudflare-operator
-spec:
-  name: ssh.git.${BASE_DOMAIN}
-  type: AAAA
-  content: ${IPV6_PREFIX}::201
-  proxied: false
-  ttl: 1
----
-apiVersion: cloudflare-operator.io/v1
-kind: DNSRecord
-metadata:
   name: vpn-${BASE_DOMAIN/./-}
   namespace: cloudflare-operator
 spec:
@@ -70,7 +45,7 @@ metadata:
   namespace: cloudflare-operator
 spec:
   name: mail.${BASE_DOMAIN}
-  proxied: false
+  proxied: true
   ttl: 1
   type: A
   content: ${MAIL_IP_V4}
@@ -82,7 +57,7 @@ metadata:
   namespace: cloudflare-operator
 spec:
   name: mail.${BASE_DOMAIN}
-  proxied: false
+  proxied: true
   ttl: 1
   type: AAAA
   content: ${MAIL_IP_V6}
@@ -124,7 +99,7 @@ metadata:
 spec:
   name: autodiscover.${BASE_DOMAIN}
   content: mail.${BASE_DOMAIN}
-  proxied: false
+  proxied: true
   ttl: 1
   type: CNAME
 ---
@@ -153,7 +128,7 @@ metadata:
 spec:
   name: autoconfig.${BASE_DOMAIN}
   content: mail.${BASE_DOMAIN}
-  proxied: false
+  proxied: true
   ttl: 1
   type: CNAME
 ---
