@@ -136,7 +136,7 @@ spec:
             - name: SMTP_AUTHTYPE
               value: LOGIN
             - name: SMTP_NAME
-              value: cloud@${BASE_DOMAIN}
+              value: mail@${BASE_DOMAIN}
             - name: SMTP_PORT
               value: "587"
             - name: SMTP_SECURE
