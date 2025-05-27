@@ -73,7 +73,7 @@ spec:
   ttl: 1
   type: TLSA
   data:
-    certificate: faf63dddf7d2999df871e09094947c24f147b1f0582a1bdbb442690811067ee7
+    certificate: 382454ba81b79c03cefdef5d0a418fabeb0fc70cbd18fccee31143d606056a6c
     usage: 3
     selector: 1
     matching_type: 1
