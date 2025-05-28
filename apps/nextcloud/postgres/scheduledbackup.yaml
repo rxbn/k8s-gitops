@@ -2,9 +2,9 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
-  name: nextcloud-postgres-17
+  name: nextcloud-postgres
   namespace: nextcloud
 spec:
   schedule: 0 5 2 * * SUN
   cluster:
-    name: nextcloud-postgres-17
+    name: nextcloud-postgres

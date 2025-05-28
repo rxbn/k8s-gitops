@@ -5,7 +5,7 @@ metadata:
   name: nextcloud
   namespace: nextcloud
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: nextcloud
@@ -47,7 +47,7 @@ spec:
             - -c
             - |
               echo 'Waiting for PostgreSQL to become ready...'
-              until printf "." && nc -z -w 2 nextcloud-postgres-17-rw.nextcloud.svc.cluster.local 5432; do
+              until printf "." && nc -z -w 2 nextcloud-postgres-rw.nextcloud.svc.cluster.local 5432; do
                   sleep 2;
               done;
               echo 'PostgreSQL OK ✓'
@@ -103,21 +103,21 @@ spec:
           image: nextcloud:31.0.5-fpm-alpine
           env:
             - name: POSTGRES_HOST
-              value: nextcloud-postgres-17-rw.nextcloud.svc.cluster.local
+              value: nextcloud-postgres-rw.nextcloud.svc.cluster.local
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: nextcloud-postgres-17-app
+                  name: nextcloud-postgres-app
                   key: username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: nextcloud-postgres-17-app
+                  name: nextcloud-postgres-app
                   key: password
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: nextcloud-postgres-17-app
+                  name: nextcloud-postgres-app
                   key: dbname
             - name: NEXTCLOUD_TRUSTED_DOMAINS
               value: cloud.${BASE_DOMAIN}
