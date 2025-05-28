@@ -2,9 +2,9 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
-  name: keycloak-postgres-17
+  name: keycloak-postgres
   namespace: keycloak
 spec:
   schedule: 0 0 2 * * SUN
   cluster:
-    name: keycloak-postgres-17
+    name: keycloak-postgres

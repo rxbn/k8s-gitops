@@ -5,7 +5,7 @@ metadata:
   name: keycloak
   namespace: keycloak
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: keycloak
@@ -24,7 +24,7 @@ spec:
             - -c
             - |
               echo 'Waiting for PostgreSQL to become ready...'
-              until printf "." && nc -z -w 2 keycloak-postgres-17-rw.keycloak.svc.cluster.local 5432; do
+              until printf "." && nc -z -w 2 keycloak-postgres-rw.keycloak.svc.cluster.local 5432; do
                   sleep 2;
               done;
               echo 'PostgreSQL OK ✓'
@@ -57,7 +57,7 @@ spec:
             - name: KC_DB_URL
               valueFrom:
                 secretKeyRef:
-                  name: keycloak-postgres-17-app
+                  name: keycloak-postgres-app
                   key: jdbc-uri
             - name: KC_HEALTH_ENABLED
               value: "true"
