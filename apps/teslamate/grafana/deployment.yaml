@@ -5,7 +5,7 @@ metadata:
   name: teslamate-grafana
   namespace: teslamate
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: teslamate-grafana
@@ -24,7 +24,7 @@ spec:
             - -c
             - |
               echo 'Waiting for PostgreSQL to become ready...'
-              until printf "." && nc -z -w 2 teslamate-postgres-17-r.teslamate.svc.cluster.local 5432; do
+              until printf "." && nc -z -w 2 teslamate-postgres-r.teslamate.svc.cluster.local 5432; do
                   sleep 2;
               done;
               echo 'PostgreSQL OK ✓'
@@ -79,21 +79,21 @@ spec:
             - name: GF_AUTH_SIGNOUT_REDIRECT_URL
               value: https://sso.${BASE_DOMAIN}/realms/master/protocol/openid-connect/logout
             - name: DATABASE_HOST
-              value: teslamate-postgres-17-r.teslamate.svc.cluster.local
+              value: teslamate-postgres-r.teslamate.svc.cluster.local
             - name: DATABASE_USER
               valueFrom:
                 secretKeyRef:
-                  name: teslamate-postgres-17-app
+                  name: teslamate-postgres-app
                   key: username
             - name: DATABASE_PASS
               valueFrom:
                 secretKeyRef:
-                  name: teslamate-postgres-17-app
+                  name: teslamate-postgres-app
                   key: password
             - name: DATABASE_NAME
               valueFrom:
                 secretKeyRef:
-                  name: teslamate-postgres-17-app
+                  name: teslamate-postgres-app
                   key: dbname
           envFrom:
             - secretRef:

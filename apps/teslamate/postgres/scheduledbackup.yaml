@@ -2,9 +2,9 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
-  name: teslamate-postgres-17
+  name: teslamate-postgres
   namespace: teslamate
 spec:
   schedule: 0 10 2 * * SUN
   cluster:
-    name: teslamate-postgres-17
+    name: teslamate-postgres

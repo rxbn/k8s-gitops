@@ -2,41 +2,6 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: teslamate-postgres-17
-  namespace: teslamate
-spec:
-  instances: 1
-  imageName: ghcr.io/cloudnative-pg/postgresql:17.5
-  storage:
-    size: 20Gi
-  bootstrap:
-    initdb:
-      database: teslamate
-  backup:
-    barmanObjectStore:
-      destinationPath: s3://db-backups
-      endpointURL: http://minio.minio.svc.cluster.local:9000
-      s3Credentials:
-        accessKeyId:
-          name: db-backup
-          key: accessKey
-        secretAccessKey:
-          name: db-backup
-          key: secretKey
-      wal:
-        compression: gzip
-      data:
-        compression: gzip
-    retentionPolicy: 30d
-  monitoring:
-    enablePodMonitor: true
-    customQueriesConfigMap:
-      - name: teslamate-monitoring
-        key: custom-queries
----
-apiVersion: postgresql.cnpg.io/v1
-kind: Cluster
-metadata:
   name: teslamate-postgres
   namespace: teslamate
 spec:
@@ -47,12 +12,6 @@ spec:
   bootstrap:
     initdb:
       database: teslamate
-      import:
-        type: microservice
-        databases:
-          - teslamate
-        source:
-          externalCluster: teslamate-postgres-17
   backup:
     barmanObjectStore:
       destinationPath: s3://db-backups
@@ -74,12 +33,3 @@ spec:
     customQueriesConfigMap:
       - name: teslamate-monitoring
         key: custom-queries
-  externalClusters:
-    - name: teslamate-postgres-17
-      connectionParameters:
-        host: teslamate-postgres-17-r.teslamate.svc.cluster.local
-        user: teslamate
-        dbname: teslamate
-      password:
-        name: teslamate-postgres-17-app
-        key: password

@@ -5,7 +5,7 @@ metadata:
   name: teslamate
   namespace: teslamate
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: teslamate
@@ -24,7 +24,7 @@ spec:
             - -c
             - |
               echo 'Waiting for PostgreSQL to become ready...'
-              until printf "." && nc -z -w 2 teslamate-postgres-17-rw.teslamate.svc.cluster.local 5432; do
+              until printf "." && nc -z -w 2 teslamate-postgres-rw.teslamate.svc.cluster.local 5432; do
                   sleep 2;
               done;
               echo 'PostgreSQL OK ✓'
@@ -51,21 +51,21 @@ spec:
             - name: CHECK_ORIGIN
               value: "true"
             - name: DATABASE_HOST
-              value: teslamate-postgres-17-rw.teslamate.svc.cluster.local
+              value: teslamate-postgres-rw.teslamate.svc.cluster.local
             - name: DATABASE_USER
               valueFrom:
                 secretKeyRef:
-                  name: teslamate-postgres-17-app
+                  name: teslamate-postgres-app
                   key: username
             - name: DATABASE_PASS
               valueFrom:
                 secretKeyRef:
-                  name: teslamate-postgres-17-app
+                  name: teslamate-postgres-app
                   key: password
             - name: DATABASE_NAME
               valueFrom:
                 secretKeyRef:
-                  name: teslamate-postgres-17-app
+                  name: teslamate-postgres-app
                   key: dbname
             - name: TZ
               value: Europe/Zurich
