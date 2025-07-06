@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
   - cnpg-cluster.yaml
   - scheduledbackup.yaml
+  - cnpg-database.yaml
   - secret.yaml
