@@ -113,6 +113,11 @@
     },
     {
       "matchDatasources": ["docker"],
+      "versioning": "loose",
+      "matchPackageNames": ["ghcr.io/tensorchord/cloudnative-vectorchord"]
+    },
+    {
+      "matchDatasources": ["docker"],
       "matchUpdateTypes": ["minor", "patch"],
       "matchPackageNames": ["renovate/renovate"],
       "automerge": true,
