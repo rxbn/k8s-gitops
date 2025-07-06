@@ -3,9 +3,7 @@
   "semanticCommits": "enabled",
   "dependencyDashboard": true,
   "separateMajorMinor": true,
-  "assignees": [
-    "rxbn"
-  ],
+  "assignees": ["rxbn"],
   "timezone": "Europe/Zurich",
   "customManagers": [
     {
@@ -13,9 +11,7 @@
       "managerFilePatterns": [
         "/.github\\/workflows\\/sync-cloudflare-nets\\.yaml$/"
       ],
-      "matchStrings": [
-        "depName=(?<depName>.*)\\s.*\\/(?<currentValue>.*?)\\/"
-      ],
+      "matchStrings": ["depName=(?<depName>.*)\\s.*\\/(?<currentValue>.*?)\\/"],
       "datasourceTemplate": "github-releases"
     },
     {
@@ -39,9 +35,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": [
-        "/crds\\/k8up\\/kustomization\\.yaml$/"
-      ],
+      "managerFilePatterns": ["/crds\\/k8up\\/kustomization\\.yaml$/"],
       "matchStrings": [
         "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*)\\s.*\\/k8up-(?<currentValue>.*?)\\/"
       ],
@@ -49,9 +43,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": [
-        "/crds\\/cert-manager\\/kustomization\\.yaml$/"
-      ],
+      "managerFilePatterns": ["/crds\\/cert-manager\\/kustomization\\.yaml$/"],
       "matchStrings": [
         "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*?)\\s.*\\/(?<currentValue>.*?)\\/"
       ],
@@ -59,9 +51,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": [
-        "/crds\\/kube-prometheus-stack\\/crds\\.yaml$/"
-      ],
+      "managerFilePatterns": ["/crds\\/kube-prometheus-stack\\/crds\\.yaml$/"],
       "matchStrings": [
         "registryUrl=(?<registryUrl>.*)\\s.*tag: (?<depName>.*)-(?<currentValue>.*)"
       ],
@@ -69,12 +59,8 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": [
-        "/apps\\/(.+\\/)*cnpg-cluster\\.yaml$/"
-      ],
-      "matchStrings": [
-        "imageName:\\s(?<depName>.*):(?<currentValue>.*)"
-      ],
+      "managerFilePatterns": ["/apps\\/(.+\\/)*cnpg-cluster\\.yaml$/"],
+      "matchStrings": ["imageName:\\s(?<depName>.*):(?<currentValue>.*)"],
       "datasourceTemplate": "docker"
     },
     {
@@ -99,75 +85,42 @@
     ]
   },
   "helm-values": {
-    "managerFilePatterns": [
-      "/(apps|base|infra)\\/(.+\\/)*helmrelease\\.yaml$/"
-    ]
+    "managerFilePatterns": ["/(apps|base|infra)\\/(.+\\/)*helmrelease\\.yaml$/"]
   },
   "packageRules": [
     {
-      "matchDatasources": [
-        "docker",
-        "helm",
-        "github-releases",
-        "github-tags"
-      ],
-      "matchUpdateTypes": [
-        "patch",
-        "minor",
-        "major"
-      ],
-      "labels": [
-        "renovate/{{datasource}}",
-        "dep/{{updateType}}"
-      ],
+      "matchDatasources": ["docker", "helm", "github-releases", "github-tags"],
+      "matchUpdateTypes": ["patch", "minor", "major"],
+      "labels": ["renovate/{{datasource}}", "dep/{{updateType}}"],
       "enabled": true
     },
     {
-      "matchDatasources": [
-        "docker"
-      ],
+      "matchDatasources": ["docker"],
       "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.?(?<build>\\d+)?.*?-ls(?<revision>\\d+)$",
       "matchPackageNames": [
         "/^ghcr\\.io\\/linuxserver\\/(sonarr|radarr|plex)$/"
       ]
     },
     {
-      "matchDatasources": [
-        "docker"
-      ],
+      "matchDatasources": ["docker"],
       "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-ls(?<build>\\d+)$",
-      "matchPackageNames": [
-        "/^ghcr\\.io\\/linuxserver\\/(sabnzbd|overseerr)$/"
-      ]
+      "matchPackageNames": ["/^ghcr\\.io\\/linuxserver\\/(sabnzbd|overseerr)$/"]
     },
     {
-      "matchDatasources": [
-        "docker"
-      ],
+      "matchDatasources": ["docker"],
       "versioning": "regex:^RELEASE\\.(?<major>\\d+)-(?<minor>\\d+)-(?<patch>\\d+)T.*Z$",
-      "matchPackageNames": [
-        "quay.io/minio/minio"
-      ]
+      "matchPackageNames": ["quay.io/minio/minio"]
     },
     {
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
-      "matchPackageNames": [
-        "renovate/renovate"
-      ],
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": ["renovate/renovate"],
       "automerge": true,
       "automergeType": "branch",
       "ignoreTests": true
     },
     {
-      "matchPackageNames": [
-        "ghcr.io/cloudnative-pg/postgresql"
-      ],
+      "matchPackageNames": ["ghcr.io/cloudnative-pg/postgresql"],
       "additionalBranchPrefix": "{{packageFileDir}}-",
       "major": {
         "enabled": false
