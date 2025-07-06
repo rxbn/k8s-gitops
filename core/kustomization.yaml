@@ -5,6 +5,7 @@ resources:
   - webhook
   - flux-system
   - namespaces
+  - ocirepositories
   - kustomizations
   - helmrepositories
   - notifications

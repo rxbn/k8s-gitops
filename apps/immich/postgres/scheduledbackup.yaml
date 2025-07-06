@@ -1,0 +1,10 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: immich-postgres
+  namespace: immich
+spec:
+  schedule: 0 20 2 * * SUN
+  cluster:
+    name: immich-postgres

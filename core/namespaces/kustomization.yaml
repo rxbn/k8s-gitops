@@ -12,6 +12,7 @@ resources:
   - oauth2-proxy.yaml
   - storage-system.yaml
   - metallb-system.yaml
+  - immich.yaml
   - kube-system.yaml
   - usenet.yaml
   - cloudflare-operator.yaml
