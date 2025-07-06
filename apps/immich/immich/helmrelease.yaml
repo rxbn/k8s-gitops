@@ -13,8 +13,6 @@ spec:
     name: immich
     namespace: flux-system
   values:
-    image:
-      tag: v1.135.3
     env:
       REDIS_HOSTNAME: immich-valkey.immich.svc.cluster.local
       DB_HOSTNAME: immich-postgres-rw.immich.svc.cluster.local
@@ -38,6 +36,9 @@ spec:
         library:
           existingClaim: immich-library
     server:
+      image:
+        repository: ghcr.io/immich-app/immich-server
+        tag: v1.135.3
       ingress:
         main:
           enabled: true
@@ -49,3 +50,7 @@ spec:
             - host: pics.${BASE_DOMAIN}
               paths:
                 - path: "/"
+    machine-learning:
+      image:
+        repository: ghcr.io/immich-app/immich-machine-learning
+        tag: v1.135.3
