@@ -113,7 +113,7 @@
     },
     {
       "matchDatasources": ["docker"],
-      "versioning": "loose",
+      "versioning": "regex:^(?<major>\\d+).(?<minor>\\d+)-.*$",
       "matchPackageNames": ["ghcr.io/tensorchord/cloudnative-vectorchord"]
     },
     {
