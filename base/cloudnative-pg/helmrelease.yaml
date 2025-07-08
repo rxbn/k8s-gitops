@@ -28,8 +28,6 @@ spec:
       grafanaDashboard:
         create: true
         namespace: monitoring
-        labels:
-          grafana_dashboard: "1"
         annotations:
           kustomize.toolkit.fluxcd.io/substitute: disabled
   install:
