@@ -8,6 +8,9 @@ spec:
   interval: 5m
   driftDetection:
     mode: enabled
+  dependsOn:
+    - name: kube-prometheus-stack
+      namespace: monitoring
   chart:
     spec:
       chart: cloudnative-pg
@@ -20,6 +23,15 @@ spec:
   values:
     crds:
       create: false
+    monitoring:
+      podMonitorEnabled: true
+      grafanaDashboard:
+        create: true
+        namespace: monitoring
+        labels:
+          grafana_dashboard: "1"
+        annotations:
+          kustomize.toolkit.fluxcd.io/substitute: disabled
   install:
     crds: Skip
   upgrade:
