@@ -21,12 +21,6 @@ spec:
     driver:
       kind: modern_ebpf
     collectors:
-      docker:
-        enabled: false
-      containerd:
-        enabled: false
-      crio:
-        enabled: false
       containerEngine:
         enabled: true
         engines:
