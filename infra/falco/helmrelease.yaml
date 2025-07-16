@@ -21,13 +21,19 @@ spec:
     driver:
       kind: modern_ebpf
     collectors:
-      containerd:
-        enabled: true
-        socket: /run/k3s/containerd/containerd.sock
-      crio:
-        enabled: false
       docker:
         enabled: false
+      containerd:
+        enabled: false
+      crio:
+        enabled: false
+      containerEngine:
+        enabled: true
+        engines:
+          containerd:
+            sockets: ["/run/k3s/containerd/containerd.sock"]
+      kubernetes:
+        enabled: true
     falcosidekick:
       enabled: true
       replicaCount: 1
