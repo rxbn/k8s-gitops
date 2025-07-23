@@ -42,7 +42,7 @@ spec:
               memory: 16Mi
       containers:
         - name: teslamate-grafana
-          image: teslamate/grafana:2.0.0
+          image: teslamate/grafana:2.1.0
           env:
             - name: GF_SERVER_DOMAIN
               value: teslamate-grafana.${BASE_DOMAIN}
