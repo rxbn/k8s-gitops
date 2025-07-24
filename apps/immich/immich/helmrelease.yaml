@@ -6,6 +6,7 @@ metadata:
   namespace: immich
 spec:
   interval: 5m
+  timeout: 20m
   driftDetection:
     mode: enabled
   chartRef:
