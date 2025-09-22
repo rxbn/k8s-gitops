@@ -64,6 +64,10 @@ spec:
         password:
           key: password
           secret: gitlab-postgres-app
+      redis:
+        host: gitlab-valkey.gitlab.svc.cluster.local
+        auth:
+          enabled: false
       kas:
         enabled: false
       appConfig:
@@ -123,8 +127,7 @@ spec:
     prometheus:
       install: false
     redis:
-      metrics:
-        enabled: false
+      install: false
     registry:
       ingress:
         annotations:
