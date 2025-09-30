@@ -100,7 +100,7 @@ spec:
             periodSeconds: 30
             timeoutSeconds: 5
         - name: nextcloud
-          image: nextcloud:31.0.9-fpm-alpine
+          image: nextcloud:32.0.0-fpm-alpine
           env:
             - name: POSTGRES_HOST
               value: nextcloud-postgres-rw.nextcloud.svc.cluster.local
