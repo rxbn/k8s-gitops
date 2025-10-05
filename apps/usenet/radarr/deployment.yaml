@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: radarr
-          image: ghcr.io/linuxserver/radarr:5.27.5.10198-ls283
+          image: ghcr.io/linuxserver/radarr:5.27.5.10198-ls284
           env:
             - name: PGID
               value: "2000"
