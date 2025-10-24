@@ -48,6 +48,7 @@ spec:
             image:
               repository: ghcr.io/immich-app/immich-server
               tag: v2.1.0
+    server:
       ingress:
         main:
           enabled: true
