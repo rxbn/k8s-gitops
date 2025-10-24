@@ -14,29 +14,38 @@ spec:
     name: immich
     namespace: flux-system
   values:
-    env:
-      REDIS_HOSTNAME: immich-valkey.immich.svc.cluster.local
-      DB_HOSTNAME: immich-postgres-rw.immich.svc.cluster.local
-      DB_USERNAME:
-        valueFrom:
-          secretKeyRef:
-            name: immich-postgres-app
-            key: username
-      DB_DATABASE_NAME:
-        valueFrom:
-          secretKeyRef:
-            name: immich-postgres-app
-            key: dbname
-      DB_PASSWORD:
-        valueFrom:
-          secretKeyRef:
-            name: immich-postgres-app
-            key: password
+    valkey:
+      enabled: true
     immich:
       persistence:
         library:
           existingClaim: immich-library
     server:
+      controllers:
+        main:
+          containers:
+            main:
+              env:
+                DB_HOSTNAME:
+                  valueFrom:
+                    secretKeyRef:
+                      name: immich-postgres-app
+                      key: host
+                DB_USERNAME:
+                  valueFrom:
+                    secretKeyRef:
+                      name: immich-postgres-app
+                      key: user
+                DB_PASSWORD:
+                  valueFrom:
+                    secretKeyRef:
+                      name: immich-postgres-app
+                      key: password
+                DB_DATABASE_NAME:
+                  valueFrom:
+                    secretKeyRef:
+                      name: immich-postgres-app
+                      key: dbname
       image:
         repository: ghcr.io/immich-app/immich-server
         tag: v2.1.0
