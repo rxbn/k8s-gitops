@@ -20,35 +20,34 @@ spec:
       persistence:
         library:
           existingClaim: immich-library
-    server:
-      controllers:
-        main:
-          containers:
-            main:
-              env:
-                DB_HOSTNAME:
-                  valueFrom:
-                    secretKeyRef:
-                      name: immich-postgres-app
-                      key: host
-                DB_USERNAME:
-                  valueFrom:
-                    secretKeyRef:
-                      name: immich-postgres-app
-                      key: user
-                DB_PASSWORD:
-                  valueFrom:
-                    secretKeyRef:
-                      name: immich-postgres-app
-                      key: password
-                DB_DATABASE_NAME:
-                  valueFrom:
-                    secretKeyRef:
-                      name: immich-postgres-app
-                      key: dbname
-      image:
-        repository: ghcr.io/immich-app/immich-server
-        tag: v2.1.0
+    controllers:
+      main:
+        containers:
+          main:
+            env:
+              DB_HOSTNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-postgres-app
+                    key: host
+              DB_USERNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-postgres-app
+                    key: user
+              DB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-postgres-app
+                    key: password
+              DB_DATABASE_NAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-postgres-app
+                    key: dbname
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              tag: v2.1.0
       ingress:
         main:
           enabled: true
@@ -60,7 +59,3 @@ spec:
             - host: pics.${BASE_DOMAIN}
               paths:
                 - path: "/"
-    machine-learning:
-      image:
-        repository: ghcr.io/immich-app/immich-machine-learning
-        tag: v2.1.0
