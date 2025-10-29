@@ -78,6 +78,9 @@ spec:
     - kind: HelmRelease
       namespace: immich
       name: "*"
+    - kind: HelmRelease
+      namespace: openbao
+      name: "*"
   exclusionList:
     - InternalError.*failed to call webhook.*EOF
     - "dial tcp: lookup.*server misbehaving"

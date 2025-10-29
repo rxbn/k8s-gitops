@@ -1,0 +1,33 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: openbao
+  namespace: openbao
+spec:
+  interval: 5m
+  timeout: 15m
+  driftDetection:
+    mode: enabled
+  chart:
+    spec:
+      chart: openbao
+      sourceRef:
+        kind: HelmRepository
+        name: openbao
+        namespace: flux-system
+      interval: 5m
+      version: 0.19.1
+  values:
+    server:
+      ha:
+        enabled: false
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          cloudflare-operator.io/content: ${BASE_DOMAIN}
+          cloudflare-operator.io/type: CNAME
+        hosts:
+          - host: openbao.${BASE_DOMAIN}
+            paths: []

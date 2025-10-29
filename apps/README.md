@@ -10,4 +10,5 @@ This directory contains all other common applications.
 - **renovate** dependency updater
 - **teslamate** data logger for my Tesla Model 3
 - **usenet** usenet-stack containing sonarr, radarr, plex, ...
+- **openbao** open source alternative to vault
 - **immich** self-hosted photo management
