@@ -47,7 +47,7 @@ spec:
                     key: dbname
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: v2.2.0
+              tag: v2.2.1
     server:
       ingress:
         main:
