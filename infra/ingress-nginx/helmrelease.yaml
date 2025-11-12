@@ -59,3 +59,5 @@ spec:
           - IPv6
     defaultBackend:
       enabled: true
+    tcp:
+      "22": "gitlab/gitlab-gitlab-shell:22"

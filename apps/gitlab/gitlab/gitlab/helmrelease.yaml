@@ -23,9 +23,6 @@ spec:
       gitlab-exporter:
         enabled: false
       gitlab-shell:
-        service:
-          type: LoadBalancer
-          externalTrafficPolicy: Local
         maxReplicas: 1
         minReplicas: 1
       migrations:
@@ -98,7 +95,6 @@ spec:
           name: gitlab-minio.local.${BASE_DOMAIN}
         registry:
           name: registry.${BASE_DOMAIN}
-        ssh: ssh.git.${BASE_DOMAIN}
       ingress:
         configureCertmanager: false
         enabled: true

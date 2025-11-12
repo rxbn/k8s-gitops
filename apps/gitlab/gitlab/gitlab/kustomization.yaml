@@ -4,4 +4,3 @@ kind: Kustomization
 resources:
   - helmrelease.yaml
   - secret.yaml
-  - ciliumnetworkpolicy.yaml
