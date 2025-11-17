@@ -53,5 +53,3 @@ spec:
       enabled: true
     bpf:
       masquerade: true
-    gatewayAPI:
-      enabled: true
