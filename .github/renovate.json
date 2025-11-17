@@ -27,7 +27,8 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/crds\\/cloudflare-operator\\/kustomization\\.yaml$/"
+        "/crds\\/cloudflare-operator\\/kustomization\\.yaml$/",
+        "/crds\\/gateway-api\\/kustomization\\.yaml$/"
       ],
       "matchStrings": [
         "datasource=(?<datasource>.*) depName=(?<depName>.*)\\s.*\\/(?<currentValue>.*?)\\/"
