@@ -90,9 +90,7 @@ spec:
           name: registry.${BASE_DOMAIN}
       ingress:
         configureCertmanager: false
-        enabled: true
-        tls:
-          enabled: false
+        enabled: false
       smtp:
         authentication: login
         enabled: true
