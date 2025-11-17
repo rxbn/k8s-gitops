@@ -147,19 +147,6 @@ spec:
     - kustomize:
         patches:
           - patch: |-
-              apiVersion: v1
-              kind: Service
-              metadata:
-                name: gitlab-gitlab-shell
-                namespace: gitlab
-                annotations:
-                  metallb.universe.tf/loadBalancerIPs: 10.0.1.201,${IPV6_PREFIX}::201
-              spec:
-                ipFamilyPolicy: PreferDualStack
-                ipFamilies:
-                  - IPv4
-                  - IPv6
-          - patch: |-
               apiVersion: autoscaling/v2
               kind: HorizontalPodAutoscaler
               metadata:
