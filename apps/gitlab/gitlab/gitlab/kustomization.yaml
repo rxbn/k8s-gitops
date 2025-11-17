@@ -4,4 +4,6 @@ kind: Kustomization
 resources:
   - httproute.yaml
   - helmrelease.yaml
+  - dnsrecords.yaml
+  - tcproute.yaml
   - secret.yaml

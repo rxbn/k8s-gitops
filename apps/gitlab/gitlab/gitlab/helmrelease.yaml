@@ -97,10 +97,7 @@ spec:
           name: registry.${BASE_DOMAIN}
       ingress:
         configureCertmanager: false
-        enabled: true
-        class: nginx
-        tls:
-          enabled: false
+        enabled: false
       smtp:
         authentication: login
         enabled: true
@@ -123,9 +120,7 @@ spec:
         enabled: false
     registry:
       ingress:
-        annotations:
-          cloudflare-operator.io/content: ${BASE_DOMAIN}
-          cloudflare-operator.io/type: CNAME
+        enabled: false
       hpa:
         maxReplicas: 1
         minReplicas: 1

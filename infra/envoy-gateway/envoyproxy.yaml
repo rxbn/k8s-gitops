@@ -25,4 +25,4 @@ spec:
     kubernetes:
       envoyService:
         annotations:
-          metallb.universe.tf/loadBalancerIPs: 10.0.1.202,${IPV6_PREFIX}::202
+          metallb.universe.tf/loadBalancerIPs: 10.0.1.200,${IPV6_PREFIX}::200

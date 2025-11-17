@@ -1,23 +1,21 @@
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
   name: nextcloud
   namespace: nextcloud
-  annotations:
-    cloudflare-operator.io/content: ${BASE_DOMAIN}
-    cloudflare-operator.io/type: CNAME
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
 spec:
-  ingressClassName: nginx
+  parentRefs:
+    - name: external
+      namespace: envoy-gateway-system
+      sectionName: external-https
+  hostnames:
+    - cloud.${BASE_DOMAIN}
   rules:
-    - host: cloud.${BASE_DOMAIN}
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: nextcloud
-                port:
-                  number: 80
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: nextcloud
+          port: 80

@@ -51,12 +51,4 @@ spec:
     server:
       ingress:
         main:
-          enabled: true
-          annotations:
-            cloudflare-operator.io/content: ${BASE_DOMAIN}
-            cloudflare-operator.io/type: CNAME
-            nginx.ingress.kubernetes.io/proxy-body-size: "0"
-          hosts:
-            - host: pics.${BASE_DOMAIN}
-              paths:
-                - path: "/"
+          enabled: false

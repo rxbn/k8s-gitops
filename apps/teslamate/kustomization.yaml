@@ -5,3 +5,5 @@ resources:
   - grafana
   - postgres
   - teslamate
+  - securitypolicy.yaml
+  - secret.yaml

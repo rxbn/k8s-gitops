@@ -6,5 +6,6 @@ resources:
   - ingress.yaml
   - service.yaml
   - configmap.yaml
+  - dnsrecord.yaml
   - secret.yaml
   - persistentvolumeclaim.yaml

@@ -5,4 +5,5 @@ resources:
   - deployment.yaml
   - ingress.yaml
   - service.yaml
+  - dnsrecord.yaml
   - persistentvolumeclaim.yaml
