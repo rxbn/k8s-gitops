@@ -7,6 +7,7 @@ resources:
   - keycloak.yaml
   - renovate.yaml
   - ingress-nginx.yaml
+  - envoy-gateway-system.yaml
   - gitlab.yaml
   - nextcloud.yaml
   - oauth2-proxy.yaml
