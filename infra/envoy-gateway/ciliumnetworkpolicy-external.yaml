@@ -15,11 +15,9 @@ spec:
         - ${LAN_NETWORK_RANGE_V6}
       toPorts:
         - ports:
-            - port: "22"
+            - port: "10080"
               protocol: TCP
-            - port: "80"
-              protocol: TCP
-            - port: "443"
+            - port: "10443"
               protocol: TCP
     - fromCIDR:
         - 103.21.244.0/22
@@ -46,7 +44,7 @@ spec:
         - 2c0f:f248::/32
       toPorts:
         - ports:
-            - port: "443"
+            - port: "10443"
               protocol: TCP
     - fromEntities:
         - cluster
