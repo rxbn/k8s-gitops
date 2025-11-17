@@ -7,9 +7,9 @@ resources:
   - metrics-server
   - oauth2-proxy
   - cert-manager
+  - envoy-gateway
   - metallb
   - falco
   - coredns
   - cilium
   - ingress-nginx
-  - envoy-gateway

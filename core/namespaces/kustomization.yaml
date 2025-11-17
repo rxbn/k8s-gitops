@@ -6,8 +6,8 @@ resources:
   - k8up.yaml
   - keycloak.yaml
   - renovate.yaml
-  - ingress-nginx.yaml
   - envoy-gateway-system.yaml
+  - ingress-nginx.yaml
   - gitlab.yaml
   - nextcloud.yaml
   - oauth2-proxy.yaml
