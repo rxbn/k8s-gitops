@@ -64,7 +64,6 @@ spec:
             (k8smeta.ns.name="gitlab" and container.name in ("gitaly", "gitlab-shell", "gitlab-workhorse"))
             or (k8smeta.ns.name="flux-system" and proc.name="gpg-agent")
             or (k8smeta.ns.name="renovate" and container.name="renovate")
-            or (k8smeta.ns.name="ingress-nginx" and container.name="controller")
             or (container.name="postgres")
 
         - list: user_known_packet_socket_binaries

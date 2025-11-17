@@ -2,14 +2,13 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: ingress-nginx
-  namespace: ingress-nginx
+  name: envoy-gateway-external
+  namespace: envoy-gateway-system
 spec:
   endpointSelector:
     matchLabels:
-      app.kubernetes.io/component: controller
-      app.kubernetes.io/instance: ingress-nginx
-      app.kubernetes.io/name: ingress-nginx
+      gateway.envoyproxy.io/owning-gateway-name: external
+      gateway.envoyproxy.io/owning-gateway-namespace: envoy-gateway-system
   ingress:
     - fromCIDR:
         - ${LAN_NETWORK_RANGE_V4}

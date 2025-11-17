@@ -1,0 +1,12 @@
+---
+apiVersion: cloudflare-operator.io/v1
+kind: DNSRecord
+metadata:
+  name: teslamate-grafana-${BASE_DOMAIN/./-}
+  namespace: cloudflare-operator
+spec:
+  name: teslamate-grafana.${BASE_DOMAIN}
+  type: CNAME
+  content: ${BASE_DOMAIN}
+  proxied: true
+  ttl: 1

@@ -1,0 +1,15 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: TCPRoute
+metadata:
+  name: gitlab-shell
+  namespace: gitlab
+spec:
+  parentRefs:
+    - name: internal
+      namespace: envoy-gateway-system
+      sectionName: internal-ssh
+  rules:
+    - backendRefs:
+        - name: gitlab-gitlab-shell
+          port: 22

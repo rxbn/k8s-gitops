@@ -22,11 +22,7 @@ jobs:
           nets+=$(printf '\n%s' "${netsv6[@]}")
 
           cilium_nets=$(printf '"%s", ' ${nets[@]})
-          /tmp/yq eval --inplace ".spec.ingress[1].fromCIDR = [ ${cilium_nets%,*} ]" infra/ingress-nginx/ciliumnetworkpolicy.yaml
-
-          ingress_nets=$(printf '%s,' ${nets[@]})
-          ingress_nets="${ingress_nets%,*}"
-          /tmp/yq eval --inplace ".spec.values.controller.config.proxy-real-ip-cidr = \"${ingress_nets}\"" infra/ingress-nginx/helmrelease.yaml
+          /tmp/yq eval --inplace ".spec.ingress[1].fromCIDR = [ ${cilium_nets%,*} ]" infra/envoy-gateway/ciliumnetworkpolicy-external.yaml
       - name: Create pull request for cloudflare network range update
         uses: peter-evans/create-pull-request@v7
         with:

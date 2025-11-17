@@ -1,22 +1,21 @@
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
   name: overseerr
   namespace: usenet
-  annotations:
-    cloudflare-operator.io/content: ${BASE_DOMAIN}
-    cloudflare-operator.io/type: CNAME
 spec:
-  ingressClassName: nginx
+  parentRefs:
+    - name: external
+      namespace: envoy-gateway-system
+      sectionName: external-https
+  hostnames:
+    - overseerr.${BASE_DOMAIN}
   rules:
-    - host: overseerr.${BASE_DOMAIN}
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: overseerr
-                port:
-                  number: 5055
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: overseerr
+          port: 5055

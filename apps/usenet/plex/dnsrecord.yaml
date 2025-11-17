@@ -1,0 +1,12 @@
+---
+apiVersion: cloudflare-operator.io/v1
+kind: DNSRecord
+metadata:
+  name: tv-${BASE_DOMAIN/./-}
+  namespace: cloudflare-operator
+spec:
+  name: tv.${BASE_DOMAIN}
+  type: CNAME
+  content: ${BASE_DOMAIN}
+  proxied: true
+  ttl: 1

@@ -8,3 +8,5 @@ resources:
   - overseerr
   - sonarr
   - schedule.yaml
+  - securitypolicy.yaml
+  - secret.yaml
