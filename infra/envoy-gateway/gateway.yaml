@@ -32,6 +32,8 @@ spec:
     - allowedRoutes:
         namespaces:
           from: All
+        kinds:
+          - kind: TCPRoute
       name: internal-ssh
       port: 22
       protocol: TCP
