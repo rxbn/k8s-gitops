@@ -67,4 +67,3 @@ spec:
       name: external-ssh
       port: 22
       protocol: TCP
-            kind: Secret
