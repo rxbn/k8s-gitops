@@ -1,0 +1,8 @@
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: envoy-gateway
+  namespace: envoy-gateway-system
+spec:
+  ipFamily: DualStack
