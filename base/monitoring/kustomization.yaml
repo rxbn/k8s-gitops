@@ -6,3 +6,5 @@ resources:
   - flux-system
   - kube-prometheus-stack
   - prometheus-pushgateway
+  - securitypolicy.yaml
+  - secret.yaml
