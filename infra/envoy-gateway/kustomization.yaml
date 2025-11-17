@@ -6,4 +6,5 @@ resources:
   - httproute.yaml
   - helmrelease.yaml
   - gateway.yaml
+  - ciliumnetworkpolicy.yaml
   - envoyproxy.yaml
