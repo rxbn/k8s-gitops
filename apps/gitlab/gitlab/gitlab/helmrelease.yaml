@@ -46,13 +46,6 @@ spec:
             type: Recreate
         maxReplicas: 1
         minReplicas: 1
-        deployments:
-          default:
-            ingress:
-              annotations:
-                cloudflare-operator.io/content: ${BASE_DOMAIN}
-                cloudflare-operator.io/type: CNAME
-              path: /
     gitlab-runner:
       install: false
     global:
@@ -97,7 +90,9 @@ spec:
           name: registry.${BASE_DOMAIN}
       ingress:
         configureCertmanager: false
-        enabled: false
+        enabled: true
+        tls:
+          enabled: false
       smtp:
         authentication: login
         enabled: true
