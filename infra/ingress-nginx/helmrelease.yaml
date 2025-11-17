@@ -51,7 +51,7 @@ spec:
           ingress-nginx/${BASE_DOMAIN/./-}
       service:
         annotations:
-          metallb.io/loadBalancerIPs: 10.0.0.200,${IPV6_PREFIX}::200
+          metallb.universe.tf/loadBalancerIPs: 10.0.1.200,${IPV6_PREFIX}::200
         externalTrafficPolicy: Local
         ipFamilyPolicy: PreferDualStack
         ipFamilies:
