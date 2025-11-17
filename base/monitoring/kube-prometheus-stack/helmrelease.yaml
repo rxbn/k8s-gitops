@@ -9,8 +9,8 @@ spec:
   driftDetection:
     mode: enabled
   dependsOn:
-    - name: ingress-nginx
-      namespace: ingress-nginx
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
   chart:
     spec:
       chart: kube-prometheus-stack
@@ -58,15 +58,7 @@ spec:
                 - severity =~ none|info
             - receiver: slack
       ingress:
-        annotations:
-          nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
-        enabled: true
-        ingressClassName: nginx
-        hosts:
-          - alertmanager.local.${BASE_DOMAIN}
-        pathType: Prefix
-        paths:
-          - /
+        enabled: false
     defaultRules:
       rules:
         etcd: false
@@ -96,15 +88,7 @@ spec:
         server:
           root_url: https://grafana.local.${BASE_DOMAIN}
       ingress:
-        annotations:
-          nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
-        enabled: true
-        ingressClassName: nginx
-        hosts:
-          - grafana.local.${BASE_DOMAIN}
-        pathType: Prefix
-        paths:
-          - /
+        enabled: false
       extraSecretMounts:
         - name: grafana-auth-generic-oauth
           secretName: grafana-auth-generic-oauth
@@ -143,15 +127,7 @@ spec:
       enabled: false
     prometheus:
       ingress:
-        annotations:
-          nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
-        enabled: true
-        ingressClassName: nginx
-        hosts:
-          - prometheus.local.${BASE_DOMAIN}
-        pathType: Prefix
-        paths:
-          - /
+        enabled: false
       prometheusSpec:
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false

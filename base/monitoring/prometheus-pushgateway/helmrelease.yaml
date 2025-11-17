@@ -9,8 +9,8 @@ spec:
   driftDetection:
     mode: enabled
   dependsOn:
-    - name: ingress-nginx
-      namespace: ingress-nginx
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
   chart:
     spec:
       chart: prometheus-pushgateway
@@ -25,13 +25,7 @@ spec:
       - name: TZ
         value: Europe/Zurich
     ingress:
-      enabled: true
-      className: nginx
-      pathType: Prefix
-      annotations:
-        nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
-      hosts:
-        - pushgateway.local.${BASE_DOMAIN}
+      enabled: false
     serviceMonitor:
       enabled: true
       namespace: monitoring
