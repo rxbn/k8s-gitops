@@ -6,7 +6,7 @@ metadata:
   namespace: gitlab
 spec:
   parentRefs:
-    - name: internal
+    - name: external
       namespace: envoy-gateway-system
       sectionName: external-ssh
   rules:
