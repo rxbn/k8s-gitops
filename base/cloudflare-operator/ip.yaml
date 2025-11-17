@@ -16,4 +16,4 @@ metadata:
   name: ${BASE_DOMAIN/./-}-v6
 spec:
   type: static
-  address: ${METALLB_INGRESS_NGINX_ADDRESS_POOL_V6%/128}
+  address: ${IPV6_PREFIX}::200

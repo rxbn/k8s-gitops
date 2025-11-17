@@ -2,21 +2,10 @@
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
-  name: ingress-nginx
-  namespace: metallb-system
-spec:
-  addresses:
-    - ${METALLB_INGRESS_NGINX_ADDRESS_POOL_V4}
-    - ${METALLB_INGRESS_NGINX_ADDRESS_POOL_V6}
-  autoAssign: false
----
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
-metadata:
   name: default
   namespace: metallb-system
 spec:
   addresses:
-    - ${METALLB_DEFAULT_ADDRESS_POOL_V4}
-    - ${METALLB_DEFAULT_ADDRESS_POOL_V6}
+    - ${METALLB_ADDRESS_POOL_V4}
+    - ${METALLB_ADDRESS_POOL_V6}
   autoAssign: true
