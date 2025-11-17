@@ -15,19 +15,9 @@ spec:
         - ${LAN_NETWORK_RANGE_V6}
       toPorts:
         - ports:
-            - port: "10022"
-              protocol: TCP
             - port: "10080"
               protocol: TCP
             - port: "10443"
               protocol: TCP
     - fromEntities:
         - cluster
-      toPorts:
-        - ports:
-            - port: "10022"
-              protocol: TCP
-            - port: "10080"
-              protocol: TCP
-            - port: "10443"
-              protocol: TCP

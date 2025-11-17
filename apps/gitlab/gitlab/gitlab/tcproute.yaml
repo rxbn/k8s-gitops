@@ -8,7 +8,7 @@ spec:
   parentRefs:
     - name: internal
       namespace: envoy-gateway-system
-      sectionName: internal-ssh
+      sectionName: external-ssh
   rules:
     - backendRefs:
         - name: gitlab-gitlab-shell
