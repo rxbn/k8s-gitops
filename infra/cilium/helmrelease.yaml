@@ -27,11 +27,7 @@ spec:
       ui:
         enabled: true
         ingress:
-          enabled: true
-          annotations:
-            nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
-          hosts:
-            - hubble.local.${BASE_DOMAIN}
+          enabled: false
     operator:
       replicas: 1
     kubeProxyReplacement: true

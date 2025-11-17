@@ -9,8 +9,8 @@ spec:
   driftDetection:
     mode: enabled
   dependsOn:
-    - name: ingress-nginx
-      namespace: ingress-nginx
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
   chart:
     spec:
       chart: minio
@@ -30,19 +30,9 @@ spec:
       storageClass: backup
       size: 200Gi
     ingress:
-      enabled: true
-      ingressClassName: nginx
-      annotations:
-        nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
-      hosts:
-        - s3.local.${BASE_DOMAIN}
+      enabled: false
     consoleIngress:
-      enabled: true
-      ingressClassName: nginx
-      annotations:
-        nginx.ingress.kubernetes.io/whitelist-source-range: ${LAN_NETWORK_RANGE_V4},${LAN_NETWORK_RANGE_V6},${POD_NETWORK_RANGE_V4},${POD_NETWORK_RANGE_V6}
-      hosts:
-        - minio-console.local.${BASE_DOMAIN}
+      enabled: false
     environment:
       TZ: Europe/Zurich
     resources:
