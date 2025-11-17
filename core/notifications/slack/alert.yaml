@@ -43,6 +43,9 @@ spec:
       namespace: ingress-nginx
       name: "*"
     - kind: HelmRelease
+      namespace: envoy-gateway-system
+      name: "*"
+    - kind: HelmRelease
       namespace: oauth2-proxy
       name: "*"
     - kind: HelmRelease

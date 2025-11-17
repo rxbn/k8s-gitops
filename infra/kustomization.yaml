@@ -12,3 +12,4 @@ resources:
   - coredns
   - cilium
   - ingress-nginx
+  - envoy-gateway
