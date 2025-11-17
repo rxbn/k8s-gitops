@@ -2,7 +2,7 @@
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: EnvoyProxy
 metadata:
-  name: envoy-gateway
+  name: internal
   namespace: envoy-gateway-system
 spec:
   ipFamily: DualStack
@@ -12,3 +12,17 @@ spec:
       envoyService:
         annotations:
           metallb.universe.tf/loadBalancerIPs: 10.0.1.201,${IPV6_PREFIX}::201
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: external
+  namespace: envoy-gateway-system
+spec:
+  ipFamily: DualStack
+  provider:
+    type: Kubernetes
+    kubernetes:
+      envoyService:
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: 10.0.1.202,${IPV6_PREFIX}::202

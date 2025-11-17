@@ -8,6 +8,11 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   gatewayClassName: envoy-gateway
+  infrastructure:
+    parametersRef:
+      group: gateway.envoyproxy.io
+      kind: EnvoyProxy
+      name: internal
   listeners:
     - allowedRoutes:
         namespaces:
@@ -25,4 +30,37 @@ spec:
       tls:
         certificateRefs:
           - name: local-${BASE_DOMAIN/./-}-tls
+            kind: Secret
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: external
+  namespace: envoy-gateway-system
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  gatewayClassName: envoy-gateway
+  infrastructure:
+    parametersRef:
+      group: gateway.envoyproxy.io
+      kind: EnvoyProxy
+      name: external
+  listeners:
+    - allowedRoutes:
+        namespaces:
+          from: Same
+      name: external-http
+      port: 80
+      protocol: HTTP
+    - allowedRoutes:
+        namespaces:
+          from: All
+      name: external-https
+      hostname: "*.${BASE_DOMAIN}"
+      port: 443
+      protocol: HTTPS
+      tls:
+        certificateRefs:
+          - name: ${BASE_DOMAIN/./-}-tls
             kind: Secret
