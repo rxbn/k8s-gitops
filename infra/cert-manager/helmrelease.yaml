@@ -19,10 +19,6 @@ spec:
       interval: 5m
   values:
     installCRDs: false
-    config:
-      apiVersion: controller.config.cert-manager.io/v1alpha1
-      kind: ControllerConfiguration
-      enableGatewayAPI: true
     extraArgs:
       - --dns01-recursive-nameservers=1.1.1.1:53
       - --dns01-recursive-nameservers-only
