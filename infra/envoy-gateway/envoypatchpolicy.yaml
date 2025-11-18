@@ -52,6 +52,14 @@ spec:
                           exact: CH
                   principals:
                     - any: true
+                github-asn:
+                  permissions:
+                    - header:
+                        name: x-geo-asn
+                        string_match:
+                          exact: "36459"
+                  principals:
+                    - any: true
                 internal-no-header:
                   permissions:
                     - not_rule:
