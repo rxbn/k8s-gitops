@@ -23,46 +23,52 @@ spec:
                 - |
                   set -eu
 
-                  download() {
-                    EDITION="$1"
-                    OUT="/tmp/${EDITION}.tar.gz"
+                  echo "Updating MaxMind GeoLite databases"
 
-                    echo "Downloading ${EDITION}"
-                    curl -sSL \
-                      "https://download.maxmind.com/app/geoip_download?edition_id=${EDITION}&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" \
-                      -o "${OUT}"
+                  mkdir -p /tmp/maxmind-city
+                  echo "Downloading GeoLite2-City"
+                  curl -sSL \
+                    "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" \
+                    -o /tmp/maxmind-city/geolite2-city.tar.gz
 
-                    echo "Extracting ${EDITION}"
-                    tar -xzf "${OUT}" -C /tmp
-                    find /tmp -maxdepth 3 -name "${EDITION}.mmdb" | head -n1
-                  }
+                  echo "Extracting GeoLite2-City"
+                  tar -xzf /tmp/maxmind-city/geolite2-city.tar.gz -C /tmp/maxmind-city
 
-                  # Download City DB
-                  CITY_PATH=$(download GeoLite2-City)
+                  CITY_PATH=$(find /tmp/maxmind-city -maxdepth 5 -name "GeoLite2-City.mmdb" | head -n1 || true)
+
                   if [ -z "${CITY_PATH}" ]; then
-                    echo "Could not find extracted City DB file"
+                    echo "Could not find GeoLite2-City.mmdb in extracted archive"
                     exit 1
                   fi
 
-                  # Download ASN DB
-                  ASN_PATH=$(download GeoLite2-ASN)
-                  if [ -z "${ASN_PATH}" ]; then
-                    echo "Could not find extracted ASN DB file"
-                    exit 1
-                  fi
-
-                  echo "Replacing City DB in PVC"
+                  echo "Installing City DB to PVC"
                   cp "${CITY_PATH}" /data/GeoLite2-City.mmdb.tmp
                   mv /data/GeoLite2-City.mmdb.tmp /data/GeoLite2-City.mmdb
 
-                  echo "Replacing ASN DB in PVC"
+                  mkdir -p /tmp/maxmind-asn
+                  echo "Downloading GeoLite2-ASN"
+                  curl -sSL \
+                    "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" \
+                    -o /tmp/maxmind-asn/geolite2-asn.tar.gz
+
+                  echo "Extracting GeoLite2-ASN"
+                  tar -xzf /tmp/maxmind-asn/geolite2-asn.tar.gz -C /tmp/maxmind-asn
+
+                  ASN_PATH=$(find /tmp/maxmind-asn -maxdepth 5 -name "GeoLite2-ASN.mmdb" | head -n1 || true)
+
+                  if [ -z "${ASN_PATH}" ]; then
+                    echo "Could not find GeoLite2-ASN.mmdb in extracted archive"
+                    exit 1
+                  fi
+
+                  echo "Installing ASN DB to PVC"
                   cp "${ASN_PATH}" /data/GeoLite2-ASN.mmdb.tmp
                   mv /data/GeoLite2-ASN.mmdb.tmp /data/GeoLite2-ASN.mmdb
 
                   echo "Cleanup"
-                  rm -rf /tmp/*
+                  rm -rf /tmp/maxmind-city /tmp/maxmind-asn
 
-                  echo "Done (City + ASN updated)"
+                  echo "Done. City and ASN DBs updated."
               volumeMounts:
                 - name: maxmind-db
                   mountPath: /data
