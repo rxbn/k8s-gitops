@@ -23,40 +23,25 @@ spec:
                 - |
                   set -eu
 
-                  WORKDIR=$(mktemp -d)
-                  trap 'rm -rf "$WORKDIR"' EXIT
+                  echo "Downloading GeoLite2 City database"
+                  curl -sSL \
+                    "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" \
+                    -o /tmp/geolite.tar.gz
 
-                  download_and_install() {
-                    edition="$1"
-                    filename="$2"
+                  echo "Extracting"
+                  tar -xzf /tmp/geolite.tar.gz -C /tmp
 
-                    echo "Downloading ${edition}"
-                    archive="${WORKDIR}/${edition}.tar.gz"
-                    curl -sSL \
-                      "https://download.maxmind.com/app/geoip_download?edition_id=${edition}&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" \
-                      -o "$archive"
+                  # The extracted folder name contains a timestamp, so find it dynamically
+                  DB_PATH=$(find /tmp -maxdepth 2 -name "GeoLite2-City.mmdb" | head -n1)
 
-                    echo "Extracting ${edition}"
-                    extract_dir="${WORKDIR}/${edition}"
-                    mkdir -p "$extract_dir"
-                    tar -xzf "$archive" -C "$extract_dir"
+                  if [ -z "$DB_PATH" ]; then
+                    echo "Could not find extracted mmdb file"
+                    exit 1
+                  fi
 
-                    db_path=$(find "$extract_dir" -name "$filename" | head -n1)
-
-                    if [ -z "$db_path" ]; then
-                      echo "Could not find extracted $filename file"
-                      exit 1
-                    fi
-
-                    echo "Replacing ${filename} in PVC"
-                    cp "$db_path" "/data/${filename}.tmp"
-                    mv "/data/${filename}.tmp" "/data/${filename}"
-
-                    rm -rf "$archive" "$extract_dir"
-                  }
-
-                  download_and_install "GeoLite2-City" "GeoLite2-City.mmdb"
-                  download_and_install "GeoLite2-ASN" "GeoLite2-ASN.mmdb"
+                  echo "Replacing database in PVC"
+                  cp "$DB_PATH" /data/GeoLite2-City.mmdb.tmp
+                  mv /data/GeoLite2-City.mmdb.tmp /data/GeoLite2-City.mmdb
 
                   echo "Done"
               volumeMounts:
