@@ -29,7 +29,9 @@ spec:
                 common_provider_config:
                   geo_headers_to_add:
                     country: x-geo-country
+                    asn: x-geo-asn
                 city_db_path: /etc/envoy/maxmind/GeoLite2-City.mmdb
+                isn_db_path: /etc/envoy/maxmind/GeoLite2-ASN.mmdb
     - type: type.googleapis.com/envoy.config.listener.v3.Listener
       name: envoy-gateway-system/external/external-https
       operation:
