@@ -90,7 +90,10 @@ spec:
           name: registry.${BASE_DOMAIN}
       ingress:
         configureCertmanager: false
-        enabled: false
+        enabled: true
+        class: nginx
+        tls:
+          enabled: false
       smtp:
         authentication: login
         enabled: true
@@ -112,17 +115,12 @@ spec:
       metrics:
         enabled: false
     registry:
-      ingress:
-        enabled: false
       hpa:
         maxReplicas: 1
         minReplicas: 1
       maintenance:
         readonly:
           enabled: false
-    minio:
-      ingress:
-        enabled: false
   install:
     crds: Skip
   upgrade:
