@@ -4,10 +4,9 @@ kind: Kustomization
 resources:
   - external-services
   - gatewayclass.yaml
-  - ciliumnetworkpolicy-external.yaml
-  - ciliumnetworkpolicy-internal.yaml
   - httproute.yaml
   - helmrelease.yaml
   - gateway.yaml
   - clienttrafficpolicy.yaml
+  - ciliumnetworkpolicy.yaml
   - envoyproxy.yaml
