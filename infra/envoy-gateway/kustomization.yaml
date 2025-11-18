@@ -5,8 +5,12 @@ resources:
   - external-services
   - gatewayclass.yaml
   - httproute.yaml
+  - envoypatchpolicy.yaml
+  - cronjob.yaml
   - helmrelease.yaml
   - gateway.yaml
   - clienttrafficpolicy.yaml
+  - secret.yaml
+  - persistentvolumeclaim.yaml
   - ciliumnetworkpolicy.yaml
   - envoyproxy.yaml

@@ -1,0 +1,53 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: update-geolite-db
+  namespace: envoy-gateway-system
+spec:
+  schedule: 0 * * * *
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: update-geolite-db
+              image: ghcr.io/containeroo/alpine-toolbox:3.1.1
+              envFrom:
+                - secretRef:
+                    name: maxmind-license
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -eu
+
+                  echo "Downloading GeoLite2 City database"
+                  curl -sSL \
+                    "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" \
+                    -o /tmp/geolite.tar.gz
+
+                  echo "Extracting"
+                  tar -xzf /tmp/geolite.tar.gz -C /tmp
+
+                  # The extracted folder name contains a timestamp, so find it dynamically
+                  DB_PATH=$(find /tmp -maxdepth 2 -name "GeoLite2-City.mmdb" | head -n1)
+
+                  if [ -z "$DB_PATH" ]; then
+                    echo "Could not find extracted mmdb file"
+                    exit 1
+                  fi
+
+                  echo "Replacing database in PVC"
+                  cp "$DB_PATH" /data/GeoLite2-City.mmdb.tmp
+                  mv /data/GeoLite2-City.mmdb.tmp /data/GeoLite2-City.mmdb
+
+                  echo "Done"
+              volumeMounts:
+                - name: maxmind-db
+                  mountPath: /data
+          volumes:
+            - name: maxmind-db
+              persistentVolumeClaim:
+                claimName: maxmind-geolite-db

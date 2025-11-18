@@ -1,0 +1,52 @@
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyPatchPolicy
+metadata:
+  name: geoblock-ch-only
+  namespace: envoy-gateway-system
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    name: external
+  type: JSONPatch
+  jsonPatches:
+    - type: type.googleapis.com/envoy.config.listener.v3.Listener
+      name: envoy-gateway-system/external/external-https
+      operation:
+        op: add
+        path: /filter_chains/0/filters/0/typed_config/http_filters/0
+        value:
+          name: envoy.filters.http.geoip
+          typed_config:
+            "@type": type.googleapis.com/envoy.extensions.filters.http.geoip.v3.Geoip
+            xff_config:
+              xff_num_trusted_hops: 1
+            provider:
+              name: envoy.geoip_providers.maxmind
+              typed_config:
+                "@type": type.googleapis.com/envoy.extensions.geoip_providers.maxmind.v3.MaxMindConfig
+                common_provider_config:
+                  geo_headers_to_add:
+                    country: x-geo-country
+                city_db_path: /etc/envoy/maxmind/GeoLite2-City.mmdb
+    - type: type.googleapis.com/envoy.config.listener.v3.Listener
+      name: envoy-gateway-system/external/external-https
+      operation:
+        op: add
+        path: /filter_chains/0/filters/0/typed_config/http_filters/1
+        value:
+          name: envoy.filters.http.rbac
+          typed_config:
+            "@type": type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBAC
+            rules:
+              action: ALLOW
+              policies:
+                only-ch:
+                  permissions:
+                    - header:
+                        name: x-geo-country
+                        string_match:
+                          exact: CH
+                  principals:
+                    - any: true
