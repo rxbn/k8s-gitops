@@ -26,3 +26,14 @@ spec:
       envoyService:
         annotations:
           metallb.universe.tf/loadBalancerIPs: 10.0.1.200,${IPV6_PREFIX}::200
+      envoyDeployment:
+        pod:
+          volumes:
+            - name: maxmind-db
+              persistentVolumeClaim:
+                claimName: maxmind-geolite-db
+        container:
+          volumeMounts:
+            - name: maxmind-db
+              mountPath: /etc/envoy/maxmind
+              readOnly: true
