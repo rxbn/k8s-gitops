@@ -1,0 +1,12 @@
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: ClientTrafficPolicy
+metadata:
+  name: envoy
+  namespace: envoy-gateway-system
+spec:
+  path:
+    escapedSlashesAction: KeepUnchanged
+  targetSelectors:
+    - group: gateway.networking.k8s.io
+      kind: Gateway

@@ -9,4 +9,5 @@ resources:
   - httproute.yaml
   - helmrelease.yaml
   - gateway.yaml
+  - clienttrafficpolicy.yaml
   - envoyproxy.yaml
