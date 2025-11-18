@@ -43,3 +43,15 @@ spec:
       backendRefs:
         - name: checkmk
           port: 443
+---
+apiVersion: cloudflare-operator.io/v1
+kind: DNSRecord
+metadata:
+  name: checkmk-${BASE_DOMAIN/./-}
+  namespace: cloudflare-operator
+spec:
+  name: checkmk.${BASE_DOMAIN}
+  type: CNAME
+  content: ${BASE_DOMAIN}
+  proxied: true
+  ttl: 1
