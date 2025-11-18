@@ -14,13 +14,6 @@ spec:
   rules:
     - matches:
         - path:
-            type: Exact
-            value: /api
-      backendRefs:
-        - name: sabnzbd
-          port: 8080
-    - matches:
-        - path:
             type: PathPrefix
             value: /
       backendRefs:

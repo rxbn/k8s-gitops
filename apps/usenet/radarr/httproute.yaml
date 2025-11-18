@@ -15,13 +15,6 @@ spec:
     - matches:
         - path:
             type: PathPrefix
-            value: /api
-      backendRefs:
-        - name: radarr
-          port: 7878
-    - matches:
-        - path:
-            type: PathPrefix
             value: /
       backendRefs:
         - name: radarr

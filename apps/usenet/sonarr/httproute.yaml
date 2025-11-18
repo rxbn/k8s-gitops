@@ -15,13 +15,6 @@ spec:
     - matches:
         - path:
             type: PathPrefix
-            value: /api
-      backendRefs:
-        - name: sonarr
-          port: 8989
-    - matches:
-        - path:
-            type: PathPrefix
             value: /
       backendRefs:
         - name: sonarr
