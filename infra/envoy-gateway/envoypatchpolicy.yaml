@@ -32,23 +32,31 @@ spec:
                     asn: x-geo-asn
                 city_db_path: /etc/envoy/maxmind/GeoLite2-City.mmdb
                 # asn_db_path: /etc/envoy/maxmind/GeoLite2-ASN.mmdb
-    # - type: type.googleapis.com/envoy.config.listener.v3.Listener
-    #   name: envoy-gateway-system/external/external-https
-    #   operation:
-    #     op: add
-    #     path: /filter_chains/0/filters/0/typed_config/http_filters/1
-    #     value:
-    #       name: envoy.filters.http.rbac
-    #       typed_config:
-    #         "@type": type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBAC
-    #         rules:
-    #           action: ALLOW
-    #           policies:
-    #             only-ch:
-    #               permissions:
-    #                 - header:
-    #                     name: x-geo-country
-    #                     string_match:
-    #                       exact: CH
-    #               principals:
-    #                 - any: true
+    - type: type.googleapis.com/envoy.config.listener.v3.Listener
+      name: envoy-gateway-system/external/external-https
+      operation:
+        op: add
+        path: /filter_chains/0/filters/0/typed_config/http_filters/1
+        value:
+          name: envoy.filters.http.rbac
+          typed_config:
+            "@type": type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBAC
+            rules:
+              action: ALLOW
+              policies:
+                only-ch:
+                  permissions:
+                    - header:
+                        name: x-geo-country
+                        string_match:
+                          exact: CH
+                  principals:
+                    - any: true
+                internal-no-header:
+                  permissions:
+                    - not_rule:
+                        header:
+                          name: x-geo-country
+                          present_match: true
+                  principals:
+                    - any: true
