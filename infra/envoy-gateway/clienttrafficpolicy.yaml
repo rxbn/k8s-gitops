@@ -5,6 +5,9 @@ metadata:
   name: envoy-gateway
   namespace: envoy-gateway-system
 spec:
+  clientIPDetection:
+    xForwardedFor:
+      numTrustedHops: 1
   path:
     escapedSlashesAction: KeepUnchanged
   targetSelectors:
