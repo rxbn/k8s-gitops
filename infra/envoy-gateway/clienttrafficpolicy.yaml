@@ -2,7 +2,7 @@
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: ClientTrafficPolicy
 metadata:
-  name: envoy
+  name: envoy-gateway
   namespace: envoy-gateway-system
 spec:
   path:
