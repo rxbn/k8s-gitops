@@ -31,7 +31,7 @@ spec:
                     country: x-geo-country
                     asn: x-geo-asn
                 city_db_path: /etc/envoy/maxmind/GeoLite2-City.mmdb
-                # asn_db_path: /etc/envoy/maxmind/GeoLite2-ASN.mmdb
+                asn_db_path: /etc/envoy/maxmind/GeoLite2-ASN.mmdb
     - type: type.googleapis.com/envoy.config.listener.v3.Listener
       name: envoy-gateway-system/external/external-https
       operation:
