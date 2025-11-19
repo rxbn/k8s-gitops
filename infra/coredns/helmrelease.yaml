@@ -44,6 +44,9 @@ spec:
             parameters: :9153
           - name: forward
             parameters: . /etc/resolv.conf
+          - name: log
+            configBlock: |-
+              class success
           - name: cache
             parameters: 30
           - name: loop
