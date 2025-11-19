@@ -33,6 +33,11 @@ spec:
                     "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" \
                     -o /tmp/maxmind-city/geolite2-city.tar.gz
 
+                  if grep -q "Daily GeoIP database download limit reached" /tmp/maxmind-city/geolite2-city.tar.gz; then
+                    echo "Reached daily download limit for MaxMind GeoLite databases. Skipping update."
+                    exit 0
+                  fi
+
                   echo "Extracting GeoLite2-City"
                   tar -xzf /tmp/maxmind-city/geolite2-city.tar.gz -C /tmp/maxmind-city
 
@@ -52,6 +57,11 @@ spec:
                   curl -sSL \
                     "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" \
                     -o /tmp/maxmind-asn/geolite2-asn.tar.gz
+
+                  if grep -q "Daily GeoIP database download limit reached" /tmp/maxmind-asn/geolite2-asn.tar.gz; then
+                    echo "Reached daily download limit for MaxMind GeoLite databases. Skipping update."
+                    exit 0
+                  fi
 
                   echo "Extracting GeoLite2-ASN"
                   tar -xzf /tmp/maxmind-asn/geolite2-asn.tar.gz -C /tmp/maxmind-asn
