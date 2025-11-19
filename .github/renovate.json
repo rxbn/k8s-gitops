@@ -9,14 +9,6 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/.github\\/workflows\\/sync-cloudflare-nets\\.yaml$/"
-      ],
-      "matchStrings": ["depName=(?<depName>.*)\\s.*\\/(?<currentValue>.*?)\\/"],
-      "datasourceTemplate": "github-releases"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
         "/.github\\/workflows\\/helm-release-differ\\.yaml$/"
       ],
       "matchStrings": [
