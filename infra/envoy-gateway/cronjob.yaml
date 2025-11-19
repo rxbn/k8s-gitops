@@ -7,12 +7,19 @@ metadata:
   annotations:
     kustomize.toolkit.fluxcd.io/substitute: disabled
 spec:
+  suspend: false
   schedule: 0 * * * *
+  timeZone: Europe/Zurich
+  failedJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 1
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            job: update-geolite-db
         spec:
-          restartPolicy: Never
           containers:
             - name: update-geolite-db
               image: ghcr.io/containeroo/alpine-toolbox:3.1.1
@@ -84,6 +91,8 @@ spec:
               volumeMounts:
                 - name: maxmind-db
                   mountPath: /data
+          restartPolicy: Never
+          automountServiceAccountToken: false
           volumes:
             - name: maxmind-db
               persistentVolumeClaim:
