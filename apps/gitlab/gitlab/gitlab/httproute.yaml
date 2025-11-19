@@ -56,7 +56,7 @@ spec:
   rules:
     - matches:
         - path:
-            type: PathPrefix
+            type: Exact
             value: /users/sign_in
       filters:
         - type: RequestRedirect
