@@ -121,18 +121,6 @@ spec:
             rules:
               action: DENY
               policies: {}
-    - type: type.googleapis.com/envoy.config.listener.v3.Listener
-      name: envoy-gateway-system/external/external-http
-      operation:
-        op: add
-        path: /filter_chains/0/filters/0/typed_config/http_filters/2
-        value:
-          name: envoy.filters.http.rbac.admin
-          typed_config:
-            "@type": type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBAC
-            rules:
-              action: DENY
-              policies: {}
 ---
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: EnvoyPatchPolicy
@@ -168,49 +156,7 @@ spec:
                   principals:
                     - any: true
     - type: "type.googleapis.com/envoy.config.route.v3.RouteConfiguration"
-      name: envoy-gateway-system/external/external-http
-      operation:
-        op: add
-        jsonPath: "..virtual_hosts[?match(@.name, '.*(son|rad)arr_${BASE_DOMAIN/./_}')]"
-        path: "typed_per_filter_config/envoy.filters.http.rbac.admin"
-        value:
-          "@type": type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBACPerRoute
-          rbac:
-            rules:
-              action: DENY
-              policies:
-                deny-admin-page:
-                  permissions:
-                    - header:
-                        name: ":path"
-                        safe_regex_match:
-                          google_re2: {}
-                          regex: "^/(settings|system).*"
-                  principals:
-                    - any: true
-    - type: "type.googleapis.com/envoy.config.route.v3.RouteConfiguration"
       name: envoy-gateway-system/external/external-https
-      operation:
-        op: add
-        jsonPath: "..virtual_hosts[?match(@.name, '.*sabnzbd_${BASE_DOMAIN/./_}')]"
-        path: "typed_per_filter_config/envoy.filters.http.rbac.admin"
-        value:
-          "@type": type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBACPerRoute
-          rbac:
-            rules:
-              action: DENY
-              policies:
-                deny-admin-page:
-                  permissions:
-                    - header:
-                        name: ":path"
-                        safe_regex_match:
-                          google_re2: {}
-                          regex: "^/config.*"
-                  principals:
-                    - any: true
-    - type: "type.googleapis.com/envoy.config.route.v3.RouteConfiguration"
-      name: envoy-gateway-system/external/external-http
       operation:
         op: add
         jsonPath: "..virtual_hosts[?match(@.name, '.*sabnzbd_${BASE_DOMAIN/./_}')]"
@@ -252,49 +198,7 @@ spec:
                   principals:
                     - any: true
     - type: "type.googleapis.com/envoy.config.route.v3.RouteConfiguration"
-      name: envoy-gateway-system/external/external-http
-      operation:
-        op: add
-        jsonPath: "..virtual_hosts[?match(@.name, '.*cloud_${BASE_DOMAIN/./_}')]"
-        path: "typed_per_filter_config/envoy.filters.http.rbac.admin"
-        value:
-          "@type": type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBACPerRoute
-          rbac:
-            rules:
-              action: DENY
-              policies:
-                deny-admin-page:
-                  permissions:
-                    - header:
-                        name: ":path"
-                        safe_regex_match:
-                          google_re2: {}
-                          regex: "^/settings/admin.*"
-                  principals:
-                    - any: true
-    - type: "type.googleapis.com/envoy.config.route.v3.RouteConfiguration"
       name: envoy-gateway-system/external/external-https
-      operation:
-        op: add
-        jsonPath: "..virtual_hosts[?match(@.name, '.*(sso|git)_${BASE_DOMAIN/./_}')]"
-        path: "typed_per_filter_config/envoy.filters.http.rbac.admin"
-        value:
-          "@type": type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBACPerRoute
-          rbac:
-            rules:
-              action: DENY
-              policies:
-                deny-admin-page:
-                  permissions:
-                    - header:
-                        name: ":path"
-                        safe_regex_match:
-                          google_re2: {}
-                          regex: "^/admin.*"
-                  principals:
-                    - any: true
-    - type: "type.googleapis.com/envoy.config.route.v3.RouteConfiguration"
-      name: envoy-gateway-system/external/external-http
       operation:
         op: add
         jsonPath: "..virtual_hosts[?match(@.name, '.*(sso|git)_${BASE_DOMAIN/./_}')]"
