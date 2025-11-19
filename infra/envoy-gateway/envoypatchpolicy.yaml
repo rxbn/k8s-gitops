@@ -38,7 +38,7 @@ spec:
         op: add
         path: /filter_chains/0/filters/0/typed_config/http_filters/1
         value:
-          name: envoy.filters.http.rbac
+          name: envoy.filters.http.rbac.geo
           typed_config:
             "@type": type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBAC
             rules:
@@ -60,6 +60,18 @@ spec:
                           exact: "36459"
                   principals:
                     - any: true
+    - type: type.googleapis.com/envoy.config.listener.v3.Listener
+      name: envoy-gateway-system/external/external-https
+      operation:
+        op: add
+        path: /filter_chains/0/filters/0/typed_config/http_filters/2
+        value:
+          name: envoy.filters.http.rbac.admin
+          typed_config:
+            "@type": type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBAC
+            rules:
+              action: DENY
+              policies: {}
 ---
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: EnvoyPatchPolicy
@@ -78,7 +90,7 @@ spec:
       operation:
         op: add
         jsonPath: "..virtual_hosts[?match(@.name, '.*(son|rad)arr_${BASE_DOMAIN/./_}')]"
-        path: "typed_per_filter_config/envoy.filters.http.rbac"
+        path: "typed_per_filter_config/envoy.filters.http.rbac.admin"
         value:
           "@type": type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBACPerRoute
           rbac:
@@ -99,7 +111,7 @@ spec:
       operation:
         op: add
         jsonPath: "..virtual_hosts[?match(@.name, '.*sabnzbd_${BASE_DOMAIN/./_}')]"
-        path: "typed_per_filter_config/envoy.filters.http.rbac"
+        path: "typed_per_filter_config/envoy.filters.http.rbac.admin"
         value:
           "@type": type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBACPerRoute
           rbac:
@@ -120,7 +132,7 @@ spec:
       operation:
         op: add
         jsonPath: "..virtual_hosts[?match(@.name, '.*cloud_${BASE_DOMAIN/./_}')]"
-        path: "typed_per_filter_config/envoy.filters.http.rbac"
+        path: "typed_per_filter_config/envoy.filters.http.rbac.admin"
         value:
           "@type": type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBACPerRoute
           rbac:
@@ -141,7 +153,7 @@ spec:
       operation:
         op: add
         jsonPath: "..virtual_hosts[?match(@.name, '.*(sso|git)_${BASE_DOMAIN/./_}')]"
-        path: "typed_per_filter_config/envoy.filters.http.rbac"
+        path: "typed_per_filter_config/envoy.filters.http.rbac.admin"
         value:
           "@type": type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBACPerRoute
           rbac:
