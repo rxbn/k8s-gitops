@@ -47,6 +47,7 @@ spec:
           - name: log
             configBlock: |-
               class success
+              format "{remote} {type} {class} {name} {rcode}"
           - name: cache
             parameters: 30
           - name: loop
