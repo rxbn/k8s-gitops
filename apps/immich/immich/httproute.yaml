@@ -9,6 +9,9 @@ spec:
     - name: external
       namespace: envoy-gateway-system
       sectionName: external-https
+    - name: internal
+      namespace: envoy-gateway-system
+      sectionName: internal-https
   hostnames:
     - pics.${BASE_DOMAIN}
   rules:

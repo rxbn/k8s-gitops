@@ -8,5 +8,5 @@ spec:
   name: overseerr.${BASE_DOMAIN}
   type: CNAME
   content: ${BASE_DOMAIN}
-  proxied: true
+  proxied: false
   ttl: 1

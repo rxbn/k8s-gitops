@@ -9,7 +9,7 @@ spec:
   type: A
   ipRef:
     name: ${BASE_DOMAIN/./-}-v4
-  proxied: true
+  proxied: false
   ttl: 1
 ---
 apiVersion: cloudflare-operator.io/v1
@@ -22,7 +22,7 @@ spec:
   type: AAAA
   ipRef:
     name: ${BASE_DOMAIN/./-}-v6
-  proxied: true
+  proxied: false
   ttl: 1
 ---
 apiVersion: cloudflare-operator.io/v1

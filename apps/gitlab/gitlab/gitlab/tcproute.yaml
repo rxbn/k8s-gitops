@@ -9,6 +9,9 @@ spec:
     - name: external
       namespace: envoy-gateway-system
       sectionName: external-ssh
+    - name: internal
+      namespace: envoy-gateway-system
+      sectionName: internal-https
   rules:
     - backendRefs:
         - name: gitlab-gitlab-shell

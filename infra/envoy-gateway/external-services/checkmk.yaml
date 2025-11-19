@@ -33,6 +33,9 @@ spec:
     - name: external
       namespace: envoy-gateway-system
       sectionName: external-https
+    - name: internal
+      namespace: envoy-gateway-system
+      sectionName: internal-https
   hostnames:
     - checkmk.${BASE_DOMAIN}
   rules:
@@ -53,5 +56,5 @@ spec:
   name: checkmk.${BASE_DOMAIN}
   type: CNAME
   content: ${BASE_DOMAIN}
-  proxied: true
+  proxied: false
   ttl: 1

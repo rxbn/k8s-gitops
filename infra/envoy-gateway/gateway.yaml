@@ -22,13 +22,21 @@ spec:
         namespaces:
           from: All
       name: internal-https
-      hostname: "*.local.${BASE_DOMAIN}"
+      hostname: "*.${BASE_DOMAIN}"
       port: 443
       protocol: HTTPS
       tls:
         certificateRefs:
           - name: ${BASE_DOMAIN/./-}-tls
             kind: Secret
+    - allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TCPRoute
+      name: internal-ssh
+      port: 22
+      protocol: TCP
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
@@ -59,11 +67,3 @@ spec:
       tls:
         certificateRefs:
           - name: ${BASE_DOMAIN/./-}-tls
-    - allowedRoutes:
-        namespaces:
-          from: All
-        kinds:
-          - kind: TCPRoute
-      name: external-ssh
-      port: 22
-      protocol: TCP

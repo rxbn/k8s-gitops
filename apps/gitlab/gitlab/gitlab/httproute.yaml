@@ -30,6 +30,9 @@ spec:
     - name: external
       namespace: envoy-gateway-system
       sectionName: external-https
+    - name: internal
+      namespace: envoy-gateway-system
+      sectionName: internal-https
   hostnames:
     - git.${BASE_DOMAIN}
   rules:
@@ -51,6 +54,9 @@ spec:
     - name: external
       namespace: envoy-gateway-system
       sectionName: external-https
+    - name: internal
+      namespace: envoy-gateway-system
+      sectionName: internal-https
   hostnames:
     - registry.${BASE_DOMAIN}
   rules:
