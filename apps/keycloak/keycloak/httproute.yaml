@@ -2,16 +2,34 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: keycloak
+  name: keycloak-internal
+  namespace: keycloak
+spec:
+  parentRefs:
+    - name: internal
+      namespace: envoy-gateway-system
+      sectionName: internal-https
+  hostnames:
+    - sso.${BASE_DOMAIN}
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: keycloak
+          port: 8080
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: keycloak-external
   namespace: keycloak
 spec:
   parentRefs:
     - name: external
       namespace: envoy-gateway-system
       sectionName: external-https
-    - name: internal
-      namespace: envoy-gateway-system
-      sectionName: internal-https
   hostnames:
     - sso.${BASE_DOMAIN}
   rules:

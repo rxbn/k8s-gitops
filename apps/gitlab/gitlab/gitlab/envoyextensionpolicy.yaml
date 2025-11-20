@@ -23,3 +23,27 @@ spec:
             )
           end
         end
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyExtensionPolicy
+metadata:
+  name: block-admin-page
+  namespace: gitlab
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: gitlab-webservice-external
+  lua:
+    - type: Inline
+      inline: |
+        function envoy_on_request(request_handle)
+          if string.match(request_handle:headers():get(":path"), "^/admin") then
+            request_handle:respond(
+              {
+                [":status"] = "403",
+              },
+              "Admin page access is blocked."
+            )
+          end
+        end
