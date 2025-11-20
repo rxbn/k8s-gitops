@@ -47,6 +47,20 @@ spec:
         - name: home-assistant
           port: 443
 ---
+apiVersion: gateway.networking.k8s.io/v1alpha3
+kind: BackendTLSPolicy
+metadata:
+  name: home-assistant-tls
+  namespace: envoy-gateway-system
+spec:
+  targetRefs:
+    - group: ""
+      kind: Service
+      name: home-assistant
+  validation:
+    wellKnownCACertificates: System
+    hostname: home.${BASE_DOMAIN}
+---
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:

@@ -47,6 +47,20 @@ spec:
         - name: checkmk
           port: 443
 ---
+apiVersion: gateway.networking.k8s.io/v1alpha3
+kind: BackendTLSPolicy
+metadata:
+  name: checkmk-tls
+  namespace: envoy-gateway-system
+spec:
+  targetRefs:
+    - group: ""
+      kind: Service
+      name: checkmk
+  validation:
+    wellKnownCACertificates: System
+    hostname: checkmk.${BASE_DOMAIN}
+---
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
