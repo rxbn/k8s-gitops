@@ -42,7 +42,7 @@ spec:
 
                   if grep -q "Daily GeoIP database download limit reached" /tmp/maxmind-city/geolite2-city.tar.gz; then
                     echo "Reached daily download limit for MaxMind GeoLite databases. Skipping update."
-                    exit 0
+                    exit 1
                   fi
 
                   echo "Extracting GeoLite2-City"
@@ -67,7 +67,7 @@ spec:
 
                   if grep -q "Daily GeoIP database download limit reached" /tmp/maxmind-asn/geolite2-asn.tar.gz; then
                     echo "Reached daily download limit for MaxMind GeoLite databases. Skipping update."
-                    exit 0
+                    exit 1
                   fi
 
                   echo "Extracting GeoLite2-ASN"
