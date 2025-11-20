@@ -5,6 +5,7 @@ metadata:
   name: envoy-gateway
   namespace: envoy-gateway-system
 spec:
+  http2: {}
   clientIPDetection:
     xForwardedFor:
       numTrustedHops: 1

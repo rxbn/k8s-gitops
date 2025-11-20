@@ -9,7 +9,6 @@ spec:
     - port: 443
       protocol: TCP
       targetPort: 443
-      appProtocol: kubernetes.io/wss
   type: ClusterIP
 ---
 apiVersion: v1
