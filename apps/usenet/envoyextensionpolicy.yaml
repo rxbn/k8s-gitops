@@ -1,0 +1,27 @@
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyExtensionPolicy
+metadata:
+  name: arr-disable-admin-page
+  namespace: usenet
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: sonarr-external
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: radarr-external
+  lua:
+    - type: Inline
+      inline: |
+        function envoy_on_request(request_handle)
+          if string.match(request_handle:headers():get(":path"), "^/(settings|system)") then
+            request_handle:respond(
+              {
+                [":status"] = "403",
+              },
+              "Admin page access is blocked."
+            )
+          end
+        end
