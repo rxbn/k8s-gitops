@@ -89,48 +89,6 @@ spec:
       name: envoy-gateway-system/external/external-https
       operation:
         op: add
-        jsonPath: "..virtual_hosts[?match(@.name, '.*(son|rad)arr_${BASE_DOMAIN/./_}')]"
-        path: "typed_per_filter_config/envoy.filters.http.rbac.admin"
-        value:
-          "@type": type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBACPerRoute
-          rbac:
-            rules:
-              action: DENY
-              policies:
-                deny-admin-page:
-                  permissions:
-                    - header:
-                        name: ":path"
-                        safe_regex_match:
-                          google_re2: {}
-                          regex: "^/(settings|system).*"
-                  principals:
-                    - any: true
-    - type: "type.googleapis.com/envoy.config.route.v3.RouteConfiguration"
-      name: envoy-gateway-system/external/external-https
-      operation:
-        op: add
-        jsonPath: "..virtual_hosts[?match(@.name, '.*sabnzbd_${BASE_DOMAIN/./_}')]"
-        path: "typed_per_filter_config/envoy.filters.http.rbac.admin"
-        value:
-          "@type": type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBACPerRoute
-          rbac:
-            rules:
-              action: DENY
-              policies:
-                deny-admin-page:
-                  permissions:
-                    - header:
-                        name: ":path"
-                        safe_regex_match:
-                          google_re2: {}
-                          regex: "^/config.*"
-                  principals:
-                    - any: true
-    - type: "type.googleapis.com/envoy.config.route.v3.RouteConfiguration"
-      name: envoy-gateway-system/external/external-https
-      operation:
-        op: add
         jsonPath: "..virtual_hosts[?match(@.name, '.*cloud_${BASE_DOMAIN/./_}')]"
         path: "typed_per_filter_config/envoy.filters.http.rbac.admin"
         value:

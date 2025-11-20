@@ -1,0 +1,51 @@
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyExtensionPolicy
+metadata:
+  name: arr-disable-admin-panel
+  namespace: usenet
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: radarr-external
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: sonarr-external
+  lua:
+    - type: Inline
+      inline: |
+        function envoy_on_request(request_handle)
+          if request_handle:headers():get(":path"):match("^/(settings|system)") then
+            request_handle:respond(
+              {
+                [":status"] = "403",
+              },
+              "Admin panel access is blocked."
+            )
+          end
+        end
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyExtensionPolicy
+metadata:
+  name: sabnzbd-disable-admin-panel
+  namespace: usenet
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: sabnzbd-external
+  lua:
+    - type: Inline
+      inline: |
+        function envoy_on_request(request_handle)
+          if request_handle:headers():get(":path"):match("^/config") then
+            request_handle:respond(
+              {
+                [":status"] = "403",
+              },
+              "Admin panel access is blocked."
+            )
+          end
+        end
