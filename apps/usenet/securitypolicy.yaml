@@ -14,7 +14,10 @@ spec:
       name: radarr
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
-      name: sabnzbd
+      name: sabnzbd-internal
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: sabnzbd-external
   oidc:
     provider:
       issuer: https://sso.${BASE_DOMAIN}/realms/master

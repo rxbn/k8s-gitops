@@ -5,6 +5,7 @@ resources:
   - deployment.yaml
   - httproute.yaml
   - service.yaml
+  - envoyextensionpolicy.yaml
   - configmap.yaml
   - dnsrecord.yaml
   - persistentvolumeclaim.yaml
