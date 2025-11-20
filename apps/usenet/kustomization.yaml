@@ -7,7 +7,6 @@ resources:
   - plex
   - overseerr
   - sonarr
-  - envoyextensionpolicy.yaml
   - schedule.yaml
   - securitypolicy.yaml
   - secret.yaml
