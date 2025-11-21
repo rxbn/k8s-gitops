@@ -85,7 +85,7 @@ spec:
         gitlab:
           name: git.${BASE_DOMAIN}
         minio:
-          name: gitlab-minio.local.${BASE_DOMAIN}
+          name: gitlab-minio.${BASE_DOMAIN}
         registry:
           name: registry.${BASE_DOMAIN}
       ingress:

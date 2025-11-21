@@ -10,7 +10,7 @@ spec:
       namespace: envoy-gateway-system
       sectionName: internal-https
   hostnames:
-    - alertmanager.local.${BASE_DOMAIN}
+    - alertmanager.${BASE_DOMAIN}
   rules:
     - matches:
         - path:
@@ -31,7 +31,7 @@ spec:
       namespace: envoy-gateway-system
       sectionName: internal-https
   hostnames:
-    - grafana.local.${BASE_DOMAIN}
+    - grafana.${BASE_DOMAIN}
   rules:
     - matches:
         - path:
@@ -52,7 +52,7 @@ spec:
       namespace: envoy-gateway-system
       sectionName: internal-https
   hostnames:
-    - prometheus.local.${BASE_DOMAIN}
+    - prometheus.${BASE_DOMAIN}
   rules:
     - matches:
         - path:

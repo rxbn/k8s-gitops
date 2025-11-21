@@ -10,7 +10,7 @@ spec:
       namespace: envoy-gateway-system
       sectionName: internal-https
   hostnames:
-    - hubble.local.${BASE_DOMAIN}
+    - hubble.${BASE_DOMAIN}
   rules:
     - matches:
         - path:

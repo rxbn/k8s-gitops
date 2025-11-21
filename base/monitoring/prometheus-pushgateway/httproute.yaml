@@ -10,7 +10,7 @@ spec:
       namespace: envoy-gateway-system
       sectionName: internal-https
   hostnames:
-    - pushgateway.local.${BASE_DOMAIN}
+    - pushgateway.${BASE_DOMAIN}
   rules:
     - matches:
         - path:

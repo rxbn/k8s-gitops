@@ -10,7 +10,7 @@ spec:
       namespace: envoy-gateway-system
       sectionName: internal-https
   hostnames:
-    - gitlab-minio.local.${BASE_DOMAIN}
+    - gitlab-minio.${BASE_DOMAIN}
   rules:
     - matches:
         - path:

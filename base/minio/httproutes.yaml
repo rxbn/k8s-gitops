@@ -10,7 +10,7 @@ spec:
       namespace: envoy-gateway-system
       sectionName: internal-https
   hostnames:
-    - s3.local.${BASE_DOMAIN}
+    - s3.${BASE_DOMAIN}
   rules:
     - matches:
         - path:
@@ -31,7 +31,7 @@ spec:
       namespace: envoy-gateway-system
       sectionName: internal-https
   hostnames:
-    - minio-console.local.${BASE_DOMAIN}
+    - minio-console.${BASE_DOMAIN}
   rules:
     - matches:
         - path:
