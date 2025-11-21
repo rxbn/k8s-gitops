@@ -5,6 +5,5 @@ resources:
   - deployment.yaml
   - httproute.yaml
   - service.yaml
-  - dnsrecord.yaml
   - secret.yaml
   - persistentvolumeclaim.yaml

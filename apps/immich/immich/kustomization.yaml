@@ -5,5 +5,4 @@ resources:
   - httproute.yaml
   - helmrelease.yaml
   - schedule.yaml
-  - dnsrecord.yaml
   - persistentvolumeclaim.yaml

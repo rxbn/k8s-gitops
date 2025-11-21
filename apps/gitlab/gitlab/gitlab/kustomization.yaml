@@ -5,6 +5,5 @@ resources:
   - httproute.yaml
   - helmrelease.yaml
   - envoyextensionpolicy.yaml
-  - dnsrecords.yaml
   - tcproute.yaml
   - secret.yaml

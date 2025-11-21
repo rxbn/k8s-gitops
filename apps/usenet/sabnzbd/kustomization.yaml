@@ -7,5 +7,4 @@ resources:
   - service.yaml
   - envoyextensionpolicy.yaml
   - configmap.yaml
-  - dnsrecord.yaml
   - persistentvolumeclaim.yaml

@@ -6,6 +6,5 @@ resources:
   - httproute.yaml
   - service.yaml
   - envoyextensionpolicy.yaml
-  - dnsrecord.yaml
   - secret.yaml
   - persistentvolumeclaim.yaml
