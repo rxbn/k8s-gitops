@@ -20,11 +20,6 @@ spec:
   values:
     config:
       envoyGateway:
-        rateLimit:
-          backend:
-            type: Redis
-            redis:
-              url: envoy-gateway-valkey.envoy-gateway-system.svc.cluster.local:6379
         extensionApis:
           enableEnvoyPatchPolicy: true
           enableBackend: true
