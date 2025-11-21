@@ -4,6 +4,11 @@ kind: HTTPRoute
 metadata:
   name: overseerr
   namespace: usenet
+  annotations:
+    cloudflare-operator.io/content: ${BASE_DOMAIN}
+    cloudflare-operator.io/proxied: "false"
+    cloudflare-operator.io/ttl: "1"
+    cloudflare-operator.io/type: CNAME
 spec:
   parentRefs:
     - name: external
