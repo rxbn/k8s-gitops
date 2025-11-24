@@ -79,4 +79,5 @@ spec:
     - InternalError.*failed to call webhook.*EOF
     - "dial tcp: lookup.*server misbehaving"
     - dependency.*not ready
+    - no such file or directory
   suspend: false
