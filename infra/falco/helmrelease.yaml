@@ -84,6 +84,7 @@ spec:
           condition: >
             (proc.name startswith "python3")
             or (k8smeta.ns.name="gitlab" and proc.exepath="/kaniko/executor")
+            or (proc.pname="systemd")
 
         - macro: allowed_clear_log_files
           condition: >
