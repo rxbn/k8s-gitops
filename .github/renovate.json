@@ -115,13 +115,6 @@
       "automerge": true,
       "automergeType": "branch",
       "ignoreTests": true
-    },
-    {
-      "matchPackageNames": ["ghcr.io/cloudnative-pg/postgresql"],
-      "additionalBranchPrefix": "{{packageFileDir}}-",
-      "major": {
-        "enabled": false
-      }
     }
   ],
   "ignoreDeps": [
