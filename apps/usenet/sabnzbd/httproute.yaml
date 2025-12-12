@@ -12,10 +12,18 @@ spec:
   hostnames:
     - sabnzbd.${BASE_DOMAIN}
   rules:
-    - matches:
+    - name: sabnzbd
+      matches:
         - path:
             type: PathPrefix
             value: /
+      backendRefs:
+        - name: sabnzbd
+          port: 8080
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /api
       backendRefs:
         - name: sabnzbd
           port: 8080

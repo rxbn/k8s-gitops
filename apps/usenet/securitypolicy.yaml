@@ -19,6 +19,7 @@ spec:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
       name: sabnzbd-internal
+      sectionName: sabnzbd
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
       name: sabnzbd-external
