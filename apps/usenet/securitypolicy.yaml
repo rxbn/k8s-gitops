@@ -11,7 +11,11 @@ spec:
       name: sonarr
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
-      name: radarr
+      name: radarr-internal
+      sectionName: radarr
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: radarr-external
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
       name: sabnzbd-internal
