@@ -6,7 +6,7 @@ metadata:
   namespace: immich
 spec:
   instances: 1
-  imageName: ghcr.io/tensorchord/cloudnative-vectorchord:17.5-0.4.3
+  imageName: ghcr.io/tensorchord/cloudnative-vectorchord:18.1-1.0.0
   storage:
     size: 20Gi
   bootstrap:
