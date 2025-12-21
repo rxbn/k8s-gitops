@@ -10,6 +10,7 @@ spec:
     type: Kubernetes
     kubernetes:
       envoyService:
+        externalTrafficPolicy: Local
         annotations:
           metallb.universe.tf/loadBalancerIPs: 10.0.1.201,${IPV6_PREFIX}::201
 ---
@@ -24,6 +25,7 @@ spec:
     type: Kubernetes
     kubernetes:
       envoyService:
+        externalTrafficPolicy: Local
         annotations:
           metallb.universe.tf/loadBalancerIPs: 10.0.1.200,${IPV6_PREFIX}::200
       envoyDeployment:
