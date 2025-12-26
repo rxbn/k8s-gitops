@@ -24,3 +24,12 @@ spec:
           for: 8h
           labels:
             severity: critical
+        - alert: TeslaMateMetricsAbsent
+          annotations:
+            description: TeslaMate Postgres metrics are absent
+          expr: |
+            absent(cnpg_open_drives_open_drives)
+            or absent(cnpg_incomplete_charges_incomplete_charges)
+          for: 30m
+          labels:
+            severity: warning
