@@ -13,7 +13,7 @@ data:
         SELECT
           current_database() as dbname,
           count(*) as open_drives
-        FROM drives
+        FROM public.drives
         WHERE
           end_date IS NULL;
 
@@ -30,7 +30,7 @@ data:
         SELECT
           current_database() as dbname,
           count(*) as incomplete_charges
-        FROM charging_processes
+        FROM public.charging_processes
         WHERE
           end_date IS NULL;
 
