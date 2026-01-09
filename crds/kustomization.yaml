@@ -6,5 +6,6 @@ resources:
   - cloudflare-operator
   - kube-prometheus-stack
   - cert-manager
+  - barman-cloud-plugin
   - metallb
   - k8up
