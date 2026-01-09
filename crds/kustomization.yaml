@@ -5,7 +5,7 @@ resources:
   - cloudnative-pg
   - cloudflare-operator
   - kube-prometheus-stack
+  - cnpg-plugin-barman-cloud
   - cert-manager
-  - barman-cloud-plugin
   - metallb
   - k8up

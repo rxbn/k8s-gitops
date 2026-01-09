@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: barman-cloud-plugin
+  name: cnpg-plugin-barman-cloud
   namespace: cnpg-system
 spec:
   interval: 5m
