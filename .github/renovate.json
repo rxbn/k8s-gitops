@@ -59,7 +59,8 @@
       "customType": "regex",
       "managerFilePatterns": [
         "/crds\\/metallb\\/crds\\.yaml$/",
-        "/crds\\/cloudnative-pg\\/crds\\.yaml$/"
+        "/crds\\/cloudnative-pg\\/crds\\.yaml$/",
+        "/crds\\/barman-cloud-plugin\\/crds\\.yaml$/"
       ],
       "matchStrings": [
         "datasource=(?<datasource>.*) depName=(?<depName>.*)\\s.*tag: (?<currentValue>.*)"
