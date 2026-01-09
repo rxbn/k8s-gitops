@@ -13,7 +13,7 @@ spec:
       namespace: monitoring
   chart:
     spec:
-      chart: barman-cloud-plugin
+      chart: plugin-barman-cloud
       version: 0.4.0
       sourceRef:
         kind: HelmRepository
