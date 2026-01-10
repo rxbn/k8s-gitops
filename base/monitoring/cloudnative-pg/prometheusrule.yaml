@@ -76,6 +76,6 @@ spec:
             description: Backup failed for {{ $labels.job }}
             summary: Checks if the backup failed
           expr: |-
-            cnpg_collector_last_failed_backup_timestamp != 0
+            barman_cloud_cloudnative_pg_io_last_failed_backup_timestamp != 0
           labels:
             severity: critical

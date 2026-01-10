@@ -5,4 +5,5 @@ resources:
   - cnpg-cluster.yaml
   - scheduledbackup.yaml
   - cnpg-database.yaml
+  - objectstore.yaml
   - secret.yaml
