@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - nextcloud
   - gitlab
-  - immich
   - usenet
   - teslamate
   - keycloak

@@ -72,9 +72,6 @@ spec:
     - kind: HelmRelease
       namespace: cnpg-system
       name: "*"
-    - kind: HelmRelease
-      namespace: immich
-      name: "*"
   exclusionList:
     - InternalError.*failed to call webhook.*EOF
     - "dial tcp: lookup.*server misbehaving"
