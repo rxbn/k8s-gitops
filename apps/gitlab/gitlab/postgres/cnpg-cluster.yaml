@@ -17,6 +17,8 @@ spec:
     roles:
       - name: registry
         login: true
+        passwordSecret:
+          name: gitlab-postgres-registry-credential
   plugins:
     - name: barman-cloud.cloudnative-pg.io
       isWALArchiver: true
