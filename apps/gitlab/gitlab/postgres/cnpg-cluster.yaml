@@ -13,6 +13,10 @@ spec:
     initdb:
       database: gitlabhq_production
       owner: gitlab
+  managed:
+    roles:
+      - name: registry
+        login: true
   plugins:
     - name: barman-cloud.cloudnative-pg.io
       isWALArchiver: true
