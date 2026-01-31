@@ -115,10 +115,10 @@ spec:
       enabled: true
       maintenance:
         readonly:
-          enabled: true
+          enabled: false
       database:
         configure: true
-        enabled: false
+        enabled: true
         name: registry
         user: registry
         password:
