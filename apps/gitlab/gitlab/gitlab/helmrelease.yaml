@@ -117,7 +117,6 @@ spec:
         readonly:
           enabled: false
       database:
-        configure: true
         enabled: true
         name: registry
         user: registry
