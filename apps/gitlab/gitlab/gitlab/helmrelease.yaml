@@ -112,14 +112,25 @@ spec:
       metrics:
         enabled: false
     registry:
+      enabled: true
+      maintenance:
+        readonly:
+          enabled: true
+      database:
+        configure: true
+        enabled: false
+        name: registry
+        user: registry
+        password:
+          secret: gitlab-postgres-registry
+          key: password
+        migrations:
+          enabled: true
       ingress:
         enabled: false
       hpa:
         maxReplicas: 1
         minReplicas: 1
-      maintenance:
-        readonly:
-          enabled: false
     minio:
       ingress:
         enabled: false
