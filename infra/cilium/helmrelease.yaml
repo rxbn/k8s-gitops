@@ -30,6 +30,11 @@ spec:
           enabled: false
     operator:
       replicas: 1
+    l2announcements:
+      enabled: true
+    k8sClientRateLimit:
+      qps: 100
+      burst: 200
     kubeProxyReplacement: true
     k8sServiceHost: k3s.srv.${BASE_DOMAIN}
     k8sServicePort: 6443
