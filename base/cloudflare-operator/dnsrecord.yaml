@@ -28,6 +28,18 @@ spec:
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
+  name: wildcard-${BASE_DOMAIN/./-}
+  namespace: cloudflare-operator
+spec:
+  name: '*.${BASE_DOMAIN}'
+  type: CNAME
+  content: ${BASE_DOMAIN}
+  proxied: false
+  ttl: 1
+---
+apiVersion: cloudflare-operator.io/v1
+kind: DNSRecord
+metadata:
   name: vpn-${BASE_DOMAIN/./-}
   namespace: cloudflare-operator
 spec:
