@@ -19,37 +19,9 @@ spec:
       securityContext:
         fsGroup: 2000
         fsGroupChangePolicy: OnRootMismatch
-      initContainers:
-        - name: migrate-overseerr-data
-          image: busybox:1.36.1
-          command:
-            - /bin/sh
-            - -ec
-            - |
-              if [ -f /target/.seerr-overseerr-migration-done ]; then
-                exit 0
-              fi
-
-              if [ -n "$(ls -A /source 2>/dev/null)" ]; then
-                cp -R /source/. /target/
-              fi
-              touch /target/.seerr-overseerr-migration-done
-          securityContext:
-            runAsUser: 2000
-            runAsGroup: 2000
-            runAsNonRoot: true
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - ALL
-          volumeMounts:
-            - mountPath: /source
-              name: legacy-data
-            - mountPath: /target
-              name: data
       containers:
         - name: seerr
-          image: ghcr.io/seerr-team/seerr:v3.0.0
+          image: ghcr.io/seerr-team/seerr:v3.0.1
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -99,7 +71,3 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: seerr-data
-        - name: legacy-data
-          persistentVolumeClaim:
-            # Temporary migration source. Remove this volume and init container after first successful run.
-            claimName: overseerr-data
