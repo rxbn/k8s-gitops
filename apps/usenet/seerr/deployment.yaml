@@ -17,7 +17,7 @@ spec:
         app: seerr
     spec:
       securityContext:
-        fsGroup: 1000
+        fsGroup: 2000
         fsGroupChangePolicy: OnRootMismatch
       initContainers:
         - name: migrate-overseerr-data
@@ -32,15 +32,13 @@ spec:
               fi
 
               if [ -n "$(ls -A /source 2>/dev/null)" ]; then
-                cp -a /source/. /target/
+                cp -R /source/. /target/
               fi
-
-              chown -R 1000:1000 /target
               touch "${marker}"
           securityContext:
-            runAsUser: 0
-            runAsGroup: 0
-            runAsNonRoot: false
+            runAsUser: 2000
+            runAsGroup: 2000
+            runAsNonRoot: true
             allowPrivilegeEscalation: false
             capabilities:
               drop:
@@ -60,8 +58,8 @@ spec:
                 - ALL
             readOnlyRootFilesystem: false
             runAsNonRoot: true
-            runAsUser: 1000
-            runAsGroup: 1000
+            runAsUser: 2000
+            runAsGroup: 2000
             privileged: false
             seccompProfile:
               type: RuntimeDefault
