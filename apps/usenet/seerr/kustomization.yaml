@@ -6,3 +6,4 @@ resources:
   - httproute.yaml
   - service.yaml
   - persistentvolumeclaim.yaml
+  - persistentvolumeclaim-legacy.yaml

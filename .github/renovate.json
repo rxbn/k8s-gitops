@@ -97,7 +97,7 @@
     {
       "matchDatasources": ["docker"],
       "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-ls(?<build>\\d+)$",
-      "matchPackageNames": ["/^ghcr\\.io\\/linuxserver\\/(sabnzbd|overseerr)$/"]
+      "matchPackageNames": ["/^ghcr\\.io\\/linuxserver\\/sabnzbd$/"]
     },
     {
       "matchDatasources": ["docker"],

@@ -2,14 +2,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: overseerr
+  name: seerr
   namespace: usenet
 spec:
   ports:
     - port: 5055
       targetPort: 5055
   selector:
-    app: overseerr
+    app: seerr
   ipFamilyPolicy: PreferDualStack
   ipFamilies:
     - IPv4

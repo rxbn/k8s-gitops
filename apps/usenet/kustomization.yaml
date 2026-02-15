@@ -5,7 +5,7 @@ resources:
   - sabnzbd
   - radarr
   - plex
-  - overseerr
+  - seerr
   - sonarr
   - schedule.yaml
   - securitypolicy.yaml

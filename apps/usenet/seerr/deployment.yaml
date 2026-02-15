@@ -1,0 +1,108 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seerr
+  namespace: usenet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seerr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: seerr
+    spec:
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+      initContainers:
+        - name: migrate-overseerr-data
+          image: busybox:1.36.1
+          command:
+            - /bin/sh
+            - -ec
+            - |
+              marker="/target/.seerr-overseerr-migration-done"
+              if [ -f "${marker}" ]; then
+                exit 0
+              fi
+
+              if [ -n "$(ls -A /source 2>/dev/null)" ]; then
+                cp -a /source/. /target/
+              fi
+
+              chown -R 1000:1000 /target
+              touch "${marker}"
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - mountPath: /source
+              name: legacy-data
+            - mountPath: /target
+              name: data
+      containers:
+        - name: seerr
+          image: ghcr.io/seerr-team/seerr:v3.0.0
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: false
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            privileged: false
+            seccompProfile:
+              type: RuntimeDefault
+          env:
+            - name: TZ
+              value: Europe/Zurich
+            - name: PORT
+              value: "5055"
+          ports:
+            - containerPort: 5055
+          volumeMounts:
+            - mountPath: /app/config
+              name: data
+          startupProbe:
+            httpGet:
+              path: /api/v1/status
+              port: 5055
+            failureThreshold: 20
+            periodSeconds: 10
+            timeoutSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /api/v1/status
+              port: 5055
+            failureThreshold: 3
+            periodSeconds: 10
+            timeoutSeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /api/v1/status
+              port: 5055
+            failureThreshold: 3
+            periodSeconds: 30
+            timeoutSeconds: 3
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: seerr-data
+        - name: legacy-data
+          persistentVolumeClaim:
+            # Temporary migration source. Remove this volume and init container after first successful run.
+            claimName: overseerr-data
