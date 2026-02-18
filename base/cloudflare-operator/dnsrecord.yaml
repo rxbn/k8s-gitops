@@ -40,6 +40,31 @@ spec:
 apiVersion: cloudflare-operator.io/v1
 kind: DNSRecord
 metadata:
+  name: vpn-${BASE_DOMAIN/./-}-v4
+  namespace: cloudflare-operator
+spec:
+  name: vpn.${BASE_DOMAIN}
+  type: A
+  ipRef:
+    name: ${BASE_DOMAIN/./-}-v4
+  proxied: false
+  ttl: 1
+---
+apiVersion: cloudflare-operator.io/v1
+kind: DNSRecord
+metadata:
+  name: vpn-${BASE_DOMAIN/./-}-v6
+  namespace: cloudflare-operator
+spec:
+  name: vpn.${BASE_DOMAIN}
+  type: AAAA
+  content: ${IPV6_PREFIX}::105
+  proxied: false
+  ttl: 1
+---
+apiVersion: cloudflare-operator.io/v1
+kind: DNSRecord
+metadata:
   name: mail-${BASE_DOMAIN/./-}-v4
   namespace: cloudflare-operator
 spec:
