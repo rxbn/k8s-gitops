@@ -8,6 +8,6 @@ resources:
   - cert-manager
   - envoy-gateway
   - metallb
-  - falco
+  # - falco
   - coredns
   - cilium
