@@ -47,10 +47,10 @@ spec:
             enabled: false
       kubernetes:
         enabled: true
-      falcoctl:
-        artifact:
-          follow:
-            enabled: false
+    falcoctl:
+      artifact:
+        follow:
+          enabled: false
     falcosidekick:
       enabled: true
       replicaCount: 1
