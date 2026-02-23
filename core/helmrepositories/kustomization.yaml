@@ -12,6 +12,7 @@ resources:
   - jetstack.yaml
   - minio.yaml
   - metrics-server.yaml
+  - valkey.yaml
   - containeroo.yaml
   - cilium.yaml
   - cloudnative-pg.yaml

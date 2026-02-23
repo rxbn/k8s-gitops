@@ -8,6 +8,9 @@ spec:
   interval: 5m
   driftDetection:
     mode: enabled
+  dependsOn:
+    - name: valkey
+      namespace: gitlab
   chart:
     spec:
       chart: gitlab
@@ -54,6 +57,9 @@ spec:
         password:
           key: password
           secret: gitlab-postgres-app
+      redis:
+        host: valkey.gitlab.svc.cluster.local
+        port: 6379
       kas:
         enabled: false
       appConfig:
@@ -109,8 +115,7 @@ spec:
     prometheus:
       install: false
     redis:
-      metrics:
-        enabled: false
+      install: false
     registry:
       enabled: true
       maintenance:
