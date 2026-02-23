@@ -60,6 +60,8 @@ spec:
       redis:
         host: valkey.gitlab.svc.cluster.local
         port: 6379
+        auth:
+          enabled: false
       kas:
         enabled: false
       appConfig:
