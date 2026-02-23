@@ -9,7 +9,7 @@ spec:
   driftDetection:
     mode: enabled
   dependsOn:
-    - name: valkey
+    - name: gitlab-valkey
       namespace: gitlab
   chart:
     spec:
@@ -58,7 +58,7 @@ spec:
           key: password
           secret: gitlab-postgres-app
       redis:
-        host: valkey.gitlab.svc.cluster.local
+        host: gitlab-valkey.gitlab.svc.cluster.local
         port: 6379
         auth:
           enabled: false
