@@ -140,6 +140,9 @@ spec:
         maxReplicas: 1
         minReplicas: 1
     minio:
+      persistence:
+        annotations:
+          helm.sh/resource-policy: "keep"
       ingress:
         enabled: false
   install:
