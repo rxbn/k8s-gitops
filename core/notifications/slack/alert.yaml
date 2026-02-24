@@ -21,7 +21,6 @@ spec:
     - InternalError.*failed to call webhook.*EOF
     - "dial tcp: lookup.*server misbehaving"
     - dependency.*not ready
-    - no such file or directory
     - context deadline exceeded
   suspend: false
 ---
@@ -78,6 +77,5 @@ spec:
     - InternalError.*failed to call webhook.*EOF
     - "dial tcp: lookup.*server misbehaving"
     - dependency.*not ready
-    - no such file or directory
     - context deadline exceeded
   suspend: false
