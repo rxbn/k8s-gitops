@@ -6,6 +6,7 @@ resources:
   - flux-system
   - namespaces
   - ocirepositories
+  - gitrepositories
   - kustomizations
   - helmrepositories
   - notifications

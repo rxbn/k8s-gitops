@@ -9,6 +9,8 @@ spec:
   driftDetection:
     mode: enabled
   dependsOn:
+    - name: gitlab-garage
+      namespace: gitlab
     - name: gitlab-valkey
       namespace: gitlab
   chart:
