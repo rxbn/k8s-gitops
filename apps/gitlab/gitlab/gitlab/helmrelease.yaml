@@ -40,6 +40,10 @@ spec:
         minReplicas: 1
       toolbox:
         backups:
+          objectStorage:
+            config:
+              secret: gitlab-object-storage-s3cmd
+              key: config
           cron:
             enabled: true
             timeZone: Europe/Zurich
@@ -66,7 +70,14 @@ spec:
           enabled: false
       kas:
         enabled: false
+      minio:
+        enabled: false
       appConfig:
+        object_store:
+          enabled: true
+          connection:
+            secret: gitlab-object-storage
+            key: config
         terraformState:
           enabled: true
         omniauth:
@@ -94,8 +105,6 @@ spec:
         domain: ${BASE_DOMAIN}
         gitlab:
           name: git.${BASE_DOMAIN}
-        minio:
-          name: gitlab-minio.${BASE_DOMAIN}
         registry:
           name: registry.${BASE_DOMAIN}
       ingress:
@@ -139,12 +148,6 @@ spec:
       hpa:
         maxReplicas: 1
         minReplicas: 1
-    minio:
-      persistence:
-        annotations:
-          helm.sh/resource-policy: "keep"
-      ingress:
-        enabled: false
   install:
     crds: Skip
   upgrade:
@@ -210,13 +213,6 @@ spec:
               kind: PodDisruptionBudget
               metadata:
                 name: gitlab-webservice-default
-                namespace: gitlab
-              $patch: delete
-          - patch: |-
-              apiVersion: policy/v1
-              kind: PodDisruptionBudget
-              metadata:
-                name: gitlab-minio-v1
                 namespace: gitlab
               $patch: delete
           - patch: |-
