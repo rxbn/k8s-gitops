@@ -17,6 +17,8 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    deployment:
+      replicaCount: 1
     garage:
       replicationFactor: "1"
     persistence:
