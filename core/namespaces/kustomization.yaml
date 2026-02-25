@@ -17,6 +17,6 @@ resources:
   - cnpg-system.yaml
   - cert-manager.yaml
   - teslamate.yaml
-  - minio.yaml
   - monitoring.yaml
   - cilium.yaml
+  - garage.yaml

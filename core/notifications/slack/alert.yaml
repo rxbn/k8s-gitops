@@ -53,7 +53,7 @@ spec:
       namespace: monitoring
       name: "*"
     - kind: HelmRelease
-      namespace: minio
+      namespace: garage
       name: "*"
     - kind: HelmRelease
       namespace: cert-manager

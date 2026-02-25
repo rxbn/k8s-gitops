@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - cloudnative-pg
   - cloudflare-operator
-  - minio
   - intel-gpu-plugin
   - k8up
   - monitoring
+  - garage

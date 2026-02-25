@@ -27,7 +27,7 @@ spec:
                 - name: SOURCE_BUCKET
                   value: gitlab-backups
                 - name: DESTINATION_URL
-                  value: http://minio.minio.svc.cluster.local:9000
+                  value: http://garage.garage.svc.cluster.local:3900
                 - name: DESTINATION_BUCKET
                   value: gitlab
                 - name: JOB_NAME

@@ -9,8 +9,8 @@ spec:
   driftDetection:
     mode: enabled
   dependsOn:
-    - name: envoy-gateway
-      namespace: envoy-gateway-system
+    - name: kube-prometheus-stack
+      namespace: monitoring
   chart:
     spec:
       chart: prometheus-pushgateway

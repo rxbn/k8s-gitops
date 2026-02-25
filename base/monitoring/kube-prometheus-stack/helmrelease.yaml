@@ -8,9 +8,6 @@ spec:
   interval: 5m
   driftDetection:
     mode: enabled
-  dependsOn:
-    - name: envoy-gateway
-      namespace: envoy-gateway-system
   chart:
     spec:
       chart: kube-prometheus-stack

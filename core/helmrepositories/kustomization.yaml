@@ -10,7 +10,6 @@ resources:
   - coredns.yaml
   - k8up-io.yaml
   - jetstack.yaml
-  - minio.yaml
   - metrics-server.yaml
   - valkey.yaml
   - containeroo.yaml
