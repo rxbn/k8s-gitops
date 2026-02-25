@@ -26,16 +26,6 @@ spec:
                   value: http://gitlab-garage.gitlab.svc.cluster.local:3900
                 - name: SOURCE_BUCKET
                   value: gitlab-backups
-                - name: SOURCE_ACCESSKEY
-                  valueFrom:
-                    secretKeyRef:
-                      key: SOURCE_ACCESSKEY
-                      name: gitlab-backup-mirror
-                - name: SOURCE_SECRETKEY
-                  valueFrom:
-                    secretKeyRef:
-                      key: SOURCE_SECRETKEY
-                      name: gitlab-backup-mirror
                 - name: DESTINATION_URL
                   value: http://minio.minio.svc.cluster.local:9000
                 - name: DESTINATION_BUCKET
