@@ -56,6 +56,9 @@ spec:
       namespace: minio
       name: "*"
     - kind: HelmRelease
+      namespace: garage
+      name: "*"
+    - kind: HelmRelease
       namespace: cert-manager
       name: "*"
     - kind: HelmRelease

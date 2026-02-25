@@ -8,3 +8,4 @@ resources:
   - intel-gpu-plugin
   - k8up
   - monitoring
+  - garage
