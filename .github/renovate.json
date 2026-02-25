@@ -74,7 +74,7 @@
   },
   "flux": {
     "managerFilePatterns": [
-      "/((apps|base|infra)\\/(.+\\/)*helmrelease|core\\/(helmrepositories|ocirepositories)\\/.*)\\.yaml$/"
+      "/((apps|base|infra)\\/(.+\\/)*helmrelease|core\\/(gitrepositories|helmrepositories|ocirepositories)\\/.*)\\.yaml$/"
     ]
   },
   "helm-values": {
@@ -103,11 +103,6 @@
       "matchDatasources": ["docker"],
       "versioning": "regex:^RELEASE\\.(?<major>\\d+)-(?<minor>\\d+)-(?<patch>\\d+)T.*Z$",
       "matchPackageNames": ["quay.io/minio/minio"]
-    },
-    {
-      "matchDatasources": ["docker"],
-      "versioning": "regex:^(?<major>\\d+).(?<minor>\\d+)-.*$",
-      "matchPackageNames": ["ghcr.io/tensorchord/cloudnative-vectorchord"]
     },
     {
       "matchDatasources": ["docker"],
