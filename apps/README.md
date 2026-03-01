@@ -6,6 +6,7 @@ This directory contains all other common applications.
 
 - **gitlab** contains gitlab and other gitlab related applications
 - **keycloak** identity and access management
+- **mealie** self-hosted recipe manager and meal planner
 - **nextcloud** self-hosted cloud similar to iCloud
 - **renovate** dependency updater
 - **teslamate** data logger for my Tesla Model 3
