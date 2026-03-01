@@ -21,7 +21,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: mealie
-          image: ghcr.io/mealie-recipes/mealie:v3.10.2
+          image: ghcr.io/mealie-recipes/mealie:v3.11.0
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
