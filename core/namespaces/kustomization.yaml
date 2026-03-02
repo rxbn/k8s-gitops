@@ -12,7 +12,6 @@ resources:
   - storage-system.yaml
   - metallb-system.yaml
   - kube-system.yaml
-  - mealie.yaml
   - usenet.yaml
   - cloudflare-operator.yaml
   - cnpg-system.yaml

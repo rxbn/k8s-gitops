@@ -6,6 +6,5 @@ resources:
   - gitlab
   - usenet
   - teslamate
-  - mealie
   - keycloak
   - renovate
