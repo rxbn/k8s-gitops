@@ -7,7 +7,6 @@ resources:
   - metrics-server
   - cert-manager
   - envoy-gateway
-  - metallb
   - falco
   - coredns
   - cilium

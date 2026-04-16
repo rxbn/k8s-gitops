@@ -1,0 +1,11 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: default
+spec:
+  blocks:
+    - start: ${LOADBALANCER_ADDRESS_POOL_V4_START}
+      stop: ${LOADBALANCER_ADDRESS_POOL_V4_STOP}
+    - start: ${LOADBALANCER_ADDRESS_POOL_V6_START}
+      stop: ${LOADBALANCER_ADDRESS_POOL_V6_STOP}

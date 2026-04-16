@@ -10,7 +10,6 @@ resources:
   - gitlab.yaml
   - nextcloud.yaml
   - storage-system.yaml
-  - metallb-system.yaml
   - kube-system.yaml
   - usenet.yaml
   - cloudflare-operator.yaml
