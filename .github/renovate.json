@@ -58,7 +58,6 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/crds\\/metallb\\/crds\\.yaml$/",
         "/crds\\/cloudnative-pg\\/crds\\.yaml$/",
         "/crds\\/cnpg-plugin-barman-cloud\\/crds\\.yaml$/"
       ],
