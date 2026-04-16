@@ -21,7 +21,7 @@ spec:
           typed_config:
             "@type": type.googleapis.com/envoy.extensions.filters.http.geoip.v3.Geoip
             xff_config:
-              xff_num_trusted_hops: 1
+              xff_num_trusted_hops: 0
             provider:
               name: envoy.geoip_providers.maxmind
               typed_config:
