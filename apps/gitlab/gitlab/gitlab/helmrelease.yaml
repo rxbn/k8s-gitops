@@ -74,8 +74,8 @@ spec:
         enabled: false
       appConfig:
         dependencyProxy:
-          enabled: false
-          proxy_download: false
+          enabled: true
+          bucket: gitlab-dependency-proxy
         object_store:
           enabled: true
           connection:
