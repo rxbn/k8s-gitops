@@ -14,6 +14,23 @@ spec:
     - type: type.googleapis.com/envoy.config.listener.v3.Listener
       name: envoy-gateway-system/external/external-https
       operation:
+        op: replace
+        path: /filter_chains/0/filters/0/typed_config/use_remote_address
+        value: true
+    - type: type.googleapis.com/envoy.config.listener.v3.Listener
+      name: envoy-gateway-system/external/external-https
+      operation:
+        op: add
+        path: /filter_chains/0/filters/0/typed_config/xff_num_trusted_hops
+        value: 0
+    - type: type.googleapis.com/envoy.config.listener.v3.Listener
+      name: envoy-gateway-system/external/external-https
+      operation:
+        op: remove
+        path: /filter_chains/0/filters/0/typed_config/original_ip_detection_extensions
+    - type: type.googleapis.com/envoy.config.listener.v3.Listener
+      name: envoy-gateway-system/external/external-https
+      operation:
         op: add
         path: /filter_chains/0/filters/0/typed_config/http_filters/0
         value:
