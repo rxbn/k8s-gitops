@@ -20,4 +20,3 @@ resources:
   - minio.yaml
   - monitoring.yaml
   - cilium.yaml
-  - garage.yaml
