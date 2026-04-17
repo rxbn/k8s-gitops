@@ -73,6 +73,8 @@ spec:
       minio:
         enabled: false
       appConfig:
+        dependencyProxy:
+          enabled: false
         object_store:
           enabled: true
           connection:
