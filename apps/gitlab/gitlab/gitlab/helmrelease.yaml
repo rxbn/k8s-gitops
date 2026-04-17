@@ -75,6 +75,7 @@ spec:
       appConfig:
         dependencyProxy:
           enabled: false
+          proxy_download: false
         object_store:
           enabled: true
           connection:
