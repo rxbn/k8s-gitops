@@ -67,11 +67,17 @@ spec:
                           exact: CH
                   principals:
                     - any: true
-                github-asn:
+                github-flux-webhook-asn:
                   permissions:
-                    - header:
-                        name: x-geo-asn
-                        string_match:
-                          exact: "36459"
+                    - and_rules:
+                        rules:
+                          - header:
+                              name: x-geo-asn
+                              string_match:
+                                exact: "36459"
+                          - header:
+                              name: :authority
+                              string_match:
+                                exact: flux-webhook.${BASE_DOMAIN}
                   principals:
                     - any: true

@@ -15,7 +15,7 @@ spec:
         function envoy_on_request(request_handle)
           local path = request_handle:headers():get(":path")
 
-          if path == "/login?direct=1" then
+          if string.match(path, "^/login%?.*([?&]direct=1)(&.*)?$") or string.match(path, "^/login%?direct=1$") then
             request_handle:respond(
               {
                 [":status"] = "301",

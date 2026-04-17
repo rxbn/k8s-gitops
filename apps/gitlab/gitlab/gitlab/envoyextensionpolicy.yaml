@@ -15,7 +15,7 @@ spec:
         function envoy_on_request(request_handle)
           local path = request_handle:headers():get(":path")
 
-          if path == "/users/sign_in?auto_sign_in=false" then
+          if string.match(path, "^/users/sign_in%?.*([?&]auto_sign_in=false)(&.*)?$") or string.match(path, "^/users/sign_in%?auto_sign_in=false$") then
             request_handle:respond(
               {
                 [":status"] = "301",
