@@ -7,6 +7,5 @@ metadata:
 data:
   config.json: |-
     {
-        "printConfig": true,
-        "allowUnsafeSshCommand": true
+        "printConfig": true
     }
