@@ -19,6 +19,9 @@ spec:
         - path:
             type: PathPrefix
             value: /
+      timeouts:
+        request: 0s
+        backendRequest: 0s
       backendRefs:
         - name: plex
           port: 32400
