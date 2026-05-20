@@ -1,0 +1,27 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: jellyfin
+  namespace: usenet
+spec:
+  parentRefs:
+    - name: external
+      namespace: envoy-gateway-system
+      sectionName: external-https
+    - name: internal
+      namespace: envoy-gateway-system
+      sectionName: internal-https
+  hostnames:
+    - jellyfin.${BASE_DOMAIN}
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      timeouts:
+        request: 0s
+        backendRequest: 0s
+      backendRefs:
+        - name: jellyfin
+          port: 8096
