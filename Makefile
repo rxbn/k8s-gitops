@@ -1,3 +1,5 @@
+all: kustomizations secrets
+
 kustomizations:
 	/bin/bash ./hack/generate_kustomizations.sh
 
