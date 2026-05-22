@@ -6,19 +6,43 @@ metadata:
   namespace: gitlab
 spec:
   parentRefs:
-    - name: internal
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: internal
       namespace: envoy-gateway-system
       sectionName: internal-https
   hostnames:
     - git.${BASE_DOMAIN}
   rules:
-    - matches:
+    - name: default-root
+      matches:
         - path:
             type: PathPrefix
             value: /
+      timeouts:
+        backendRequest: 15s
+        request: 15s
       backendRefs:
-        - name: gitlab-webservice-default
+        - kind: Service
+          name: gitlab-webservice-default
           port: 8181
+          weight: 1
+    - name: default-long-running
+      matches:
+        - path:
+            type: RegularExpression
+            value: ^/.*/ssh-receive-pack$
+        - path:
+            type: RegularExpression
+            value: ^/.*/ssh-upload-pack$
+      timeouts:
+        backendRequest: 0s
+        request: 0s
+      backendRefs:
+        - kind: Service
+          name: gitlab-webservice-default
+          port: 8181
+          weight: 1
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -27,19 +51,43 @@ metadata:
   namespace: gitlab
 spec:
   parentRefs:
-    - name: external
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: external
       namespace: envoy-gateway-system
       sectionName: external-https
   hostnames:
     - git.${BASE_DOMAIN}
   rules:
-    - matches:
+    - name: default-root
+      matches:
         - path:
             type: PathPrefix
             value: /
+      timeouts:
+        backendRequest: 15s
+        request: 15s
       backendRefs:
-        - name: gitlab-webservice-default
+        - kind: Service
+          name: gitlab-webservice-default
           port: 8181
+          weight: 1
+    - name: default-long-running
+      matches:
+        - path:
+            type: RegularExpression
+            value: ^/.*/ssh-receive-pack$
+        - path:
+            type: RegularExpression
+            value: ^/.*/ssh-upload-pack$
+      timeouts:
+        backendRequest: 0s
+        request: 0s
+      backendRefs:
+        - kind: Service
+          name: gitlab-webservice-default
+          port: 8181
+          weight: 1
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -48,10 +96,14 @@ metadata:
   namespace: gitlab
 spec:
   parentRefs:
-    - name: external
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: external
       namespace: envoy-gateway-system
       sectionName: external-https
-    - name: internal
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: internal
       namespace: envoy-gateway-system
       sectionName: internal-https
   hostnames:
@@ -61,6 +113,11 @@ spec:
         - path:
             type: PathPrefix
             value: /
+      timeouts:
+        backendRequest: 900s
+        request: 900s
       backendRefs:
-        - name: gitlab-registry
+        - kind: Service
+          name: gitlab-registry
           port: 5000
+          weight: 1
