@@ -49,10 +49,8 @@ spec:
               name: movies2
           resources:
             requests:
-              gpu.intel.com/i915: 1
               memory: 4Gi
             limits:
-              gpu.intel.com/i915: 1
               memory: 16Gi
           startupProbe:
             httpGet:
