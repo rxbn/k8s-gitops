@@ -8,7 +8,6 @@ resources:
   - renovate.yaml
   - envoy-gateway-system.yaml
   - gitlab.yaml
-  - nextcloud.yaml
   - whoami.yaml
   - storage-system.yaml
   - kube-system.yaml
