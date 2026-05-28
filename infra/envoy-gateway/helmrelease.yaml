@@ -9,6 +9,8 @@ spec:
   driftDetection:
     mode: enabled
   dependsOn:
+    - name: envoy-gateway-crds
+      namespace: flux-system
     - name: cilium
       namespace: cilium
     - name: cert-manager
@@ -17,6 +19,10 @@ spec:
     kind: OCIRepository
     name: envoy-gateway
     namespace: flux-system
+  install:
+    crds: Skip
+  upgrade:
+    crds: Skip
   values:
     config:
       envoyGateway:

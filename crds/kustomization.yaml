@@ -7,4 +7,5 @@ resources:
   - kube-prometheus-stack
   - cnpg-plugin-barman-cloud
   - cert-manager
+  - envoy-gateway
   - k8up

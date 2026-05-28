@@ -1,0 +1,25 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: envoy-gateway-crds
+  namespace: flux-system
+spec:
+  interval: 5m
+  chartRef:
+    kind: OCIRepository
+    name: envoy-gateway-crds
+    namespace: flux-system
+  values:
+    crds:
+      gatewayAPI:
+        enabled: true
+        channel: experimental
+      envoyGateway:
+        enabled: true
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
+  uninstall:
+    keepHistory: false
