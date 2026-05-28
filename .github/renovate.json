@@ -27,6 +27,15 @@
     },
     {
       "customType": "regex",
+      "managerFilePatterns": [
+        "/crds\\/envoy-gateway\\/kustomization\\.yaml$/"
+      ],
+      "matchStrings": [
+        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\s.*\\/download\\/(?<currentValue>.*?)\\/"
+      ]
+    },
+    {
+      "customType": "regex",
       "managerFilePatterns": ["/crds\\/k8up\\/kustomization\\.yaml$/"],
       "matchStrings": [
         "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*)\\s.*\\/k8up-(?<currentValue>.*?)\\/"
