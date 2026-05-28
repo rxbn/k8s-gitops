@@ -104,13 +104,6 @@
       "matchPackageNames": ["quay.io/minio/minio"]
     },
     {
-      "matchPackageNames": [
-        "/(^|\\/)gateway-helm$/",
-        "/(^|\\/)gateway-crds-helm$/"
-      ],
-      "groupName": "envoy-gateway"
-    },
-    {
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["minor", "patch"],
       "matchPackageNames": ["renovate/renovate"],
