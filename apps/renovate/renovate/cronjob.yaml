@@ -66,9 +66,6 @@ spec:
                 - secretRef:
                     name: renovate
               volumeMounts:
-                - name: renovate-ssh
-                  mountPath: /home/ubuntu/.ssh
-                  readOnly: true
                 - name: renovate-config
                   mountPath: /renovate/
           restartPolicy: Never
@@ -77,6 +74,3 @@ spec:
             - name: renovate-config
               configMap:
                 name: renovate-config
-            - name: renovate-ssh
-              secret:
-                secretName: renovate-ssh
