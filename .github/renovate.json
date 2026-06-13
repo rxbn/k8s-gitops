@@ -9,16 +9,6 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
-        "/.github\\/workflows\\/helm-release-differ\\.yaml$/"
-      ],
-      "matchStrings": [
-        "depName=(?<depName>.*)\\s.*version: (?<currentValue>.*)"
-      ],
-      "datasourceTemplate": "github-releases"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
         "/crds\\/cloudflare-operator\\/kustomization\\.yaml$/"
       ],
       "matchStrings": [

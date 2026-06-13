@@ -49,7 +49,6 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v5
         with:
-          # renovate depName=helm/helm
           version: v4.2.0
 
       - name: Helm Release Differ
