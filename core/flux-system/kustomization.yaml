@@ -6,6 +6,13 @@ resources:
   - gotk-sync.yaml
 patches:
   - patch: |
+      apiVersion: apiextensions.k8s.io/v1
+      kind: CustomResourceDefinition
+      metadata:
+        name: kustomizations.kustomize.toolkit.fluxcd.io
+        annotations:
+          kustomize.toolkit.fluxcd.io/substitute: disabled
+  - patch: |
       $patch: delete
       apiVersion: networking.k8s.io/v1
       kind: NetworkPolicy
