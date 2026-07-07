@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lidarr
+  namespace: usenet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lidarr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: lidarr
+    spec:
+      containers:
+        - name: lidarr
+          image: ghcr.io/linuxserver/lidarr:latest
+          env:
+            - name: PGID
+              value: "2000"
+            - name: PUID
+              value: "2000"
+            - name: TZ
+              value: Europe/Zurich
+            - name: DOCKER_MODS
+              value: ghcr.io/themepark-dev/theme.park:lidarr
+            - name: TP_THEME
+              value: catppuccin-mocha
+            - name: TP_COMMUNITY_THEME
+              value: "true"
+          ports:
+            - containerPort: 8686
+          volumeMounts:
+            - mountPath: /config
+              name: data
+            - mountPath: /config/Backups
+              name: backup
+            - mountPath: /music
+              name: music
+            - mountPath: /downloads
+              name: downloads
+          startupProbe:
+            tcpSocket:
+              port: 8686
+            failureThreshold: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          livenessProbe:
+            tcpSocket:
+              port: 8686
+            failureThreshold: 2
+            periodSeconds: 30
+            timeoutSeconds: 5
+      restartPolicy: Always
+      automountServiceAccountToken: false
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: lidarr-data
+        - name: backup
+          persistentVolumeClaim:
+            claimName: lidarr-backup
+        - name: music
+          hostPath:
+            path: /mnt/tank/media/music
+            type: Directory
+        - name: downloads
+          hostPath:
+            path: /mnt/disk04/downloads/complete
+            type: Directory

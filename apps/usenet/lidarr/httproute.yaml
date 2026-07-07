@@ -1,0 +1,50 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: lidarr-internal
+  namespace: usenet
+spec:
+  parentRefs:
+    - name: internal
+      namespace: envoy-gateway-system
+      sectionName: internal-https
+  hostnames:
+    - lidarr.${BASE_DOMAIN}
+  rules:
+    - name: lidarr
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: lidarr
+          port: 8686
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /api
+      backendRefs:
+        - name: lidarr
+          port: 8686
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: lidarr-external
+  namespace: usenet
+spec:
+  parentRefs:
+    - name: external
+      namespace: envoy-gateway-system
+      sectionName: external-https
+  hostnames:
+    - lidarr.${BASE_DOMAIN}
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: lidarr
+          port: 8686

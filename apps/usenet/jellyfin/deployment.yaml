@@ -47,6 +47,8 @@ spec:
               name: movies
             - mountPath: /data/movies2
               name: movies2
+            - mountPath: /data/music
+              name: music
           resources:
             requests:
               memory: 4Gi
@@ -86,4 +88,8 @@ spec:
         - name: movies2
           hostPath:
             path: /mnt/tank/media/movies2
+            type: Directory
+        - name: music
+          hostPath:
+            path: /mnt/tank/media/music
             type: Directory
