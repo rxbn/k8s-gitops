@@ -120,7 +120,8 @@
     },
     {
       "matchPackageNames": ["ghcr.io/cloudnative-pg/postgresql"],
-      "additionalBranchPrefix": "{{packageFileDir}}-"
+      "additionalBranchPrefix": "{{packageFileDir}}-",
+      "prCreation": "status-success"
     },
     {
       "matchPackageNames": ["kubernetes-sigs/gateway-api"],
