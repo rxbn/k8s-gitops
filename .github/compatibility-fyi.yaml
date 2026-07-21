@@ -1,0 +1,32 @@
+---
+version: 1
+
+defaults:
+  unknown: block
+  apiError: block
+  minimumConfidence: high
+  maximumEvidenceAgeDays: 180
+
+gates:
+  - id: envoy-gateway-api
+    project:
+      id: envoy-gateway
+      version:
+        files:
+          - core/ocirepositories/envoy-gateway.yaml
+        document:
+          apiVersion: source.toolkit.fluxcd.io/v1
+          kind: OCIRepository
+          metadata.name: envoy-gateway
+        value: spec.ref.tag
+
+    dependency:
+      id: gateway-api
+      versions:
+        files:
+          - crds/envoy-gateway/kustomization.yaml
+        document:
+          apiVersion: kustomize.config.k8s.io/v1beta1
+          kind: Kustomization
+        value: resources.0
+        extract: /download/v(?<version>[^/]+)/
