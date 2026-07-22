@@ -18,6 +18,9 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    image:
+      repository: valkey/valkey
+      tag: 7.2.12
     dataStorage:
       enabled: true
       requestedSize: 2Gi

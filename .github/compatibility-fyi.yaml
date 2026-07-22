@@ -128,6 +128,29 @@ gates:
         value: spec.imageName
         extract: ":(?<version>[^@]+)$"
 
+  - id: gitlab-valkey
+    project:
+      id: gitlab-helm
+      version:
+        files:
+          - apps/gitlab/gitlab/gitlab/helmrelease.yaml
+        document:
+          apiVersion: helm.toolkit.fluxcd.io/v2
+          kind: HelmRelease
+          metadata.name: gitlab
+        value: spec.chart.spec.version
+
+    dependency:
+      id: valkey
+      versions:
+        files:
+          - apps/gitlab/gitlab/valkey/helmrelease.yaml
+        document:
+          apiVersion: helm.toolkit.fluxcd.io/v2
+          kind: HelmRelease
+          metadata.name: gitlab-valkey
+        value: spec.values.image.tag
+
   - id: gitlab-runner-gitlab
     project:
       id: gitlab-runner-helm
