@@ -17,9 +17,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": [
-        "/crds\\/envoy-gateway\\/kustomization\\.yaml$/"
-      ],
+      "managerFilePatterns": ["/crds\\/envoy-gateway\\/kustomization\\.yaml$/"],
       "matchStrings": [
         "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\s.*\\/download\\/(?<currentValue>.*?)\\/"
       ]
@@ -125,6 +123,21 @@
     },
     {
       "matchPackageNames": ["kubernetes-sigs/gateway-api"],
+      "prCreation": "status-success"
+    },
+    {
+      "matchPackageNames": [
+        "cloudnative-pg/cloudnative-pg",
+        "cloudnative-pg/plugin-barman-cloud",
+        "quay.io/keycloak/keycloak",
+        "teslamate/teslamate"
+      ],
+      "prCreation": "status-success"
+    },
+    {
+      "groupName": "GitLab and GitLab Runner",
+      "matchDatasources": ["helm"],
+      "matchPackageNames": ["gitlab", "gitlab-runner"],
       "prCreation": "status-success"
     }
   ],
