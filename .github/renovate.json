@@ -130,7 +130,8 @@
         "cloudnative-pg/cloudnative-pg",
         "cloudnative-pg/plugin-barman-cloud",
         "quay.io/keycloak/keycloak",
-        "teslamate/teslamate"
+        "teslamate/teslamate",
+        "valkey/valkey"
       ],
       "prCreation": "status-success"
     },
