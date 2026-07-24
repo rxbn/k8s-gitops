@@ -55,20 +55,13 @@ spec:
                   'host_bucket = minio.minio.svc.cluster.local:9000' \
                   'use_https = False' \
                   'preserve_attrs = False' \
-                  > /backup-object-storage/config
+                  > /init-secrets/backup-object-storage.s3cfg
             envFrom:
               - secretRef:
                   name: gitlab-backup-mirror
             volumeMounts:
-              - name: backup-object-storage
-                mountPath: /backup-object-storage
-        extraVolumeMounts: |
-          - name: backup-object-storage
-            mountPath: /etc/gitlab/backup-object-storage
-            readOnly: true
-        extraVolumes: |
-          - name: backup-object-storage
-            emptyDir: {}
+              - name: toolbox-secrets
+                mountPath: /init-secrets
         backups:
           objectStorage:
             config:
@@ -83,7 +76,7 @@ spec:
               --backend-backup s3
               --s3tool-data s3cmd
               --s3tool-backup s3cmd
-              --s3config /etc/gitlab/backup-object-storage/config
+              --s3config /etc/gitlab/backup-object-storage.s3cfg
               --maximum-backups 3
             successfulJobsHistoryLimit: 1
       webservice:
