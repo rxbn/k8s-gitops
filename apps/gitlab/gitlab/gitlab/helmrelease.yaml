@@ -37,6 +37,38 @@ spec:
         maxReplicas: 1
         minReplicas: 1
       toolbox:
+        extraInitContainers: |
+          - name: configure-backup-object-storage
+            image: busybox:1.38.0
+            command:
+              - sh
+              - -ec
+            args:
+              - |
+                umask 077
+                printf '%s\n' \
+                  '[default]' \
+                  "access_key = $${DESTINATION_ACCESSKEY}" \
+                  "secret_key = $${DESTINATION_SECRETKEY}" \
+                  'bucket_location = us-east-1' \
+                  'host_base = minio.minio.svc.cluster.local:9000' \
+                  'host_bucket = minio.minio.svc.cluster.local:9000' \
+                  'use_https = False' \
+                  'preserve_attrs = False' \
+                  > /backup-object-storage/config
+            envFrom:
+              - secretRef:
+                  name: gitlab-backup-mirror
+            volumeMounts:
+              - name: backup-object-storage
+                mountPath: /backup-object-storage
+        extraVolumeMounts: |
+          - name: backup-object-storage
+            mountPath: /etc/gitlab/backup-object-storage
+            readOnly: true
+        extraVolumes: |
+          - name: backup-object-storage
+            emptyDir: {}
         backups:
           objectStorage:
             config:
@@ -46,6 +78,13 @@ spec:
             enabled: true
             timeZone: Europe/Zurich
             schedule: 0 1 * * *
+            extraArgs: >-
+              --backend-data s3
+              --backend-backup s3
+              --s3tool-data s3cmd
+              --s3tool-backup s3cmd
+              --s3config /etc/gitlab/backup-object-storage/config
+              --maximum-backups 3
             successfulJobsHistoryLimit: 1
       webservice:
         deployment:
@@ -73,6 +112,9 @@ spec:
       kas:
         enabled: false
       appConfig:
+        backups:
+          bucket: gitlab
+          tmpBucket: gitlab-tmp
         dependencyProxy:
           enabled: true
           bucket: gitlab-dependency-proxy
