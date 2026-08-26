@@ -122,7 +122,12 @@
       "prCreation": "status-success"
     },
     {
-      "matchPackageNames": ["kubernetes-sigs/gateway-api"],
+      "groupName": "Envoy Gateway and Gateway API",
+      "matchPackageNames": [
+        "docker.io/envoyproxy/gateway-helm",
+        "envoyproxy/gateway",
+        "kubernetes-sigs/gateway-api"
+      ],
       "prCreation": "status-success"
     },
     {
