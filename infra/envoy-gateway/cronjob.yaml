@@ -15,6 +15,7 @@ spec:
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
+      backoffLimit: 0
       template:
         metadata:
           labels:
@@ -34,60 +35,79 @@ spec:
 
                   echo "Updating MaxMind GeoLite databases"
 
-                  mkdir -p /tmp/maxmind-city
-                  echo "Downloading GeoLite2-City"
-                  curl -sSL \
-                    "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" \
-                    -o /tmp/maxmind-city/geolite2-city.tar.gz
+                  update_database() {
+                    local edition_id="$1"
+                    local database_name="$2"
+                    local database_path="/data/${database_name}.mmdb"
+                    local modified_path="/data/.${database_name}.last-modified"
+                    local download_url="https://download.maxmind.com/app/geoip_download?edition_id=${edition_id}&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz"
+                    local work_dir
+                    local headers_path
+                    local archive_path
+                    local remote_last_modified
+                    local extracted_path
 
-                  if grep -q "Daily GeoIP database download limit reached" /tmp/maxmind-city/geolite2-city.tar.gz; then
-                    echo "Reached daily download limit for MaxMind GeoLite databases. Skipping update."
-                    exit 1
-                  fi
+                    work_dir=$(mktemp -d)
+                    headers_path="${work_dir}/headers"
+                    archive_path="${work_dir}/database.tar.gz"
 
-                  echo "Extracting GeoLite2-City"
-                  tar -xzf /tmp/maxmind-city/geolite2-city.tar.gz -C /tmp/maxmind-city
+                    trap 'rm -rf "${work_dir}"' RETURN
 
-                  CITY_PATH=$(find /tmp/maxmind-city -maxdepth 5 -name "GeoLite2-City.mmdb" | head -n1 || true)
+                    echo "Checking ${edition_id} release date"
+                    curl --fail --silent --show-error --location --head \
+                      --output "${headers_path}" \
+                      "${download_url}"
 
-                  if [ -z "${CITY_PATH}" ]; then
-                    echo "Could not find GeoLite2-City.mmdb in extracted archive"
-                    exit 1
-                  fi
+                    remote_last_modified=$(awk '
+                      tolower($1) == "last-modified:" {
+                        sub(/^[^:]*:[[:space:]]*/, "")
+                        sub(/\r$/, "")
+                        value = $0
+                      }
+                      END { print value }
+                    ' "${headers_path}")
 
-                  echo "Installing City DB to PVC"
-                  cp "${CITY_PATH}" /data/GeoLite2-City.mmdb.tmp
-                  mv /data/GeoLite2-City.mmdb.tmp /data/GeoLite2-City.mmdb
+                    if [ -z "${remote_last_modified}" ]; then
+                      echo "MaxMind response for ${edition_id} did not include Last-Modified"
+                      return 1
+                    fi
 
-                  mkdir -p /tmp/maxmind-asn
-                  echo "Downloading GeoLite2-ASN"
-                  curl -sSL \
-                    "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz" \
-                    -o /tmp/maxmind-asn/geolite2-asn.tar.gz
+                    if [ -f "${database_path}" ] && \
+                      [ -f "${modified_path}" ] && \
+                      [ "$(cat "${modified_path}")" = "${remote_last_modified}" ]; then
+                      echo "${edition_id} is already up to date"
+                      return
+                    fi
 
-                  if grep -q "Daily GeoIP database download limit reached" /tmp/maxmind-asn/geolite2-asn.tar.gz; then
-                    echo "Reached daily download limit for MaxMind GeoLite databases. Skipping update."
-                    exit 1
-                  fi
+                    echo "Downloading ${edition_id} updated ${remote_last_modified}"
+                    curl --fail --silent --show-error --location \
+                      --output "${archive_path}" \
+                      "${download_url}"
 
-                  echo "Extracting GeoLite2-ASN"
-                  tar -xzf /tmp/maxmind-asn/geolite2-asn.tar.gz -C /tmp/maxmind-asn
+                    if ! tar -tzf "${archive_path}" >/dev/null; then
+                      echo "MaxMind returned an invalid archive for ${edition_id}"
+                      return 1
+                    fi
 
-                  ASN_PATH=$(find /tmp/maxmind-asn -maxdepth 5 -name "GeoLite2-ASN.mmdb" | head -n1 || true)
+                    tar -xzf "${archive_path}" -C "${work_dir}"
+                    extracted_path=$(find "${work_dir}" -maxdepth 5 -name "${database_name}.mmdb" | head -n1 || true)
 
-                  if [ -z "${ASN_PATH}" ]; then
-                    echo "Could not find GeoLite2-ASN.mmdb in extracted archive"
-                    exit 1
-                  fi
+                    if [ -z "${extracted_path}" ]; then
+                      echo "Could not find ${database_name}.mmdb in extracted archive"
+                      return 1
+                    fi
 
-                  echo "Installing ASN DB to PVC"
-                  cp "${ASN_PATH}" /data/GeoLite2-ASN.mmdb.tmp
-                  mv /data/GeoLite2-ASN.mmdb.tmp /data/GeoLite2-ASN.mmdb
+                    echo "Installing ${edition_id} to PVC"
+                    cp "${extracted_path}" "${database_path}.tmp"
+                    mv "${database_path}.tmp" "${database_path}"
+                    printf '%s\n' "${remote_last_modified}" >"${modified_path}.tmp"
+                    mv "${modified_path}.tmp" "${modified_path}"
+                  }
 
-                  echo "Cleanup"
-                  rm -rf /tmp/maxmind-city /tmp/maxmind-asn
+                  update_database GeoLite2-City GeoLite2-City
+                  update_database GeoLite2-ASN GeoLite2-ASN
 
-                  echo "Done. City and ASN DBs updated."
+                  echo "Done. GeoLite databases are up to date."
               volumeMounts:
                 - name: maxmind-db
                   mountPath: /data
