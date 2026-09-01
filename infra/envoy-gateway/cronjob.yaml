@@ -23,7 +23,7 @@ spec:
         spec:
           containers:
             - name: update-geolite-db
-              image: ghcr.io/containeroo/alpine-toolbox:3.2.1
+              image: ghcr.io/containeroo/alpine-toolbox:3.2.2
               envFrom:
                 - secretRef:
                     name: maxmind-license
