@@ -26,12 +26,6 @@ spec:
               value: "2000"
             - name: TZ
               value: Europe/Zurich
-            - name: DOCKER_MODS
-              value: ghcr.io/themepark-dev/theme.park:lidarr
-            - name: TP_THEME
-              value: catppuccin-mocha
-            - name: TP_COMMUNITY_THEME
-              value: "true"
           ports:
             - containerPort: 8686
           volumeMounts:
