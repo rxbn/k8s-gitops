@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: sabnzbd
-          image: ghcr.io/linuxserver/sabnzbd:5.1.2-ls271
+          image: ghcr.io/linuxserver/sabnzbd:5.1.3-ls272
           env:
             - name: PGID
               value: "2000"
