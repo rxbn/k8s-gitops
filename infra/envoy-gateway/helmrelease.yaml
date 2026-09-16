@@ -9,6 +9,8 @@ spec:
   driftDetection:
     mode: enabled
   dependsOn:
+    - name: envoy-gateway-crds
+      namespace: envoy-gateway-system
     - name: cilium
       namespace: cilium
     - name: cert-manager
@@ -21,6 +23,9 @@ spec:
     crds: Skip
   upgrade:
     crds: Skip
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 5m
   values:
     config:
       envoyGateway:
