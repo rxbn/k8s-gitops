@@ -106,7 +106,7 @@ gates:
 
   - id: gitlab-postgresql
     project:
-      id: gitlab-helm
+      id: gitlab
       version:
         files:
           - apps/gitlab/gitlab/gitlab/helmrelease.yaml
@@ -114,10 +114,16 @@ gates:
           apiVersion: helm.toolkit.fluxcd.io/v2
           kind: HelmRelease
           metadata.name: gitlab
+          spec.chart.spec.chart: gitlab
+          spec.chart.spec.sourceRef.kind: HelmRepository
+          spec.chart.spec.sourceRef.name: gitlab
         value: spec.chart.spec.version
+        helm:
+          repository: https://charts.gitlab.io
+          chart: gitlab
 
     dependency:
-      id: postgresql
+      id: postgresql-helm-deployment
       versions:
         files:
           - apps/gitlab/gitlab/postgres/cnpg-cluster.yaml
@@ -130,7 +136,7 @@ gates:
 
   - id: gitlab-valkey
     project:
-      id: gitlab-helm
+      id: gitlab
       version:
         files:
           - apps/gitlab/gitlab/gitlab/helmrelease.yaml
@@ -138,10 +144,16 @@ gates:
           apiVersion: helm.toolkit.fluxcd.io/v2
           kind: HelmRelease
           metadata.name: gitlab
+          spec.chart.spec.chart: gitlab
+          spec.chart.spec.sourceRef.kind: HelmRepository
+          spec.chart.spec.sourceRef.name: gitlab
         value: spec.chart.spec.version
+        helm:
+          repository: https://charts.gitlab.io
+          chart: gitlab
 
     dependency:
-      id: valkey
+      id: valkey-helm-deployment
       versions:
         files:
           - apps/gitlab/gitlab/valkey/helmrelease.yaml
@@ -152,8 +164,11 @@ gates:
         value: spec.values.image.tag
 
   - id: gitlab-runner-gitlab
+    # Upstream recommends version alignment; it does not guarantee compatibility.
+    policy:
+      unknown: warn
     project:
-      id: gitlab-runner-helm
+      id: gitlab-runner
       version:
         files:
           - apps/gitlab/gitlab-runner/helmrelease.yaml
@@ -161,10 +176,16 @@ gates:
           apiVersion: helm.toolkit.fluxcd.io/v2
           kind: HelmRelease
           metadata.name: gitlab-runner
+          spec.chart.spec.chart: gitlab-runner
+          spec.chart.spec.sourceRef.kind: HelmRepository
+          spec.chart.spec.sourceRef.name: gitlab
         value: spec.chart.spec.version
+        helm:
+          repository: https://charts.gitlab.io
+          chart: gitlab-runner
 
     dependency:
-      id: gitlab-helm
+      id: gitlab
       versions:
         files:
           - apps/gitlab/gitlab/gitlab/helmrelease.yaml
@@ -172,7 +193,13 @@ gates:
           apiVersion: helm.toolkit.fluxcd.io/v2
           kind: HelmRelease
           metadata.name: gitlab
+          spec.chart.spec.chart: gitlab
+          spec.chart.spec.sourceRef.kind: HelmRepository
+          spec.chart.spec.sourceRef.name: gitlab
         value: spec.chart.spec.version
+        helm:
+          repository: https://charts.gitlab.io
+          chart: gitlab
 
   - id: envoy-gateway-api
     project:
@@ -187,7 +214,7 @@ gates:
         value: spec.ref.tag
 
     dependency:
-      id: gateway-api
+      id: gateway-api-standard
       versions:
         files:
           - crds/envoy-gateway/kustomization.yaml
@@ -195,4 +222,4 @@ gates:
           apiVersion: kustomize.config.k8s.io/v1beta1
           kind: Kustomization
         value: resources.0
-        extract: /download/v(?<version>[^/]+)/
+        extract: '/download/v(?<version>[^/]+)/standard-install\.yaml$'
