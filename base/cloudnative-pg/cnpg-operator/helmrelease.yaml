@@ -21,6 +21,9 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    image:
+      # Remove when the chart appVersion includes 1.30.1 or newer.
+      tag: 1.30.1
     crds:
       create: false
     monitoring:
