@@ -9,6 +9,7 @@ ETags/sizes are skipped during incremental copy; use --verify for full checks.
 """
 import concurrent.futures
 import hashlib
+import gzip
 import json
 import sys
 import time
@@ -40,6 +41,11 @@ transfer = TransferConfig(multipart_threshold=32 * 1024**2, multipart_chunksize=
 
 
 def objects(connection, bucket):
+    manifest = next((arg.split("=", 1)[1] for arg in sys.argv if arg.startswith("--source-manifest=")), None)
+    if manifest and connection is source:
+        with gzip.open(manifest, "rt") as handle:
+            yield from json.load(handle)
+        return
     prefixes = next((arg.split("=", 1)[1].split(",") for arg in sys.argv if arg.startswith("--prefixes=")), [""])
     current_versions = connection is source and "--version-listing" in sys.argv
     prefix_file = next((arg.split("=", 1)[1] for arg in sys.argv if arg.startswith("--prefix-file=")), None)
