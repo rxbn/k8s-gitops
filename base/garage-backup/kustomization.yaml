@@ -6,6 +6,7 @@ resources:
   - helmrelease.yaml
   - secret.yaml
   - admin-service.yaml
+  - httproute.yaml
   - provisioning.yaml
 configMapGenerator:
   - name: garage-backup-provision

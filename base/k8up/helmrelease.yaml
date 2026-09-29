@@ -5,6 +5,9 @@ metadata:
   name: k8up
   namespace: k8up
 spec:
+  dependsOn:
+    - name: garage-backup
+      namespace: garage-backup
   interval: 5m
   driftDetection:
     mode: enabled
