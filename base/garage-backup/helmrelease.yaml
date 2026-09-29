@@ -33,12 +33,6 @@ spec:
         api:
           region: us-east-1
           rootDomain: .s3.${BASE_DOMAIN}
-    environment:
-      - name: GARAGE_ADMIN_TOKEN
-        valueFrom:
-          secretKeyRef:
-            name: garage-backup
-            key: adminToken
     persistence:
       data:
         storageClass: backup

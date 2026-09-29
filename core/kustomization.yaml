@@ -12,4 +12,3 @@ resources:
   - notifications
   - cluster-settings.yaml
   - cluster-secrets.yaml
-  - retained-minio-pvc.yaml
