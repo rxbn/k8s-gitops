@@ -1,0 +1,65 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: garage-backup-provision
+spec:
+  schedule: "17 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      backoffLimit: 3
+      activeDeadlineSeconds: 600
+      template:
+        spec:
+          restartPolicy: Never
+          automountServiceAccountToken: false
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+            runAsNonRoot: true
+          containers:
+            - name: provision
+              image: python:3.12.12-alpine3.22
+              command: [python, /scripts/provision.py]
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities:
+                  drop: [ALL]
+              resources:
+                requests:
+                  cpu: 10m
+                  memory: 32Mi
+                limits:
+                  memory: 128Mi
+              volumeMounts:
+                - name: script
+                  mountPath: /scripts
+                  readOnly: true
+                - name: credentials
+                  mountPath: /credentials
+                  readOnly: true
+                - name: meta
+                  mountPath: /mnt/meta
+                  readOnly: true
+                - name: data
+                  mountPath: /mnt/data
+          volumes:
+            - name: script
+              configMap:
+                name: garage-backup-provision
+            - name: credentials
+              secret:
+                secretName: garage-backup
+                defaultMode: 0440
+            - name: meta
+              persistentVolumeClaim:
+                claimName: meta-garage-backup-0
+            - name: data
+              persistentVolumeClaim:
+                claimName: data-garage-backup-0
