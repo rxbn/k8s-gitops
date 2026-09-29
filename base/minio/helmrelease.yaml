@@ -5,6 +5,8 @@ metadata:
   name: minio
   namespace: minio
 spec:
+  # Offline archive: preserve the original versioned data for historical access.
+  suspend: true
   interval: 5m
   driftDetection:
     mode: enabled
