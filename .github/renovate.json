@@ -122,16 +122,16 @@
       "prCreation": "status-success"
     },
     {
-      "groupName": "Envoy Gateway and Gateway API",
+      "groupName": "Envoy Gateway",
       "matchPackageNames": [
         "docker.io/envoyproxy/gateway-helm",
-        "envoyproxy/gateway",
-        "kubernetes-sigs/gateway-api"
+        "envoyproxy/gateway"
       ],
       "prCreation": "status-success"
     },
     {
       "matchPackageNames": [
+        "kubernetes-sigs/gateway-api",
         "cloudnative-pg/cloudnative-pg",
         "cloudnative-pg/plugin-barman-cloud",
         "quay.io/keycloak/keycloak",
