@@ -2,6 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "semanticCommits": "enabled",
   "dependencyDashboard": true,
+  "prCreation": "immediate",
   "separateMajorMinor": true,
   "assignees": ["rxbn"],
   "timezone": "Europe/Zurich",
@@ -118,33 +119,19 @@
     },
     {
       "matchPackageNames": ["ghcr.io/cloudnative-pg/postgresql"],
-      "additionalBranchPrefix": "{{packageFileDir}}-",
-      "prCreation": "status-success"
+      "additionalBranchPrefix": "{{packageFileDir}}-"
     },
     {
       "groupName": "Envoy Gateway",
       "matchPackageNames": [
         "docker.io/envoyproxy/gateway-helm",
         "envoyproxy/gateway"
-      ],
-      "prCreation": "status-success"
-    },
-    {
-      "matchPackageNames": [
-        "kubernetes-sigs/gateway-api",
-        "cloudnative-pg/cloudnative-pg",
-        "cloudnative-pg/plugin-barman-cloud",
-        "quay.io/keycloak/keycloak",
-        "teslamate/teslamate",
-        "valkey/valkey"
-      ],
-      "prCreation": "status-success"
+      ]
     },
     {
       "groupName": "GitLab and GitLab Runner",
       "matchDatasources": ["helm"],
-      "matchPackageNames": ["gitlab", "gitlab-runner"],
-      "prCreation": "status-success"
+      "matchPackageNames": ["gitlab", "gitlab-runner"]
     }
   ],
   "ignoreDeps": [
