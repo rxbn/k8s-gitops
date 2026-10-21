@@ -6,6 +6,10 @@ metadata:
   namespace: falco
 spec:
   interval: 5m
+  timeout: 10m
+  upgrade:
+    remediation:
+      retries: 3
   driftDetection:
     mode: enabled
   chart:
