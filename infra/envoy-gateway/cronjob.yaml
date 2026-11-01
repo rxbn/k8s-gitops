@@ -15,7 +15,8 @@ spec:
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
-      backoffLimit: 0
+      backoffLimit: 2
+      activeDeadlineSeconds: 1800
       template:
         metadata:
           labels:
@@ -54,7 +55,9 @@ spec:
                     trap 'rm -rf "${work_dir}"' RETURN
 
                     echo "Checking ${edition_id} release date"
-                    curl --fail --silent --show-error --location --head \
+                    curl --retry 5 --retry-all-errors --retry-delay 5 \
+                      --retry-max-time 180 --connect-timeout 15 --max-time 120 \
+                      --fail --silent --show-error --location --head \
                       --output "${headers_path}" \
                       "${download_url}"
 
@@ -80,7 +83,9 @@ spec:
                     fi
 
                     echo "Downloading ${edition_id} updated ${remote_last_modified}"
-                    curl --fail --silent --show-error --location \
+                    curl --retry 5 --retry-all-errors --retry-delay 5 \
+                      --retry-max-time 180 --connect-timeout 15 --max-time 120 \
+                      --fail --silent --show-error --location \
                       --output "${archive_path}" \
                       "${download_url}"
 
