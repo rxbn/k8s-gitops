@@ -25,6 +25,8 @@ spec:
       name: RetryOnFailure
       retryInterval: 5m
   values:
+    crds:
+      enabled: false
     config:
       envoyGateway:
         extensionApis:
