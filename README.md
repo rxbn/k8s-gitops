@@ -1,7 +1,5 @@
 # k8s-gitops
 
-![Kubernetes](https://i.imgur.com/p1RzXjQ.png)
-
 ## :loudspeaker:&nbsp; About
 
 This repository contains my entire Kubernetes cluster setup built on K3s and managed by Flux v2.\
@@ -49,7 +47,3 @@ Install all pre-commit hooks so they are executed every time before a commit occ
 There are also a couple GitHub workflows included in this repository that will help automate some processes.
 
 - [Diff HelmReleases on Pull Requests](./.github/workflows/helm-release-differ.yaml) - workflow to add diff to `HelmRelease` pull requests
-
-## :hugs:&nbsp; Thanks
-
-Huge thanks to the community at [k8s@home](https://github.com/k8s-at-home) for the awesome templates and the Kubernetes at home logo!
