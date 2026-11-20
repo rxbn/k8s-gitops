@@ -1,7 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "semanticCommits": "enabled",
-  "dependencyDashboard": true,
+  "dependencyDashboard": {
+    "enabled": true
+  },
   "prCreation": "immediate",
   "separateMajorMinor": true,
   "assignees": ["rxbn"],
