@@ -57,13 +57,13 @@ spec:
                   'host_bucket = garage-backup.garage-backup.svc.cluster.local:3900' \
                   'use_https = False' \
                   'preserve_attrs = False' \
-                  > /init-secrets/backup-object-storage.s3cfg
+                  > /srv/gitlab/tmp/backup-object-storage.s3cfg
             envFrom:
               - secretRef:
                   name: gitlab-backup-mirror
             volumeMounts:
-              - name: toolbox-secrets
-                mountPath: /init-secrets
+              - name: toolbox-tmp
+                mountPath: /srv/gitlab/tmp
         backups:
           objectStorage:
             config:
@@ -78,7 +78,7 @@ spec:
               --backend-backup s3
               --s3tool-data s3cmd
               --s3tool-backup s3cmd
-              --s3config /etc/gitlab/backup-object-storage.s3cfg
+              --s3config /srv/gitlab/tmp/backup-object-storage.s3cfg
               --maximum-backups 3
             successfulJobsHistoryLimit: 1
       webservice:
