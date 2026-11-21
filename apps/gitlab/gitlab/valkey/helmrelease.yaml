@@ -20,7 +20,7 @@ spec:
   values:
     image:
       repository: valkey/valkey
-      tag: 7.2.16
+      tag: 9.2.0
     persistence:
       enabled: true
       size: 2Gi
