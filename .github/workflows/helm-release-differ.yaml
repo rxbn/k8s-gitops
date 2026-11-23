@@ -16,10 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Filter Helm Releases
-        uses: dorny/paths-filter@v4
+        uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4
         id: filter
         with:
           list-files: json
@@ -38,16 +38,16 @@ jobs:
         file: ${{ fromJSON(needs.detect-file-changes.outputs.yaml_files) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Checkout default branch
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: master
           path: default
 
       - name: Install Helm
-        uses: azure/setup-helm@v5
+        uses: azure/setup-helm@2f5e7bc67f1f9972ab16657bb795f36d8f04de0e # v5
         with:
           version: v4.3.2
 
@@ -62,14 +62,14 @@ jobs:
           echo "::set-output name=diff::$(echo ${diff})"
 
       - name: Find Comment
-        uses: peter-evans/find-comment@v4
+        uses: peter-evans/find-comment@b30e6a3c0ed37e7c023ccd3f1db5c6c0b0c23aad # v4
         id: find-comment
         with:
           issue-number: "${{ github.event.pull_request.number }}"
           body-includes: "${{ matrix.file }}"
 
       - name: Create or update comment
-        uses: peter-evans/create-or-update-comment@v5
+        uses: peter-evans/create-or-update-comment@e8674b075228eee787fea43ef493e45ece1004c9 # v5
         with:
           comment-id: "${{ steps.find-comment.outputs.comment-id }}"
           issue-number: "${{ github.event.pull_request.number }}"
