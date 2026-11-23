@@ -1,4 +1,5 @@
 {
+  "extends": ["helpers:pinGitHubActionDigests"],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "semanticCommits": "enabled",
   "dependencyDashboard": {
