@@ -139,8 +139,8 @@ spec:
                 requests:
                   storage: 10Gi
     prometheus-node-exporter:
-      extraArgs:
-        - --collector.filesystem.ignored-mount-points=^/(mnt|dev|proc|sys|var/lib/docker/.+)($|/)
+      defaultArgs:
+        - --collector.filesystem.mount-points-exclude=^/(mnt|dev|proc|sys|var/lib/docker/.+)($|/)
     prometheusOperator:
       serviceMonitor:
         sampleLimit: 0
